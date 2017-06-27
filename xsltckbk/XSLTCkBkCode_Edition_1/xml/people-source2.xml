@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+  <person name="Al Zehtooney" age="33" sex="m" smoker="no"/>
+  <person name="Brad York" age="38" sex="m" smoker="yes"/>
+  <person name="Charles Xavier" age="32" sex="m" smoker="no"/>
+  <person name="Sal Mangano" age="38" sex="m" smoker="no"/>
+</people>

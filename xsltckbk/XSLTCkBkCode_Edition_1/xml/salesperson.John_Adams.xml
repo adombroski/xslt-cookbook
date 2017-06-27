@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<salesperson name="John Adams" seniority="1">
+   <product sku="10000" totalSales="10000.00"/>
+   <product sku="20000" totalSales="50000.00"/>
+   <product sku="25000" totalSales="920000.00"/>
+</salesperson>

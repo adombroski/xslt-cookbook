@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT bids      (bid_tuple*)>
+<!ELEMENT bid_tuple (userid, itemno, bid, bid_date)>
+<!ELEMENT userid    (#PCDATA)>
+<!ELEMENT itemno    (#PCDATA)>
+<!ELEMENT bid       (#PCDATA)>
+<!ELEMENT bid_date  (#PCDATA)>
+

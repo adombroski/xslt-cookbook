@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apply>
+	<eq/>
+	<apply>
+		<plus/>
+		<apply>
+			<minus/>
+			<ci>y</ci>
+			<cn>2</cn>
+		</apply>
+		<apply>
+			<times/>
+			<cn>4</cn>
+			<apply>
+				<plus/>
+				<ci>x</ci>
+				<cn>1</cn>
+			</apply>
+		</apply>
+		<cn>8</cn>
+	</apply>
+	<cn>0</cn>
+</apply>

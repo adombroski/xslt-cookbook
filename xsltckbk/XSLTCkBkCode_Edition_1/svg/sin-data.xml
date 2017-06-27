@@ -1,0 +1,351 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Salvatore R. Mangano</Author>
+  <LastAuthor>Salvatore R. Mangano</LastAuthor>
+  <Created>2002-08-17T17:33:30Z</Created>
+  <Company>Descriptix</Company>
+  <Version>10.3501</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <DownloadComponents/>
+  <LocationOfComponents HRef="file:///\\"/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>10110</WindowHeight>
+  <WindowWidth>9420</WindowWidth>
+  <WindowTopX>240</WindowTopX>
+  <WindowTopY>60</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="2" ss:ExpandedRowCount="73" x:FullColumns="1"
+   x:FullRows="1">
+   <Column ss:Index="2" ss:Width="63"/>
+   <Row>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">8.7155742747658166E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.17364817766693033</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">15</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.25881904510252074</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.34202014332566871</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">25</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.42261826174069944</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">30</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.49999999999999994</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">35</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.57357643635104605</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">40</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.64278760968653925</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">45</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.70710678118654746</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">50</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.76604444311897801</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">55</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.8191520442889918</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">60</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.8660254037844386</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">65</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.90630778703664994</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">70</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.93969262078590832</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">75</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.96592582628906831</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">80</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.98480775301220802</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">85</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.99619469809174555</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">90</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">95</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.99619469809174555</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">100</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.98480775301220802</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">105</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.96592582628906831</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">110</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.93969262078590843</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">115</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.90630778703665005</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">120</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.86602540378443871</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">125</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.81915204428899202</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">130</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.76604444311897801</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">135</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.70710678118654757</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">140</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.64278760968653947</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">145</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.57357643635104638</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">150</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.49999999999999994</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">155</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.4226182617406995</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">160</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.34202014332566888</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">165</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.25881904510252102</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">170</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">0.17364817766693028</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">175</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">8.7155742747658638E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">180</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">1.22514845490862E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">185</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-8.7155742747657944E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">190</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.17364817766693047</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">195</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.25881904510252035</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">200</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.34202014332566866</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">205</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.42261826174069927</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">210</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.50000000000000011</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">215</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.57357643635104583</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">220</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.64278760968653925</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">225</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.70710678118654746</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">230</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.7660444431189779</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">235</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.81915204428899158</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">240</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.86602540378443837</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">245</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.90630778703664971</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">250</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.93969262078590821</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">255</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.96592582628906831</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">260</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.98480775301220802</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">265</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.99619469809174555</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">270</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">275</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.99619469809174555</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">280</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.98480775301220813</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">285</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.9659258262890682</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">290</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.93969262078590854</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">295</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.90630778703664994</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">300</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.8660254037844386</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">305</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.8191520442889918</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">310</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.76604444311897812</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">315</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.70710678118654768</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">320</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.64278760968653958</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">325</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.57357643635104649</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">330</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.50000000000000044</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">335</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.4226182617407</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">340</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.3420201433256686</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">345</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.25881904510252068</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">350</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-0.17364817766693127</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">355</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-8.7155742747658319E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Formula="=R[-1]C+5"><Data ss:Type="Number">360</Data></Cell>
+    <Cell ss:Formula="=SIN(RC[-1] * PI() / 180)"><Data ss:Type="Number">-2.45029690981724E-16</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet2">
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet3">
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+<head>
+<title>Check Out</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<h1>Check Out</h1>
+<form name="customerInfo" method="post" action="">
+  <table width="70%" border="0" cellspacing="3" cellpadding="3">
+    <tr> 
+      <td width="7%">&#xa0;</td>
+      <td width="32%"> 
+        <div align="center"><b>Shipping Address</b></div>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">&#xa0;</td>
+      <td width="34%"> 
+        <div align="center"><b>Billing Address</b></div>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">Name</td>
+      <td width="32%"> 
+        <input type="text" name="shipName" maxlength="40" size="50" border="0" align="absmiddle"/>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Name</td>
+      <td width="34%"> 
+        <input type="text" name="billName" maxlength="40" size="50" border="0" align="absmiddle"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">Address</td>
+      <td width="32%"> 
+        <input type="text" name="shipAddr" maxlength="40" size="50" border="0" align="absmiddle"/>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Address</td>
+      <td width="34%"> 
+        <input type="text" name="billAddr" maxlength="40" size="50" border="0" align="absmiddle"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">City</td>
+      <td width="32%"> 
+        <input type="text" name="shipCity" maxlength="40" size="50" border="0" align="absmiddle"/>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">City</td>
+      <td width="34%"> 
+        <input type="text" name="billCity" maxlength="40" size="50" border="0" align="absmiddle"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">State</td>
+      <td width="32%"> 
+        <select name="shipState" size="1" align="absmiddle">
+        </select>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">State</td>
+      <td width="34%"> 
+        <select name="billState" size="1" align="absmiddle" onChange="setTax(this)">
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">Zip</td>
+      <td width="32%"> 
+        <input type="text" name="shipZip" maxlength="10" size="15" border="0" align="absmiddle"/>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Zip</td>
+      <td width="34%"> 
+        <input type="text" name="billZip" maxlength="10" size="15" border="0" align="absmiddle"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">&#xa0;</td>
+      <td width="32%">&#xa0;</td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">&#xa0;</td>
+      <td width="34%">&#xa0;</td>
+    </tr>
+    <tr> 
+      <td width="7%">&#xa0;</td>
+      <td width="32%">&#xa0;</td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Subtotal</td>
+      <td width="34%">
+        <input type="text" name="subtotal" readonly="1" value="100.00"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">&#xa0;</td>
+      <td width="32%">&#xa0;</td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Tax</td>
+      <td width="34%">
+        <input type="text" name="tax" readonly="1"/>
+      </td>
+    </tr>
+    <tr>
+      <td width="7%">&#xa0;</td>
+      <td width="32%">&#xa0;</td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Total</td>
+      <td width="34%">
+        <input type="text" name="total" readonly="1"/>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+

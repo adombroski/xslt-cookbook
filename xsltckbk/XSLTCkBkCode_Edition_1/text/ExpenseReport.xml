@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by Salvatore R Mangano (Man Machine Interfaces) -->
+<ExpenseReport statementNum="123">
+  <Employee>
+    <Name>Salvatore Mangano</Name>
+    <SSN>999-99-9999</SSN>
+    <Dept>XSLT Hacking</Dept>
+    <EmpNo>1</EmpNo>
+    <Position>Cook</Position>
+    <Manager>Big Boss O'Reilly</Manager>
+  </Employee>
+  <PayPeriod>
+    <From>1/1/02</From>
+    <To>1/31/02</To>
+  </PayPeriod>
+  <Expenses>
+    <Expense>
+      <Date>12/20/01</Date>
+      <Account>12345</Account>
+      <Desc>Goofing off instead of going to confrence.</Desc>
+      <Lodging>500.00</Lodging>
+      <Transport>50.00</Transport>
+      <Fuel>0</Fuel>
+      <Meals>300.00</Meals>
+      <Phone>100</Phone>
+      <Entertainment>1000.00</Entertainment>
+      <Other>300.00</Other>
+    </Expense>
+    <Expense>
+      <Date>12/20/01</Date>
+      <Account>12345</Account>
+      <Desc>On the beach</Desc>
+      <Lodging>500.00</Lodging>
+      <Transport>50.00</Transport>
+      <Fuel>0</Fuel>
+      <Meals>200.00</Meals>
+      <Phone>20</Phone>
+      <Entertainment>300.00</Entertainment>
+      <Other>100.00</Other>
+    </Expense>
+  </Expenses>
+</ExpenseReport>

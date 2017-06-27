@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test:test xmlns:test="http://www.ora.com/XSLTCookbook/test">
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">1</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">2</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">3</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">4</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">5</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">6</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">7</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">8</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">9</data>
+  <data xmlns="http://www.ora.com/XSLTCookbook/test">10</data>
+</test:test>

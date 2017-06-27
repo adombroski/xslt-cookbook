@@ -1,0 +1,15 @@
+void prettyPrintMessage(ostream& stream, const Message& msg);
+class TestData ;
+ostream prettyPrint(ostream & stream, const TestData& data);
+class AddStockOrderData ;
+ostream prettyPrint(ostream & stream, const AddStockOrderData& data);
+class AddStockOrderAckData ;
+ostream prettyPrint(ostream & stream, const AddStockOrderAckData& data);
+class AddStockOrderNackData ;
+ostream prettyPrint(ostream & stream, const AddStockOrderNackData& data);
+class CancelStockOrderData ;
+ostream prettyPrint(ostream & stream, const CancelStockOrderData& data);
+class CancelStockOrderAckData ;
+ostream prettyPrint(ostream & stream, const CancelStockOrderAckData& data);
+class CancelStockOrderNackData ;
+ostream prettyPrint(ostream & stream, const CancelStockOrderNackData& data);

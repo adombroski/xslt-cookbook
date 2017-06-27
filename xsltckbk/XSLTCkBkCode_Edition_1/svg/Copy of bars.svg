@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE svg
+  PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns:test="http://www.ora.com/XSLTCookbook/ns/test" width="400" height="400">
+   <g xmlns:emath="http://www.exslt.org/math" transform="translate(50,25) translate(150,175) rotate(-180) translate(-150,-175)">
+      <rect x="0" y="0" height="350" width="300" style="stroke: black;stroke-width:0.5;stroke-opacity:0.5;fill:none"/>
+   </g>
+   <g xmlns:emath="http://www.exslt.org/math" transform="translate(50,25)                              translate(150,175)                              rotate(-180)                              translate(-150,-175)                              scale(1,1.1666666666666667)">
+      <line x1="27.272727272727273" y1="0" x2="27.272727272727273" y2="139" style="stroke-width: 2; stroke: red"/>
+      <line x1="54.54545454545455" y1="0" x2="54.54545454545455" y2="27" style="stroke-width: 2; stroke: orange"/>
+      <line x1="81.81818181818181" y1="0" x2="81.81818181818181" y2="13.0" style="stroke-width: 2; stroke: yellow"/>
+      <line x1="109.0909090909091" y1="0" x2="109.0909090909091" y2="130" style="stroke-width: 2; stroke: green"/>
+      <line x1="136.36363636363637" y1="0" x2="136.36363636363637" y2="50" style="stroke-width: 2; stroke: blue"/>
+      <line x1="163.63636363636363" y1="0" x2="163.63636363636363" y2="40" style="stroke-width: 2; stroke: lime"/>
+      <line x1="190.9090909090909" y1="0" x2="190.9090909090909" y2="30" style="stroke-width: 2; stroke: aqua"/>
+      <line x1="218.1818181818182" y1="0" x2="218.1818181818182" y2="20" style="stroke-width: 2; stroke: teal"/>
+      <line x1="245.45454545454547" y1="0" x2="245.45454545454547" y2="22.0" style="stroke-width: 2; stroke: brown"/>
+      <line x1="272.72727272727275" y1="0" x2="272.72727272727275" y2="87" style="stroke-width: 2; stroke: black"/>
+   </g>
+</svg>

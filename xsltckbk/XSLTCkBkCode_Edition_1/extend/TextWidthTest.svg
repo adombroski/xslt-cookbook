@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="100%" width="100%">
+  <g style="font-family:Serif;font-size:9;;"><rect style="fill:none;stroke: black;stroke-width:0.5;" height="11" width="98" y="0pt" x="10"/><text y="6.5pt" x="11">M's are BIG; l's are small;</text></g>
+  <g style="font-family:Serif;font-size:10;;"><rect style="fill:none;stroke: black;stroke-width:0.5;" height="12" width="157" y="18pt" x="10"/><text y="25pt" x="11">SVG makes handling text no fun at all</text></g>
+  <g style="font-family:Helvetica;font-size:12;;"><rect style="fill:none;stroke: black;stroke-width:0.5;" height="12" width="156" y="38pt" x="10"/><text y="46pt" x="11">But if I cheat with a little Java</text></g>
+  <g style="font-family:Arial;font-size:14;;font-weight:bold"><rect style="fill:none;stroke: black;stroke-width:0.5;" height="14" width="306" y="62pt" x="10"/><text y="71pt" x="11">PROMISE ME YOU WON'T TELL MY MAMMA!</text></g>
+  <g style="font-family:Century;font-size:16;font-style:italic;"><rect style="fill:none;stroke: black;stroke-width:0.5;" height="18" width="233" y="90pt" x="10"/><text y="100pt" x="11">But if you do, I won't lose cheer.</text></g>
+  <g style="font-family:Courier New;font-size:18;font-style:italic;font-weight:bold"><rect style="fill:none;stroke: black;stroke-width:0.5;" height="18" width="416" y="122pt" x="10"/><text y="133pt" x="11">Its really my tech editor that I fear!</text></g>
+</svg>

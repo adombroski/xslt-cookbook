@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people which="MeAndMyFriends">
+  <person firstname="Sal" lastname="Mangano" age="38" height="5.75"/>
+  <person firstname="Mike" lastname="Palmieri" age="28" height="5.10"/>
+  <person firstname="Vito" lastname="Palmieri" age="38" height="6.0"/>
+  <person firstname="Vinny" lastname="Mari" age="37" height="5.8"/>
+</people>

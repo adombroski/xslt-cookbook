@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by Salvatore R Mangano (Man Machine Interfaces) -->
+<people>
+  
+   <person>
+      <name>Al Zehtooney</name>
+      <age>33</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Brad York</name>
+      <age>38</age>
+      <sex>m</sex>
+      <smoker>yes</smoker>
+   </person>
+  
+   <person>
+      <name>Charles Xavier</name>
+      <age>32</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>David Willimas</name>
+      <age>33</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Edward Ulster</name>
+      <age>33</age>
+      <sex>m</sex>
+      <smoker>yes</smoker>
+   </person>
+  
+   <person>
+      <name>Frank Townsend</name>
+      <age>35</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Greg Sutter</name>
+      <age>40</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Harry Rogers</name>
+      <age>37</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>John Quincy</name>
+      <age>43</age>
+      <sex>m</sex>
+      <smoker>yes</smoker>
+   </person>
+  
+   <person>
+      <name>Kent Peterson</name>
+      <age>31</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Larry Newell</name>
+      <age>23</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Max Milton</name>
+      <age>22</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Norman Lamagna</name>
+      <age>30</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Ollie Kensinton</name>
+      <age>44</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>John Frank</name>
+      <age>24</age>
+      <sex>m</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Mary Williams</name>
+      <age>33</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Jane Frank</name>
+      <age>38</age>
+      <sex>f</sex>
+      <smoker>yes</smoker>
+   </person>
+  
+   <person>
+      <name>Jo Peterson</name>
+      <age>32</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Angie Frost</name>
+      <age>33</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Betty Bates</name>
+      <age>33</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Connie Date</name>
+      <age>35</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Donna Finster</name>
+      <age>20</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Esther Gates</name>
+      <age>37</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Fanny Hill</name>
+      <age>33</age>
+      <sex>f</sex>
+      <smoker>yes</smoker>
+   </person>
+  
+   <person>
+      <name>Geta Iota</name>
+      <age>27</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Hillary Johnson</name>
+      <age>22</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Ingrid Kent</name>
+      <age>21</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Jill Larson</name>
+      <age>20</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Kim Mulrooney</name>
+      <age>41</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+  
+   <person>
+      <name>Lisa Nevins</name>
+      <age>21</age>
+      <sex>f</sex>
+      <smoker>no</smoker>
+   </person>
+
+</people>

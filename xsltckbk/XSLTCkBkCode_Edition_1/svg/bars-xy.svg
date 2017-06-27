@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE svg
+  PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns:test="http://www.ora.com/XSLTCookbook/ns/test" width="400" height="400">
+   <g xmlns:emath="http://www.exslt.org/math" transform="translate(50,25) translate(150,175) rotate(-180) translate(-150,-175)">
+      <rect x="0" y="0" height="350" width="300" style="stroke: black;stroke-width:0.5;stroke-opacity:0.5;fill:none"/>
+   </g>
+   <g xmlns:emath="http://www.exslt.org/math" transform="translate(50,25)                              translate(150,175)                              rotate(-180)                              translate(-150,-175)                              scale(1,70)">
+      <line x1="75" y1="0" x2="75" y2="3.0" style="stroke-width: 5; stroke: red"/>
+      <text x="75" y="210" transform="scale(1,0.014285714285714285)                                        translate(0,10)                                        translate(75,210)                                        rotate(180)                                        translate(-75,-210)" style="text-anchor: middle; font-size: 8">3.0</text>
+      <line x1="150" y1="0" x2="150" y2="2.0" style="stroke-width: 5; stroke: orange"/>
+      <text x="150" y="140" transform="scale(1,0.014285714285714285)                                        translate(0,10)                                        translate(150,140)                                        rotate(180)                                        translate(-150,-140)" style="text-anchor: middle; font-size: 8">2.0</text>
+      <line x1="225" y1="0" x2="225" y2="1.0" style="stroke-width: 5; stroke: yellow"/>
+      <text x="225" y="70" transform="scale(1,0.014285714285714285)                                        translate(0,10)                                        translate(225,70)                                        rotate(180)                                        translate(-225,-70)" style="text-anchor: middle; font-size: 8">1.0</text>
+   </g>
+   <path xmlns:emath="http://www.exslt.org/math" transform="translate(125,375)                                     scale(75,-70)                                 translate(0,0)" d="M 0,1.0 L 1,2.0 L 2,3.0" style="fill: none; stroke: black; stroke-width:0.013333333333333334; "/>
+</svg>

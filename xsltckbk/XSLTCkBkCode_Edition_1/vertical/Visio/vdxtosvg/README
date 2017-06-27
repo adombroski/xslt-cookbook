@@ -1,0 +1,231 @@
+Notes for vdxtosvg XSLT stylesheet:
+
+WHAT'S NEW FOR VERSION 1.5:
+==========================
+Two main changes:
+
+a) NURBS curves are now translated to Beziers.  There are a few
+limitations, though: only 3rd-degree curves are supported, they
+can not have repeating knots (except at the endpoints, of course), and
+all weights must be 1 (i.e., non-rational).  This appears to be what
+Visio's freehand tool creates, so it shouldn't be a problem unless
+you're creating curves another way (e.g., via ShapeSheet changes).
+
+b) All predefined patterns are implemented.  However, pattern 9 (fine
+crosshatch) doesn't display correctly on Batik, although it does on
+Adobe's SVG Viewer (ASV).  It appears to be a difference in
+interpretation of x/y positioning and scaling, but I haven't worked
+out yet who is right.  If you use Batik and you need this, contact me
+and I'll tell you how to change it so it will work (but then it won't
+be correct in ASV).
+
+A few bugs have been corrected, most importantly a bug in the text
+wrapping script that caused the last word to wrap when it didn't need
+to.  See the ChangeLog for details.
+
+Finally, this may be my last release for a while.  I'm losing my job
+on Aug 16 2002, and although I've got a pretty good chance at getting
+another job soon, they don't use Visio 2002.  I'll probably handle
+feature requests if you send me a VDX file to use as a test case.  And
+of course I'll accept patches (but still send a test case if the patch
+adds new functionality, so I can add it to my regression tests).
+
+
+
+INTRODUCTION:
+============
+Microsoft's Visio (tm) 2002 added the capability to read and write
+Visio drawings in XML format.  These drawings are identified by the
+extension ".vdx".  However, this is purely a data format.  The
+graphics data is all there, but not in a standard graphics format.
+
+SVG (Scalable Vector Graphics) is a W3C Recommendation for describing
+two-dimensional graphics in XML.  It supports most of the constructs
+used in Visio, plus a number of advanced features, like animation.
+
+XSLT is the link between the two.  An XSLT stylesheet (which is also
+written in XML) specifies the translation from one XML language/format
+to another.  An XSLT processor takes the stylesheet and the input XML
+file, and produces the output file.
+
+The goals of this project are:
+
+(a) develop an XSLT stylesheet to translate Visio's VDX format to SVG,
+with the resulting drawing being as close as possible - both visually
+and structurally - to the original.
+
+(b) develop Visio templates/stencils/masters and methodologies to
+allow SVG-specific constructs (like animation) to be easily and
+intuitively added to a drawing.
+
+
+
+USAGE:
+======
+The stylesheet has been broken up into multiple files to try to keep
+things modular and organized.  All are required to be in the same
+directory.
+
+This requires a Microsoft Visio file that has been saved in VDX
+format.  AFAIK, this is only possible under Visio 2002; I don't know
+for certain if it's available in the Standard Edition (I have the
+Professional).  The good thing is, Visio 2002 also reads VDX, so you can
+use it as the native drawing format (i.e., you don't need to keep two
+copies of the drawing).
+
+To use it, you either need to explicitly convert the VDX file to SVG
+with an XSLT processor, or have the browser do it on-the-fly.  For
+example, with a Saxon installation, the command:
+
+    java -jar ~/install/saxon/saxon.jar -o basic_tests.svg \
+    basic_tests.vdx visio.xsl
+
+will translate basic_tests.vdx into basic_tests.svg.
+
+To do it via the browser, [Insert instructions and details for
+on-the-fly conversion].
+
+Top-level Parameters
+--------------------
+Currently, there are two top-level parameters that can be used to
+change the behavior of the translation:
+
+pageNumber: this parameter specifies the page number of the Visio
+drawing that is to be translated.  The default is 1 (the first page).
+
+userScale: this parameter specifies the scale between Visio's units
+and the SVG user units.  The default is 100.
+[Note: this was added because of some strange behavior I saw when the
+scales were the same.  I assumed it was due to numerical problems with
+small numbers, but later tests indicate that it may have been due to
+the lack of a default viewBox on the outermost <svg> element.]
+
+The procedure for setting these parameters during translation depends
+on the XSLT translator (e.g., Saxon simply requires appending
+    <parameter>=<value>
+    (e.g., pageNumber=2)
+to the command line).
+
+
+
+MISCELLANEOUS:
+=============
+
+Unsupported Visio constructs
+----------------------------
+Text - forced or justified horizontal alignment; alignment will
+       default to "center".
+Text - mixed format (e.g., changes in style or size); all text in a
+       given element will be rendered in the same style.  Due to the
+       primitive text handling in SVG 1.0, this feature will probably
+       be delayed until a later SVG release.
+
+Ellipse - rotation parameter (however, rotating the object itself does
+          work)
+
+NURBS curves - replaced by a line between the endpoints.
+
+Masters/stencils - simple masters (those with only one shape)
+                   generally work; more complicated ones don't render
+                   the graphics properly.
+
+
+
+Visio Master Stencils of SVG elements
+--------------------------------------
+viewBox - this currently only works for the default viewBox, and only
+    if the object's name is "default".
+
+animate - connector-based identification of the target (xlink:href),
+    the top-level viewbox, and the begin and end attributes is
+    supported; all other attributes are textual properties.
+
+animateMotion - same as for 'animate', plus connector-based
+    identification of the path (mpath) is supported.  For mpath,
+    only simple shapes are supported (no groups, no stencils); the
+    <Geom> of the path must be the child of the <Shape> connected to.
+
+Note: there is not yet a stencil that includes these masters; however,
+they can be copied from animation_tests.vdx.
+
+Note: there is an "unsupported" hook for adding any sort of SVG
+element: add the property "svg-element" to an object, with the value
+being the complete element text (including the start/end tags).  I
+won't swear that this will always be available, so don't use it for
+things that you expect to still work a month from now.
+
+
+Translation Details
+-------------------
+One of Visio's interesting features is the ability to add text to
+almost any graphics shape.  In order to mimic this in SVG, each
+visible <Shape> element in the drawing is translated to a container
+(e.g., <g>), which contains the graphics and optional text elements.
+This causes some difficulties for inter-object references (e.g.,
+referencing a path for <mpath>, but it was the only way to keep the
+relationship).  The type of container defaults to <g>, but can be
+changed by adding the property 'svgElement' to the shape, with the
+value being the element name (e.g., 'defs').  This is particularly
+useful for connectors between animation objects and targets.
+
+Animation support
+-----------------
+To add animation to a drawing:
+
+a) drag the 'animate' or 'animateMotion' stencil onto the sheet.
+
+b) set the attributes.
+
+All of the attributes can be set textually as properties on the
+stencil, but a few allow graphical indication of the relationship.  To
+use this,
+
+a) add a connection point to the stencil (some day I'll add this to
+the master).
+
+b) add a connection point to the object that will represent the value
+of the attribute (e.g., the target of the 'animate' element).
+
+c) connect them with any sort of line, starting with the animation
+stencil.  *NOTE*: both ends of the connector should be red when it's
+selected, indicating that the ends are glued to the connection points.
+
+d) add the 'svgAttribute' property to the connector, with the value
+being the attribute the connector represents ('begin', 'end', etc; the
+default is 'xlink:href').  In some cases ('begin' and 'end'), the
+attribute name must be followed by ':' and an event suffix (e.g.,
+'begin:.end' to indicate that this 'animate' will start when the 'end'
+event is triggered on the referenced 'animate').
+
+e) add the 'svgElement' property to the connector, with a value of
+'defs'.  This will cause the group for the connector to be put in a
+<defs>, so it won't be displayed in SVG.
+
+You're probably thinking that it would make sense to have a connector
+master, to keep everyone from having to add all of these properties.
+You're right, of course.  However, I'm pretty sure this won't work
+currently (although I haven't tried it).
+
+See animation_tests.vdx for animation examples.
+
+Note that the connectors in animation_tests.vdx have text indicating
+the svgAttribute property value.  DO NOT EDIT THIS TEXT DIRECTLY.
+Instead, edit the property (I tried locking the text, but this also
+prevents repositioning the text, which is a significant drawback).
+
+Notes on naming
+---------------
+Here's my current naming convention in the Visio files:
+
+Properties on masters that represent attributes are named
+'@<attribute>'.
+
+Properties on user-created objects (like connectors)
+that represent an attribute are named 'svgAttribute' (hopefully we
+don't need more than one per object).
+
+'svgElement' is used to indicate the sort of grouping object that
+should be used for the shape.
+
+=========================================================================
+$Id: README,v 1.7 2002/07/20 17:41:36 jabreen Exp $

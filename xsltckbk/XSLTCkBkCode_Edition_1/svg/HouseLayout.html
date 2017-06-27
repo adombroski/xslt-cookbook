@@ -1,0 +1,249 @@
+<html xmlns:xlink="http://www.w3.org/1999/xlink">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>1234 Main St. Pleasantville NJ</title><script>
+
+var item_selected = null;
+
+// When the mouse ponter triggers the mouse over event
+// This function is called.
+// We are using both the SVGDOM and the XML DOM
+// to access the document's tree nodes.
+// More particularly, this function change elements
+// identified by 'part-nn" and 'desc-nn' identifiers (i.e. the id attribute).
+// Note that to change a style attribute with the SVG DOM does not
+// require to know in advance the value of the style attribute.
+// In contrast, with the XML DOM you need to know the full content
+// of the style attribute.
+function on_mouse_over (ID)
+{
+	if (ID == item_selected)
+		return true;
+
+	var obj_name = "part-";
+	obj_name = obj_name.concat(ID);
+	
+	// Change the SVG element's style
+	// -------------------------------
+	// 1 - get the SVGDOM document element from the Adobe SVG viewer
+	// 2 - Then, get the element included in the SVG document and which is
+	// referred by the id='part-nn' identifier.
+	// nn stands for a number; Example: part-1
+	// 3 - Finally, Get the style attribute from the SVG DOM element node.
+	// the getStyle function is particular to the SVG DOM.
+	// the get style function returns a style object.
+	// We change the 'fill' style attribute with the returned
+	// style object. Note that in contrast to the XML DOM
+	// we do not need to know in advance the content of the
+	// style attribute's value to change one of the CSS attribute.
+	var svgdoc = document.figure.getSVGDocument();
+	var svgobj = svgdoc.getElementById(obj_name);
+	if (svgobj != null)
+	{
+		var svgStyle = svgobj.getStyle(); 
+		svgStyle.setProperty ('fill', 'yellow'); 
+	}
+
+	// Here is what we should have if the target browser
+	// would fully support the XML DOM
+	// --------------------------------------------------
+	// Get the element inluded in this HTML document (see in the body
+	// section) and which is referred by the 'desc-nn' identifier. nn
+	// stands for a number; example desc-1
+	///then, Change the element's style attribute using the
+	// XML DOM. Please note that in contrast to the SVG DOM
+	// function, the whole style attribute's value is changed and
+	// not the value of a single contained CSS attribute.
+	// DOES NOT WORK...
+	var svgdesc = document.getElementById(obj_name);
+	if (svgdesc != null)
+		svgdesc.setAttribute("style", "background-color:yellow; cursor:hand");
+
+	// Here is what we do for the IE 5 DHTML DOM
+	// -----------------------------------------
+	var DHTMLobj = document.all.item(obj_name)
+	if (DHTMLobj != null)
+		DHTMLobj.style.backgroundColor = "yellow";
+	return true;
+}
+
+// When the mouse ponter triggers the mouse over event
+// This function is called.
+// We are using both the SVGDOM and the XML DOM
+// to access the document's tree nodes.
+// More particularly, this function change elements
+// identified by 'part-nn" and 'desc-nn' identifiers (i.e. the id attribute).
+// Note that to change a style attribute with the SVG DOM does not
+// require to know in advance the value of the style attribute.
+// In contrast, with the XML DOM you need to know the full content
+// of the style attribute.
+function on_mouse_out (ID)
+{
+	if (ID == item_selected)
+		return true;
+
+	var obj_name = "part-";
+	obj_name = obj_name.concat(ID);
+	
+	// Change the SVG element's style
+	// -------------------------------
+	// 1 - get the SVGDOM document element from the Adobe SVG viewer
+	// 2 - Then, get the element included in the SVG document and which is
+	// referred by the id='part-nn' identifier.
+	// nn stands for a number; Example: part-1
+	// 3 - Finally, Get the style attribute from the SVG DOM element node.
+	// the getStyle function is particular to the SVG DOM.
+	// the get style function returns a style object.
+	// We change the 'fill' style attribute with the returned
+	// style object. Note that in contrast to the XML DOM
+	// we do not need to know in advance the content of the
+	// style attribute's value to change one of the CSS attribute.
+	var svgdoc = document.figure.getSVGDocument();
+	var svgobj = svgdoc.getElementById(obj_name);
+	if (svgobj != null)
+	{
+		var svgStyle = svgobj.getStyle(); 
+		svgStyle.setProperty ('fill', 'white'); 
+	}
+
+	// Here is what we should have if the target browser
+	// would fully support the XML DOM
+	// --------------------------------------------------
+	// Get the element inluded in this HTML document (see in the body
+	// section) and which is referred by the 'desc-nn' identifier. nn
+	// stands for a number; example desc-1
+	///then, Change the element's style attribute using the
+	// XML DOM. Please note that in contrast to the SVG DOM
+	// function, the whole style attribute's value is changed and
+	// not the value of a single contained CSS attribute.
+	// DOES NOT WORK...
+	var svgdesc = document.getElementById(obj_name);
+	if (svgdesc != null)
+		svgdesc.setAttribute("style", "background-color:white;");
+
+	// Here is what we for the IE 5 DHTML DOM
+	// --------------------------------------
+	var DHTMLobj = document.all.item(obj_name)
+	if (DHTMLobj != null)
+		DHTMLobj.style.backgroundColor = "white";
+
+	return true;
+}
+
+function on_mouse_click(ID)
+{
+	var obj_name = "part-";
+	obj_name = obj_name.concat(ID);
+
+	// reset the color of the previously selected part
+	if (item_selected)
+	{
+		var svgdoc = document.figure.getSVGDocument();
+		var svgobj = svgdoc.getElementById(obj_name);
+		if (svgobj != null)
+		{
+			var svgStyle = svgobj.getStyle(); 
+			svgStyle.setProperty ('fill', 'white'); 
+		}
+		var DHTMLobj = document.all.item(obj_name)
+		if (DHTMLobj != null)
+		{
+			DHTMLobj.style.backgroundColor = "white";
+			DHTMLobj.style.fontWeight  = "normal";
+		}
+	}
+	// Now select the new part
+	if (item_selected != ID)
+	{
+		var svgdoc = document.figure.getSVGDocument();
+		var svgobj = svgdoc.getElementById(obj_name);
+		if (svgobj != null)
+		{
+			var svgStyle = svgobj.getStyle(); 
+			svgStyle.setProperty ('fill', '#C0C0C0'); 
+		}
+		var DHTMLobj = document.all.item(obj_name)
+		if (DHTMLobj != null)
+		{
+			DHTMLobj.style.backgroundColor = "#C0C0C0";
+			DHTMLobj.style.fontWeight  = "bolder";
+		}
+		item_selected = ID;	
+	}
+	else
+		item_selected = null;
+
+
+
+	return true;	
+}
+</script></head>
+   <body>
+      <div align="center">
+         <embed name="figure" width="540" height="540" type="image/svg" pluginspage="http://www.adobe.com/svg/viewer/install/" src="HouseLayout.svg"></embed>
+      </div>
+      <table border="0" cellpadding="1" cellspacing="0" width="100%" bgcolor="black">
+         <tr>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="white">
+               <tr style="background-color:#990033; color:white;">
+                  <td>Room</td>
+                  <td align="right">Length</td>
+                  <td align="right">Width</td>
+                  <td align="right">Windows</td>
+                  <td>Miscelaneous</td>
+               </tr>
+               <tr id="bedroom1" style="background-color:white;" onmouseover="on_mouse_over('bedroom1')" onmouseout="on_mouse_out('bedroom1')" onclick="on_mouse_click('bedroom1')">
+                  <td>Bedroom</td>
+                  <td align="right">10</td>
+                  <td align="right">10</td>
+                  <td align="right">2</td>
+                  <td>View of junk yard</td>
+               </tr>
+               <tr id="bedroom2" style="background-color:white;" onmouseover="on_mouse_over('bedroom2')" onmouseout="on_mouse_out('bedroom2')" onclick="on_mouse_click('bedroom2')">
+                  <td>Bedroom</td>
+                  <td align="right">10</td>
+                  <td align="right">10</td>
+                  <td align="right">1</td>
+                  <td>Elvis slept here</td>
+               </tr>
+               <tr id="masterBedroom" style="background-color:white;" onmouseover="on_mouse_over('masterBedroom')" onmouseout="on_mouse_out('masterBedroom')" onclick="on_mouse_click('masterBedroom')">
+                  <td>Master Bedroom</td>
+                  <td align="right">18</td>
+                  <td align="right">10</td>
+                  <td align="right">3</td>
+                  <td>Walk in Closet</td>
+               </tr>
+               <tr id="masterBath" style="background-color:white;" onmouseover="on_mouse_over('masterBath')" onmouseout="on_mouse_out('masterBath')" onclick="on_mouse_click('masterBath')">
+                  <td>Master Bath</td>
+                  <td align="right">5</td>
+                  <td align="right">5</td>
+                  <td align="right">1</td>
+                  <td>Full Bath w/ bidet</td>
+               </tr>
+               <tr id="kitchen" style="background-color:white;" onmouseover="on_mouse_over('kitchen')" onmouseout="on_mouse_out('kitchen')" onclick="on_mouse_click('kitchen')">
+                  <td>Kitchen</td>
+                  <td align="right">20</td>
+                  <td align="right">18</td>
+                  <td align="right">2</td>
+                  <td>New Cabinets</td>
+               </tr>
+               <tr id="livingRoom" style="background-color:white;" onmouseover="on_mouse_over('livingRoom')" onmouseout="on_mouse_out('livingRoom')" onclick="on_mouse_click('livingRoom')">
+                  <td>Living Room</td>
+                  <td align="right">18</td>
+                  <td align="right">18</td>
+                  <td align="right">2</td>
+                  <td>View of Rose Garden</td>
+               </tr>
+               <tr id="bath1" style="background-color:white;" onmouseover="on_mouse_over('bath1')" onmouseout="on_mouse_out('bath1')" onclick="on_mouse_click('bath1')">
+                  <td>Bathroom</td>
+                  <td align="right">6</td>
+                  <td align="right">5</td>
+                  <td align="right">1</td>
+                  <td>Heart Shapped Tub</td>
+               </tr>
+            </table>
+         </tr>
+      </table>
+   </body>
+</html>

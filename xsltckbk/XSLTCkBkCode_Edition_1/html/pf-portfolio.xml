@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pf:portfolio xmlns="http://www.ora.com/XSLTCookbook/namespaces/portfolio" xmlns:pf="http://www.ora.com/XSLTCookbook/namespaces/portfolio">
+  <pf:investment>
+    <symbol>IBM</symbol>
+    <current>72.70</current>
+    <paid>65.00</paid>
+    <qty>1000</qty>
+  </pf:investment>
+  <investment>
+    <symbol>JMAR</symbol>
+    <current>1.90</current>
+    <paid>5.10</paid>
+    <qty>5000</qty>
+  </investment>
+  <investment>
+    <symbol>DELL</symbol>
+    <current>24.50</current>
+    <paid>18.00</paid>
+    <qty>100000</qty>
+  </investment>
+  <investment>
+    <symbol>P</symbol>
+    <current>57.33</current>
+    <paid>63</paid>
+    <qty>100</qty>
+  </investment>
+</pf:portfolio>

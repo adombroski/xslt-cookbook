@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xtm:topicMap xmlns:xtm="http://www.topicmaps.org/xtm/1.0" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <xtm:topic id="EN">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef xlink:href="http://www.topicmaps.org/xtm/1.0/language.xtm#en"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>EN</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="FR">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef xlink:href="http://www.topicmaps.org/xtm/1.0/language.xtm#fr"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>FR</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="myTomato">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef xlink:href="http://www.fed.gov/usda/doc/tomato.htm#gradeA"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>tomato</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:baseName>
+         <xtm:scope>
+            <xtm:topicRef xlink:href="#EN"/>
+         </xtm:scope>
+         <xtm:baseNameString>tomato</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:baseName>
+         <xtm:scope>
+            <xtm:topicRef xlink:href="#FR"/>
+         </xtm:scope>
+         <xtm:baseNameString>tomate</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:variant>
+         <xtm:variantName>
+            <xtm:resourceData>TMT</xtm:resourceData>
+         </xtm:variantName>
+         <xtm:parameters>
+            <xtm:topicRef xlink:href="cell_phone"/>
+            <xtm:topicRef xlink:href="TMT"/>
+         </xtm:parameters>
+      </xtm:variant>
+      <xtm:occurance>
+         <xtm:resourceRef xlink:href="#tomato.gif"/>
+      </xtm:occurance>
+   </xtm:topic>
+   <xtm:topic id="myConfite">
+      <xtm:baseName>
+         <xtm:baseNameString>tomate confite farcie aux douze saveurs</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:instanceOf>
+         <topicRef xlink:href="#desert"/>
+      </xtm:instanceOf>
+   </xtm:topic>
+   <xtm:topic id="desert">
+      <xtm:baseName>
+         <xtm:baseNameString>desert</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="anIngredient">
+      <xtm:baseName>
+         <xtm:baseNameString>ingredient</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="aDish">
+      <xtm:baseName>
+         <xtm:baseNameString>dish</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="ingredient_of">
+      <xtm:baseName>
+         <xtm:baseNameString>ingredient_of</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="myCarmel">
+      <xtm:baseName>
+         <xtm:baseNameString>carmel</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="menu">
+      <xtm:baseName>
+         <xtm:baseNameString>menu</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="entrees">
+      <xtm:baseName>
+         <xtm:baseNameString>entrees</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="myFoieGras">
+      <xtm:baseName>
+         <xtm:baseNameString>FoieGras</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="cell_phone">
+      <xtm:baseName>
+         <xtm:baseNameString>cell_phone</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:asociation id="tomato_confite_association">
+      <xtm:instanceOf>
+         <topicRef xlink:href="ingredient_of"/>
+      </xtm:instanceOf>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="anIngredient"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myTomato"/>
+      </xtm:member>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="aDish"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myConfite"/>
+      </xtm:member>
+   </xtm:asociation>
+   <xtm:asociation id="caramels_confite">
+      <xtm:instanceOf>
+         <topicRef xlink:href="ingredient_of"/>
+      </xtm:instanceOf>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="anIngredient"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myCarmel"/>
+      </xtm:member>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="aDish"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myConfite"/>
+      </xtm:member>
+   </xtm:asociation>
+   <xtm:asociation id="entree_desert">
+      <xtm:instanceOf>
+         <topicRef xlink:href="menu"/>
+      </xtm:instanceOf>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="entrees"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myFoieGras"/>
+      </xtm:member>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="dessert"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myConfite"/>
+      </xtm:member>
+   </xtm:asociation>
+</xtm:topicMap>

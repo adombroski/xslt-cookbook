@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by Salvatore R Mangano (Man Machine Interfaces) -->
+<people>
+  <person name="Al Zehtooney" birthday="01/01/1969" height="5.1" weight="150"/>
+  <person name="Brad York" birthday="02/02/1964" height="6.1" weight="150"/>
+  <person name="Charles Xavier" birthday="03/10/1970" height="5.4" weight="150"/>
+  <person name="David Willimas" birthday="05/03/1969" height="6.2" weight="150"/>
+  <person name="Edward Ulster" birthday="04/01/1969" height="5.9" weight="150"/>
+  <person name="Frank Townsend" birthday="12/28/1966" height="6.0" weight="150"/>
+  <person name="Greg Sutter" birthday="10/10/1962" height="5.3" weight="150"/>
+  <person name="Harry Rogers" birthday="1965" height="5.34" weight="150"/>
+  <person name="John Quincy" birthday="1959" height="7.2" weight="150"/>
+  <person name="Kent Peterson" birthday="1971" height="5.8" weight="150"/>
+  <person name="Larry Newell" birthday="1979" height="5.7" weight="150"/>
+  <person name="Max Milton" birthday="1980" height="5.9" weight="150"/>
+  <person name="Norman Lamagna" birthday="1972" height="5.86" weight="150"/>
+  <person name="Ollie Kensinton" birthday="1958" height="5" weight="150"/>
+  <person name="John Frank" birthday="1978" height="5" weight="150"/>
+  <person name="Mary Williams" birthday="1969" height="5" weight="150"/>
+  <person name="Jane Frank" birthday="1964" height="5" weight="150"/>
+  <person name="Jo Peterson" birthday="1972" height="5" weight="150"/>
+  <person name="Angie Frost" birthday="1969" height="5" weight="150"/>
+  <person name="Betty Bates" birthday="1969" height="5" weight="150"/>
+  <person name="Connie Date" birthday="1967" height="5" weight="150"/>
+  <person name="Donna Finster" birthday="1982" height="5" weight="150"/>
+  <person name="Esther Gates" birthday="1965" height="5" weight="150"/>
+  <person name="Fanny Hill" birthday="1969" height="5" weight="150"/>
+  <person name="Geta Iota" birthday="1975" height="5" weight="150"/>
+  <person name="Hillary Johnson" birthday="1982" height="5" weight="150"/>
+  <person name="Ingrid Kent" birthday="1983" height="5" weight="150"/>
+  <person name="Jill Larson" birthday="1982" height="5" weight="150"/>
+  <person name="Kim Mulrooney" birthday="1961" height="5" weight="150"/>
+  <person name="Lisa Nevins" birthday="1983" height="6" weight="150"/>
+</people>

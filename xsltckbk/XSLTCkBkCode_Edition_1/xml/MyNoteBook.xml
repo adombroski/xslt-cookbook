@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyNoteBook>
+  <friends>
+  </friends>
+  <coworkers>
+  </coworkers>
+  <projects>
+    <project>Replalce mapML with XSLT engine using Xalan C++</project>
+    <project>Figure out the meaning of life.</project>
+    <project>Figure out where the dryer is hinding all those missing socks</project>
+  </projects>  
+</MyNoteBook>

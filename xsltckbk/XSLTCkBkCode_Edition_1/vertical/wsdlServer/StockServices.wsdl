@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="wsdlServiceList.xslt"?>
+<definitions name="StockServices" targetNamespace="http://acme.com/stockservices.wsdl" xmlns:acme="http://acme.com/stockservices.wsdl" xmlns:xsd1="http://acme.com/stockquote.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema targetNamespace="http://example.com/stockquote.xsd" xmlns="http://www.w3.org/2000/10/XMLSchema">
+      <element name="Ticker">
+        <complexType>
+          <all>
+            <element name="tickerSymbol" type="string"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="TradePrice">
+        <complexType>
+          <all>
+            <element name="price" type="float"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="CompanyName">
+        <complexType>
+          <all>
+            <element name="company" type="string"/>
+          </all>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  
+  <message name="GetLastTradePriceInput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+  
+  <message name="GetLastTradePriceOutput">
+    <part name="body" element="xsd1:TradePrice"/>
+  </message>
+  
+  <message name="GetCompanyInput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+  
+  <message name="GetCompanyOutput">
+    <part name="body" element="xsd1:CompanyName"/>
+  </message>
+
+  <message name="GetTickerInput">
+    <part name="body" element="xsd1:CompanyName"/>
+  </message>
+  
+  <message name="GetTickerOutput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+
+
+  <portType name="StockQuotePortType">
+    <operation name="GetLastTradePrice">
+      <input message="acme:GetLastTradePriceInput"/>
+      <output message="acme:GetLastTradePriceOutput"/>
+    </operation>
+  </portType>
+
+  <portType name="StockTickerPortType">
+    <operation name="GetLastTradePrice">
+      <input message="acme:GetTickerInput"/>
+      <output message="acme:GetCompanyOutput"/>
+    </operation>
+  </portType>
+
+  <portType name="StockNamePortType">
+    <operation name="GetCompanyInput">
+      <input message="acme:GetCompanyInput"/>
+      <output message="acme:GetTickerOutput"/>
+    </operation>
+  </portType>
+  
+  <binding name="StockQuoteSoapBinding" type="acme:StockQuotePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetLastTradePrice">
+      <soap:operation soapAction="http://acme.com/GetLastTradePrice"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <binding name="StockTickerSoapBinding" type="acme:StockTickerPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetTickerSymbol">
+      <soap:operation soapAction="http://acme.com/GetTickerSymbol"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <binding name="StockNameSoapBinding" type="acme:StockNamePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetCompanyName">
+      <soap:operation soapAction="http://acme.com/GetCompanyName"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  
+  <service name="StockQuoteService">
+    <documentation>Provides stock quotes</documentation>
+    <port name="StockQuotePort" binding="acme:StockQuoteSoapBinding">
+      <soap:address location="http://acme.com/stockquote"/>
+    </port>
+  </service>
+  <service name="StockTickerToNameService">
+    <documentation>Looks up company names from ticker symbols</documentation>
+    <port name="StockTickerToNamePort" binding="acme:StockTickerSoapBinding">
+      <soap:address location="http://acme.com/stockquote"/>
+    </port>
+  </service>
+  <service name="StockNameToTickerService">
+    <documentation>Looks up ticker symbols from company names</documentation>
+    <port name="StockNameToTickerPort" binding="acme:StockNameSoapBinding">
+      <soap:address location="http://acme.com/stockquote"/>
+    </port>
+  </service>
+</definitions>

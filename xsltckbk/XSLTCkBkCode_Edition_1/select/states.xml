@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<us:states xmlns:us="http://www.oreilly.com/TheXSLTCoobook/nampespaces/us">
+<us:state name="ALABAMA" abbrev="AL"/>
+<us:state name="ALASKA" abbrev="AK"/>
+<us:state name="AMERICAN SAMOA" abbrev="AS"/>
+<us:state name="ARIZONA" abbrev="AZ"/>
+<us:state name="ARKANSAS" abbrev="AR"/>
+<us:state name="CALIFORNIA" abbrev="CA"/>
+<us:state name="COLORADO" abbrev="CO"/>
+<us:state name="CONNECTICUT" abbrev="CT"/>
+<us:state name="DELAWARE" abbrev="DE"/>
+<us:state name="DISTRICT OF COLUMBIA" abbrev="DC"/>
+<us:state name="FEDERATED STATES OF MICRONESIA" abbrev="FM"/>
+<us:state name="FLORIDA" abbrev="FL"/>
+<us:state name="GEORGIA" abbrev="GA"/>
+<us:state name="GUAM" abbrev="GU"/>
+<us:state name="HAWAII" abbrev="HI"/>
+<us:state name="IDAHO" abbrev="ID"/>
+<us:state name="ILLINOIS" abbrev="IL"/>
+<us:state name="INDIANA" abbrev="IN"/>
+<us:state name="IOWA" abbrev="IA"/>
+<us:state name="KANSAS" abbrev="KS"/>
+<us:state name="KENTUCKY" abbrev="KY"/>
+<us:state name="LOUISIANA" abbrev="LA"/>
+<us:state name="MAINE" abbrev="ME"/>
+<us:state name="MARSHALL ISLANDS" abbrev="MH"/>
+<us:state name="MARYLAND" abbrev="MD"/>
+<us:state name="MASSACHUSETTS" abbrev="MA"/>
+<us:state name="MICHIGAN" abbrev="MI"/>
+<us:state name="MINNESOTA" abbrev="MN"/>
+<us:state name="MISSISSIPPI" abbrev="MS"/>
+<us:state name="MISSOURI" abbrev="MO"/>
+<us:state name="MONTANA" abbrev="MT"/>
+<us:state name="NEBRASKA" abbrev="NE"/>
+<us:state name="NEVADA" abbrev="NV"/>
+<us:state name="NEW HAMPSHIRE" abbrev="NH"/>
+<us:state name="NEW JERSEY" abbrev="NJ"/>
+<us:state name="NEW MEXICO" abbrev="NM"/>
+<us:state name="NEW YORK" abbrev="NY"/>
+<us:state name="NORTH CAROLINA" abbrev="NC"/>
+<us:state name="NORTH DAKOTA" abbrev="ND"/>
+<us:state name="NORTHERN MARIANA ISLANDS" abbrev="MP"/>
+<us:state name="OHIO" abbrev="OH"/>
+<us:state name="OKLAHOMA" abbrev="OK"/>
+<us:state name="OREGON" abbrev="OR"/>
+<us:state name="PALAU" abbrev="PW"/>
+<us:state name="PENNSYLVANIA" abbrev="PA"/>
+<us:state name="PUERTO RICO" abbrev="PR"/>
+<us:state name="RHODE ISLAND" abbrev="RI"/>
+<us:state name="SOUTH CAROLINA" abbrev="SC"/>
+<us:state name="SOUTH DAKOTA" abbrev="SD"/>
+<us:state name="TENNESSEE" abbrev="TN"/>
+<us:state name="TEXAS" abbrev="TX"/>
+<us:state name="UTAH" abbrev="UT"/>
+<us:state name="VERMONT" abbrev="VT"/>
+<us:state name="VIRGIN ISLANDS" abbrev="VI"/>
+<us:state name="VIRGINIA" abbrev="VA"/>
+<us:state name="WASHINGTON" abbrev="WA"/>
+<us:state name="WEST VIRGINIA" abbrev="WV"/>
+<us:state name="WISCONSIN" abbrev="WI"/>
+<us:state name="WYOMING" abbrev="WY"/>
+</us:states>

@@ -1,0 +1,2157 @@
+Chapter 7
+XML to Text
+1) Dealing with Whitespace
+<review>?
+?<author>?
+?? <name>Sal Mangano</name>?
+??<email>smangano@somewhere.com</email>?
+?</author>?
+<title>XSLT Cookbook</title>?
+<reviewer>?
+??<name>?<annonymous/>?</name>?
+??<email>smangano@somewhere.com</email>?
+??<comment>?
+Totally awesome. <b>Worth every cent!</b>?<i>Must buy because I ?
+know the author peronally and he can sure use the money.</i>?
+??</comment>?
+?</reviewer>?
+</review>?
+ 
+Example 7-1. Input 
+<numbers>
+  <number>10</number>
+  <number>3.5</number>
+  <number>4.44</number>
+  <number>77.7777</number>
+</numbers>
+Example 7-2. Processing numbers with and without an empty xsl:text element 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="text"/>
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="numbers">
+Without empty text element:
+<xsl:apply-templates mode="without"/>
+With empty text element:
+<xsl:apply-templates mode="with"/>
+</xsl:template>   
+   
+<xsl:template match="number" mode="without">
+  <xsl:value-of select="."/>,
+</xsl:template>
+   
+<xsl:template match="number" mode="with">
+  <xsl:value-of select="."/>,<xsl:text/>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-3. Output 
+Without empty text element:
+10,
+3.5,
+4.44,
+77.7777,
+   
+With empty text element:
+10,3.5,4.44,77.7777,
+Too little whitespace
+ 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="text"/>
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="number">
+  <xsl:value-of select="."/>
+  <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+</xsl:stylesheet>
+ 
+Example 7-4. Stylesheet demonstrating the effect of xsl:text and xml:space=preserve 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="text"/>
+   
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="numbers">
+Without xml:space="preserve":
+<xsl:apply-templates mode="without-preserve"/>
+With xml:space="preserve":
+<xsl:apply-templates mode="with-preserve"/>
+</xsl:template>
+   
+<xsl:template match="number" mode="without-preserve">
+  <xsl:value-of select="."/><xsl:text> </xsl:text>
+</xsl:template>
+   
+<xsl:template match="number" mode="with-preserve" xml:space="preserve">
+  <xsl:value-of select="."/><xsl:text> </xsl:text>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-5. Output 
+Without xml:space="preserve":
+10 3.5 4.44 77.7777
+With xml:space="preserve":
+   
+  10
+   
+  3.5
+   
+  4.44
+   
+  77.7777
+ 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+xmlns:my="http://www.ora.com/XSLTCookbook/ns/my">
+   
+<!-- Strip whitespace in all elements -->
+<xsl:strip-space="*"/>
+   
+<!-- except those in the "my" namespace -->
+<xsl:preserve-space="my:*"/>
+   
+<!-- and those named foo -->
+<xsl:preserve-space="foo"/>
+2) Exporting XML to Delimited Data
+Create a CSV file from flat attribute-encoded elements
+Example 7-6. people.xml 
+<?xml version="1.0" encoding="UTF-8"?>
+   
+<people>
+  <person name="Al Zehtooney" age="33" sex="m" smoker="no"/>
+  <person name="Brad York" age="38" sex="m" smoker="yes"/>
+  <person name="Charles Xavier" age="32" sex="m" smoker="no"/>
+  <person name="David Willimas" age="33" sex="m" smoker="no"/>
+  <person name="Edward Ulster" age="33" sex="m" smoker="yes"/>
+  <person name="Frank Townsend" age="35" sex="m" smoker="no"/>
+  <person name="Greg Sutter" age="40" sex="m" smoker="no"/>
+  <person name="Harry Rogers" age="37" sex="m" smoker="no"/>
+  <person name="John Quincy" age="43" sex="m" smoker="yes"/>
+  <person name="Kent Peterson" age="31" sex="m" smoker="no"/>
+  <person name="Larry Newell" age="23" sex="m" smoker="no"/>
+  <person name="Max Milton" age="22" sex="m" smoker="no"/>
+  <person name="Norman Lamagna" age="30" sex="m" smoker="no"/>
+  <person name="Ollie Kensington" age="44" sex="m" smoker="no"/>
+  <person name="John Frank" age="24" sex="m" smoker="no"/>
+  <person name="Mary Williams" age="33" sex="f" smoker="no"/>
+  <person name="Jane Frank" age="38" sex="f" smoker="yes"/>
+  <person name="Jo Peterson" age="32" sex="f" smoker="no"/>
+  <person name="Angie Frost" age="33" sex="f" smoker="no"/>
+  <person name="Betty Bates" age="33" sex="f" smoker="no"/>
+  <person name="Connie Date" age="35" sex="f" smoker="no"/>
+  <person name="Donna Finster" age="20" sex="f" smoker="no"/>
+  <person name="Esther Gates" age="37" sex="f" smoker="no"/>
+  <person name="Fanny Hill" age="33" sex="f" smoker="yes"/>
+  <person name="Geta Iota" age="27" sex="f" smoker="no"/>
+  <person name="Hillary Johnson" age="22" sex="f" smoker="no"/>
+  <person name="Ingrid Kent" age="21" sex="f" smoker="no"/>
+  <person name="Jill Larson" age="20" sex="f" smoker="no"/>
+  <person name="Kim Mulrooney" age="41" sex="f" smoker="no"/>
+  <person name="Lisa Nevins" age="21" sex="f" smoker="no"/>
+</people>
+Example 7-7. A simple but input-specific CSV transform 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     <xsl:output method="text"/>
+     <xsl:strip-space elements="*"/>
+     
+     <xsl:template match="person">
+       <xsl:value-of select="@name"/>,<xsl:text/>
+       <xsl:value-of select="@age"/>,<xsl:text/>
+       <xsl:value-of select="@sex"/>,<xsl:text/>
+       <xsl:value-of select="@smoker"/>
+       <xsl:text>&#xa;</xsl:text>
+     </xsl:template>
+     
+</xsl:stylesheet>
+Example 7-8. Output 
+Al Zehtooney,33,m,no
+Brad York,38,m,yes
+Charles Xavier,32,m,no
+David Willimas,33,m,no
+Edward Ulster,33,m,yes
+Frank Townsend,35,m,no
+Greg Sutter,40,m,no
+...
+Example 7-9. generic-attr-to-csv.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:csv="http://www.ora.com/XSLTCookbook/namespaces/csv">
+   
+<xsl:param name="delimiter" select=" ',' "/>
+   
+<xsl:output method="text" />
+   
+<xsl:strip-space elements="*"/>
+     
+<xsl:template match="/">
+  <xsl:for-each select="$columns">
+    <xsl:value-of select="@name"/>
+    <xsl:if test="position() != last()">
+      <xsl:value-of select="$delimiter/>
+    </xsl:if>
+  </xsl:for-each>
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:apply-templates/>
+</xsl:template>
+   
+<xsl:template match="/*/*">
+  <xsl:variable name="row" select="."/>
+  
+  <xsl:for-each select="$columns">
+    <xsl:apply-templates select="$row/@*[local-name(.)=current()/@attr]" 
+    mode="csv:map-value"/>
+    <xsl:if test="position() != last()">
+      <xsl:value-of select="$delimiter"/>
+    </xsl:if>
+  </xsl:for-each>
+   
+  <xsl:text>&#xa;</xsl:text>
+ 
+</xsl:template>
+   
+<xsl:template match="@*" mode="map-value">
+  <xsl:value-of select="."/>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-10. Using the generic solution to process people.xml 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:csv="http://www.ora.com/XSLTCookbook/namespaces/csv">
+   
+<xsl:import href="generic-attr-to-csv.xslt"/>
+   
+<!--Defines the mapping from attributes to columns -->
+<xsl:variable name="columns" select="document('')/*/csv:column"/>
+   
+<csv:column name="Name" attr="name"/>
+<csv:column name="Age" attr="age"/>
+<csv:column name="Gender" attr="sex"/>
+<csv:column name="Smoker" attr="smoker"/>
+   
+<!-- Handle custom attribute mappings -->
+   
+<xsl:template match="@sex" mode="csv:map-value">
+  <xsl:choose>
+    <xsl:when test=".='m'">male</xsl:when>
+    <xsl:when test=".='f'">female</xsl:when>
+    <xsl:otherwise>error</xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Create a CSV file from flat element-encoded data
+Example 7-11. People using elements 
+<people>
+  <person>
+    <name>Al Zehtooney</name>
+    <age>33</age>
+    <sex>m</sex>
+    <smoker>no</smoker>
+  </person>
+  <person>
+    <name>Brad York</name>
+    <age>38</age>
+    <sex>m</sex>
+    <smoker>yes</smoker>
+  </person>
+  <person>
+    <name>Charles Xavier</name>
+    <age>32</age>
+    <sex>m</sex>
+    <smoker>no</smoker>
+  </person>
+  <person>
+    <name>David Willimas</name>
+    <age>33</age>
+    <sex>m</sex>
+    <smoker>no</smoker>
+  </person>
+...
+</people>
+Example 7-12. generic-elem-to-csv.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:csv="http://www.ora.com/XSLTCookbook/namespaces/csv">
+   
+<xsl:param name="delimiter" select=" ',' "/>
+   
+<xsl:output method="text" />
+   
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="/">
+  <xsl:for-each select="$columns">
+    <xsl:value-of select="@name"/>
+   <xsl:if test="position() != last()">
+      <xsl:value-of select="$delimiter"/>
+    </xsl:if>
+  </xsl:for-each>
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:apply-templates/>
+</xsl:template>
+   
+<xsl:template match="/*/*">
+  <xsl:variable name="row" select="."/>
+  
+  <xsl:for-each select="$columns">
+    <xsl:apply-templates
+        select="$row/*[local-name(.)=current()/@elem]" mode="csv:map-value"/>
+    <xsl:if test="position() != last()">
+    <xsl:value-of select="$delimiter"/>
+    </xsl:if>
+  </xsl:for-each>
+   
+  <xsl:text>&#xa;</xsl:text>
+ 
+</xsl:template>
+   
+<xsl:template match="node()" mode="map-value">
+  <xsl:value-of select="."/>
+</xsl:template>
+Example 7-13. people-elem-to-csv.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:csv="http://www.ora.com/XSLTCookbook/namespaces/csv">
+   
+<xsl:import href="generic-elem-to-csv.xslt"/>
+   
+<!--Defines the mapping from attributes to columns -->
+<xsl:variable name="columns" select="document('')/*/csv:column"/>
+   
+<csv:column name="Name" elem="name"/>
+<csv:column name="Age" elem="age"/>
+<csv:column name="Gender" elem="sex"/>
+<csv:column name="Smoker" elem="smoker"/>
+   
+</xsl:stylesheet>
+Example 7-14. Output 
+Name,Age,Gender,Smoker
+Al Zehtooney,33,m,no
+Brad York,38,m,yes
+Charles Xavier,32,m,no
+David Willimas,33,m,no
+...
+Handle more complex mappings
+<ExpenseReport statementNum="123">
+  <Employee>
+    <Name>Salvatore Mangano</Name>
+    <SSN>999-99-9999</SSN>
+    <Dept>XSLT Hacking</Dept>
+    <EmpNo>1</EmpNo>
+    <Position>Cook</Position>
+    <Mangager>Big Boss O'Reilly</Mangager>
+  </Employee>
+  <PayPeriod>
+    <From>1/1/02</From>
+    <To>1/31/02</To>
+  </PayPeriod>
+  <Expenses>
+    <Expense>
+      <Date>12/20/01</Date>
+      <Account>12345</Account>
+      <Desc>Goofing off instead of going to confrence.</Desc>
+      <Lodging>500.00</Lodging>
+      <Transport>50.00</Transport>
+      <Fuel>0</Fuel>
+      <Meals>300.00</Meals>
+      <Phone>100</Phone>
+      <Entertainment>1000.00</Entertainment>
+      <Other>300.00</Other>
+    </Expense>
+    <Expense>
+      <Date>12/20/01</Date>
+      <Account>12345</Account>
+      <Desc>On the beach</Desc>
+      <Lodging>500.00</Lodging>
+      <Transport>50.00</Transport>
+      <Fuel>0</Fuel>
+      <Meals>200.00</Meals>
+      <Phone>20</Phone>
+      <Entertainment>300.00</Entertainment>
+      <Other>100.00</Other>
+    </Expense>
+  </Expenses>
+</ExpenseReport>
+ 
+Figure 7-1. Expense report spreadsheet
+,,,,,,,,,,,,Statement No.,123,
+   
+,,,,,,,,,,,Expense Statement,
+   
+   
+,,,Employee,,,,,,,,,Pay Period,
+   
+,,,Name,Salvatore Mangano,,Emp #,1,,,,,From,1/1/02,
+,,,SSN,999-99-9999,,Position,Cook,
+,,,Department,XSLT Hacking,,,,,,,,To,1/31/02,
+   
+,,,Date,Account,Description,Lodging,Transport,Fuel,Meals,Phone,Entertainment,Other,
+Total,
+   
+,,,12/20/01,12345,Goofing off instead of going to confrence.,500.00,50.00,0,300.
+00,100,1000.00,300.00,
+   
+,,,12/20/01,12345,On the beach,500.00,50.00,0,200.00,20,300.00,100.00,Sub Total,
+,,,Approved,,Notes,,,,,,,Advances,
+,,,,,,,,,,,,Total,
+<xsl:template match="ExpenseReport">
+    <c:cell col="M" row="3" value="Statement No."/>
+    <c:cell col="N" row="3" value="{@statementNum}"/>
+    <c:cell col="L" row="6" value="Expense Statement"/>
+    <xsl:apply-templates/>
+    <xsl:variable name="offset" select="count(Expenses/Expense)+18"/>
+    <c:cell col="M" row="{$offset}" value="Sub Total"/>
+    <c:cell col="D" row="{$offset + 1}" value="Approved"/>
+    <c:cell col="F" row="{$offset + 1}" value="Notes"/>
+    <c:cell col="M" row="{$offset + 1}" value="Advances"/>
+    <c:cell col="M" row="{$offset + 2}" value="Total"/>
+  </xsl:template>
+   
+  <xsl:template match="Employee">
+    <c:cell col="D" row="10" value="Employee"/>
+    <xsl:apply-templates/>
+  </xsl:template>
+   
+  <xsl:template match="Employee/Name">
+    <c:cell col="D" row="12" value="Name"/>
+    <c:cell col="E" row="12" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Employee/SSN">
+    <c:cell col="D" row="13" value="SSN"/>
+    <c:cell col="E" row="13" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Employee/Dept">
+    <c:cell col="D" row="14" value="Department"/>
+    <c:cell col="E" row="14" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Employee/EmpNo">
+    <c:cell col="G" row="12" value="Emp #"/>
+    <c:cell col="H" row="12" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Employee/Position">
+    <c:cell col="G" row="13" value="Position"/>
+    <c:cell col="H" row="13" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Employee/Manager">
+    <c:cell col="G" row="14" value="Manager"/>
+    <c:cell col="H" row="14" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="PayPeriod">
+    <c:cell col="M" row="10" value="Pay Period"/>
+    <xsl:apply-templates/>
+  </xsl:template>
+   
+  <xsl:template match="PayPeriod/From">
+    <c:cell col="M" row="12" value="From"/>
+    <c:cell col="N" row="12" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="PayPeriod/To">
+    <c:cell col="M" row="14" value="To"/>
+    <c:cell col="N" row="14" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expenses">
+    <c:cell col="D" row="16" value="Date"/>
+    <c:cell col="E" row="16" value="Account"/>
+    <c:cell col="F" row="16" value="Description"/>
+    <c:cell col="G" row="16" value="Lodging"/>
+    <c:cell col="H" row="16" value="Transport"/>
+    <c:cell col="I" row="16" value="Fuel"/>
+    <c:cell col="J" row="16" value="Meals"/>
+    <c:cell col="K" row="16" value="Phone"/>
+    <c:cell col="L" row="16" value="Entertainment"/>
+    <c:cell col="M" row="16" value="Other"/>
+    <c:cell col="N" row="16" value="Total"/>
+    <xsl:apply-templates/>
+  </xsl:template>
+   
+  <xsl:template match="Expenses/Expense">
+    <xsl:apply-templates>
+      <xsl:with-param name="row" select="position()+16"/>
+    </xsl:apply-templates>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Date">
+    <xsl:param name="row"/>
+    <c:cell col="D" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Account">
+    <xsl:param name="row"/>
+    <c:cell col="E" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Desc">
+    <xsl:param name="row"/>
+    <c:cell col="F" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Lodging">
+    <xsl:param name="row"/>
+    <c:cell col="G" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Transport">
+    <xsl:param name="row"/>
+    <c:cell col="H" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Fuel">
+    <xsl:param name="row"/>
+    <c:cell col="I" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Meals">
+    <xsl:param name="row"/>
+    <c:cell col="J" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Phone">
+    <xsl:param name="row"/>
+    <c:cell col="K" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Entertainment">
+    <xsl:param name="row"/>
+    <c:cell col="L" row="{$row}" value="{.}"/>
+  </xsl:template>
+   
+  <xsl:template match="Expense/Other">
+    <xsl:param name="row"/>
+    <c:cell col="M" row="{$row}" value="{.}"/>
+  </xsl:template>
+<c:cells xmlns:c="http://www.ora.com/XSLTCookbook/namespaces/cells" >
+  <c:cell col="M" row="3" value="Statement No."/>
+  <c:cell col="N" row="3" value="123"/>
+  <c:cell col="L" row="6" value="Expense Statement"/>
+  <c:cell col="D" row="10" value="Employee"/>
+  <c:cell col="D" row="12" value="Name"/>
+  <c:cell col="E" row="12" value="Salvatore Mangano"/>
+  <c:cell col="D" row="13" value="SSN"/>
+  <c:cell col="E" row="13" value="999-99-9999"/>
+  <c:cell col="D" row="14" value="Department"/>
+  <c:cell col="E" row="14" value="XSLT Hacking"/>
+  <c:cell col="G" row="12" value="Emp #"/>
+  <c:cell col="H" row="12" value="1"/>
+  <c:cell col="G" row="13" value="Position"/>
+  <c:cell col="H" row="13" value="Cook"/>
+  <c:cell col="G" row="14" value="Manager"/>
+  <c:cell col="H" row="14" value="Big Boss O'Reilly"/>
+  <c:cell col="M" row="10" value="Pay Period"/>
+  <c:cell col="M" row="12" value="From"/>
+  <c:cell col="N" row="12" value="1/1/02"/>
+  <c:cell col="M" row="14" value="To"/>
+  <c:cell col="N" row="14" value="1/31/02"/>
+  <c:cell col="D" row="16" value="Date"/>
+  <c:cell col="E" row="16" value="Account"/>
+  <c:cell col="F" row="16" value="Description"/>
+  <c:cell col="G" row="16" value="Lodging"/>
+  <c:cell col="H" row="16" value="Transport"/>
+  <c:cell col="I" row="16" value="Fuel"/>
+  <c:cell col="J" row="16" value="Meals"/>
+  <c:cell col="K" row="16" value="Phone"/>
+  <c:cell col="L" row="16" value="Entertainment"/>
+  <c:cell col="M" row="16" value="Other"/>
+  <c:cell col="N" row="16" value="Total"/>
+  <c:cell col="D" row="18" value="12/20/01"/>
+  <c:cell col="E" row="18" value="12345"/>
+  <c:cell col="F" row="18" value="Goofing off instead of going to confrence."/>
+  <c:cell col="G" row="18" value="500.00"/>
+  <c:cell col="H" row="18" value="50.00"/>
+  <c:cell col="I" row="18" value="0"/>
+  <c:cell col="J" row="18" value="300.00"/>
+  <c:cell col="K" row="18" value="100"/>
+  <c:cell col="L" row="18" value="1000.00"/>
+  <c:cell col="M" row="18" value="300.00"/>
+  <c:cell col="D" row="20" value="12/20/01"/>
+  <c:cell col="E" row="20" value="12345"/>
+  <c:cell col="F" row="20" value="On the beach"/>
+  <c:cell col="G" row="20" value="500.00"/>
+  <c:cell col="H" row="20" value="50.00"/>
+  <c:cell col="I" row="20" value="0"/>
+  <c:cell col="J" row="20" value="200.00"/>
+  <c:cell col="K" row="20" value="20"/>
+  <c:cell col="L" row="20" value="300.00"/>
+  <c:cell col="M" row="20" value="100.00"/>
+  <c:cell col="M" row="20" value="Sub Total"/>
+  <c:cell col="D" row="21" value="Approved"/>
+  <c:cell col="F" row="21" value="Notes"/>
+  <c:cell col="M" row="21" value="Advances"/>
+  <c:cell col="M" row="22" value="Total"/>
+</c:cells>
+Example 7-15. Generic cells-to-comma-delimited.xslt 
+<xsl:stylesheet version="1.0" 
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+     xmlns:c="http://www.ora.com/XSLTCookbook/namespaces/cells"
+      xmlns:exsl="http://exslt.org/common" extension-element-prefixes="exsl">
+   
+  <xsl:output method="text"/>
+   
+  <!-- Used to map column letters to numbers -->
+  <xsl:variable name="columns" select=" '_ABCDEFGHIJKLMNOPQRSTUVWXYZ' "/>
+  
+  <xsl:template match="/">
+   
+     <!-- Capture cells in a variable -->
+    <xsl:variable name="cells">
+      <xsl:apply-templates/>
+    </xsl:variable>
+    
+     <!-- Sort into row-column order -->
+    <xsl:variable name="cells-sorted">
+      <xsl:for-each select="exsl:node-set($cells)/c:cell">
+        <xsl:sort select="@row" data-type="number"/>
+        <xsl:sort select="@col" data-type="text"/>
+        <xsl:copy-of select="."/>
+      </xsl:for-each>
+    </xsl:variable>
+   
+    <xsl:apply-templates select="exsl:node-set($cells-sorted)/c:cell"/>
+   
+  </xsl:template>
+   
+  <xsl:template match="c:cell">
+    <xsl:choose>
+        <!-- Detect a row change -->
+      <xsl:when test="preceding-sibling::c:cell[1]/@row != @row">
+         <!-- Compute how many rows to skip, if any -->
+        <xsl:variable name="skip-rows">
+          <xsl:choose>
+            <xsl:when test="preceding-sibling::c:cell[1]/@row">
+              <xsl:value-of 
+               select="@row - preceding-sibling::c:cell[1]/@row"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@row - 1"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:call-template name="skip-rows">
+          <xsl:with-param name="skip" select="$skip-rows"/>
+        </xsl:call-template>
+   
+        <xsl:variable name="current-col" 
+               select="string-length(substring-before($columns,@col))"/>
+        <xsl:call-template name="skip-cols">
+          <xsl:with-param name="skip" select="$current-col - 1"/>
+        </xsl:call-template>
+        <xsl:value-of select="@value"/>,<xsl:text/>
+      </xsl:when>
+      
+      <xsl:otherwise>
+         <!-- Compute how many cols to skip, if any -->
+        <xsl:variable name="skip-cols">
+          <xsl:variable name="current-col" 
+               select="string-length(substring-before($columns,@col))"/>
+          
+          <xsl:choose>
+            <xsl:when test="preceding-sibling::c:cell[1]/@col">
+              <xsl:variable name="prev-col" 
+               select="string-length(substring-before($columns,
+                         preceding-sibling::c:cell[1]/@col))"/>
+              <xsl:value-of select="$current-col - $prev-col - 1"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$current-col - 1"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:call-template name="skip-cols">
+          <xsl:with-param name="skip" select="$skip-cols"/>
+        </xsl:call-template>
+        <!--Output the value of the cell and a comma -->
+        <xsl:value-of select="@value"/>,<xsl:text/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+   
+<!-- Used to insert empty lines for non contiguous rows -->
+<xsl:template name="skip-rows">
+  <xsl:param name="skip"/>
+  <xsl:choose>
+    <xsl:when test="$skip > 0">
+      <xsl:text>&#xa;</xsl:text>
+      <xsl:call-template name="skip-rows">
+        <xsl:with-param name="skip" select="$skip - 1"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise/>
+  </xsl:choose>
+</xsl:template>
+   
+<!-- Used to insert extra commas for non contiguous cols -->
+<xsl:template name="skip-cols">
+  <xsl:param name="skip"/>
+  <xsl:choose>
+    <xsl:when test="$skip > 0">
+      <xsl:text>,</xsl:text>
+      <xsl:call-template name="skip-cols">
+        <xsl:with-param name="skip" select="$skip - 1"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise/>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-16. Applications-specific expense-to-delimited.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:c="http://www.ora.com/XSLTCookbook/namespaces/cells" 
+  xmlns:exsl="http://exslt.org/common" extension-element-prefixes="exsl">
+   
+  <xsl:include href="cells-to-comma-delimited.xslt"/>
+  
+  <xsl:template match="ExpenseReport">
+    <c:cell col="M" row="3" value="Statement No."/>
+    <c:cell col="N" row="3" value="{@statementNum}"/>
+    <c:cell col="L" row="6" value="Expense Statement"/>
+    <xsl:apply-templates/>
+    <xsl:variable name="offset" select="count(Expenses/Expense)+18"/>
+    <c:cell col="M" row="{$offset}" value="Sub Total"/>
+    <c:cell col="D" row="{$offset + 1}" value="Approved"/>
+    <c:cell col="F" row="{$offset + 1}" value="Notes"/>
+    <c:cell col="M" row="{$offset + 1}" value="Advances"/>
+    <c:cell col="M" row="{$offset + 2}" value="Total"/>
+  </xsl:template>
+   
+  <xsl:template match="Employee">
+    <c:cell col="D" row="10" value="Employee"/>
+    <xsl:apply-templates/>
+  </xsl:template>
+   
+  <xsl:template match="Employee/Name">
+    <c:cell col="D" row="12" value="Name"/>
+    <c:cell col="E" row="12" value="{.}"/>
+  </xsl:template>
+   
+<!-- ... -->
+<!-- Remainder elided, same as original stylesheet above -->
+<!-- ... -->
+   
+</xsl:stylesheet>
+XSLT  2.0
+toCSV.xslt
+<xsl:stylesheet version="2.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:fn="http://www.w3.org/2004/10/xpath-functions" 
+xmlns:csv="http://www.ora.com/XSLTCookbook/namespaces/csv">
+   
+<xsl:param name="delimiter" select=" ',' "/>
+
+<!--These should be overridden in importing stylesheet -->
+<xsl:variable name="columns" select="()" as="xs:string*"/>
+<xsl:variable name="nodeNames" select="$columns" as="xs:string*"/>
+   
+<xsl:output method="text" />
+   
+<xsl:strip-space elements="*"/>
+     
+<xsl:template match="/">
+  <!--Here we use the new ability of value-of-->
+  <xsl:value-of select="$columns" separator="{$delimiter}"/>
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:apply-templates mode="csv:map-row"/>
+</xsl:template>
+   
+<xsl:template match="/*/*" mode="csv:map-row" name="csv:map-row">
+
+  <xsl:param name="elemOrAttr" select=" 'elem' " as="xs:string"/>
+  
+  <xsl:variable name="row" select="." as="node()"/>
+  
+  <xsl:for-each select="$nodeNames">
+    <xsl:apply-templates select="if ($elemOrAttr eq 'elem') 
+                                 then $row/*[local-name(.) eq current()] 
+                                 else $row/@*[local-name(.) eq current()]" 
+                         mode="csv:map-value"/>
+    <xsl:value-of select="if (position() ne last()) then $delimiter else ()"/>
+  </xsl:for-each>
+   
+  <xsl:text>&#xa;</xsl:text>
+ 
+</xsl:template>
+   
+<xsl:template match="node()" mode="csv:map-value">
+  <xsl:value-of select="."/>
+</xsl:template>
+   
+</xsl:stylesheet>
+
+peopleToCSV.xslt
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:csv="http://www.ora.com/XSLTCookbook/namespaces/csv">
+   
+<xsl:import href="toCSV.xslt"/>
+   
+<!--Defines the mapping from nodes to columns -->
+<xsl:variable name="columns" select="'Name', 'Age', 'Gender', 'Smoker'" 
+as="xs:string*"/>
+<xsl:variable name="nodeNames" select="'name', 'age', 'sex', 'smoker'" 
+as="xs:string*"/>
+
+<!-- Switch default processing from elements to attributes -->
+<xsl:template match="/*/*" mode="csv:map-row">
+  <xsl:call-template name="csv:map-row">
+    <xsl:with-param name="elemOrAttr" select=" 'attr' "/>
+  </xsl:call-template>
+</xsl:template>
+
+<!-- Handle custom attribute mappings -->
+   
+<xsl:template match="@sex" mode="csv:map-value">
+  <xsl:choose>
+    <xsl:when test=".='m'">male</xsl:when>
+    <xsl:when test=".='f'">female</xsl:when>
+    <xsl:otherwise>error</xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+3) Creating a Columnar Report
+Example 7-17. Generic text-justification template—text.justify.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings"
+  xmlns:text="http://www.ora.com/XSLTCookbook/namespaces/text"
+  extension-element-prefixes="text">
+     
+<xsl:include href="../strings/str.dup.xslt"/>
+   
+<xsl:template name="text:justify">
+  <xsl:param name="value" /> 
+  <xsl:param name="width" select="10"/>
+  <xsl:param name="align" select=" 'left' "/>
+   
+  <!-- Truncate if too long -->  
+  <xsl:variable name="output" select="substring($value,1,$width)"/>
+  
+  <xsl:choose>
+    <xsl:when test="$align = 'left'">
+      <xsl:value-of select="$output"/>
+      <xsl:call-template name="str:dup">
+        <xsl:with-param name="input" select=" ' ' "/>
+        <xsl:with-param name="count" 
+          select="$width - string-length($output)"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:when test="$align = 'right'">
+      <xsl:call-template name="str:dup">
+        <xsl:with-param name="input" select=" ' ' "/>
+        <xsl:with-param name="count" 
+               select="$width - string-length($output)"/>
+      </xsl:call-template>
+      <xsl:value-of select="$output"/>
+    </xsl:when>
+    <xsl:when test="$align = 'center'">
+      <xsl:call-template name="str:dup">
+        <xsl:with-param name="input" select=" ' ' "/>
+        <xsl:with-param name="count" 
+          select="floor(($width - string-length($output)) div 2)"/>
+      </xsl:call-template>
+      <xsl:value-of select="$output"/>
+      <xsl:call-template name="str:dup">
+        <xsl:with-param name="input" select=" ' ' "/>
+        <xsl:with-param name="count" 
+          select="ceiling(($width - string-length($output)) div 2)"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>INVALID ALIGN</xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-18. people-to-columns.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings"
+  xmlns:text="http://www.ora.com/XSLTCookbook/namespaces/text">
+   
+<xsl:include href="text.justify.xslt"/>
+   
+<xsl:output method="text" />
+   
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="people">
+Name                 Age    Sex   Smoker
+--------------------|------|-----|---------
+<xsl:apply-templates/>
+</xsl:template>
+   
+<xsl:template match="person">
+   
+  <xsl:call-template name="text:justify">
+    <xsl:with-param name="value" select="@name"/>
+    <xsl:with-param name="width" select="20"/>
+  </xsl:call-template>
+ <xsl:text>|</xsl:text>
+  <xsl:call-template name="text:justify">
+    <xsl:with-param name="value" select="@age"/>
+    <xsl:with-param name="width" select="6"/>
+    <xsl:with-param name="align" select=" 'right' "/>
+  </xsl:call-template>
+ <xsl:text>|</xsl:text>
+  <xsl:call-template name="text:justify">
+    <xsl:with-param name="value" select="@sex"/>
+    <xsl:with-param name="width" select="6"/>
+    <xsl:with-param name="align" select=" 'center' "/>
+  </xsl:call-template>
+ <xsl:text>|</xsl:text>
+  <xsl:call-template name="text:justify">
+    <xsl:with-param name="value" select="@smoker"/>
+    <xsl:with-param name="width" select="9"/>
+    <xsl:with-param name="align" select=" 'center' "/>
+  </xsl:call-template>
+  <xsl:text>
+</xsl:text>  
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-19. Output 
+Name                 Age    Sex   Smoker
+--------------------|------|-----|---------
+Al Zehtooney        |    33|  m  |   no
+Brad York           |    38|  m  |   yes
+Charles Xavier      |    32|  m  |   no
+David Willimas      |    33|  m  |   no
+Edward Ulster       |    33|  m  |   yes
+Frank Townsend      |    35|  m  |   no
+Greg Sutter         |    40|  m  |   no
+Harry Rogers        |    37|  m  |   no
+John Quincy         |    43|  m  |   yes
+Kent Peterson       |    31|  m  |   no
+Larry Newell        |    23|  m  |   no
+Max Milton          |    22|  m  |   no
+Norman Lamagna      |    30|  m  |   no
+Ollie Kensinton     |    44|  m  |   no
+John Frank          |    24|  m  |   no
+Mary Williams       |    33|  f  |   no
+Jane Frank          |    38|  f  |   yes
+Jo Peterson         |    32|  f  |   no
+Angie Frost         |    33|  f  |   no
+Betty Bates         |    33|  f  |   no
+Connie Date         |    35|  f  |   no
+Donna Finster       |    20|  f  |   no
+Esther Gates        |    37|  f  |   no
+Fanny Hill          |    33|  f  |   yes
+Geta Iota           |    27|  f  |   no
+Hillary Johnson     |    22|  f  |   no
+Ingrid Kent         |    21|  f  |   no
+Jill Larson         |    20|  f  |   no
+Kim Mulrooney       |    41|  f  |   no
+Lisa Nevins         |    21|  f  |   no
+Example 7-20. text.matrix.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:text="http://www.ora.com/XSLTCookbook/namespaces/text" 
+  extension-element-prefixes="text">
+   
+  <xsl:output method="text"/>
+  
+  <xsl:include href="text.justify.xslt"/>
+  
+  <xsl:template name="text:row-major">
+    <xsl:param name="nodes" select="/.."/>
+    <xsl:param name="num-cols" select="2"/>
+    <xsl:param name="width" select="10"/>
+    <xsl:param name="align" select=" 'left' "/>
+    <xsl:param name="gutter" select=" ' ' "/>
+   
+    <xsl:if test="$nodes">
+        <xsl:call-template name="text:row">
+          <xsl:with-param name="nodes" 
+               select="$nodes[position() &lt;= $num-cols]"/>
+          <xsl:with-param name="width" select="$width"/>
+          <xsl:with-param name="align" select="$align"/>
+          <xsl:with-param name="gutter" select="$gutter"/>
+        </xsl:call-template>
+        <!-- process remaining rows -->
+        <xsl:call-template name="text:row-major">
+          <xsl:with-param name="nodes" 
+               select="$nodes[position() > $num-cols]"/> 
+          <xsl:with-param name="num-cols" select="$num-cols"/>
+          <xsl:with-param name="width" select="$width"/>
+          <xsl:with-param name="align" select="$align"/>
+          <xsl:with-param name="gutter" select="$gutter"/>
+        </xsl:call-template>
+    </xsl:if>
+  </xsl:template>
+   
+  <xsl:template name="text:col-major">
+    <xsl:param name="nodes" select="/.."/>
+    <xsl:param name="num-cols" select="2"/>
+    <xsl:param name="width" select="10"/>
+    <xsl:param name="align" select=" 'left' "/>
+    <xsl:param name="gutter" select=" ' ' "/>
+   
+    <xsl:if test="$nodes">
+        <xsl:call-template name="text:row">
+          <xsl:with-param name="nodes" 
+               select="$nodes[(position() - 1) mod 
+                         ceiling(last() div $num-cols) = 0]"/>
+          <xsl:with-param name="width" select="$width"/>
+          <xsl:with-param name="align" select="$align"/>
+          <xsl:with-param name="gutter" select="$gutter"/>
+  </xsl:call-template>
+        
+        <!-- process remaining rows -->
+        <xsl:call-template name="text:col-major">
+          <xsl:with-param name="nodes" 
+               select="$nodes[(position() - 1) mod 
+                         ceiling(last() div $num-cols) != 0]"/> 
+          <xsl:with-param name="num-cols" select="$num-cols"/>
+          <xsl:with-param name="width" select="$width"/>
+          <xsl:with-param name="align" select="$align"/>
+          <xsl:with-param name="gutter" select="$gutter"/>
+        </xsl:call-template>
+    </xsl:if>
+    
+  </xsl:template>
+   
+<xsl:template name="text:row">
+    <xsl:param name="nodes" select="/.."/>
+    <xsl:param name="width" select="10"/>
+    <xsl:param name="align" select=" 'left' "/>
+    <xsl:param name="gutter" select=" ' ' "/>
+   
+  
+  <xsl:for-each select="$nodes">
+    <xsl:call-template name="text:justify">
+      <xsl:with-param name="value" select="."/>
+      <xsl:with-param name="width" select="$width"/>
+      <xsl:with-param name="align" select="$align"/>
+    </xsl:call-template>
+    <xsl:value-of select="$gutter"/>
+  </xsl:for-each>
+  
+  <xsl:text>&#xa;</xsl:text>
+  
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-21. Input 
+<numbers>
+  <number>10</number>
+  <number>3.5</number>
+  <number>4.44</number>
+  <number>77.7777</number>
+  <number>-8</number>
+  <number>1</number>
+  <number>444</number>
+  <number>1.1234</number>
+  <number>7.77</number>
+  <number>3.1415927</number>
+  <number>10</number>
+  <number>9</number>
+  <number>8</number>
+  <number>7</number>
+  <number>666</number>
+  <number>5555</number>
+  <number>-4444444</number>
+  <number>22.33</number>
+  <number>18</number>
+  <number>36.54</number>
+  <number>43</number>
+  <number>99999</number>
+  <number>999999</number>
+  <number>9999999</number>
+  <number>32</number>
+  <number>64</number>
+  <number>-64.0001</number>
+</numbers>
+Example 7-22. Stylesheet 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:text="http://www.ora.com/XSLTCookbook/namespaces/text">
+   
+<xsl:output method="text" />
+   
+<xsl:include href="text.matrix.xslt"/>
+   
+<xsl:template match="numbers">
+Five columns of numbers in row major order:
+<xsl:text/>
+  <xsl:call-template name="text:row-major">
+    <xsl:with-param name="nodes" select="number"/>
+    <xsl:with-param name="align" select=" 'right' "/>
+    <xsl:with-param name="num-cols" select="5"/>
+    <xsl:with-param name="gutter" select=" ' | ' "/>
+  </xsl:call-template>
+   
+Five columns of numbers in column major order:
+<xsl:text/>
+  <xsl:call-template name="text:col-major">
+    <xsl:with-param name="nodes" select="number"/>
+    <xsl:with-param name="align" select=" 'right' "/>
+    <xsl:with-param name="num-cols" select="5"/>
+    <xsl:with-param name="gutter" select=" ' | ' "/>
+  </xsl:call-template>
+  
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-23. Output 
+Five columns of numbers in row major order:
+        10 |        3.5 |       4.44 |    77.7777 |         -8 |
+         1 |        444 |     1.1234 |       7.77 |  3.1415927 |
+        10 |          9 |          8 |          7 |        666 |
+      5555 |   -4444444 |      22.33 |         18 |      36.54 |
+        43 |      99999 |     999999 |    9999999 |         32 |
+        64 |   -64.0001 |
+   
+Five columns of numbers in column major order:
+        10 |        444 |          8 |         18 |         32 |
+       3.5 |     1.1234 |          7 |      36.54 |         64 |
+      4.44 |       7.77 |        666 |         43 |   -64.0001 |
+   77.7777 |  3.1415927 |       5555 |      99999 |
+        -8 |         10 |   -4444444 |     999999 |
+         1 |          9 |      22.33 |    9999999 |
+XSLT  2.0
+<xsl:function name="text:dup" as="xs:string">
+  <xsl:param name="input" as="xs:string"/>
+  <xsl:param name="count" as="xs:integer"/>
+  <xsl:sequence  select="string-join(for $i in 1 to $count return $input, '')"/>
+</xsl:function>
+
+<xsl:function name="text:justify" as="xs:string">
+  <xsl:param name="value" as="xs:string"/> 
+  <xsl:param name="width" as="xs:integer" />
+  <xsl:sequence select="text:justify($value, $width, 'left')"/>
+</xsl:function>
+  
+<xsl:function name="text:justify" as="xs:string">
+  <xsl:param name="value" as="xs:string"/> 
+  <xsl:param name="width" as="xs:integer" />
+  <xsl:param name="align" as="xs:string" />
+   
+  <!-- Truncate if too long -->  
+  <xsl:variable name="output" 
+                select="substring($value,1,$width)" as="xs:string"/>
+  <xsl:variable name="offset" 
+                select="$width - string-length($output)" as="xs:integer"/>
+  <xsl:choose>
+    <xsl:when test="$align = 'left'">
+      <xsl:value-of select="concat($output, text:dup(' ', $offset))"/>
+    </xsl:when>
+    <xsl:when test="$align = 'right'">
+      <xsl:value-of select="concat(text:dup(' ', $offset), $output)"/>
+    </xsl:when>
+    <xsl:when test="$align = 'center'">
+      <xsl:variable name="before" select="$offset idiv 2"/>
+      <xsl:variable name="after" select="$before + $offset mod 2"/>
+      <xsl:value-of select="concat(text:dup(' ', $before),
+                                   $output,text:dup(' ', $after))"/>
+    </xsl:when>
+    <xsl:otherwise>INVALID ALIGN</xsl:otherwise>
+  </xsl:choose>
+</xsl:function>
+Discussion
+Example 7-24. generic-attr-to-columns.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings"
+ xmlns:text="http://www.ora.com/XSLTCookbook/namespaces/text">
+   
+<xsl:include href="text.justify.xslt"/>
+   
+<xsl:param name="gutter" select=" ' ' "/>
+   
+<xsl:output method="text"/>
+   
+<xsl:strip-space elements="*"/>
+   
+<xsl:variable name="columns" select="/.."/>
+   
+<xsl:template match="/">
+  <xsl:for-each select="$columns">
+    <xsl:call-template name="text:justify" >
+      <xsl:with-param name="value" select="@name"/>
+      <xsl:with-param name="width" select="@width"/>
+      <xsl:with-param name="align" select=" 'left' "/>
+    </xsl:call-template>
+    <xsl:value-of select="$gutter"/>
+  </xsl:for-each>
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:for-each select="$columns">
+    <xsl:call-template name="str:dup">
+      <xsl:with-param name="input" select=" '-' "/>
+      <xsl:with-param name="count" select="@width"/>
+    </xsl:call-template>
+    <xsl:call-template name="str:dup">
+      <xsl:with-param name="input" select=" '-' "/>
+      <xsl:with-param name="count" select="string-length($gutter)"/>
+    </xsl:call-template>
+  </xsl:for-each>
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:apply-templates/>
+</xsl:template>
+   
+<xsl:template match="/*/*">
+  <xsl:variable name="row" select="."/>
+   
+  <xsl:for-each select="$columns">
+    <xsl:variable name="value">
+      <xsl:apply-templates 
+      select="$row/@*[local-name(.)=current()/@attr]" mode="text:map-col-value"/>
+    </xsl:variable>
+    <xsl:call-template name="text:justify" >
+      <xsl:with-param name="value" select="$value"/>
+      <xsl:with-param name="width" select="@width"/>
+      <xsl:with-param name="align" select="@align"/>
+    </xsl:call-template>
+    <xsl:value-of select="$gutter"/>
+  </xsl:for-each>
+   
+  <xsl:text>&#xa;</xsl:text>
+ 
+</xsl:template>
+   
+<xsl:template match="@*" mode="text:map-col-value">
+  <xsl:value-of select="."/>
+</xsl:template>
+Example 7-25. people-to-cols-using-generic.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings"
+  xmlns:text="http://www.ora.com/XSLTCookbook/namespaces/text">
+   
+<xsl:import href="generic-attr-to-columns.xslt"/>
+   
+<!--Defines the mapping from attributes to columns -->
+<xsl:variable name="columns" select="document('')/*/text:column"/>
+   
+<text:column name="Name" width="20" align="left" attr="name"/>
+<text:column name="Age" width="6" align="right" attr="age"/>
+<text:column name="Gender" width="6" align="left" attr="sex"/>
+<text:column name="Smoker" width="6" align="left" attr="smoker"/>
+   
+<!-- Handle custom attribute mappings -->
+   
+<xsl:template match="@sex" mode="text:map-col-value">
+  <xsl:choose>
+    <xsl:when test=".='m'">male</xsl:when>
+    <xsl:when test=".='f'">female</xsl:when>
+    <xsl:otherwise>error</xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-26. Output (with gutter param = " | ") 
+Name                 | Age    | Gender | Smoker |
+-------------------------------------------------
+Al Zehtooney         |     33 | male   | no     |
+Brad York            |     38 | male   | yes    |
+Charles Xavier       |     32 | male   | no     |
+David Willimas       |     33 | male   | no     |
+Edward Ulster        |     33 | male   | yes    |
+Frank Townsend       |     35 | male   | no     |
+Greg Sutter          |     40 | male   | no     |
+Harry Rogers         |     37 | male   | no     |
+John Quincy          |     43 | male   | yes    |
+Kent Peterson        |     31 | male   | no     |
+Larry Newell         |     23 | male   | no     |
+Max Milton           |     22 | male   | no     |
+Norman Lamagna       |     30 | male   | no     |
+Ollie Kensinton      |     44 | male   | no     |
+John Frank           |     24 | male   | no     |
+Mary Williams        |     33 | female | no     |
+Jane Frank           |     38 | female | yes    |
+Jo Peterson          |     32 | female | no     |
+Angie Frost          |     33 | female | no     |
+Betty Bates          |     33 | female | no     |
+Connie Date          |     35 | female | no     |
+Donna Finster        |     20 | female | no     |
+Esther Gates         |     37 | female | no     |
+Fanny Hill           |     33 | female | yes    |
+Geta Iota            |     27 | female | no     |
+Hillary Johnson      |     22 | female | no     |
+Ingrid Kent          |     21 | female | no     |
+Jill Larson          |     20 | female | no     |
+Kim Mulrooney        |     41 | female | no     |
+Lisa Nevins          |     21 | female | no     |
+4) Displaying a Hierarchy
+Example 7-27. text.hierarchy.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings">
+   
+<xsl:include href="../strings/str.dup.xslt"/>
+<xsl:include href="../strings/str.replace.xslt"/>
+   
+<xsl:output method="text"/>
+   
+<!--Levels indented with two spaces by default -->
+<xsl:param name="indent" select=" '  ' "/>
+   
+<xsl:template match="*">
+  <xsl:param  name="level" select="count(./ancestor::*)"/>
+  
+  <!-- Indent this element -->
+  <xsl:call-template name="str:dup" >
+    <xsl:with-param name="input" select="$indent"/>
+    <xsl:with-param name="count" select="$level"/>
+  </xsl:call-template>
+  
+  <!--Process the element name. Default will output local-name -->
+  <xsl:apply-templates select="." mode="name">
+    <xsl:with-param name="level" select="$level"/>
+  </xsl:apply-templates>
+  
+  <!--Signal the start of processing of attributes. 
+      Default will output '(' -->
+  <xsl:apply-templates select="." mode="begin-attributes">
+    <xsl:with-param name="level" select="$level"/>
+  </xsl:apply-templates>
+  
+  <!--Process attributes. 
+      Default will output name="value". -->
+  <xsl:apply-templates select="@*">
+    <xsl:with-param name="element" select="."/>
+    <xsl:with-param name="level" select="$level"/>
+  </xsl:apply-templates>
+  
+  <!--Signal the end of processing of attributes. 
+      Default will output ')' -->
+  <xsl:apply-templates select="." mode="end-attributes">
+    <xsl:with-param name="level" select="$level"/>
+  </xsl:apply-templates>
+  
+  <!-- Process the elements value. -->
+  <!-- Default will format the value of a leaf element -->
+  <!-- so it is indented at next line -->
+  <xsl:apply-templates select="." mode="value">
+    <xsl:with-param name="level" select="$level"/>
+  </xsl:apply-templates>
+  
+  <xsl:apply-templates select="." mode="line-break">
+    <xsl:with-param name="level" select="$level"/>
+  </xsl:apply-templates>
+ 
+  <!-- Process children -->
+  <xsl:apply-templates select="*">
+    <xsl:with-param name="level" select="$level + 1"/>
+  </xsl:apply-templates>
+  
+</xsl:template>
+   
+<!--Default handling of element names. -->
+<xsl:template match="*"     mode="name">[<xsl:value-of 
+                                    select="local-name(.)"/></xsl:template>
+   
+<!--Default handling of start of attributes. -->
+<xsl:template match="*" mode="begin-attributes">
+  <xsl:if test="@*"><xsl:text> </xsl:text></xsl:if>
+</xsl:template>
+   
+<!--Default handling of attributes. -->
+<xsl:template match="@*">
+  <xsl:value-of select="local-name(.)"/>="<xsl:value-of select="."/>"<xsl:text/>
+  <xsl:if test="position() != last()">
+    <xsl:text> </xsl:text>
+  </xsl:if>
+</xsl:template>
+   
+<!--Default handling of end of attributes. -->
+<xsl:template match="*" mode="end-attributes">]</xsl:template>
+   
+<!--Default handling of element values. -->
+<xsl:template match="*" mode="value">
+  <xsl:param name="level"/>
+   
+  <!-- Only output value for leaves -->
+  <xsl:if test="not(*)">
+    <xsl:variable name="indent-str">
+      <xsl:call-template name="str:dup" >
+        <xsl:with-param name="input" select="$indent"/>
+        <xsl:with-param name="count" select="$level"/>
+      </xsl:call-template>
+    </xsl:variable>
+    
+    <xsl:text>&#xa;</xsl:text>
+    
+    <xsl:value-of select="$indent-str"/>
+    
+    <xsl:call-template name="str:replace">
+      <xsl:with-param name="input" select="."/>
+      <xsl:with-param name="search-string" select=" '&#xa;' "/>
+      <xsl:with-param name="replace-string" 
+                      select="concat('&#xa;',$indent-str)"/>
+    </xsl:call-template>
+  </xsl:if>
+</xsl:template>
+   
+<xsl:template match="*" mode="line-break">
+  <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+  
+</xsl:stylesheet>
+Example 7-28. Output when used to process ExpenseReport.xml 
+[ExpenseReport statementNum="123"]
+  [Employee]
+    [Name]
+    Salvatore Mangano
+    [SSN]
+    999-99-9999
+    [Dept]
+    XSLT Hacking
+    [EmpNo]
+    1
+    [Position]
+    Cook
+    [Manager]
+    Big Boss O'Reilly
+  [PayPeriod]
+    [From]
+    1/1/02
+    [To]
+    1/31/02
+  [Expenses]
+    [Expense]
+      [Date]
+      12/20/01
+      [Account]
+      12345
+      [Desc]
+      Goofing off instead of going to confrence.
+      [Lodging]
+      500.00
+      [Transport]
+      50.00
+      [Fuel]
+      0
+      [Meals]
+      300.00
+      [Phone]
+      100
+      [Entertainment]
+      1000.00
+      [Other]
+      300.00
+    [Expense]
+      [Date]
+      12/20/01
+      [Account]
+      12345
+      [Desc]
+      On the beach
+      [Lodging]
+      500.00
+      [Transport]
+      50.00
+      [Fuel]
+      0
+      [Meals]
+      200.00
+      [Phone]
+      20
+      [Entertainment]
+      300.00
+      [Other]
+      100.00
+Discussion
+Example 7-29. Customized Expense Report stylesheet 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="text.hierarchy.xslt"/>
+   
+<!--Ignore attributes -->
+<xsl:template match="@*"/>
+<xsl:template match="*" mode="begin-attributes"/>
+<xsl:template match="*" mode="end-attributes"/>
+   
+<xsl:template match="*"     mode="name">
+  <!--Display element loacl name-->
+  <xsl:value-of select="local-name(.)"/>
+  <!--Follow by a colon+space if a leaf -->
+  <xsl:if test="not(*)">: </xsl:if>
+</xsl:template>
+   
+<xsl:template match="*" mode="value">
+  <xsl:if test="not(*)">
+    <xsl:value-of select="."/>
+  </xsl:if>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-30. Output with overridden formatting 
+ExpenseReport
+  Employee
+    Name: Salvatore Mangano
+    SSN: 999-99-9999
+    Dept: XSLT Hacking
+    EmpNo: 1
+    Position: Cook
+    Manager: Big Boss O'Reilly
+  PayPeriod
+    From: 1/1/02
+    To: 1/31/02
+  Expenses
+    Expense
+      Date: 12/20/01
+      Account: 12345
+      Desc: Goofing off instead of going to confrence.
+      Lodging: 500.00
+      Transport: 50.00
+      Fuel: 0
+      Meals: 300.00
+      Phone: 100
+      Entertainment: 1000.00
+      Other: 300.00
+    Expense
+      Date: 12/20/01
+      Account: 12345
+      Desc: On the beach
+      Lodging: 500.00
+      Transport: 50.00
+      Fuel: 0
+      Meals: 200.00
+      Phone: 20
+      Entertainment: 300.00
+      Other: 100.00
+Example 7-31. tree-control.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="text.hierarchy.xslt"/>
+   
+<!--Ignore attributes -->
+<xsl:template match="@*"/>
+<xsl:template match="*" mode="begin-attributes"/>
+<xsl:template match="*" mode="end-attributes"/>
+   
+<xsl:template match="*"     mode="name">
+  <!--Display element loacl name-->
+  <xsl:text>[</xsl:text>
+  <xsl:value-of select="local-name(.)"/>
+  <!--Follow by a colon+space if a leaf -->
+  <xsl:text>] </xsl:text>
+</xsl:template>
+   
+<xsl:template match="*" mode="value">
+  <xsl:if test="not(*)">
+    <xsl:value-of select="."/>
+  </xsl:if>
+</xsl:template>
+   
+<xsl:template match="*" mode="indent">
+  <xsl:for-each select="ancestor::*">
+    <xsl:choose>
+      <xsl:when test="following-sibling::*"> | </xsl:when>
+      <xsl:otherwise><xsl:text>   </xsl:text></xsl:otherwise>
+    </xsl:choose>
+  </xsl:for-each>
+  <xsl:choose>
+    <xsl:when test="*"> o-</xsl:when>
+    <xsl:when test="following-sibling::*"> +-</xsl:when>
+    <xsl:otherwise> `-</xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template match="*" mode="line-break">
+  <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-32. Output with tree-control-like formatting 
+o-[ExpenseReport]
+    o-[Employee]
+    |  +-[Name] Salvatore Mangano
+    |  +-[SSN] 999-99-9999
+    |  +-[Dept] XSLT Hacking
+    |  +-[EmpNo] 1
+    |  +-[Position] Cook
+    |  `-[Manager] Big Boss O'Reilly
+    o-[PayPeriod]
+    |  +-[From] 1/1/02
+    |  `-[To] 1/31/02
+    o-[Expenses]
+       o-[Expense]
+       |  +-[Date] 12/20/01
+       |  +-[Account] 12345
+       |  +-[Desc] Goofing off instead of going to confrence.
+       |  +-[Lodging] 500.00
+       |  +-[Transport] 50.00
+       |  +-[Fuel] 0
+       |  +-[Meals] 300.00
+       |  +-[Phone] 100
+       |  +-[Entertainment] 1000.00
+       |  `-[Other] 300.00
+       o-[Expense]
+          +-[Date] 12/20/01
+          +-[Account] 12345
+          +-[Desc] On the beach
+          +-[Lodging] 500.00
+          +-[Transport] 50.00
+          +-[Fuel] 0
+          +-[Meals] 200.00
+          +-[Phone] 20
+          +-[Entertainment] 300.00
+          `-[Other] 100.00
+Example 7-33. Stylesheet creating collapsed levels 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="tree-control.xslt"/>
+   
+<xsl:param name="collapse"/>
+<xsl:variable name="collapse-test" select="concat(' ',$collapse,' ')"/>
+   
+<xsl:template match="*"     mode="name">
+    <xsl:if test="not(ancestor::*[contains($collapse-test,
+                                   concat(' ',local-name(.),' '))])">
+      <xsl:apply-imports/>
+    </xsl:if>
+</xsl:template>
+   
+<xsl:template match="*" mode="value">
+    <xsl:if test="not(ancestor::*[contains($collapse-test,
+                                   concat(' ',local-name(.),' '))])">
+      <xsl:apply-imports/>
+    </xsl:if>
+</xsl:template>
+   
+<xsl:template match="*" mode="line-break">
+    <xsl:if test="not(ancestor::*[contains($collapse-test,
+                                   concat(' ',local-name(.),' '))])">
+      <xsl:apply-imports/>
+    </xsl:if>
+</xsl:template>
+   
+<xsl:template match="*" mode="indent">
+  <xsl:choose>
+    <xsl:when test="self::*[contains($collapse-test,
+                                       concat(' ',local-name(.),' '))]">
+      <xsl:for-each select="ancestor::*">
+        <xsl:text>   </xsl:text>
+      </xsl:for-each>
+      <xsl:text> x-</xsl:text>
+    </xsl:when>
+    <xsl:when test="ancestor::*[contains($collapse-test,
+                                 concat(' ',local-name(.),' '))]"/>
+    <xsl:otherwise>
+      <xsl:apply-imports/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 7-34. Output with $collapse="Employee PayPeriod" 
+o-[ExpenseReport]
+    x-[Employee]
+    x-[PayPeriod]
+    o-[Expenses]
+       o-[Expense]
+       |  +-[Date] 12/20/01
+       |  +-[Account] 12345
+       |  +-[Desc] Goofing off instead of going to confrence.
+       |  +-[Lodging] 500.00
+       |  +-[Transport] 50.00
+       |  +-[Fuel] 0
+       |  +-[Meals] 300.00
+       |  +-[Phone] 100
+       |  +-[Entertainment] 1000.00
+       |  `-[Other] 300.00
+       o-[Expense]
+          +-[Date] 12/20/01
+          +-[Account] 12345
+          +-[Desc] On the beach
+          +-[Lodging] 500.00
+          +-[Transport] 50.00
+          +-[Fuel] 0
+          +-[Meals] 200.00
+          +-[Phone] 20
+          +-[Entertainment] 300.00
+          `-[Other] 100.00
+5) Numbering Textual Output
+Number siblings sequentially
+Example 7-35. Stylesheet 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+   
+  <xsl:template match="person">
+    <xsl:number count="*" format="1. "/> 
+    <xsl:value-of select="@name"/>
+  </xsl:template>
+   
+</xsl:stylesheet>
+Example 7-36. Output 
+1. Al Zehtooney
+2. Brad York
+3. Charles Xavier
+4. David Willimas
+5. Edward Ulster
+6. Frank Townsend
+7. Greg Sutter
+8. Harry Rogers
+9. John Quincy
+10. Kent Peterson
+...
+Start from a number other than one
+Example 7-37. Stylesheet using nonsequential numbering 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:template match="person">
+    <xsl:variable name="num">
+      <xsl:number count="*"/>
+    </xsl:variable>   
+    <xsl:number value="($num - 1) * 5 + 10" format="1. "/>
+    <xsl:value-of select="@name"/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+</xsl:stylesheet>
+Example 7-38. Output 
+10. Al Zehtooney
+15. Brad York
+20. Charles Xavier
+25. David Willimas
+30. Edward Ulster
+35. Frank Townsend
+40. Greg Sutter
+45. Harry Rogers
+50. John Quincy
+55. Kent Peterson
+...
+Example 7-39. Stylesheet for numbering from L 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:template match="person">
+    <xsl:variable name="num">
+      <xsl:number count="*"/>
+    </xsl:variable>   
+    <xsl:number value="$num + 11" format="A. "/>
+    <xsl:value-of select="@name"/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+</xsl:stylesheet>
+Example 7-40. People numbered successively from letter L 
+L. Al Zehtooney
+M. Brad York
+N. Charles Xavier
+O. David Willimas
+P. Edward Ulster
+Q. Frank Townsend
+R. Greg Sutter
+S. Harry Rogers
+T. John Quincy
+U. Kent Peterson
+...
+Number elements globally
+<people>
+  <group>
+    <person name="Al Zehtooney" age="33" sex="m" smoker="no"/>
+    <person name="Brad York" age="38" sex="m" smoker="yes"/>
+    <person name="Charles Xavier" age="32" sex="m" smoker="no"/>
+    <person name="David Willimas" age="33" sex="m" smoker="no"/>
+    <person name="Edward Ulster" age="33" sex="m" smoker="yes"/>
+    <person name="Frank Townsend" age="35" sex="m" smoker="no"/>
+  </group>
+  <group>
+    <person name="Greg Sutter" age="40" sex="m" smoker="no"/>
+    <person name="Harry Rogers" age="37" sex="m" smoker="no"/>
+    <group>
+      <person name="John Quincy" age="43" sex="m" smoker="yes"/>
+      <person name="Kent Peterson" age="31" sex="m" smoker="no"/>
+      <person name="Larry Newell" age="23" sex="m" smoker="no"/>
+      <group>
+        <person name="Max Milton" age="22" sex="m" smoker="no"/>
+        <person name="Norman Lamagna" age="30" sex="m" smoker="no"/>
+        <person name="Ollie Kensinton" age="44" sex="m" smoker="no"/>
+      </group>
+      <person name="John Frank" age="24" sex="m" smoker="no"/>
+    </group>
+    <group>
+      <person name="Mary Williams" age="33" sex="f" smoker="no"/>
+      <person name="Jane Frank" age="38" sex="f" smoker="yes"/>
+      <person name="Jo Peterson" age="32" sex="f" smoker="no"/>
+      <person name="Angie Frost" age="33" sex="f" smoker="no"/>
+      <person name="Betty Bates" age="33" sex="f" smoker="no"/>
+      <person name="Connie Date" age="35" sex="f" smoker="no"/>
+      <person name="Donna Finster" age="20" sex="f" smoker="no"/>
+    </group>
+    <group>
+      <person name="Esther Gates" age="37" sex="f" smoker="no"/>
+      <person name="Fanny Hill" age="33" sex="f" smoker="yes"/>
+      <person name="Geta Iota" age="27" sex="f" smoker="no"/>
+      <person name="Hillary Johnson" age="22" sex="f" smoker="no"/>
+      <person name="Ingrid Kent" age="21" sex="f" smoker="no"/>
+      <person name="Jill Larson" age="20" sex="f" smoker="no"/>
+      <person name="Kim Mulrooney" age="41" sex="f" smoker="no"/>
+      <person name="Lisa Nevins" age="21" sex="f" smoker="no"/>
+    </group>
+  </group>
+</people>
+Example 7-41. Stylesheet for level="any" 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:template match="person">
+    <xsl:number count="person" level="any" format="1. "/> 
+    <xsl:value-of select="@name"/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+</xsl:stylesheet>
+Example 7-42. Output with level="any" 
+1. Al Zehtooney
+2. Brad York
+3. Charles Xavier
+4. David Willimas
+5. Edward Ulster
+6. Frank Townsend
+7. Greg Sutter
+8. Harry Rogers
+9. John Quincy
+10. Kent Peterson
+11. Larry Newell
+12. Max Milton
+13. Norman Lamagna
+14. Ollie Kensinton
+15. John Frank
+16. Mary Williams
+17. Jane Frank
+18. Jo Peterson
+19. Angie Frost
+20. Betty Bates
+21. Connie Date
+22. Donna Finster
+23. Esther Gates
+24. Fanny Hill
+25. Geta Iota
+26. Hillary Johnson
+27. Ingrid Kent
+28. Jill Larson
+29. Kim Mulrooney
+30. Lisa Nevins
+Number elements globally within a subcontext
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:template match="people/group">
+    <xsl:text>Group </xsl:text>
+    <xsl:number count="group"/>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:apply-templates/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+  <xsl:template match="person">
+    <xsl:number count="person" level="any" from="people/group" format="1. "/> 
+    <xsl:value-of select="@name"/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+</xsl:stylesheet>
+   
+Group 1
+1. Al Zehtooney
+2. Brad York
+3. Charles Xavier
+4. David Willimas
+5. Edward Ulster
+6. Frank Townsend
+   
+Group 2
+1. Greg Sutter
+2. Harry Rogers
+3. John Quincy
+4. Kent Peterson
+5. Larry Newell
+6. Max Milton
+7. Norman Lamagna
+8. Ollie Kensinton
+9. John Frank
+10. Mary Williams
+11. Jane Frank
+12. Jo Peterson
+13. Angie Frost
+14. Betty Bates
+15. Connie Date
+16. Donna Finster
+17. Esther Gates
+18. Fanny Hill
+19. Geta Iota
+20. Hillary Johnson
+21. Ingrid Kent
+22. Jill Larson
+23. Kim Mulrooney
+24. Lisa Nevins
+Number hierarchically
+Example 7-43. Hierarchical numbering based on group and person 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:template match="people/group">
+    <xsl:text>Group </xsl:text>
+    <xsl:number count="group"/>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:apply-templates/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+  <xsl:template match="person">
+    <xsl:number count="group | person" level="multiple" format="1.1.1 "/> 
+    <xsl:value-of select="@name"/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+</xsl:stylesheet>
+Group 1
+1.1 Al Zehtooney
+1.2 Brad York
+1.3 Charles Xavier
+1.4 David Willimas
+1.5 Edward Ulster
+1.6 Frank Townsend
+   
+Group 2
+2.1 Greg Sutter
+2.2 Harry Rogers
+2.3.1 John Quincy
+2.3.2 Kent Peterson
+2.3.3 Larry Newell
+2.3.4.1 Max Milton
+2.3.4.2 Norman Lamagna
+2.3.4.3 Ollie Kensinton
+2.3.5 John Frank
+2.4.1 Mary Williams
+2.4.2 Jane Frank
+2.4.3 Jo Peterson
+2.4.4 Angie Frost
+2.4.5 Betty Bates
+2.4.6 Connie Date
+2.4.7 Donna Finster
+2.5.1 Esther Gates
+2.5.2 Fanny Hill
+2.5.3 Geta Iota
+2.5.4 Hillary Johnson
+2.5.5 Ingrid Kent
+2.5.6 Jill Larson
+2.5.7 Kim Mulrooney
+2.5.8 Lisa Nevins
+Example 7-44. Stylesheet for creating muliple ordered levels 
+ <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:template match="group">
+    <xsl:text>Group </xsl:text>
+    <xsl:number count="group" level="multiple"/>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:apply-templates/>
+  </xsl:template>
+   
+  <xsl:template match="person">
+    <xsl:number count="group" level="multiple" format="1.1.1."/>
+    <xsl:number count="person" level="single" format="1 "/> 
+    <xsl:value-of select="@name"/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+</xsl:stylesheet>
+Example 7-45. Output 
+Group 1
+1.1 Al Zehtooney
+1.2 Brad York
+1.3 Charles Xavier
+1.4 David Willimas
+1.5 Edward Ulster
+1.6 Frank Townsend
+Group 2
+2.1 Greg Sutter
+2.2 Harry Rogers
+Group 2.1
+2.1.1 John Quincy
+2.1.2 Kent Peterson
+2.1.3 Larry Newell
+Group 2.1.1
+2.1.1.1 Max Milton
+2.1.1.2 Norman Lamagna
+2.1.1.3 Ollie Kensinton
+2.1.4 John Frank
+Group 2.2
+2.2.1 Mary Williams
+2.2.2 Jane Frank
+2.2.3 Jo Peterson
+2.2.4 Angie Frost
+2.2.5 Betty Bates
+2.2.6 Connie Date
+2.2.7 Donna Finster
+Group 2.3
+2.3.1 Esther Gates
+2.3.2 Fanny Hill
+2.3.3 Geta Iota
+2.3.4 Hillary Johnson
+2.3.5 Ingrid Kent
+2.3.6 Jill Larson
+2.3.7 Kim Mulrooney
+2.3.8 Lisa Nevins
+Discussion
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:template match="group">
+    <xsl:param name="parent-level" select=" '' "/>
+    
+    <xsl:variable name="number" select="concat($parent-level,position())"/>
+    
+    <xsl:text>Group </xsl:text>
+    <xsl:value-of select="$number"/>
+    <xsl:text>&#xa;</xsl:text>
+   
+    <xsl:apply-templates>
+      <xsl:with-param name="parent-level" select="concat($number,'.')"/>
+    </xsl:apply-templates>
+    
+  </xsl:template>
+   
+  <xsl:template match="person">
+    <xsl:param name="parent-level" select=" '' "/>
+   
+    <xsl:variable name="number">
+      <xsl:value-of select="concat($parent-level,position(),' ')"/>
+    </xsl:variable>
+    
+     <xsl:value-of select="$number"/>
+    <xsl:value-of select="@name"/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+   
+</xsl:stylesheet>
+6) Wrapping Text to a Specified Width and 
+Alignment
+<xsl:stylesheet version="1.0" 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" id="text.wrap"
+  xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings" 
+  xmlns:text="http://www.ora.com/XSLTCookbook/namespaces/text" 
+  exclude-result-prefixes="text">
+   
+<xsl:include href="../strings/str.find-last.xslt"/>
+<xsl:include href="text.justify.xslt"/>
+   
+<xsl:template match="node() | @*" mode="text:wrap" name="text:wrap">
+  <xsl:param name="input" select="normalize-space()"/> 
+  <xsl:param name="width" select="70"/>
+  <xsl:param name="align-width" select="$width"/>
+  <xsl:param name="align" select=" 'left' "/>
+   
+  <xsl:if test="$input">
+    <xsl:variable name="line">
+      <xsl:choose>
+        <xsl:when test="string-length($input) > $width">
+          <xsl:call-template name="str:substring-before-last">
+              <xsl:with-param name="input" 
+               select="substring($input,1,$width)"/>
+              <xsl:with-param name="substr" select=" ' ' "/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$input"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+  
+    <xsl:if test="$line">
+      <xsl:call-template name="text:justify">
+        <xsl:with-param name="value" select="$line"/>
+        <xsl:with-param name="width" select="$align-width"/>
+        <xsl:with-param name="align" select="$align"/>
+      </xsl:call-template>
+      <xsl:text>&#xa;</xsl:text>
+    </xsl:if>  
+   
+    <xsl:call-template name="text:wrap">
+      <xsl:with-param name="input" 
+          select="substring($input, string-length($line) + 2)"/>
+      <xsl:with-param name="width" select="$width"/>
+      <xsl:with-param name="align-width" select="$align-width"/>
+      <xsl:with-param name="align" select="$align"/>
+    </xsl:call-template>
+  </xsl:if>  
+  
+</xsl:template>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:text="http://www.ora.com/XSLTCookbook/namespaces/text">
+     
+<xsl:include href="text.wrap.xslt"/>
+     
+<xsl:strip-space elements="*"/>
+<xsl:output method="text"/>
+     
+<xsl:template match="p">
+  <xsl:apply-templates select="." mode="text:wrap">
+    <xsl:with-param name="width" select="40"/>
+      <xsl:with-param name="align" select=" 'center' "/>
+    <xsl:with-param name="align-width" select="60"/>
+  </xsl:apply-templates>
+  <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+     
+</xsl:stylesheet>
+<doc>
+  <p>In the age of the internet, formats such HTML, XHTML and PDF clearly dominate 
+the application of XSL and XSLT. However, plain old text will never become obsolete 
+because it is the lowest common denominator in both human and machine-readable 
+formats.  XML is often converted to text to be imported into another application 
+that does not know how to read XML or does not interpret it the way you would 
+prefer. Text output is also used when the result will be sent to a terminal or post 
+processed in a Unix pipeline.</p>
+  <p>Many recipes in this section place stress on XSLT techniques that create very 
+generic XML to text converters. Here generic means that the transformation can 
+easily be customized to work on many different XML inputs or produce a variety of 
+outputs or both. The techniques employed in these recipes have application beyond 
+specifics of a given recipe and often beyond the domain of text processing. In 
+particular, you may want to look at recipes 7.2 through 7.5 even if they do not 
+address a present need.
+</p>
+</doc>
+            In the age of the internet, formats             
+              such HTML, XHTML and PDF clearly              
+            dominate the application of XSL and             
+             XSLT. However, plain old text will             
+          never become obsolete because it is the           
+          lowest common denominator in both human           
+            and machine-readable formats. XML is            
+           often converted to text to be imported           
+           into another application that does not           
+              know how to read XML or does not              
+           interpret it the way you would prefer.           
+             Text output is also used when the              
+            result will be sent to a terminal or            
+             post processed in a Unix pipeline.             
+     
+             Many recipes in this section place             
+           stress on XSLT techniques that create            
+            very generic XML to text converters.            
+                Here generic means that the                 
+          transformation can easily be customized           
+          to work on many different XML inputs or           
+           produce a variety of outputs or both.            
+              The techniques employed in these              
+              recipes have application beyond               
+           specifics of a given recipe and often            
+           beyond the domain of text processing.            
+           In particular, you may want to look at           
+          recipes 7.2 through 7.5 even if they do           
+                not address a present need.                 
+
+ 
+ 
+ 
+ 
+2		XML to Text
+2) Exporting XML to Delimited Data		3 of 40
+2
+	3
+DRAFT	O'Reilly & Associates	1/16/2006

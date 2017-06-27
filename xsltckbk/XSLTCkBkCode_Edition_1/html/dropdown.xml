@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="dropdown.xsl" ?>
+<Database>
+  <People>
+    <Person><FavoriteColor>2</FavoriteColor></Person>
+  </People>
+  <Colors>
+    <Color><ColorName>Red</ColorName><ColorId>1</ColorId></Color>
+    <Color><ColorName>Blue</ColorName><ColorId>2</ColorId></Color>
+    <Color><ColorName>Green</ColorName><ColorId>3</ColorId></Color>
+  </Colors>
+</Database>

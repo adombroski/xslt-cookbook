@@ -1,0 +1,127 @@
+Platform: NT
+Output: MBCS
+Rose Version: 6.5.9232.10
+********Object Flows Not supported ***********
+Global Symbol Entered; Model: 'test' with id G.1 at index  0
+Scoped Symbol Entered; Category: 'Logical View' with id S.10000 at index  0
+Scoped Symbol Entered; Class: 'TestClass' with id S.10001 at index  1
+Scoped Symbol Entered; StateMachine: 'State/Activity Model' with id S.10002 at index  2
+Global Symbol Entered; State: 'Start{3D66E2610222}' with id G.2 at index  1
+Global Symbol Entered; Transition: '{3D66E27702BF}' with id G.3 at index  2
+Global Symbol Entered; Event: 'event1' with id G.4 at index  3
+Global Symbol Entered; Transition: '{3D66E2A102BF}' with id G.5 at index  4
+Global Symbol Entered; Event: 'event2' with id G.6 at index  5
+Global Symbol Entered; State: 'State1{3D66E26C003E}' with id G.7 at index  6
+Global Symbol Entered; Transition: '{3D66E2BD03B9}' with id G.8 at index  7
+Global Symbol Entered; Event: 'event3' with id G.9 at index  8
+Global Symbol Entered; Transition: '{3D66E2E60399}' with id G.10 at index  9
+Enter Global Symbol: Event event3 is already present
+Global Symbol Entered; State: 'State2{3D66E27B0222}' with id G.11 at index  10
+Global Symbol Entered; Transition: '{3D66E2EF004E}' with id G.12 at index  11
+Enter Global Symbol: Event event3 is already present
+Global Symbol Entered; State: 'NewState{3D66E2E30203}' with id G.13 at index  12
+Scoped Symbol Entered; Subsystem: 'Component View' with id S.10003 at index  3
+Scoped Symbol Entered; Category: 'Use Case View' with id S.10004 at index  4
+Create Model: test
+Create UMLClass: TestClass
+Create State Machine: ::TestClass::State/Activity Model
+Create UMLPseudoState: Start @ G.2
+---> Pseudostate kind is initial
+Creating transition #G.3
+  Source set for transition: G.2
+  Target set for transition: G.7
+Global Symbol Entered; Event: 'event1{3D66E27702C0}' with id G.15 at index  13
+Create Trigger Event: event1
+Global Symbol Entered; StateMachineSignal: 'event1' with id G.16 at index  14
+Create Signal: event1
+Creating transition #G.5
+  Source set for transition: G.2
+  Target set for transition: G.11
+Global Symbol Entered; Event: 'event2{3D66E2A102C0}' with id G.17 at index  15
+Create Trigger Event: event2
+Global Symbol Entered; StateMachineSignal: 'event2' with id G.18 at index  16
+Create Signal: event2
+Create uninterpreted action: action2
+Create effect action sequence1 for transition @ G.20
+Create UMLSimpleState: State1 @ G.7
+Create entry action seq @ G.21
+Create exit action seq @ G.22
+Creating transition #G.8
+  Source set for transition: G.7
+  Target set for transition: G.11
+Global Symbol Entered; Event: 'event3{3D66E2BD03BA}' with id G.23 at index  17
+Create Trigger Event: event3
+Global Symbol Entered; StateMachineSignal: 'event3' with id G.24 at index  18
+Create Signal: event3
+Create Guard @ G.25:  ifOkay
+Creating transition #G.10
+  Source set for transition: G.7
+  Target set for transition: G.13
+Global Symbol Entered; Event: 'event3{3D66E2E6039A}' with id G.26 at index  19
+Create Trigger Event: event3
+Use existing Signal: event3
+Create UMLSimpleState: State2 @ G.11
+Create entry action seq @ G.27
+Create exit action seq @ G.28
+Creating transition #G.12
+  Source set for transition: G.11
+  Target set for transition: G.13
+Global Symbol Entered; Event: 'event3{3D66E2EF004F}' with id G.29 at index  20
+Create Trigger Event: event3
+Use existing Signal: event3
+Create UMLPseudoState: NewState @ G.13
+---> Pseudostate kind is final
+Add incoming refs for outgoing transitions from G.2
+Trans @ G.3 added as incoming to G.7
+Trans @ G.5 added as incoming to G.11
+Add incoming refs for outgoing transitions from G.7
+Trans @ G.8 added as incoming to G.11
+Trans @ G.10 added as incoming to G.13
+Add incoming refs for outgoing transitions from G.11
+Trans @ G.12 added as incoming to G.13
+Add incoming refs for outgoing transitions from G.13
+CreateClassGeneralizations for pkg: Logical View
+CreateClassGeneralizations for pkg: Use Case View
+Create Package diagrams for /test
+GenerateClassDiagrams -- category: Logical View
+New UISModelElement created @ G.30, extends G.1
+Scoped Symbol Entered; ClassDiagram: 'Main' with id S.10005 at index  5
+Generate Class Diagram: Logical View::Main
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.31
+** Class model id is S.10001
+AddPresentationForNoteView ignores label: 'TestClass'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+GenerateScenarioDiagram -- category: Logical View
+GenerateStateActivityDiagram -- category: Logical View
+GenerateStateActivityDiagram -- class: TestClass
+New UISModelElement created @ G.32, extends S.10002
+Scoped Symbol Entered; StateDiagram: 'NewDiagram' with id S.10006 at index  6
+Generate State/Activity Diagram: Logical View::TestClass::State/Activity Model::NewDiagram
+Process itemview of type: StateView, for item of type: State
+AddPresentationForNoteView ignores label: 'Start'
+Process itemview of type: StateView, for item of type: State
+AddPresentationForNoteView ignores label: 'State1'
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.35 for trans @ G.3
+Rose shortcoming forces dropping of label: event1( arg1 )
+Process itemview of type: StateView, for item of type: State
+AddPresentationForNoteView ignores label: 'State2'
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.37 for trans @ G.5
+Rose shortcoming forces dropping of label: event2 / action2
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.38 for trans @ G.8
+Rose shortcoming forces dropping of label: event3[ ifOkay ]
+Process itemview of type: StateView, for item of type: State
+AddPresentationForNoteView ignores label: 'NewState'
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.40 for trans @ G.10
+Rose shortcoming forces dropping of label: event3
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.41 for trans @ G.12
+Rose shortcoming forces dropping of label: event3
+Using existing UISModelElement @ G.30, extends G.1
+Scoped Symbol Entered; ModuleDiagram: 'Main' with id S.10007 at index  7
+Generate Module Diagram: Main

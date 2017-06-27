@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<animals>
+  <mammals>
+    <animal common="chimpanzee" species="Pan troglodytes" order="Primates"/>
+    <animal common="human" species="Homo Sapien" order="Primates"/>
+  </mammals>
+  <reptiles>
+    <animal common="boa constrictor" species="Boa constrictor" order="Squamata"/>
+    <animal common="gecko" species="Gekko gecko" order="Squamata"/>
+  </reptiles>
+  <birds>
+    <animal common="sea gull" species="Larus occidentalis" order="Charadriiformes"/>
+    <animal common="Black-Backed Woodpecker" species="Picoides arcticus" order="Piciformes"/>
+  </birds>
+</animals>

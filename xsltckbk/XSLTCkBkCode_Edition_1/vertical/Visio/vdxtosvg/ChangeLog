@@ -1,0 +1,305 @@
+********** Version 1.5
+
+2002-07-20  jabreen  <jabreen@pegasus>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/ChangeLog, /cvsroot/vdxtosvg/vdxtosvg/README:
+	Updated for release 1.5.  Also corrected embarrassing misspelling of
+	USAGE.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-style.xsl:
+	Added width & height to compound linearGradient patterns (ASV didn't
+	complain, but Batik did).
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-style.xsl:
+	All predefined patterns are now finished.
+
+2002-07-19  jabreen  <jabreen@pegasus>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-style.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Finished gradient patterns.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Added some gradient patterns (not done yet).
+
+2002-07-18  jabreen  <jabreen@pegasus>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-style.xsl:
+	Added all line-based patterns.
+
+2002-07-17  jabreen  <jabreen@pegasus>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/pattern_tests.vdx: Initial checkin.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-style.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Got pattern scaling issues finalized.
+	Laid foundation for adding more patterns.
+
+2002-07-12  jabreen  <jabreen@pegasus>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Fixed bug with last word getting wrapped.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/text_tests.vdx:
+	Added text wrapping test cases.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Set xml:space to "preserve", to better reproduce Visio's text wrapping.
+
+2002-07-04  jabreen  <jabreen@pegasus>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-nurbs.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Added NURBS to Bezier translation.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl: Added NURBS support.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/curve_tests.vdx: Added NURBS test page.
+
+2002-07-03  jabreen  <jabreen@pegasus>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-nurbs.xsl: Initial checkin.
+
+2002-06-26  jabreen  <jabreen@pegasus>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/animation_tests.vdx:
+	Fixed animateMotion master so that the properties are at the top-level
+	group.
+
+********** Version 1.4
+
+2002-06-24  jabreen  <jabreen@godzilla.celoxnetworks.com>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/README: Updated for release 1.4.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/animation_tests.vdx:
+	More work on animation.
+
+2002-06-23  jabreen  <jabreen@godzilla.celoxnetworks.com>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl:
+	Fixed animateMotion mpath element.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/README:
+	Added details and useage notes on animation elements.
+
+2002-06-21  jabreen  <jabreen@godzilla.celoxnetworks.com>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/animation_tests.vdx, /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx, /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Added animate element.
+	Adding animateMotion element (not quite working yet).
+
+2002-06-20  jabreen  <jabreen@godzilla.celoxnetworks.com>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl:
+	Modularized lookup-style-property template.
+
+********** Version 1.3
+
+2002-06-19  jabreen  <jabreen@godzilla.celoxnetworks.com>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/ChangeLog: Initial checkin.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/README: Updated for release 1.3.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Fixed bug in text margins.
+	Support for simple masters.
+
+2002-06-19  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/README: Updated for release 1.3.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Fixed bug in text margins.
+	Support for simple masters.
+
+2002-06-19  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Fixed bug in text margins.
+	Support for simple masters.
+
+2002-06-18  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Added some non-special master support.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx:
+	Updated viewBox master (added svgElement property).
+
+2002-06-17  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Fixed bug with empty <text/> elements.
+
+2002-06-14  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/text_tests.vdx:
+	Transformed text appears to work except for a few odd cases.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl:
+	All alignment seems correct except for transformed text.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/text_tests.vdx: Added transform tests
+
+2002-06-12  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx:
+	I'm not sure what changes there were; just reformatting?
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Took out dependency on Saxon for text formatting.
+
+2002-06-03  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Last change broke explicit viewBox element, now fixed.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Default viewBox is now the entire sheet.
+
+2002-06-01  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Getting closer to faithful text reproduction.  Still a few oddities...
+
+	* /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	More wrapping work (currently somewhat broken).
+
+********** Version 1.2a
+
+2002-05-31  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl:
+	Stupid XML comment rules...
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl:
+	Added some more text notes.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/README: Fleshed out some more.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx, /cvsroot/vdxtosvg/vdxtosvg/text_tests.vdx, /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Added limited hyperlink support.
+	Added support for arbitrary containers (defs, symbol, g) (should probably
+	add svg to that).
+
+2002-05-29  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Fixed top-aligned text problem.
+	Started work on connectors.
+
+2002-05-28  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/text_tests.vdx:
+	Redid page 2 to help debug top align problem.
+
+2002-05-27  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	More work on text alignment (mostly vertical).
+
+2002-05-25  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/text_tests.vdx: Initial checkin.
+
+********** Version 1.2
+	
+2002-05-24  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/README: Commit for release 1.2.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/curve_tests.vdx, /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Commit before release 1.2.
+
+2002-05-23  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Added baseline-shift (still not completely done, though).
+
+2002-05-22  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/README, /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx, /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Added some animation support.
+	Added README file.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Got animation master working (more or less)
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl:
+	Fixed animate master (but still not animating...)
+
+2002-05-21  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-masters.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx:
+	Trying to add animate master (note: tip is broken)
+
+2002-05-20  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx:
+	In the middle of adding support for 'animate' master.
+
+2002-05-18  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio-style.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio-text.xsl, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Broke out style & text templates to separate files.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Checkpoint before breaking up into include files.
+	Got text alignment mostly working.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Close to getting text offsets working, but had to resort to saxon
+	extension function
+
+2002-05-17  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/seq_test.vdx:
+	Still working on text alignment...
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl: Added marker support
+	Added media-type
+	Moved fixed stuff to called template
+
+2002-05-15  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/seq_test.vdx, /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Added support for TextXForm, plus some other things.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Fixed bug that would cause an endless loop in some cases.
+
+2002-05-14  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx:
+	Added some LinePattern support.
+
+2002-05-13  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl, /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	I think I've got display-time word wrapping working.
+
+	* /cvsroot/vdxtosvg/vdxtosvg/basic_tests-mod.svg, /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Fixed syntax bug
+
+	* /cvsroot/vdxtosvg/vdxtosvg/basic_tests-mod.svg, /cvsroot/vdxtosvg/vdxtosvg/wordwrap.js:
+	Initial checkin
+
+2002-05-10  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx:
+	Indented to make it easier to read
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Fixed missing space in wrapped text.  Also added fudge factor to max
+	character width (still needs work).
+
+2002-05-09  jabreen  <jabreen@users.sourceforge.net>
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl: *** empty log message ***
+
+	* /cvsroot/vdxtosvg/vdxtosvg/basic_tests.vdx, /cvsroot/vdxtosvg/vdxtosvg/curve_tests.vdx:
+	Initial checkin
+
+	* /cvsroot/vdxtosvg/vdxtosvg/visio.xsl:
+	Moved visio.xsl from errant subdirectory
+

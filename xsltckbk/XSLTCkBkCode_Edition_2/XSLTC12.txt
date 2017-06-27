@@ -1,0 +1,2494 @@
+Chapter 12
+Code Generation
+<MessageRepository xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:
+noNamespaceSchemaLocation="C:\MyProjects\XSLT Cookbook\code gen\MessageRepository.
+xsd">
+  <DataTypes>
+    <Primitive>
+      <Name>Real</Name>
+      <Size>8</Size>
+      <Category>real</Category>
+    </Primitive>
+    <Primitive>
+      <Name>Integer</Name>
+      <Size>4</Size>
+      <Category>signed integer</Category>
+    </Primitive>
+    <Primitive>
+      <Name>StkSymbol</Name>
+      <Size>10</Size>
+      <Category>string</Category>
+    </Primitive>
+    <Primitive>
+      <Name>Message</Name>
+      <Size>100</Size>
+      <Category>string</Category>
+    </Primitive>
+    <Primitive>
+      <Name>Shares</Name>
+      <Size>4</Size>
+      <Category>signed integer</Category>
+    </Primitive>
+    <Enumeration>
+      <Name>BuyOrSell</Name>
+      <Enumerators>
+        <Enumerator>
+          <Name>BUY</Name>
+          <Value>0</Value>
+        </Enumerator>
+        <Enumerator>
+          <Name>SELL</Name>
+          <Value>1</Value>
+        </Enumerator>
+      </Enumerators>
+    </Enumeration>
+    <Enumeration>
+      <Name>OrderType</Name>
+      <Enumerators>
+        <Enumerator>
+          <Name>MARKET</Name>
+          <Value>0</Value>
+        </Enumerator>
+        <Enumerator>
+          <Name>LIMIT</Name>
+          <Value>1</Value>
+        </Enumerator>
+      </Enumerators>
+    </Enumeration>
+    <Structure>
+      <Name>TestData</Name>
+      <Members>
+        <Member>
+          <Name>order</Name>
+          <DataTypeName>AddStockOrderData</DataTypeName>
+        </Member>
+        <Member>
+          <Name>cancel</Name>
+          <DataTypeName>CancelStockOrderData</DataTypeName>
+        </Member>
+      </Members>
+    </Structure>
+    <Structure>
+      <Name>AddStockOrderData</Name>
+      <Documentation>A request to add a new order.</Documentation>
+      <Members>
+        <Member>
+          <Name>symbol</Name>
+          <DataTypeName>StkSymbol</DataTypeName>
+        </Member>
+        <Member>
+          <Name>quantity</Name>
+          <DataTypeName>Shares</DataTypeName>
+        </Member>
+        <Member>
+          <Name>side</Name>
+          <DataTypeName>BuyOrSell</DataTypeName>
+        </Member>
+        <Member>
+          <Name>type</Name>
+          <DataTypeName>OrderType</DataTypeName>
+        </Member>
+        <Member>
+          <Name>price</Name>
+          <DataTypeName>Real</DataTypeName>
+        </Member>
+      </Members>
+    </Structure>
+    <Structure>
+      <Name>AddStockOrderAckData</Name>
+      <Documentation>A positive acknowledgment that order was added successfully.
+      </Documentation>
+      <Members>
+        <Member>
+          <Name>orderId</Name>
+          <DataTypeName>Integer</DataTypeName>
+        </Member>
+      </Members>
+    </Structure>
+    <Structure>
+      <Name>AddStockOrderNackData</Name>
+      <Documentation>An negative acknowledgment that order add was unsuccessful.
+      </Documentation>
+      <Members>
+        <Member>
+          <Name>reason</Name>
+          <DataTypeName>Message</DataTypeName>
+        </Member>
+      </Members>
+    </Structure>
+    <Structure>
+      <Name>CancelStockOrderData</Name>
+      <Documentation>A request to cancel all or part of an order</Documentation>
+      <Members>
+        <Member>
+          <Name>orderId</Name>
+          <DataTypeName>Integer</DataTypeName>
+        </Member>
+        <Member>
+          <Name>quantity</Name>
+          <DataTypeName>Shares</DataTypeName>
+        </Member>
+      </Members>
+    </Structure>
+    <Structure>
+      <Name>CancelStockOrderAckData</Name>
+      <Documentation>A positive acknowledgment that order was canceled 
+successfully.
+      </Documentation>
+      <Members>
+        <Member>
+          <Name>orderId</Name>
+          <DataTypeName>Integer</DataTypeName>
+        </Member>
+        <Member>
+          <Name>quantityRemaining</Name>
+          <DataTypeName>Shares</DataTypeName>
+        </Member>
+      </Members>
+    </Structure>
+    <Structure>
+      <Name>CancelStockOrderNackData</Name>
+      <Documentation>An negative acknowledgment that the order cancel was
+      unsuccessful.</Documentation>
+      <Members>
+        <Member>
+          <Name>orderId</Name>
+          <DataTypeName>Integer</DataTypeName>
+        </Member>
+        <Member>
+          <Name>reason</Name>
+          <DataTypeName>Message</DataTypeName>
+        </Member>
+      </Members>
+    </Structure>
+  </DataTypes>
+  <Messages>
+    <Message>
+      <Name>ADD_STOCK_ORDER</Name>
+      <MsgId>1</MsgId>
+      <DataTypeName>AddStockOrderData</DataTypeName>
+      <Senders>
+        <ProcessRef>StockClient</ProcessRef>
+      </Senders>
+      <Receivers>
+        <ProcessRef>StockServer</ProcessRef>
+      </Receivers>
+    </Message>
+    <Message>
+      <Name>ADD_STOCK_ORDER_ACK</Name>
+      <MsgId>2</MsgId>
+      <DataTypeName>AddStockOrderAckData</DataTypeName>
+      <Senders>
+        <ProcessRef>StockServer</ProcessRef>
+      </Senders>
+      <Receivers>
+        <ProcessRef>StockClient</ProcessRef>
+      </Receivers>
+    </Message>
+    <Message>
+      <Name>ADD_STOCK_ORDER_NACK</Name>
+      <MsgId>3</MsgId>
+      <DataTypeName>AddStockOrderNackData</DataTypeName>
+      <Senders>
+        <ProcessRef>StockServer</ProcessRef>
+      </Senders>
+      <Receivers>
+        <ProcessRef>StockClient</ProcessRef>
+      </Receivers>
+    </Message>
+    <Message>
+      <Name>CANCEL_STOCK_ORDER</Name>
+      <MsgId>4</MsgId>
+      <DataTypeName>CancelStockOrderData</DataTypeName>
+      <Senders>
+        <ProcessRef>StockClient</ProcessRef>
+      </Senders>
+      <Receivers>
+        <ProcessRef>StockServer</ProcessRef>
+      </Receivers>
+    </Message>
+    <Message>
+      <Name>CANCEL_STOCK_ORDER_ACK</Name>
+      <MsgId>5</MsgId>
+      <DataTypeName>CancelStockOrderAckData</DataTypeName>
+      <Senders>
+        <ProcessRef>StockServer</ProcessRef>
+      </Senders>
+      <Receivers>
+        <ProcessRef>StockClient</ProcessRef>
+      </Receivers>
+    </Message>
+    <Message>
+      <Name>CANCEL_STOCK_ORDER_NACK</Name>
+      <MsgId>6</MsgId>
+      <DataTypeName>CancelStockOrderNackData</DataTypeName>
+      <Senders>
+        <ProcessRef>StockServer</ProcessRef>
+      </Senders>
+      <Receivers>
+        <ProcessRef>StockClient</ProcessRef>
+      </Receivers>
+    </Message>
+    <Message>
+      <Name>TEST</Name>
+      <MsgId>7</MsgId>
+      <DataTypeName>TestData</DataTypeName>
+      <Senders>
+        <ProcessRef>StockServer</ProcessRef>
+      </Senders>
+      <Receivers>
+        <ProcessRef>StockClient</ProcessRef>
+      </Receivers>
+    </Message>
+  </Messages>
+  <Processes>
+    <Process>
+      <Name>StockClient</Name>
+    </Process>
+    <Process>
+      <Name>StockServer</Name>
+    </Process>
+  </Processes>
+</MessageRepository>
+XSLT 2.0
+<!-- A function for generating a C style function declaration 
+     using mostly XPath 2.0 -->
+
+<xsl:function name="ckbk:function-decl" as="xs:string*">
+  <xsl:param name="name" as="xs:string"/>
+  <xsl:param name="returnType" as="xs:string"/>
+  <xsl:param name="argNames" as="xs:string*"/>
+  <xsl:param name="argTypesPre" as="xs:string*"/>
+  <xsl:param name="argTypesPost" as="xs:string*"/>
+  <xsl:variable name="c" select="count($argNames)"/>
+  <xsl:sequence select="$returnType,
+		               $name,
+		               '(', 
+		               for $i in 1 to $c return ($argTypesPre[$i], $argNames[$i],
+                                                  $argTypesPost[$i], 
+                                                  if ($i ne $c) then ',' else ''), 
+		               ');' "/> 
+</xsl:function>
+Generating Constant Definitions
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <!--The name of the output source code file. --> 
+  <xsl:param name="file" select=" 'MESSAGE_IDS.h' "/>
+  
+  <!-- The default behavior is to generate C++ style constants -->
+  <xsl:variable name="constants-type" select=" 'const int' "/>
+   
+  <!-- The default C++ assigment operator -->
+  <xsl:variable name="assignment" select=" ' = ' "/>
+   
+  <!-- The default C++ statement terminator -->
+  <xsl:variable name="terminator" select=" ';' "/>
+   
+   
+  <!--Transform repository into a sequence of message constant 
+      definitions -->  
+  <xsl:template match="MessageRepository">
+    <xsl:call-template name="constants-start"/>
+    <xsl:apply-templates select="Messages/Message"/>
+    <xsl:call-template name="constants-end"/>
+  </xsl:template>  
+   
+  <!--Each meesage becomes a comment and an constant definition -->
+  <xsl:template match="Message">
+    <xsl:apply-templates select="." mode="doc" />
+    <xsl:apply-templates select="." mode="constant" />
+  </xsl:template>
+   
+  <!-- C++ header files start with an inclusion guard -->
+  <xsl:template name="constants-start">
+    <xsl:variable name="guard" select="translate($file,'.','_')"/>
+    <xsl:text>#ifndef </xsl:text>
+    <xsl:value-of select="$guard"/>
+    <xsl:text>&#xa;</xsl:text> 
+    <xsl:text>#define </xsl:text>
+    <xsl:value-of select="$guard"/>
+    <xsl:text>&#xa;&#xa;&#xa;</xsl:text>
+  </xsl:template>
+   
+  <!-- C++ header files end with the closure of the top level inclusion 
+       guard -->
+  <xsl:template name="constants-end">
+    <xsl:variable name="guard" select="translate($file,'.','_')"/>
+    <xsl:text>&#xa;&#xa;&#xa;#endif /* </xsl:text>
+    <xsl:value-of select="$guard"/>
+    <xsl:text> */&#xa;</xsl:text> 
+  </xsl:template>
+   
+  <!-- Each constant definition is preceeded by a cooment describing the 
+       associated message -->
+  <xsl:template match="Message" mode="doc">
+  /*
+  * Purpose:      <xsl:call-template name="format-comment"> 
+                        <xsl:with-param name="text" select="Documentation"/>
+                        </xsl:call-template>
+  * Data Format: <xsl:value-of select="DataTypeName"/>
+  * From:        <xsl:apply-templates select="Senders" mode="doc"/>
+  * To:          <xsl:apply-templates select="Receivers" mode="doc"/>
+  */
+  </xsl:template>
+   
+  <!-- Used in the generation of message documentation. Lists sender or
+       receiver processes -->
+  <xsl:template match="Senders|Receivers" mode="doc">
+    <xsl:for-each select="ProcessRef">
+      <xsl:value-of select="."/>
+      <xsl:if test="position(  ) != last(  )">
+       <xsl:text>, </xsl:text>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:template>
+   
+  <!-- This utility wraps comments at 40 characters wide -->
+  <xsl:template name="format-comment">
+    <xsl:param name="text"/>
+    <xsl:choose>
+      <xsl:when test="string-length($text)&lt;40">
+        <xsl:value-of select="$text"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="substring($text,1,39)"/>
+        <xsl:text>*&#xa;</xsl:text>
+        <xsl:call-template name="format-comment">
+          <xsl:with-param name="text" select="substring($text,40)"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+   
+  <!-- Each message name becomes a constant whose value is the message 
+       id -->
+  <xsl:template match="Message" mode="constant">
+    <xsl:value-of select="$constants-type"/><xsl:text> </xsl:text>
+    <xsl:value-of select="Name"/>
+    <xsl:value-of select="$assignment"/>
+    <xsl:value-of select="MsgId"/>
+    <xsl:value-of select="$terminator"/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+  
+  <!-- Ignore text nodes not explicitly handled by above templates -->
+  <xsl:template match="text(  )"/>
+  
+</xsl:stylesheet>
+#ifndef MESSAGE_IDS_h
+#define MESSAGE_IDS_h
+   
+   
+  /*
+  * Purpose:     Add a new order.
+  * Data Format: AddStockOrderData
+  * From:        StockClient
+  * To:          StockServer
+  */
+  const int ADD_STOCK_ORDER_ID = 1;
+   
+  /*
+  * Purpose:     Acknowledge the order has been added.
+  * Data Format: AddStockOrderAckData
+  * From:        StockServer
+  * To:          StockClient
+  */
+  const int ADD_STOCK_ORDER_ACK_ID = 2;
+   
+  /*
+  * Purpose:     Error adding the order. Perhaps it violates
+  *              a rule.
+  * Data Format: AddStockOrderNackData
+  * From:        StockServer
+  * To:          StockClient
+  */
+  const int ADD_STOCK_ORDER_NACK_ID = 3;
+   
+//Etc ...
+   
+#endif /* MESSAGE_IDS_h */
+Discussion
+ 
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="msgIds.xslt"/>
+  
+  <xsl:variable name="constants-type" select=" '#define ' "/>
+  <xsl:variable name="assignment" select=" '   ' "/>
+  <xsl:variable name="terminator" select=" '' "/>
+  
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="msgIds.xslt"/>
+   
+ <xsl:variable name="constants-type" select=" 'public static final int' "/>
+   
+  <xsl:template name="constants-start">
+  <xsl:text>final public class MESSAGE_IDS &#xa;</xsl:text> 
+  <xsl:text>{&#xa;</xsl:text>
+  </xsl:template>
+   
+  <xsl:template name="constants-end">
+  <xsl:text>&#xa;&#xa;}&#xa;</xsl:text> 
+  </xsl:template>
+   
+</xsl:stylesheet>
+Generating Switching Code
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:output method="text"/>
+   
+  <xsl:param name="process" select=" '*' "/>
+   
+  <xsl:variable name="message-dir" select=" 'messages' "/>
+  <xsl:variable name="directory-sep" select=" '/' "/>
+  <xsl:variable name="include-ext" select=" '.h' "/>
+  
+   
+  <xsl:template match="MessageRepository">
+    <!-- Generate source file preliminaries -->
+    <xsl:call-template name="file-start"/>
+    
+    <!-- Generate includes for messages this process recives -->
+    <xsl:apply-templates select="Messages/
+                                  Message[Receivers/
+                                          ProcessRef = $process or
+                                          $process = '*']" 
+                         mode="includes"/>
+    
+    <!-- Generate message switch preliminaries -->                                
+    <xsl:call-template name="switch-start"/>
+    
+    <!-- Generate switch body -->
+    <xsl:apply-templates select="Messages/
+                                  Message[Receivers/
+                                          ProcessRef = $process or
+                                           $process = '*']" 
+                         mode="switch"/>
+    
+    <!-- Generate switch end -->                                
+    <xsl:call-template name="switch-end"/>
+    
+    <!-- Generate file end -->
+    <xsl:call-template name="file-end"/>
+  </xsl:template>     
+   
+  <!-- Generate an include for each message -->     
+  <xsl:template match="Message" mode="includes">
+    <xsl:text>#include &lt;</xsl:text>
+    <xsl:value-of select="$message-dir"/>
+    <xsl:value-of select="$directory-sep"/>
+    <xsl:value-of select="Name"/>
+    <xsl:value-of select="$include-ext"/>
+    <xsl:text>&gt;&#xa;</xsl:text>
+  </xsl:template>
+   
+  <!-- Generate handler case for each message type -->
+  <xsl:template match="Message" mode="switch">
+    case <xsl:value-of select="Name"/>_ID:
+      <xsl:call-template name="case-action"/>
+  </xsl:template>
+   
+<!-- Generate the message handler action -->
+<xsl:template name="case-action">
+      return <xsl:value-of select="Name"/>(*static_cast&lt;const <xsl:value-of
+      select="DataTypeName"/>*&gt;(msg.getData(  ))).process(  ) ;
+</xsl:template>
+   
+  <!-- Do nothing by default. Users will override if necessary -->
+  <xsl:template name="file-start"/>
+  <xsl:template name="file-end"/>
+   
+  <!-- Generate satrt of switch statement --> 
+  <xsl:template name="switch-start">
+#include &lt;transport/Message.h&gt;
+#include &lt;transport/MESSAGE_IDS.h&gt;
+   
+<xsl:text>&#xa;&#xa;</xsl:text>
+<xsl:call-template name="process-function"/>
+{
+  switch (msg.getId(  ))
+  {
+  </xsl:template>
+  
+  <xsl:template name="switch-end">
+    return false ;
+  }
+}
+  </xsl:template>
+   
+<!-- Generate signiture for message processing entry point -->
+<xsl:template name="process-function">
+bool processMessage(const Message&amp; msg)
+</xsl:template>
+   
+   
+</xsl:stylesheet>
+#include <messages/ADD_STOCK_ORDER.h>
+#include <messages/CANCEL_STOCK_ORDER.h>
+   
+#include <transport/Message.h>
+#include <transport/MESSAGE_IDS.h>
+   
+bool processMessage(const Message& msg)
+   
+{
+  switch (msg.getId(  ))
+  {
+  
+    case ADD_STOCK_ORDER_ID:
+      
+      return ADD_STOCK_ORDER(*static_cast<const 
+      AddStockOrderData*>(msg.getData(  ))).process(  ) ;
+   
+    case CANCEL_STOCK_ORDER_ID:
+      
+      return CANCEL_STOCK_ORDER(*static_cast<const 
+      CancelStockOrderData*>(msg.getData(  ))).process(  ) ;
+   
+    return false ;
+  }
+}
+Discussion
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xslt [
+  <!--Used to control code intenting -->
+  <!ENTITY INDENT "    ">
+  <!ENTITY INDENT2 "&INDENT;&INDENT;">
+]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:template name="gen-C-Switch">
+    <xsl:param name="variable"/>
+    <xsl:param name="cases" select="/.."/>
+    <xsl:param name="actions" select="/.."/>
+    <xsl:param name="default"/>
+    <xsl:param name="baseIndent" select="'&INDENT;'"/>
+    <xsl:param name="genBreak" select="true(  )"/>
+   
+    <xsl:value-of select="$baseIndent"/>
+    <xsl:text>switch (</xsl:text>
+    <xsl:value-of select="$variable"/>
+    <xsl:text>)&#xa;</xsl:text>
+    <xsl:value-of select="$baseIndent"/>
+    <xsl:text>{&#xa;</xsl:text>
+    
+    <xsl:for-each select="$cases">
+      <xsl:variable name="pos" select="position(  )"/>
+   
+      <xsl:value-of select="$baseIndent"/>
+      <xsl:text>&INDENT;case </xsl:text>
+      <xsl:value-of select="."/>
+      <xsl:text>:&#xa;</xsl:text>
+      <xsl:call-template name="gen-C-Switch-caseBody">
+        <xsl:with-param name="case" select="."/>
+        <xsl:with-param name="action" select="$actions[$pos]"/>
+        <xsl:with-param name="baseIndent"
+                                      select="concat('&INDENT2;',$baseIndent)"/>
+      </xsl:call-template>
+      <xsl:if test="$genBreak">
+        <xsl:value-of select="$baseIndent"/>
+        <xsl:text>&INDENT2;break;</xsl:text>
+      </xsl:if>      
+      <xsl:text>&#xa;</xsl:text>
+    </xsl:for-each>
+  
+    <xsl:if test="$default">
+      <xsl:value-of select="$baseIndent"/>
+      <xsl:text>&INDENT;default:</xsl:text>
+      <xsl:text>:&#xa;</xsl:text>
+      <xsl:call-template name="gen-C-Switch-default-caseBody">
+        <xsl:with-param name="action" select="$default"/>
+        <xsl:with-param name="baseIndent" 
+             select="concat('&INDENT2;',$baseIndent)"/>
+      </xsl:call-template>
+      <xsl:text>&#xa;</xsl:text>
+    </xsl:if>
+    <xsl:value-of select="$baseIndent"/>
+    <xsl:text>}&#xa;</xsl:text>
+  </xsl:template>     
+   
+    
+  <!-- This generates a null statement by default. -->
+  <!-- Override to generate code for the case --> 
+  <xsl:template name="gen-C-Switch-caseBody">
+    <xsl:param name="case"/>
+    <xsl:param name="action"/>
+    <xsl:param name="baseIndent"/>
+    
+    <xsl:value-of select="$baseIndent"/>
+    <xsl:text>;</xsl:text>
+  </xsl:template>
+   
+  <!-- This invokes the regular case body generator. --> 
+  <!-- Overide to do something special for the default case. -->
+  <xsl:template name="gen-C-Switch-default-caseBody">
+    <xsl:param name="action"/>
+    <xsl:param name="baseIndent"/>
+    
+    <xsl:call-template name="gen-C-Switch-caseBody">
+      <xsl:with-param name="action" select="$action"/>
+      <xsl:with-param name="baseIndent" select="$baseIndent"/>
+    </xsl:call-template>
+  </xsl:template>
+   
+</xsl:stylesheet>
+Generating Message-Handling Stub Code
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:output method="text"/>
+   
+  <!-- Specifies which process to generate handlers for -->
+  <xsl:param name="process"/>
+  <!-- Specifies which message to generate handlers for. A special value of %ALL% 
+       signifies all messages -->
+  <xsl:param name="message" select=" '%ALL%' "/>
+   
+   
+  <!-- The directory where -->
+  <xsl:variable name="message-dir" select=" 'messages' "/>
+  <xsl:variable name="directory-sep" select=" '/' "/>
+  <xsl:variable name="include-ext" select=" '.h' "/>
+   
+  
+  <xsl:template match="MessageRepository">
+    <xsl:choose>
+      <xsl:when test="$message='%ALL%'"  >
+          <xsl:apply-templates
+               select="Messages/Message[Receivers/ProcessRef = $process]"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates 
+             select="Messages/Message[Receivers/ProcessRef = $process and 
+                                      Name=$message]"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>     
+   
+  <xsl:template match="Message">
+    <xsl:document href="{concat(Name,'.h')}">
+      <xsl:call-template name="makeHeader"/>
+    </xsl:document>
+    <xsl:document href="{concat(Name,'.cpp')}">
+      <xsl:call-template name="makeSource"/>
+    </xsl:document>
+    </xsl:template>
+   
+  <xsl:template name="makeHeader">
+#ifndef <xsl:value-of select="Name"/>_h
+#define <xsl:value-of select="Name"/>_h
+   
+#include &lt;transport/MessageHandler.h&gt;
+   
+//Forward Declarations
+class <xsl:value-of select="DataTypeName"/> ;
+/*!TODO:  Insert addition forward declarations here.*/   
+   
+class <xsl:value-of select="Name"/> : public MessageHandler
+{
+public:
+    <xsl:value-of select="Name"/>(const <xsl:value-of 
+        select="DataTypeName"/>&amp; data) ;
+    bool process(  ) ;
+private:
+   
+    const <xsl:value-of select="DataTypeName"/>&amp; m_Data ;
+} ;
+   
+#endif
+  </xsl:template>  
+  
+  <xsl:template name="makeSource">
+#include &lt;messages/<xsl:value-of select="Name"/>.h&gt;
+   
+/*!TODO:  Insert addition includes here.*/   
+   
+<xsl:value-of select="Name"/>::<xsl:value-of select="Name"/>(const 
+    <xsl:value-of select="DataTypeName"/>&amp; data)
+  : m_Data(data)
+{
+}
+   
+bool <xsl:value-of select="Name"/>::process(  )
+{
+  /*!TODO:  Insert message handler code here. */
+  return true; 
+}
+  </xsl:template>  
+  
+</xsl:stylesheet>
+Example 12-1. AddStockOrder.h 
+#ifndef ADD_STOCK_ORDER_h
+#define ADD_STOCK_ORDER_h
+   
+#include <transport/MessageHandler.h>
+   
+//Forward Declarations
+class AddStockOrderData ;
+/*!TODO:  Insert addition forward declarations here.*/   
+   
+class ADD_STOCK_ORDER : public MessageHandler
+{
+public:
+    ADD_STOCK_ORDER(const AddStockOrderData& data) ;
+    bool process(  ) ;
+private:
+   
+    const AddStockOrderData& m_Data ;
+} ;
+   
+#endif
+Example 12-2. AddStockOrder.cpp 
+#include <messages/ADD_STOCK_ORDER.h>
+   
+/*!TODO:  Insert addition includes here.*/   
+   
+ADD_STOCK_ORDER::ADD_STOCK_ORDER(const AddStockOrderData& data)
+  : m_Data(data)
+{
+}
+   
+bool ADD_STOCK_ORDER::process(  )
+{
+  /*!TODO:  Insert message handler code here. */
+  return true; 
+}
+Generating Data Wrappers
+<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <!--The message to generate data for. '*' for all -->
+  <xsl:param name="message" select=" '*' "/>
+  <!--The directory to generate code -->
+  <xsl:param name="generationDir" select=" 'src/' "/>
+  <!--The C++ header extension to use -->
+  <xsl:param name="headerExt" select=" '.h' "/>
+  <!--The C++ source extension to use -->
+  <xsl:param name="sourceExt" select=" '.C' "/>
+   
+  <!--Key to locate data types by name -->
+  <xsl:key name="dataTypes" match="Structure" use="Name" /> 
+  <xsl:key name="dataTypes" match="Primitive" use="Name" /> 
+  <xsl:key name="dataTypes" match="Array" use="Name" /> 
+  <xsl:key name="dataTypes" match="Enumeration" use="Name" /> 
+  
+   
+  <!-- Top level template determines which messages to process -->
+  <xsl:template match="/">
+    <xsl:choose>
+        <xsl:when test="$message = '*'">
+          <xsl:apply-templates select="*/Messages/*"/>
+        </xsl:when>
+        <xsl:when test="*/Messages/Message[Name=$message]">
+          <xsl:apply-templates select="*/Messages/Message[Name=$message]"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:message terminate="yes">No such message name 
+          [<xsl:value-of select="$message"/>]</xsl:message>
+        </xsl:otherwise>
+      </xsl:choose>
+  </xsl:template>
+   
+<!-- If the messages data type is contained in the repository then gnerate data 
+wrapper header and source file for it -->
+<xsl:template match="Message">
+  <xsl:choose>
+    <xsl:when test="key('dataTypes',DataTypeName)">
+      <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="header"/>
+      <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="source"/>
+    </xsl:when>
+    <xsl:otherwise>
+            <xsl:message>Message name [<xsl:value-of select="Name"/>] uses data
+            [<xsl:value-of select="DataTypeName"/>] that is not defined in the 
+            repository.</xsl:message>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>     
+   
+<!-- We only generate headers if a messages data type is a Stucture. 
+The only other typical message data type is XML. We don't generate wrappers for XML 
+payloads.-->
+<xsl:template match="Structure" mode="header">
+<xsl:document href="{concat($generationDir,Name,$headerExt)}">
+#include &lt;primitives/primitives.h&gt;
+   
+class <xsl:value-of select="Name"/>
+{
+public:<xsl:text>&#xa;&#xa;</xsl:text>
+  <xsl:for-each select="Members/Member">
+    <xsl:text>    </xsl:text>
+    <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="returnType"/>
+    get_<xsl:value-of select="Name"/>(  ) const ;<xsl:text/>
+    <xsl:text>&#xa;</xsl:text>
+   </xsl:for-each>
+<xsl:text>&#xa;</xsl:text>
+private:<xsl:text>&#xa;&#xa;</xsl:text>
+  <xsl:for-each select="Members/Member">
+    <xsl:text>    </xsl:text>
+    <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="data"/>  m_
+<xsl:value-of select="Name"/> ;<xsl:text/>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:for-each>
+} ;
+</xsl:document>
+</xsl:template>
+   
+<!-- We only generate source if a messages data type is a Stucture. -->
+<!-- The only other typical message data type is XML. We don't          -->
+<!-- generate wrappers for XML payloads.                                          -
+->
+<xsl:template match="Structure" mode="source">
+<xsl:document href="{concat($generationDir,Name,$sourceExt)}">
+#include "<xsl:value-of select="Name"/><xsl:value-of select="$headerExt"/>"
+   
+<xsl:text/>
+   
+  <xsl:for-each select="Members/Member">
+    <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="returnType"/>
+    <xsl:text>  </xsl:text>
+    <xsl:value-of select="../../Name"/>::get_<xsl:value-of select="Name"/>(  ) 
+const
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:text>{&#xa;</xsl:text>
+    <xsl:text>    return m_</xsl:text><xsl:value-of select="Name"/>
+    <xsl:text>;&#xa;</xsl:text>
+    <xsl:text>}&#xa;&#xa;</xsl:text>
+   </xsl:for-each>
+   
+</xsl:document>
+</xsl:template>
+   
+<!-- We assume members that are themselves structures are -->
+<!-- returned by reference. -->
+<xsl:template match="Structure" mode="returnType">
+const <xsl:value-of select="Name"/>&amp;<xsl:text/>
+</xsl:template>
+   
+<!-- We map primitives that can be represented by native C++ types to those native 
+types. -->
+<!-- Otherwise we assume the primitive is externally defined. -->
+<xsl:template match="Primitive" mode="returnType">
+  <xsl:choose>
+    <xsl:when test="Name='Integer' ">int</xsl:when>
+    <xsl:when test="Name='Real' ">double</xsl:when>
+    <xsl:otherwise><xsl:value-of select="Name"/></xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template match="*" mode="returnType">
+<xsl:value-of select="Name"/>
+</xsl:template>
+   
+<xsl:template match="Primitive" mode="data">
+  <xsl:choose>
+    <xsl:when test="Name='Integer' ">int</xsl:when>
+    <xsl:when test="Name='Real' ">double</xsl:when>
+    <xsl:otherwise><xsl:value-of select="Name"/></xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template match="*" mode="data">
+<xsl:value-of select="Name"/>
+</xsl:template>
+   
+</xsl:stylesheet>
+#include <primitives/primitives.h>
+   
+class AddStockOrderData
+{
+public:
+   
+    StkSymbol get_symbol(  ) const ;
+    Shares get_quantity(  ) const ;
+    BuyOrSell get_side(  ) const ;
+    OrderType get_type(  ) const ;
+    double get_price(  ) const ;
+   
+   
+private:
+   
+    StkSymbol  m_symbol ;
+    Shares  m_quantity ;
+    BuyOrSell  m_side ;
+    OrderType  m_type ;
+    double  m_price ;
+   
+} ;
+#include "AddStockOrderData.h"
+   
+StkSymbol  AddStockOrderData::get_symbol(  ) const
+{
+    return m_symbol;
+}
+   
+Shares  AddStockOrderData::get_quantity(  ) const
+{
+    return m_quantity;
+}
+   
+BuyOrSell  AddStockOrderData::get_side(  ) const
+{
+    return m_side;
+}
+   
+OrderType  AddStockOrderData::get_type(  ) const
+{
+    return m_type;
+}
+   
+double  AddStockOrderData::get_price(  ) const
+{
+    return m_price;
+}
+Generating Pretty Printers
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xslt [
+  <!--Used to control code intenting -->
+  <!ENTITY INDENT "    ">
+  <!ENTITY INDENT2 "&INDENT;&INDENT;">
+  <!ENTITY LS "&lt;&lt;">
+]>
+<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<!-- This pretty-printer generator needs a message switch so we -->
+<!-- reuse the one we already wrote. -->
+<xsl:import href="messageSwitch.xslt"/>
+   
+  <!--The directory to generate code -->
+  <xsl:param name="generationDir" select=" 'src/' "/>
+  <!--The C++ header file name -->
+  <xsl:param name="prettyPrintHeader" select=" 'prettyPrint.h' "/>
+  <!--The C++ source file name -->
+  <xsl:param name="prettyPrintSource" select=" 'prettyPrint.C' "/>
+   
+  <!--Key to locate data types by name -->
+  <xsl:key name="dataTypes" match="Structure" use="Name" /> 
+  <xsl:key name="dataTypes" match="Primitive" use="Name" /> 
+  <xsl:key name="dataTypes" match="Array" use="Name" /> 
+  <xsl:key name="dataTypes" match="Enumeration" use="Name" /> 
+   
+  <xsl:template match="MessageRepository">
+    <xsl:document href="{concat($generationDir,$prettyPrintHeader)}">
+      <xsl:text>void prettyPrintMessage</xsl:text>
+      <xsl:text>(ostream&amp; stream, const Message&amp; msg);&#xa;</xsl:text>
+      <xsl:apply-templates select="DataTypes/Structure" mode="declare"/>
+    </xsl:document>
+   
+    <xsl:document href="{concat($generationDir,$prettyPrintSource)}">
+      <xsl:apply-imports/>
+      <xsl:apply-templates select="DataTypes/Structure" mode="printers"/>
+    </xsl:document>
+      
+  </xsl:template>     
+   
+<!--Override the message processing function name from -->
+<!-- messageSwitch.xslt to customize the function -->
+<!-- signiture to take a stream -->
+<xsl:template name="process-function">
+<xsl:text>void prettyPrintMessage</xsl:text>
+<xsl:text>(ostream&amp; stream, const Message&amp; msg)</xsl:text>
+</xsl:template>
+   
+<!--Override case action from messageSwitch.xslt to generate -->
+<!-- call to prettyPrinter for message data -->
+<xsl:template name="case-action">
+ <xsl:text>   prettyPrint(stream, *static_cast&lt;const </xsl:text>
+ <xsl:value-of select="DataTypeName"/>
+ <xsl:text>*&gt;(msg.getData(  ))) ;
+         break;</xsl:text>
+</xsl:template>
+   
+<!--Generate declarations for each message data type -->
+<xsl:template match="Structure" mode="declare">
+<!--Forward declare the message data class -->
+<xsl:text>class </xsl:text>
+<xsl:value-of select="Name"/>
+<xsl:text> ;&#xa;</xsl:text>
+<!--Forward declare the message prettyPrint function -->
+<xsl:text>ostream prettyPrint(ostream &amp; stream, const </xsl:text>
+<xsl:value-of select="Name"/>
+<xsl:text>&amp; data);&#xa;</xsl:text>
+</xsl:template>
+   
+<!--Generate the body of  a pretty-printer -->
+<xsl:template match="Structure" mode="printers">
+<xsl:text>ostream prettyPrint(ostream &amp; stream, const </xsl:text>
+<xsl:value-of select="Name"/>
+<xsl:text>&amp; data)&#xa;</xsl:text>
+<xsl:text>{&#xa;</xsl:text>
+<xsl:text>&INDENT;stream &#xa;</xsl:text>  
+<xsl:text>&INDENT2;&LS; "</xsl:text>
+<xsl:value-of select="Name"/>
+<xsl:text>" &LS;  endl  &LS; "{"  &LS; endl &#xa;</xsl:text>  
+  <xsl:for-each select="Members/Member">
+      <xsl:text>&INDENT2;&LS; "</xsl:text>
+      <xsl:value-of select="Name"/>: " &LS; <xsl:text/>
+      <xsl:apply-templates 
+                 select="key('dataTypes',DataTypeName)" mode="print">
+        <xsl:with-param name="name" select="Name"/>
+      </xsl:apply-templates> 
+      <xsl:text>&#xa;</xsl:text> 
+  </xsl:for-each>
+  <xsl:text>&INDENT2;&LS; "}"  &LS; endl ; &#xa;</xsl:text>
+  <xsl:text>&INDENT;return stream ;&#xa;</xsl:text>
+  <xsl:text>}&#xa;&#xa;</xsl:text> 
+</xsl:template>
+   
+<!--Nested structures invoke the pretty-printer for that structure -->
+<xsl:template match="Structure" mode="print">
+  <xsl:param name="name"/>
+  <xsl:text>prettyPrint(stream, data.get_</xsl:text>
+  <xsl:value-of select="$name"/><xsl:text>(  ))</xsl:text>
+</xsl:template>
+   
+<!--We assume there is a get function for each -->
+<!-- primitive component of the message -->
+<xsl:template match="*" mode="print">
+  <xsl:param name="name"/>
+  <xsl:text>data.get_</xsl:text>
+  <xsl:value-of select="$name"/>(  ) &lt;&lt; endl<xsl:text/>
+</xsl:template>
+   
+</xsl:stylesheet>
+#include <messages/ADD_STOCK_ORDER.h>
+#include <messages/ADD_STOCK_ORDER_ACK.h>
+#include <messages/ADD_STOCK_ORDER_NACK.h>
+#include <messages/CANCEL_STOCK_ORDER.h>
+#include <messages/CANCEL_STOCK_ORDER_ACK.h>
+#include <messages/CANCEL_STOCK_ORDER_NACK.h>
+#include <messages/TEST.h>
+   
+#include <transport/Message.h>
+#include <transport/MESSAGE_IDS.h>
+   
+   
+   
+void prettyPrintMessage(ostream& stream, const Message& msg)
+{
+  switch (msg.getId(  ))
+  {
+  
+    case ADD_STOCK_ORDER_ID:
+         prettyPrint(stream, *static_cast<const 
+         AddStockOrderData*>(msg.getData(  ))) ;
+         break;
+    case ADD_STOCK_ORDER_ACK_ID:
+         prettyPrint(stream, *static_cast<const 
+         AddStockOrderAckData*>(msg.getData(  ))) ;
+         break;
+    case ADD_STOCK_ORDER_NACK_ID:
+         prettyPrint(stream, *static_cast<const 
+         AddStockOrderNackData*>(msg.getData(  ))) ;
+         break;
+    case CANCEL_STOCK_ORDER_ID:
+         prettyPrint(stream, *static_cast<const 
+         CancelStockOrderData*>(msg.getData(  ))) ;
+         break;
+    case CANCEL_STOCK_ORDER_ACK_ID:
+         prettyPrint(stream, *static_cast<const 
+         CancelStockOrderAckData*>(msg.getData(  ))) ;
+         break;
+    case CANCEL_STOCK_ORDER_NACK_ID:
+         prettyPrint(stream, *static_cast<const 
+         CancelStockOrderNackData*>(msg.getData(  ))) ;
+         break;
+    case TEST_ID:
+         prettyPrint(stream, *static_cast<const TestData*>(msg.getData(  ))) ;
+         break;
+    return false ;
+  }
+}
+  ostream prettyPrint(ostream & stream, const TestData& data)
+{
+    stream 
+        << "TestData" <<  endl  << "{"  << endl 
+        << "order: " << prettyPrint(stream, data.get_order(  ))
+        << "cancel: " << prettyPrint(stream, data.get_cancel(  ))
+        << "}"  << endl ; 
+    return stream ;
+}
+   
+ostream prettyPrint(ostream & stream, const AddStockOrderData& data)
+{
+    stream 
+        << "AddStockOrderData" <<  endl  << "{"  << endl 
+        << "symbol: " << data.get_symbol(  ) << endl
+        << "quantity: " << data.get_quantity(  ) << endl
+        << "side: " << data.get_side(  ) << endl
+        << "type: " << data.get_type(  ) << endl
+        << "price: " << data.get_price(  ) << endl
+        << "}"  << endl ; 
+    return stream ;
+}
+   
+ostream prettyPrint(ostream & stream, const AddStockOrderAckData& data)
+{
+    stream 
+        << "AddStockOrderAckData" <<  endl  << "{"  << endl 
+        << "orderId: " << data.get_orderId(  ) << endl
+        << "}"  << endl ; 
+    return stream ;
+}
+   
+ostream prettyPrint(ostream & stream, const AddStockOrderNackData& data)
+{
+    stream 
+        << "AddStockOrderNackData" <<  endl  << "{"  << endl 
+        << "reason: " << data.get_reason(  ) << endl
+        << "}"  << endl ; 
+    return stream ;
+}
+   
+ostream prettyPrint(ostream & stream, const CancelStockOrderData& data)
+{
+    stream 
+        << "CancelStockOrderData" <<  endl  << "{"  << endl 
+        << "orderId: " << data.get_orderId(  ) << endl
+        << "quantity: " << data.get_quantity(  ) << endl
+        << "}"  << endl ; 
+    return stream ;
+}
+   
+ostream prettyPrint(ostream & stream, const CancelStockOrderAckData& data)
+{
+    stream 
+        << "CancelStockOrderAckData" <<  endl  << "{"  << endl 
+        << "orderId: " << data.get_orderId(  ) << endl
+        << "quantityRemaining: " << data.get_quantityRemaining(  ) << endl
+        << "}"  << endl ; 
+    return stream ;
+}
+   
+ostream prettyPrint(ostream & stream, const CancelStockOrderNackData& data)
+{
+    stream 
+        << "CancelStockOrderNackData" <<  endl  << "{"  << endl 
+        << "orderId: " << data.get_orderId(  ) << endl
+        << "reason: " << data.get_reason(  ) << endl
+        << "}"  << endl ; 
+    return stream ;
+}
+Discussion
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xslt [
+  <!--Used to control code intenting -->
+  <!ENTITY INDENT "    ">
+  <!ENTITY INDENT2 "&INDENT;&INDENT;">
+  <!ENTITY LS "&lt;&lt;">
+]>
+<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<!-- This mesage parse generator needs a message switch so we -->
+<!-- reuse the one we already wrote. -->
+<xsl:import href="messageSwitch.xslt"/>
+   
+  <!--The directory to generate code -->
+  <xsl:param name="generationDir" select=" 'src/' "/>
+  <!--The C++ header file name -->
+  <xsl:param name="msgParseHeader" select=" 'msgParse.h' "/>
+  <!--The C++ source file name -->
+  <xsl:param name="msgParseSource" select=" 'msgParse.C' "/>
+   
+  <!--Key to locate data types by name -->
+  <xsl:key name="dataTypes" match="Structure" use="Name" /> 
+  <xsl:key name="dataTypes" match="Primitive" use="Name" /> 
+  <xsl:key name="dataTypes" match="Array" use="Name" /> 
+  <xsl:key name="dataTypes" match="Enumeration" use="Name" /> 
+   
+  <xsl:template match="MessageRepository">
+    <xsl:document href="{concat($generationDir,$msgParseHeader)}">
+      <xsl:text>void parseMessage</xsl:text>
+       <xsl:text>(MessageHandler&amp; handler, const Message&amp; msg);&#xa;
+       </xsl:text>
+      <xsl:apply-templates select="DataTypes/Structure" mode="declare"/>
+    </xsl:document>
+   
+    <xsl:document href="{concat($generationDir,$msgParseSource)}">
+      <xsl:apply-imports/>
+      <xsl:apply-templates select="DataTypes/Structure" mode="parsers"/>
+    </xsl:document>
+      
+  </xsl:template>     
+   
+<!--Override the message processing function name from -->
+<!-- messageSwitch.xslt to customize the function signiture --> 
+<!-- to take a handler -->
+<xsl:template name="process-function">
+<xsl:text>void parseMessage</xsl:text>
+<xsl:text>(MessageHandler&amp; handler, const Message&amp; msg)</xsl:text>
+</xsl:template>
+   
+<!--Override case action from messageSwitch.xslt to generate -->
+<!-- call to parse for message data -->
+<xsl:template name="case-action">
+ <xsl:text>   parse(handler, *static_cast&lt;const </xsl:text>
+ <xsl:value-of select="DataTypeName"/>
+ <xsl:text>*&gt;(msg.getData(  ))) ;
+         break;</xsl:text>
+</xsl:template>
+   
+<!--Generate declarations for each message data type -->
+<xsl:template match="Structure" mode="declare">
+<!--Forward declare the message data class -->
+<xsl:text>class </xsl:text>
+<xsl:value-of select="Name"/>
+<xsl:text> ;&#xa;</xsl:text>
+<!--Forward declare the message parse function -->
+<xsl:text>void parse(MessageHandler &amp; handler, const </xsl:text>
+<xsl:value-of select="Name"/>
+<xsl:text>&amp; data);&#xa;</xsl:text>
+</xsl:template>
+   
+<!--Generate the body of a parser -->
+<xsl:template match="Structure" mode="parsers">
+<xsl:text>void parse(MessageHandler &amp; handler, const </xsl:text>
+<xsl:value-of select="Name"/>
+<xsl:text>&amp; data)&#xa;</xsl:text>
+<xsl:text>{&#xa;</xsl:text>
+<xsl:text>&INDENT;handler.beginStruct("</xsl:text>  
+<xsl:value-of select="Name"/>
+<xsl:text>") ;&#xa;</xsl:text>  
+  <xsl:for-each select="Members/Member">
+      <xsl:apply-templates 
+           select="key('dataTypes',DataTypeName)" mode="parse">
+        <xsl:with-param name="name" select="Name"/>
+      </xsl:apply-templates> 
+  </xsl:for-each>
+<xsl:text>&INDENT;handler.endStruct("</xsl:text>  
+<xsl:value-of select="Name"/>
+<xsl:text>") ;&#xa;</xsl:text>  
+  <xsl:text>}&#xa;&#xa;</xsl:text> 
+</xsl:template>
+   
+<!--Nested structures invoke the parser for that structure -->
+<xsl:template match="Structure" mode="parse">
+  <xsl:param name="name"/>
+  <xsl:text>&INDENT;parse(handler, data.get_</xsl:text>
+  <xsl:value-of select="$name"/><xsl:text>(  ));&#xa;</xsl:text>
+</xsl:template>
+   
+<!--We assume there is a get function for each -->
+<!-- primitive component of the message -->
+<xsl:template match="*" mode="parse">
+  <xsl:param name="name"/>
+  <xsl:text>&INDENT;handler.field("</xsl:text>
+  <xsl:value-of select="$name"/>","<xsl:text/>
+  <xsl:value-of select="Name"/>",<xsl:text/>
+  <xsl:text>data.get_</xsl:text>
+  <xsl:value-of select="$name"/>(  )<xsl:text/>
+  <xsl:text>);&#xa;</xsl:text> 
+</xsl:template>
+   
+</xsl:stylesheet>
+void parse(MessageHandler & handler, const AddStockOrderData& data)
+{
+    handler.beginStruct("AddStockOrderData") ;
+    handler.field("symbol","StkSymbol",data.get_symbol(  ));
+    handler.field("quantity","Shares",data.get_quantity(  ));
+    handler.field("side","BuyOrSell",data.get_side(  ));
+    handler.field("type","OrderType",data.get_type(  ));
+    handler.field("price","Real",data.get_price(  ));
+    handler.endStruct("AddStockOrderData") ;
+}
+Generating a Test Data-Entry Web Client
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html" />
+   
+  <xsl:param name="message"/>
+   
+  <!--Key to locate data types by name -->
+  <xsl:key name="dataTypes" match="Structure" use="Name" /> 
+  <xsl:key name="dataTypes" match="Primitive" use="Name" /> 
+  <xsl:key name="dataTypes" match="Array" use="Name" /> 
+  <xsl:key name="dataTypes" match="Enumeration" use="Name" /> 
+  
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title><xsl:value-of select="$message"/> Entry</title>
+      </head>
+      <body bgcolor="#FFFFFF" text="#000000">
+        <h1><xsl:value-of select="$message"/> Entry</h1>
+        <form name="{concat($message,'Form')}" method="post" 
+        action="{concat('/cgi-bin/',$message,'Process.pl')}">
+          <xsl:apply-templates select="*/Messages/Message[Name=$message]"/>
+          <br/><center><input type="submit" name="Submit" value="Submit"/></center>
+        </form>
+      </body>
+    </html>
+  </xsl:template>     
+   
+  <xsl:template match="Message">
+    <xsl:apply-templates select="key('dataTypes',DataTypeName)">
+      <xsl:with-param name="field" select="Name"/>
+    </xsl:apply-templates>
+  </xsl:template>  
+   
+<xsl:template match="Structure">
+  <xsl:param name="field"/>
+  <table width="100%" border="0" cellspacing="1" cellpadding="1">
+    <tbody>
+      <xsl:for-each select="Members/Member">
+        <tr>
+          <td valign="top"><xsl:value-of select="Name"/></td>
+          <td>
+            <xsl:apply-templates select="key('dataTypes',DataTypeName)">
+              <xsl:with-param name="field" 
+                        select="concat($field,'_',Name)"/>
+            </xsl:apply-templates>
+          </td>
+        </tr>
+     </xsl:for-each>
+    </tbody>
+  </table>
+</xsl:template>
+   
+<xsl:template match="*">
+  <xsl:param name="field"/>
+  <input type="text" name="{$field}" size="30"/>
+</xsl:template>
+  
+</xsl:stylesheet>
+Generating Test-Entry Web CGI
+<!DOCTYPE xslt [
+  <!--Used to control code intenting -->
+  <!ENTITY INDENT "    ">
+]>
+<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:output method="text"/>
+  <xsl:strip-space elements="*"/>
+   
+  <!--The message to generate data for. '*' for all -->
+  <xsl:param name="message" select=" '*' "/>
+  <!--The directory to generate code -->
+  <xsl:param name="generationDir" select=" 'src/' "/>
+  <!--The C++ header extension to use -->
+  <xsl:param name="headerExt" select=" '.h' "/>
+  <!--The C++ source extension to use -->
+  <xsl:param name="sourceExt" select=" '.C' "/>
+   
+  <!--Key to locate data types by name -->
+  <xsl:key name="dataTypes" match="Structure" use="Name" /> 
+  <xsl:key name="dataTypes" match="Primitive" use="Name" /> 
+  <xsl:key name="dataTypes" match="Array" use="Name" /> 
+  <xsl:key name="dataTypes" match="Enumeration" use="Name" /> 
+  
+   
+  <!-- Top level template determines which messages to process -->
+  <xsl:template match="/"> 
+    <xsl:choose>
+        <xsl:when test="$message = '*'">
+          <xsl:apply-templates select="*/Messages/*"/>
+        </xsl:when>
+        <xsl:when test="*/Messages/Message[Name=$message]">
+          <xsl:apply-templates select="*/Messages/Message[Name=$message]"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:message terminate="yes">No such message name 
+          [<xsl:value-of select="$message"/>]</xsl:message>
+        </xsl:otherwise>
+      </xsl:choose>
+  </xsl:template>
+   
+<!-- If the messages data type is contained in the repository then gnerate data 
+wrapper header and source file for it -->
+<xsl:template match="Message">
+  <xsl:choose>
+    <xsl:when test="key('dataTypes',DataTypeName)">
+      <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="source">
+        <xsl:with-param name="msg" select="Name"/>
+      </xsl:apply-templates>
+    </xsl:when>
+    <xsl:otherwise>
+            <xsl:message>Message name [<xsl:value-of select="Name"/>] uses data
+            [<xsl:value-of select="DataTypeName"/>] that is not defined in the
+            repository.</xsl:message>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>     
+   
+<!-- We only generate source if a messages data type is a Stucture. -->
+<!-- The only other typical message data type is XML. We don't          -->
+<!-- generate wrappers for XML payloads.                                          -
+->
+<xsl:template match="Structure" mode="source">
+  <xsl:param name="msg"/>
+   
+  <xsl:document href="{concat($generationDir,Name,'CGI',$sourceExt)}">
+   
+<xsl:text>
+#include &lt;stdio.h&gt;
+#include "cgi.h"
+#include "</xsl:text>
+<xsl:value-of select="Name"/><xsl:value-of select="$headerExt"/>
+<xsl:text>"
+   
+void cgi_main(cgi_info *cgi)
+{
+    </xsl:text>
+    <xsl:value-of select="Name"/> 
+    <xsl:text> data ;
+    form_entry* form_data = get_form_entries(cgi) ;   
+</xsl:text>
+  
+  <xsl:for-each select="Members/Member">
+    <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="variables">
+      <xsl:with-param name="field" select="concat($msg,'_',Name)"/>
+      <xsl:with-param name="var" select="Name"/>
+    </xsl:apply-templates>
+   </xsl:for-each>
+   
+  <xsl:for-each select="Members/Member">
+    <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="load">
+      <xsl:with-param name="field" select="concat('data.',Name)"/>
+      <xsl:with-param name="var" select="Name"/>
+    </xsl:apply-templates>
+  </xsl:for-each>
+   
+<xsl:text>
+&INDENT;//Enque data to the process being tested 
+&INDENT;enqueData(data) ;
+   
+}</xsl:text>   
+</xsl:document>
+</xsl:template>
+   
+<!-- Declare and initialize variables for each field -->
+<xsl:template match="Structure" mode="variables">
+  <xsl:param name="field"/>
+  <xsl:param name="var"/>
+      <xsl:for-each select="Members/Member">
+            <xsl:apply-templates select="key('dataTypes',DataTypeName)"
+                mode="variables">
+              <xsl:with-param name="field" select="concat($field,'_',Name)"/>
+              <xsl:with-param name="var" select="$var"/>
+            </xsl:apply-templates>
+     </xsl:for-each>
+</xsl:template>
+   
+<xsl:template match="*" mode="variables">
+  <xsl:param name="field"/>
+  <xsl:param name="var"/>
+  
+  <xsl:text>&INDENT;const char * </xsl:text>
+  <xsl:value-of select="$var"/>
+  <xsl:text> = parmval(form_data, "</xsl:text>
+  <xsl:value-of select="$field"/>
+  <xsl:text>");&#xa;</xsl:text>
+</xsl:template>
+   
+<!-- Initialize data form the converted value -->
+<xsl:template match="Structure" mode="load">
+  <xsl:param name="field"/>
+  <xsl:param name="var"/>
+  <xsl:for-each select="Members/Member">
+        <xsl:apply-templates select="key('dataTypes',DataTypeName)" mode="load">
+          <xsl:with-param name="field" select="concat($field,'.',Name)"/>
+          <xsl:with-param name="var" select="concat($field,'_',Name)"/>
+        </xsl:apply-templates>
+  </xsl:for-each>
+</xsl:template>
+   
+<xsl:template match="Primitive" mode="load">
+  <xsl:param name="field"/>
+  <xsl:param name="var"/>
+ 
+  <xsl:text>&INDENT;</xsl:text>
+  <xsl:value-of select="$field"/>  
+  <xsl:text> = </xsl:text>
+  <xsl:value-of select="Name"/>
+  <xsl:text>(</xsl:text>
+  <xsl:value-of select="$var"/>
+  <xsl:text>);&#xa;</xsl:text>
+</xsl:template>
+  
+<xsl:template match="Enumeration" mode="load">
+ <xsl:param name="field"/>
+  <xsl:param name="var"/>
+ 
+  <xsl:text>&INDENT;</xsl:text>
+  <xsl:value-of select="$field"/>  
+  <xsl:text> = Enum</xsl:text>
+  <xsl:value-of select="Name"/>
+  <xsl:text>NameToVal(</xsl:text>
+  <xsl:value-of select="$var"/>
+  <xsl:text>");&#xa;</xsl:text>
+</xsl:template>
+   
+</xsl:stylesheet>
+#include <stdio.h>
+#include "cgi.h"
+#include "msg_ids.h"
+#include "AddStockOrderData.h"
+   
+void cgi_main(cgi_info *cgi)
+{
+    AddStockOrderData data ;
+    form_entry* form_data = get_form_entries(cgi) ;   
+    const char * symbol = parmval(form_data, "ADD_STOCK_ORDER_symbol");
+    const char * quantity = parmval(form_data, "ADD_STOCK_ORDER_quantity");
+    const char * side = parmval(form_data, "ADD_STOCK_ORDER_side");
+    const char * type = parmval(form_data, "ADD_STOCK_ORDER_type");
+    const char * price = parmval(form_data, "ADD_STOCK_ORDER_price");
+    data.symbol = StkSymbol(symbol);
+    data.quantity = Shares(quantity);
+    data.side = EnumBuyOrSellNameToVal(side);
+    data.type = EnumOrderTypeNameToVal(type);
+    data.price = Real(price);
+   
+    //Enque data to the process being tested 
+    enqueData(ADD_STOCK_ORDER,data) ;
+   
+}
+
+<Foundation.Core.Class xmi.id="S.10011">
+  <Foundation.Core.ModelElement.name>AnsweringMachineState
+  </Foundation.Core.ModelElement.name>
+  <Foundation.Core.ModelElement.stereotype>
+    <Foundation.Extension_Mechanisms.Stereotype xmi.idref="G.22"/>
+    <!-- state -->
+  </Foundation.Core.ModelElement.stereotype>
+  <Foundation.Core.GeneralizableElement.specialization>
+    <Foundation.Core.Generalization xmi.idref="G.91"/>
+    <!-- {Connected-&gt;AnsweringMachineState}{3D6782A402EE} -->
+    <Foundation.Core.Generalization xmi.idref="G.92"/>
+    <!-- {HandlingMsg-&gt;AnsweringMachineState}{3D6782EF0119} -->
+    <Foundation.Core.Generalization xmi.idref="G.93"/>
+    <!-- {Start-&gt;AnsweringMachineState}{3D67B2FD004E} -->
+    <Foundation.Core.Generalization xmi.idref="G.94"/>
+    <!-- {GoodBye-&gt;AnsweringMachineState}{3D67B31B02AF} -->
+  </Foundation.Core.GeneralizableElement.specialization>
+  <Foundation.Core.Classifier.associationEnd>
+    <Foundation.Core.AssociationEnd xmi.idref="G.25"/>
+  </Foundation.Core.Classifier.associationEnd>
+  <Foundation.Core.Classifier.feature>
+    <Foundation.Core.Operation xmi.id="S.10012">
+      <Foundation.Core.ModelElement.name>doCmd</Foundation.Core.ModelElement.name>
+      <Foundation.Core.ModelElement.visibility xmi.value="public"/>
+      <Foundation.Core.Feature.ownerScope xmi.value="instance"/>
+      <Foundation.Core.BehavioralFeature.isQuery xmi.value="false"/>
+      <Foundation.Core.Operation.specification/>
+      <Foundation.Core.Operation.isPolymorphic xmi.value="false"/>
+      <Foundation.Core.Operation.concurrency xmi.value="sequential"/>
+      <Foundation.Core.ModelElement.stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.idref="G.23"/>
+        <!-- pure -->
+      </Foundation.Core.ModelElement.stereotype>
+      <Foundation.Core.BehavioralFeature.parameter>
+        <Foundation.Core.Parameter xmi.id="G.76">
+          
+<Foundation.Core.ModelElement.name>cntx</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value="private"/>
+          <Foundation.Core.Parameter.defaultValue>
+            <Foundation.Data_Types.Expression>
+              <Foundation.Data_Types.Expression.language/>
+              <Foundation.Data_Types.Expression.body/>
+            </Foundation.Data_Types.Expression>
+          </Foundation.Core.Parameter.defaultValue>
+          <Foundation.Core.Parameter.kind xmi.value="inout"/>
+          <Foundation.Core.Parameter.type>
+            <Foundation.Core.Class xmi.idref="S.10001"/>
+            <!-- AnsweringMachine -->
+          </Foundation.Core.Parameter.type>
+        </Foundation.Core.Parameter>
+        <Foundation.Core.Parameter xmi.id="G.77">
+          
+<Foundation.Core.ModelElement.name>cmd</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value="private"/>
+          <Foundation.Core.Parameter.defaultValue>
+            <Foundation.Data_Types.Expression>
+              <Foundation.Data_Types.Expression.language/>
+              <Foundation.Data_Types.Expression.body/>
+            </Foundation.Data_Types.Expression>
+          </Foundation.Core.Parameter.defaultValue>
+          <Foundation.Core.Parameter.kind xmi.value="inout"/>
+          <Foundation.Core.Parameter.type>
+            <Foundation.Core.DataType xmi.idref="G.65"/>
+            <!-- Command -->
+          </Foundation.Core.Parameter.type>
+        </Foundation.Core.Parameter>
+        <Foundation.Core.Parameter xmi.id="G.78">
+          <Foundation.Core.ModelElement.name>doCmd.Return
+          </Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value="private"/>
+          <Foundation.Core.Parameter.defaultValue>
+            <Foundation.Data_Types.Expression>
+              <Foundation.Data_Types.Expression.language/>
+              <Foundation.Data_Types.Expression.body/>
+            </Foundation.Data_Types.Expression>
+          </Foundation.Core.Parameter.defaultValue>
+          <Foundation.Core.Parameter.kind xmi.value="return"/>
+          <Foundation.Core.Parameter.type>
+            <Foundation.Core.DataType xmi.idref="G.67"/>
+            <!-- void -->
+          </Foundation.Core.Parameter.type>
+        </Foundation.Core.Parameter>
+      </Foundation.Core.BehavioralFeature.parameter>
+    </Foundation.Core.Operation>
+  </Foundation.Core.Classifier.feature>
+</Foundation.Core.Class>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xslt [
+  <!--=======================================================-->
+  <!-- XMI's high level organization constructs              -->
+  <!--=======================================================-->
+  <!ENTITY BE "Behavioral_Elements">
+  <!ENTITY SM "&BE;.State_Machines">
+  <!ENTITY SMC "&SM;.StateMachine.context">
+  <!ENTITY SMT "&SM;.StateMachine.top">
+  <!ENTITY MM "Model_Management.Model">
+  <!ENTITY FC "Foundation.Core">
+  <!ENTITY FX "Foundation.Extension_Mechanisms">
+
+  <!--=======================================================-->
+  <!-- Abbreviations for the basic elements of a XMI         -->
+  <!-- file that are of most   interest to this stylesheet.  -->
+  <!--=======================================================-->
+  <!--The model as a whole -->
+  <!ENTITY MODEL "XMI/XMI.content/&MM;">
+  <!--Some generic kind of UML element -->
+  <!ENTITY ELEM "&FC;.Namespace.ownedElement">
+  <!--Elements of state machines --> 
+  <!ENTITY STATEMACH "&MODEL;/&ELEM;/&SM;.StateMachine">
+  <!ENTITY STATE "&SM;.CompositeState">
+  <!ENTITY SUBSTATE "&STATE;.substate">
+  <!ENTITY PSEUDOSTATE "&SM;.PseudoState">
+  <!ENTITY PSEUDOSTATE2 "&SMT;/&STATE;/&SUBSTATE;/&PSEUDOSTATE;">
+  <!ENTITY ACTION 
+"&BE;.Common_Behavior.ActionSequence/&BE;.Common_Behavior.ActionSequence.action">
+  <!ENTITY GUARD "&SM;.Transition.guard/&SM;.Guard/&SM;.Guard.expression">
+  <!--The association as a whole -->
+  <!ENTITY ASSOC "&FC;.Association">
+  <!--The connection part of the association-->
+  <!ENTITY CONN "&ASSOC;.connection">
+  <!--The ends of an association. -->
+  <!ENTITY END "&ASSOC;End">
+  <!ENTITY CONNEND "&CONN;/&END;">
+  <!ENTITY ENDType "&END;.type">
+  <!-- A UML class -->
+  <!ENTITY CLASS "&FC;.Class">
+  <!--The name of some UML entity -->
+  <!ENTITY NAME "&FC;.ModelElement.name">
+  <!--A operation -->
+  <!ENTITY OP "&FC;.Operation">
+  <!-- A parameter -->
+  <!ENTITY PARAM "&FC;.Parameter">
+  <!ENTITY PARAM2 "&FC;.BehavioralFeature.parameter/&PARAM;">
+  <!-- The data type of a parameter -->
+  <!ENTITY PARAMTYPE "&PARAM;.type/&FC;.DataType">
+  <!--A UML sterotype -->
+  <!ENTITY STEREOTYPE "&FC;.ModelElement.stereotype/&FX;.Stereotype">
+  <!-- A Supertype relation (inheritance) -->
+  <!ENTITY SUPERTYPE "&FC;.Generalization.supertype">
+  <!ENTITY GENERALIZATION 
+"&FC;.GeneralizableElement.generalization/&FC;.Generalization">
+  <!--=======================================================-->
+  <!--Formatting                                             -->
+  <!--=======================================================-->
+  
+  <!--Used to control code intenting -->
+  <!ENTITY INDENT "    ">
+  <!ENTITY INDENT2 "&INDENT;&INDENT;">
+]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text"/>
+  
+  <!--Index classes by their id -->
+  <xsl:key name="classKey" match="&CLASS;" use="@xmi.id"/>
+  <xsl:key name="classKey" match="&CLASS;" use="&NAME;"/>
+  
+  <!-- Index Stereoptypes by both name and xmi.id -->
+  <xsl:key name="stereotypeKey" match="&FX;.Stereotype" use="@xmi.id"/>
+  <xsl:key name="stereotypeKey" match="&FX;.Stereotype" use="&NAME;"/>
+  
+  <!--Index data types by their id -->
+  <xsl:key name="dataTypeKey" match="&FC;.DataType" use="@xmi.id"/>
+  
+  <!--Index associations by their end classes -->
+  <xsl:key name="associationKey" match="&ASSOC;" 
+use="&CONNEND;/&ENDType;/&FC;.Interface/@xmi.idref"/>
+  <xsl:key name="associationKey" match="&ASSOC;" 
+use="&CONNEND;/&ENDType;/&CLASS;/@xmi.idref"/>
+  
+  <!--Index generalizations by their id -->
+  <xsl:key name="generalizationKey" match="&FC;.Generalization" use="@xmi.id"/>
+
+  <!--Index states and pseudo states together by their id -->
+  <xsl:key name="stateKey" match="&SM;.SimpleState" use="@xmi.id"/>
+  <xsl:key name="stateKey" match="&PSEUDOSTATE;" use="@xmi.id"/>
+  
+  <!--Index state transitions by their id -->
+  <xsl:key name="transKey" match="&SM;.Transition" use="@xmi.id"/>
+  
+  <!--Index transitions events by their id -->
+  <xsl:key name="eventsKey" match="&SM;.SignalEvent" use="@xmi.id"/>
+  
+  <!-- The xmi ids of stereoptypes used to encode State Pattern  in UML -->
+  <xsl:variable name="STATE_MACH" 
+                select="key('stereotypeKey','StateMachine')/@xmi.id"/>
+  <xsl:variable name="STATE"
+                select="key('stereotypeKey','state')/@xmi.id"/>
+  <xsl:variable name="DELEGATE" 
+                select="key('stereotypeKey','delegate')/@xmi.id"/>
+  <xsl:variable name="ACTION" 
+                select="key('stereotypeKey','action')/@xmi.id"/>
+  <xsl:variable name="DEFAULT"
+                select="key('stereotypeKey','default')/@xmi.id"/>
+
+  <xsl:variable name="PURE" 
+                select="key('stereotypeKey','pure')/@xmi.id"/>
+  
+  <!-- We use modes to generate the source in 5 steps -->
+  <xsl:template match="/">
+
+    <!-- Declare state interface -->  
+    <xsl:apply-templates mode="stateInterfaceDecl"
+          select="&MODEL;/&ELEM;/&CLASS;[&STEREOTYPE;/@xmi.idref =
+                                                        $STATE_MACH]"/>
+
+    <!-- Declare concrete states -->  
+    <xsl:apply-templates mode="concreteStatesDecl"
+         select="&MODEL;/&ELEM;/&CLASS;[not(&STEREOTYPE;)]"/>
+
+    <!-- Declare state context class -->  
+    <xsl:apply-templates mode="stateDecl" 
+          select="&MODEL;/&ELEM;/&CLASS;[&STEREOTYPE;/@xmi.idref = 
+                                                        $STATE_MACH]"/>
+         
+    <!--Implement states -->  
+    <xsl:apply-templates mode="concreteStatesImpl" 
+        select="&MODEL;/&ELEM;"/>
+
+    <!--Implement context -->  
+    <xsl:apply-templates mode="stateContextImpl"
+         select="&MODEL;/&ELEM;/&CLASS;[&STEREOTYPE;/@xmi.idref =
+							        $STATE_MACH]"/>
+        
+  </xsl:template>
+  
+  <!-- STATE CONTEXT DECLARATION -->
+  <xsl:template match="&CLASS;" mode="stateDecl">
+  
+    <!-- Find the class associated with this state context that -->
+    <!-- is a state implementation. This is the type of the state -->
+    <!-- machines corrent state memeber variable -->
+    <xsl:variable name="stateImplClass">
+      <xsl:variable name="stateClassId" select="@xmi.id"/>
+      <xsl:for-each select="key('associationKey',$stateClassId)">
+        <xsl:variable name="assocClassId" 
+                      select="&CONNEND;[&ENDType;/*/@xmi.idref !=
+                                  $stateClassId]/&ENDType;/*/@xmi.idref"/>
+        <xsl:if test="key('classKey',$assocClassId)/&STEREOTYPE;/@xmi.idref 
+                                                                 = $STATE">
+          <xsl:value-of select="key('classKey',$assocClassId)/&NAME;"/>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:variable name="className" select="&NAME;"/>
+    
+    <xsl:text>&#xa;class </xsl:text>
+    <xsl:value-of select="$className"/>
+    <xsl:text>&#xa;{&#xa;public:&#xa;&#xa;</xsl:text>
+
+    
+    <!--Ctor decl -->
+    <xsl:text>&INDENT;</xsl:text>
+    <xsl:value-of select="$className"/>::<xsl:value-of select="$className"/>
+    <xsl:text>();&#xa;&#xa;</xsl:text>
+   
+    <!-- Delegates are operations that defer to the current state -->
+    <xsl:apply-templates 
+                       select="*/&OP;[&STEREOTYPE;/@xmi.idref = $DELEGATE]" 
+                       mode="declare"/>
+
+    <!-- void changeState(AbstractState& newState) -->
+    <xsl:text>&INDENT;void changeState(</xsl:text>
+    <xsl:value-of select="$stateImplClass"/>
+    <xsl:text>&amp; newSate) ;&#xa;</xsl:text>
+    
+    <xsl:text>&#xa;&#xa;</xsl:text>
+    <!-- Non-Delegates are other operations operations that states -->
+    <!-- invoke on the context -->
+    <xsl:apply-templates 
+              select="*/&OP;[&STEREOTYPE;/@xmi.idref != $DELEGATE]"
+              mode="declare"/>
+    <xsl:text>&#xa;private:&#xa;&#xa;</xsl:text>
+    <xsl:text>&INDENT;</xsl:text>
+    <xsl:value-of select="$stateImplClass"/>
+    <xsl:text>* m_State ;</xsl:text>
+    <xsl:text>&#xa;&#xa;} ;&#xa;&#xa;</xsl:text>
+    
+  </xsl:template>
+  
+  <!-- CONCRETE STATES DECLARATION -->
+  
+  <xsl:template match="&CLASS;" mode="concreteStatesDecl">
+    <xsl:text>class </xsl:text>
+  <xsl:value-of select="&NAME;"/>
+    <xsl:call-template name="baseClass"/>
+    <xsl:text>&#xa;{&#xa;public:&#xa;&#xa;</xsl:text>
+    <!-- Concrete States are Singletons so we generate an -->
+    <!-- instance method -->
+    <xsl:text>&INDENT;static </xsl:text>
+    <xsl:value-of select="&NAME;"/>
+    <xsl:text>&amp; instance() ;</xsl:text>
+    <xsl:text>&#xa;&#xa;private:&#xa;&#xa;</xsl:text>
+    <!-- We protect constructors of Singletons-->
+    <xsl:text>&INDENT;</xsl:text>
+    <xsl:value-of select="&NAME;"/>
+    <xsl:text>() {} &#xa;</xsl:text>
+    <xsl:text>&INDENT;</xsl:text>
+    <xsl:value-of select="&NAME;"/>(const <xsl:value-of select="&NAME;"/>
+    <xsl:text>&amp;) {} &#xa;</xsl:text>
+    <xsl:text>&INDENT;void operator =(const </xsl:text>
+    <xsl:value-of select="&NAME;"/>
+    <xsl:text>&amp;) {} &#xa;</xsl:text>
+    <xsl:apply-templates select="*/&OP;" mode="declare"/>
+    <xsl:text>
+} ;
+
+</xsl:text>
+  </xsl:template>
+  
+  <!-- Templates used to declare classes with all public members -->
+  
+  <xsl:template match="&CLASS;" mode="declare">
+    <xsl:text>class&#x20;</xsl:text>
+    <xsl:value-of select="&NAME;"/>
+    <xsl:text>&#xa;{&#xa;public:&#xa;&#xa;</xsl:text>
+    <xsl:apply-templates select="*/&OP;" mode="declare"/>
+    <xsl:text>&#xa;} ;&#xa;</xsl:text>
+  </xsl:template>
+  
+  <xsl:template match="&OP;" mode="declare">
+    <xsl:variable name="returnTypeId"
+                            select="&PARAM2;[&PARAM;.kind/@xmi.value = 
+                                                                 
+'return']/&PARAMTYPE;/@xmi.idref"/>
+      <xsl:text>&INDENT;</xsl:text>
+    <xsl:if test="&STEREOTYPE;/@xmi.idref = $PURE">
+      <xsl:text>virtual </xsl:text>
+    </xsl:if>
+    <xsl:value-of select="key('dataTypeKey',$returnTypeId)/&NAME;"/>
+      <xsl:text>&#x20;</xsl:text>
+    <xsl:value-of select="&NAME;"/>
+    <xsl:text>(</xsl:text>
+    <xsl:call-template name="parameters"/>
+    <xsl:text>)</xsl:text>
+    <xsl:if test="&STEREOTYPE;/@xmi.idref = $PURE">
+      <xsl:text> = 0 </xsl:text>
+    </xsl:if>
+    <xsl:text>;&#xa;</xsl:text>
+  </xsl:template>
+
+  <!--Eat extra text nodes  --> 
+  <xsl:template match="text()" mode="declare"/>
+  
+  <!-- STATE INTERFACE DECLARATION -->
+  <xsl:template match="&CLASS;" mode="stateInterfaceDecl">
+
+    <xsl:text>//Forward declarations&#xa;</xsl:text>
+    <xsl:text>class </xsl:text>
+    <xsl:value-of select="&NAME;"/>
+    <xsl:text>;&#xa;&#xa;</xsl:text>
+    
+    <xsl:variable name="stateClassId" select="@xmi.id"/>
+    <!-- Find the class associated with the state context that -->
+    <!-- is a state. -->
+    <xsl:for-each select="key('associationKey',$stateClassId)">
+      <xsl:variable name="assocClassId"
+                    select="&CONNEND;[&ENDType;/*/@xmi.idref != 
+                                   $stateClassId]/&ENDType;/*/@xmi.idref"/>
+      <xsl:if test="key('classKey',$assocClassId)/&STEREOTYPE;/@xmi.idref = 
+                                                                   $STATE">
+        <xsl:apply-templates select="key('classKey',$assocClassId)" 
+                             mode="declare"/>
+      </xsl:if>
+    </xsl:for-each>
+    <xsl:text>&#xa;&#xa;</xsl:text>
+  </xsl:template>
+  
+  <!--Eat extra text nodes  --> 
+  <xsl:template match="text()" mode="stateInterfaceDecl"/>
+  
+  <!-- STATE CONTEXT IMPLEMENTATION -->
+  <xsl:template match="&CLASS;" mode="stateContextImpl">
+  
+    <xsl:variable name="stateImplClass">
+      <xsl:variable name="stateClassId" select="@xmi.id"/>
+      <xsl:for-each select="key('associationKey',$stateClassId)">
+        <xsl:variable name="assocClassId"
+             select="&CONNEND;[&ENDType;/*/@xmi.idref !=
+                                 $stateClassId]/&ENDType;/*/@xmi.idref"/>
+        <xsl:if test="key('classKey',$assocClassId)/&STEREOTYPE;/@xmi.idref 
+                                                                 = $STATE">
+          <xsl:value-of select="key('classKey',$assocClassId)/&NAME;"/>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:variable name="className" select="&NAME;"/>
+    <xsl:text>//Constructor&#xa;</xsl:text>
+    <xsl:value-of select="$className"/>::<xsl:value-of
+                                          select="$className"/>
+    <xsl:text>()&#xa;</xsl:text>
+    <xsl:text>{&#xa;</xsl:text>
+    <xsl:text>&INDENT;//Initialize state machine in start state &#xa;</xsl:text>
+    <xsl:variable name="startStateName">
+      <xsl:call-template name="getStartState">
+        <xsl:with-param name="classId" select="@xmi.id"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>&INDENT;m_State = &amp;</xsl:text>
+    <xsl:value-of select="$startStateName"/>
+    <xsl:text>::instance() ;&#xa;</xsl:text>
+    <xsl:text>}&#xa;&#xa;</xsl:text>
+
+    <!-- void changeState(AbstractState& newState) -->
+    <xsl:text>void </xsl:text>
+    <xsl:value-of select="$className"/>
+    <xsl:text>::changeState(</xsl:text>
+    <xsl:value-of select="$stateImplClass"/>
+    <xsl:text>&amp; newState)&#xa;</xsl:text>
+    <xsl:text>{&#xa;</xsl:text>
+    <xsl:text>&INDENT;m_State = &amp;newState;</xsl:text>
+    <xsl:text>&#xa;}&#xa;&#xa;</xsl:text>
+    
+    <xsl:for-each select="*/&OP;[&STEREOTYPE;/@xmi.idref = $DELEGATE]">
+      <xsl:variable name="returnTypeId" 
+                             select="&PARAM2;[&PARAM;.kind/@xmi.value =
+                                        'return']/&PARAMTYPE;/@xmi.idref"/>
+      <xsl:value-of select="key('dataTypeKey',$returnTypeId)/&NAME;"/>
+      <xsl:text>&#x20;</xsl:text>
+      <xsl:value-of select="$className"/>::<xsl:value-of select="&NAME;"/>
+      <xsl:text>(</xsl:text>
+      <xsl:call-template name="parameters"/>
+      <xsl:text>)&#xa;</xsl:text>
+      <xsl:text>{&#xa;</xsl:text>
+      <xsl:text>&INDENT;m_State-></xsl:text>
+      <xsl:value-of select="&NAME;"/>
+      <xsl:text>(*this, </xsl:text>
+      <xsl:for-each select="&PARAM2;[&PARAM;.kind/@xmi.value != 'return']">
+        <xsl:value-of select="&NAME;"/>
+        <xsl:if test="position() != last()">
+          <xsl:text>, </xsl:text>
+        </xsl:if>
+      </xsl:for-each>
+      <xsl:text>);&#xa;</xsl:text>
+      <xsl:text>}&#xa;&#xa;</xsl:text>
+    </xsl:for-each>
+    
+    <xsl:for-each select="*/&OP;[&STEREOTYPE;/@xmi.idref != $DELEGATE]">
+      <xsl:variable name="returnTypeId"
+                    select="&PARAM2;[&PARAM;.kind/@xmi.value = 
+                                    'return']/&PARAMTYPE;/@xmi.idref"/>
+      <xsl:value-of select="key('dataTypeKey',$returnTypeId)/&NAME;"/>
+      <xsl:text>&#x20;</xsl:text>
+      <xsl:value-of select="$className"/>::<xsl:value-of select="&NAME;"/>
+      <xsl:text>(</xsl:text>
+      <xsl:call-template name="parameters"/>
+      <xsl:text>)&#xa;</xsl:text>
+      <xsl:text>{&#xa;</xsl:text>
+      <xsl:text>&INDENT;//!TODO: Implement behavior of this action&#xa;</xsl:text>
+      <xsl:text>}&#xa;&#xa;</xsl:text>
+    </xsl:for-each>
+  </xsl:template>
+  <xsl:template match="text()" mode="stateContextImpl"/>
+
+  <!-- CONCRETE STATES IMPLEMENTATION -->
+  <xsl:template match="&CLASS;" mode="concreteStatesImpl">
+    <xsl:variable name="classId" select="@xmi.id"/>
+    <xsl:variable name="stateMachine"
+                  select="/&STATEMACH;[&SMC;/&CLASS;/@xmi.idref = 
+                                                               $classId]"/>
+    <!-- For each state in the machine, generate its implementation -->
+    <xsl:for-each select="$stateMachine//&PSEUDOSTATE; |
+                                        $stateMachine//&SM;.SimpleState">
+      <xsl:call-template name="generateState">
+        <xsl:with-param name="stateClass" select="key('classKey',&NAME;)"/>
+      </xsl:call-template>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <!--Eat extra text nodes  --> 
+  <xsl:template match="text()" mode="concreteStatesImpl"/>
+  
+  <xsl:template name="generateState">
+    <!--This is a xmi class corresponding the the state -->
+    <xsl:param name="stateClass"/>
+    <!-- The current context is some state -->
+    <xsl:variable name="state" select="."/>
+    <xsl:variable name="className" select="&NAME;"/>
+    <xsl:if test="$className != $stateClass/&NAME;">
+      <xsl:message terminate="yes">State and class do not match!</xsl:message>
+    </xsl:if>
+    <xsl:for-each select="$stateClass/*/&OP;">
+      <xsl:variable name="returnTypeId" 
+                    select="&PARAM2;[&PARAM;.kind/@xmi.value =
+                                     'return']/&PARAMTYPE;/@xmi.idref"/>
+      <xsl:value-of select="key('dataTypeKey',$returnTypeId)/&NAME;"/>
+      <xsl:text>&#x20;</xsl:text>
+      <xsl:value-of select="$className"/>::<xsl:value-of select="&NAME;"/>
+      <xsl:text>(</xsl:text>
+      <xsl:call-template name="parameters"/>
+      <xsl:text>)&#xa;</xsl:text>
+      <xsl:text>{&#xa;</xsl:text>
+      <xsl:for-each 
+           select="$state/&SM;.StateVertex.outgoing/&SM;.Transition">
+        <xsl:call-template name="generateStateBody">
+          <xsl:with-param name="transition" 
+           select="key('transKey',@xmi.idref)"/>
+        </xsl:call-template>
+      </xsl:for-each>
+      <xsl:text>&INDENT2;context.errorMsg() ;&#xa;</xsl:text>
+      <xsl:text>}&#xa;&#xa;</xsl:text>
+    </xsl:for-each>
+  </xsl:template>
+  
+  
+  <xsl:template name="generateStateBody">
+    <xsl:param name="transition"/>
+    <xsl:text>&INDENT;if (cmd == </xsl:text>
+    <xsl:variable name="eventId"
+                           
+select="$transition/&SM;.Transition.trigger/&SM;.SignalEvent/@xmi.idref"/>
+    <xsl:value-of select="key('eventsKey',$eventId)/&NAME;"/>
+    <xsl:if test="$transition/&SM;.Transition.guard">
+      <xsl:text> &amp;&amp; </xsl:text>
+      <xsl:value-of
+     select="$transition/&GUARD;/*/Foundation.Data_Types.Expression.body"/>
+      <xsl:text>()</xsl:text>
+    </xsl:if>
+    <xsl:text>)&#xa;</xsl:text>
+    <xsl:text>&INDENT;{&#xa;</xsl:text>
+    <xsl:text>&INDENT2;</xsl:text>
+    <xsl:value-of 
+         select="$transition/&SM;.Transition.effect/&ACTION;/*/&NAME;"/>
+    <xsl:text>() ;&#xa;</xsl:text>
+    <xsl:variable name="targetStateId" 
+                 select="$transition/&SM;.Transition.target/*/@xmi.idref"/>
+    <xsl:if test="$targetStateId != $transition/@xmi.id"/>
+      <xsl:text>&INDENT2;cntx.changeState(</xsl:text>
+      <xsl:value-of select="key('stateKey',$targetStateId)/&NAME;"/>
+      <xsl:text>::instance());&#xa;</xsl:text>    
+    <xsl:text>&INDENT;}&#xa;</xsl:text>
+    <xsl:text>&INDENT;else&#xa;</xsl:text>
+  </xsl:template>
+  
+  <!-- Generate function parameters -->
+  <xsl:template name="parameters">
+    <xsl:for-each select="&PARAM2;[&PARAM;.kind/@xmi.value != 'return']">
+      <xsl:choose>
+        <xsl:when test="&PARAMTYPE;">
+          <xsl:value-of 
+                select="key('dataTypeKey',&PARAMTYPE;/@xmi.idref)/&NAME;"/>
+        </xsl:when>
+        <xsl:when test="&PARAM;.type/&CLASS;">
+          <xsl:value-of 
+                 select="key('classKey',
+                             &PARAM;.type/&CLASS;/@xmi.idref)/&NAME;"/>
+          <xsl:text>&amp;</xsl:text>
+        </xsl:when>
+      </xsl:choose>
+      <xsl:text>&#x20;</xsl:text>
+      <xsl:value-of select="&NAME;"/>
+      <xsl:if test="position() != last()">
+        <xsl:text>, </xsl:text>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <!-- Generate base classes -->
+  <xsl:template name="baseClass">
+    <xsl:if test="&GENERALIZATION;">
+      <xsl:text> : </xsl:text>
+      <xsl:for-each select="&GENERALIZATION;">
+        <xsl:variable name="genAssoc" 
+                      select="key('generalizationKey',@xmi.idref)"/>
+        <xsl:text>public </xsl:text>
+        <xsl:value-of 
+	 select="key('classKey',
+                 $genAssoc/&SUPERTYPE;/&CLASS;/@xmi.idref)/&NAME;"/>
+        <xsl:if test="position() != last()">
+          <xsl:text>, </xsl:text>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:if>
+  </xsl:template>
+  <xsl:template name="getStartState">
+    <xsl:param name="classId"/>
+    <xsl:variable name="stateMachine"
+                  select="/&STATEMACH;[&SMC;/&CLASS;/@xmi.idref = 
+                                                          $classId]"/>
+    <xsl:value-of 
+                  select="$stateMachine/&PSEUDOSTATE2;
+                                          [&PSEUDOSTATE;.kind/@xmi.value = 
+'initial']/&NAME;"/>
+  </xsl:template>
+</xsl:stylesheet>
+
+//Forward declarations
+class AnsweringMachine;
+   
+class AnsweringMachineState
+{
+public:
+   
+    virtual void doCmd(AnsweringMachine& cntx, Command cmd) = 0 ;
+   
+} ;
+   
+   
+class Connected : public AnsweringMachineState
+{
+public:
+   
+    static Connected& instance(  ) ;
+   
+private:
+   
+    Connected(  ) {  } 
+    Connected(const Connected&) {  } 
+    void operator =(const Connected&) {  } 
+    void doCmd(AnsweringMachine& cntx, Command cmd);
+   
+} ;
+   
+class HandlingMsg : public AnsweringMachineState
+{
+public:
+   
+    static HandlingMsg& instance(  ) ;
+   
+private:
+   
+    HandlingMsg(  ) {  } 
+    HandlingMsg(const HandlingMsg&) {  } 
+    void operator =(const HandlingMsg&) {  } 
+    void doCmd(AnsweringMachine& cntx, Command cmd);
+   
+} ;
+   
+//!OTHER STATES WERE ELIDED TO SAVE SPACE... 
+   
+class AnsweringMachine
+{
+public:
+   
+    AnsweringMachine::AnsweringMachine(  );
+   
+    void doCmd(Command cmd);
+    void changeState(AnsweringMachineState& newSate) ;
+   
+   
+    bool moreMsgs(  );
+    void playRemaining(  );
+    void playCurrentMsg(  );
+    void advanceAndPlayMsg(  );
+    void deleteMsg(  );
+    void sayGoodBye(  );
+    void errorMsg(  );
+   
+private:
+   
+    AnsweringMachineState* m_State ;
+   
+} ;
+   
+void Connected::doCmd(AnsweringMachine& cntx, Command cmd)
+{
+    if (cmd =  = NEXT_MSG && cntx.moreMsgs(  ))
+    {
+        cntx.playCurrentMsg(  ) ;
+        cntx.changeState(HandlingMsg::instance(  ));
+    }
+    else
+    if (cmd =  = NEXT_MSG && !cntx.moreMsgs(  ))
+    {
+        cntx.playRemaining(  ) ;
+        cntx.changeState(Connected::instance(  ));
+    }
+    else
+    if (cmd =  = END)
+    {
+        cntx.sayGoodBye(  ) ;
+        cntx.changeState(GoodBye::instance(  ));
+    }
+    else
+        context.errorMsg(  ) ;
+}
+   
+//!OTHER STATES WERE ELIDED TO SAVE SPACE... 
+   
+//Constructor
+AnsweringMachine::AnsweringMachine(  )
+{
+    //Initialize state machine in start state 
+    m_State = &Start::instance(  ) ;
+}
+   
+void AnsweringMachine::changeState(AnsweringMachineState& newState)
+{
+    m_State = &newState;
+}
+   
+void AnsweringMachine::doCmd(Command cmd)
+{
+    m_State->doCmd(*this, cmd);
+}
+   
+bool AnsweringMachine::moreMsgs(  )
+{
+    //!TODO: Implement behavior of this action
+}
+   
+void AnsweringMachine::playRemaining(  )
+{
+    //!TODO: Implement behavior of this action
+}
+   
+void AnsweringMachine::playCurrentMsg(  )
+{
+    //!TODO: Implement behavior of this action
+}
+   
+//!OTHER ACTIONS WERE ELIDED TO SAVE SPACE...
+Generating XSLT from XSLT
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:xslx="http://www.ora.com/XSLTCookbook/ExtendedXSLT" >
+   
+<xsl:output method="text"/>
+     
+<xsl:template match="foo">
+  <xslx:if test="bar">
+    <xsl:text>You often will find a bar in the neighborhood of foo!</xsl:text>
+  </xslx:if>
+  <xslx:elsif test="baz">
+    <xsl:text>A baz is a sure sign of geekdom</xsl:text>
+  </xslx:elsif>
+  <xslx:else>
+    <xslx:loop param="i" init="0" test="$i &lt; 10" incr="1">
+      <xsl:text>Hmmm, nothing to say here but I'll say it 10 times.</xsl:text>
+    </xslx:loop>
+  </xslx:else>
+  <xslx:loop param="i" init="10" test="$i >= 0" incr="-1">
+    <xslx:loop param="j" init="10" test="$j >= 0" incr="-1">
+      <xsl:text>&#xa;</xsl:text>
+      <xsl:value-of select="$i * $j"/>
+    </xslx:loop>
+  </xslx:loop>
+  <xslx:if test="foo">
+       <xsl:text>foo foo! Nobody says foo foo!</xsl:text>
+  </xslx:if>
+  <xslx:else>
+       <xsl:text>Well, okay then!</xsl:text>
+  </xslx:else>
+</xsl:template>
+   
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:xslx="http://www.ora.com/XSLTCookbook/ExtendedXSLT"
+ xmlns:xso="dummy" >
+   
+<!-- Reuse the identity transform to copy -->
+<!-- regular XSLT form source to destiniation -->
+<xsl:import href="../util/copy.xslt"/>
+   
+<!-- DO NOT let the processor do the formatting via indent = yes -->
+<!-- Because this could screw up xsl:text nodes                  -->
+<xsl:output method="xml" version="1.0" encoding="UTF-8" />
+   
+<!--We use xso as a alias when we need to output literal xslt elements -->
+<xsl:namespace-alias stylesheet-prefix="xso" result-prefix="xsl"/>
+     
+<xsl:template match="xsl:stylesheet | xsl:transform">
+   <xso:stylesheet>
+    <!--The first pass handles the if-elsif-else translation -->
+    <!--and the conversion of xslx:loop to named template calls -->
+    <xsl:apply-templates select="@* | node(  )"/>
+    
+    <!--The second pass handles the conversion of xslx:loop -->
+    <!-- to recusive named templates -->
+    <xsl:apply-templates mode="loop-body" select="//xslx:loop"/> 
+    
+  </xso:stylesheet>
+</xsl:template>     
+   
+<!--We look for xslx:if's that have matching xslx:elsif or xslx:else -->
+<xsl:template match="xslx:if[following-sibling::xslx:else or 
+                             following-sibling::xslx:elsif]">
+  <xsl:variable name="idIf" select="generate-id(  )"/>
+  <xso:choose>
+    <xso:when test="{@test}">
+      <xsl:apply-templates select="@* | node(  )"/>
+    </xso:when>
+    <!-- We process the xsl:eslif and xslx:else in a special mode -->
+    <!-- as part of the xsl:choose. We must make sure to only pick -->
+    <!-- up the ones whose preceding xslx:if is this xslx:if -->
+    <xsl:apply-templates 
+     select="following-sibling::xslx:else[
+                      generate-id(preceding-sibling::xslx:if[1]) = $idIf] | 
+             following-sibling::xslx:elsif[
+                      generate-id(preceding-sibling::xslx:if[1]) = $idIf]" 
+     mode="choose"/>
+  </xso:choose>
+</xsl:template>
+   
+<!--Ignore xslx:elsif and xslx:else in normal mode -->
+<xsl:template match="xslx:elsif | xslx:else"/>
+   
+<!--An xslx:elsif becomes a xsl:when -->
+<xsl:template match="xslx:elsif"  mode="choose">
+ <xso:when test="{@test}">
+   <xsl:apply-templates select="@* | node(  )"/>
+ </xso:when>
+</xsl:template>
+   
+<!--An xslx:else becomes a xsl:otherwise -->
+<xsl:template match="xslx:else" mode="choose">
+ <xso:otherwise>
+   <xsl:apply-templates/>
+ </xso:otherwise>
+</xsl:template>
+   
+   
+<!-- An xslx:loop becomes a call to a named template -->
+<xsl:template match="xslx:loop">
+  <!-- Each template is given the name loop-N where N is position -->
+  <!-- of this loop relative to previous loops at any level -->
+  <xsl:variable name="name">
+    <xsl:text>loop-</xsl:text>
+    <xsl:number count="xslx:loop" level="any"/>
+  </xsl:variable> 
+  
+  <xso:call-template name="{$name}">
+    <xsl:for-each select="ancestor::xslx:loop">
+      <xso:with-param name="{@param}" select="${@param}"/>
+    </xsl:for-each>
+    <xso:with-param name="{@param}" select="{@init}"/>
+  </xso:call-template>  
+ 
+</xsl:template>
+   
+<!-- Mode loop-body is used on the 2nd pass. -->
+<!-- Here recursive templates are generated to do the looping.  -->
+   
+<xsl:template match="xslx:loop" mode="loop-body">
+  <xsl:variable name="name">
+    <xsl:text>loop-</xsl:text>
+    <xsl:value-of select="position(  )"/>
+  </xsl:variable> 
+  
+  <xso:template name="{$name}">
+    <!--If this loop is nested in another it must -->
+    <!--"see" the outter loop parameters so we generate these here -->
+    <xsl:for-each select="ancestor::xslx:loop">
+      <xso:param name="{@param}"/>
+    </xsl:for-each>
+    <!--The local loop parameter -->
+    <xso:param name="{@param}"/>
+    <!--Generate the recusion control test -->
+    <xso:if test="{@test}">
+      <!-- Apply template in normal mode to handle -->
+      <!-- calls to nested loops while copying everything else. -->
+      <xsl:apply-templates/>
+      <!--This is the recursive call that applies -->
+      <!--the incr to the loop param -->
+      <xso:call-template name="{$name}">
+        <xsl:for-each select="ancestor::xslx:loop">
+          <xso:with-param name="{@param}" select="${@param}"/>
+        </xsl:for-each>
+        <xso:with-param name="{@param}" select="${@param} + {@incr}"/>
+      </xso:call-template>
+    </xso:if>
+  </xso:template>
+</xsl:template>
+   
+</xsl:stylesheet>
+<xso:stylesheet xmlns:xso="http://www.w3.org/1999/XSL/Transform" xmlns:xsl="http://
+www.w3.org/1999/XSL/Transform" xmlns:xslx="http://www.ora.com/XSLTCookbook/
+ExtendedXSLT" version="1.0">
+  <xsl:output method="text"/>
+  <xsl:template match="foo">
+    <xso:choose>
+      <xso:when test="bar">
+        <xsl:text>You often will find a bar in the neighborhood of foo!</xsl:text>
+      </xso:when>
+      <xso:when test="baz">
+        <xsl:text>A baz is a sure sign of geekdom</xsl:text>
+      </xso:when>
+      <xso:otherwise>
+        <xso:call-template name="loop-1">
+          <xso:with-param name="i" select="0"/>
+        </xso:call-template>
+      </xso:otherwise>
+    </xso:choose>
+    <xso:call-template name="loop-2">
+      <xso:with-param name="i" select="10"/>
+    </xso:call-template>
+    <xso:choose>
+      <xso:when test="foo">
+        <xsl:text>foo foo! Nobody says foo foo!</xsl:text>
+      </xso:when>
+      <xso:otherwise>
+        <xsl:text>Well, okay then!</xsl:text>
+      </xso:otherwise>
+    </xso:choose>
+  </xsl:template>
+  <xso:template name="loop-1">
+    <xso:param name="i"/>
+    <xso:if test="$i &lt; 10">
+      <xsl:text>Hmmm, nothing to say here but I'll say it 10 times.</xsl:text>
+      <xso:call-template name="loop-1">
+        <xso:with-param name="i" select="$i + 1"/>
+      </xso:call-template>
+    </xso:if>
+  </xso:template>
+  <xso:template name="loop-2">
+    <xso:param name="i"/>
+    <xso:if test="$i &gt;= 0">
+      <xso:call-template name="loop-3">
+        <xso:with-param name="i" select="$i"/>
+        <xso:with-param name="j" select="10"/>
+      </xso:call-template>
+      <xso:call-template name="loop-2">
+        <xso:with-param name="i" select="$i + -1"/>
+      </xso:call-template>
+    </xso:if>
+  </xso:template>
+  <xso:template name="loop-3">
+    <xso:param name="i"/>
+    <xso:param name="j"/>
+    <xso:if test="$j &gt;= 0">
+      <xsl:text>
+</xsl:text>
+      <xsl:value-of select="$i * $j"/>
+      <xso:call-template name="loop-3">
+        <xso:with-param name="i" select="$i"/>
+        <xso:with-param name="j" select="$j + -1"/>
+      </xso:call-template>
+    </xso:if>
+  </xso:template>
+</xso:stylesheet>
+ 
+ 
+ 
+ 
+44		Code Generation
+Generating XSLT from XSLT		45 of 45
+44
+	45
+DRAFT	O'Reilly & Associates	1/17/2006

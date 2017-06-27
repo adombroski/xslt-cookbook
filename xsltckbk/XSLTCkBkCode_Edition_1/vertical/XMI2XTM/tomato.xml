@@ -1,0 +1,1864 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<!DOCTYPE XMI SYSTEM 'uml.dtd' [
+<!ELEMENT uisToolName (#PCDATA)>
+<!ELEMENT uisDiagramName (#PCDATA)>
+<!ELEMENT uisDiagramStyle (#PCDATA)>
+<!ELEMENT uisDiagramPresentation (Foundation.Auxiliary_Elements.Presentation*)>
+<!ELEMENT UISDiagram (uisDiagramName, uisToolName, uisDiagramStyle, uisDiagramPresentation*)>
+<!ATTLIST UISDiagram xmi.id ID #REQUIRED>
+<!ELEMENT uisOwnedDiagram (UISDiagram*)>
+<!ELEMENT UISModelElement (uisOwnedDiagram*)>
+<!ATTLIST UISModelElement xmi.id ID #REQUIRED>
+<!ENTITY bs "&#38;#08;">
+<!ENTITY vt "&#38;#11;">
+<!ENTITY ff "&#38;#12;">
+]>
+<XMI xmi.version = '1.0'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Unisys.IntegratePlus.2</XMI.exporter>
+      <XMI.exporterVersion>4.0.3</XMI.exporterVersion>
+    </XMI.documentation>
+    <XMI.metamodel xmi.name = 'UML' xmi.version = '1.1'/>
+  </XMI.header>
+  <XMI.content>
+    <Model_Management.Model xmi.id = 'G.1'>
+      <Foundation.Core.ModelElement.name>tomato</Foundation.Core.ModelElement.name>
+      <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+      <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+      <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+      <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+      <XMI.extension xmi.extender = 'Unisys.IntegratePlus.2'>
+        <XMI.reference xmi.idref = 'G.36'/>
+      </XMI.extension>
+      <Foundation.Core.Namespace.ownedElement>
+        <Foundation.Core.Class xmi.id = 'S.10001'>
+          <Foundation.Core.ModelElement.name>EN</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.9'/> <!-- {3D626E2D006D} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10002'>
+              <Foundation.Core.ModelElement.name>subjectIdentity</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>http://www.topicmaps.org/xtm/1.0/language.xtm#en</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.31'/> <!-- String -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.DataType xmi.id = 'G.31'>
+          <Foundation.Core.ModelElement.name>String</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Foundation.Core.DataType>
+        <Foundation.Core.Class xmi.id = 'S.10003'>
+          <Foundation.Core.ModelElement.name>FR</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.12'/> <!-- {3D626ECC030D} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10004'>
+              <Foundation.Core.ModelElement.name>subjectIdentity</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>http://www.topicmaps.org/xtm/1.0/language.xtm#fr</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.31'/> <!-- String -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10005'>
+          <Foundation.Core.ModelElement.name>tomato</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.specialization>
+            <Foundation.Core.Generalization xmi.idref = 'G.33'/> <!-- {EN::tomato-&gt;tomato}{3D626E020242} -->
+            <Foundation.Core.Generalization xmi.idref = 'G.34'/> <!-- {FR::tomate-&gt;tomato}{3D626EB80109} -->
+            <Foundation.Core.Generalization xmi.idref = 'G.35'/> <!-- {TMT-&gt;tomato}{3D6C257D0119} -->
+          </Foundation.Core.GeneralizableElement.specialization>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.17'/> <!-- {3D626FAE030D} -->
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.20'/> <!-- anIngredient{3D6274D90261} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10006'>
+              <Foundation.Core.ModelElement.name>id</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>myTomato</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+            <Foundation.Core.Attribute xmi.id = 'S.10007'>
+              <Foundation.Core.ModelElement.name>subjectIdentity</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>http://www.fed.gov/usda/doc/tomato.htm#gradeA</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.31'/> <!-- String -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.DataType xmi.id = 'G.32'>
+          <Foundation.Core.ModelElement.name>&lt;undefined&gt;</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Foundation.Core.DataType>
+        <Foundation.Core.Class xmi.id = 'S.10008'>
+          <Foundation.Core.ModelElement.name>EN::tomato</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.3'/> <!-- baseName -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.generalization>
+            <Foundation.Core.Generalization xmi.idref = 'G.33'/> <!-- {EN::tomato-&gt;tomato}{3D626E020242} -->
+          </Foundation.Core.GeneralizableElement.generalization>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.10'/> <!-- {3D626E2D007D} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10009'>
+          <Foundation.Core.ModelElement.name>FR::tomate</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.3'/> <!-- baseName -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.generalization>
+            <Foundation.Core.Generalization xmi.idref = 'G.34'/> <!-- {FR::tomate-&gt;tomato}{3D626EB80109} -->
+          </Foundation.Core.GeneralizableElement.generalization>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.13'/> <!-- {3D626ECC030E} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10010'>
+          <Foundation.Core.ModelElement.name>tomato.gif</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.4'/> <!-- resource -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.16'/> <!-- {3D626FAE02FD} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10011'>
+          <Foundation.Core.ModelElement.name>tomate confite farcie aux douze saveurs</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.requirement>
+            <Foundation.Core.Dependency xmi.idref = 'G.29'/> <!-- {tomate confite farcie aux douze saveurs?desert}{3D6274140222} -->
+          </Foundation.Core.ModelElement.requirement>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.21'/> <!-- aDish{3D6274D90262} -->
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.24'/> <!-- aDish{3D62799F009C} -->
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.28'/> <!-- dessert{3D627D5900CC} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10012'>
+              <Foundation.Core.ModelElement.name>id</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>myConfite</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10013'>
+          <Foundation.Core.ModelElement.name>desert</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.provision>
+            <Foundation.Core.Dependency xmi.idref = 'G.29'/> <!-- {tomate confite farcie aux douze saveurs?desert}{3D6274140222} -->
+          </Foundation.Core.ModelElement.provision>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10014'>
+          <Foundation.Core.ModelElement.name>ingredient</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10015'>
+              <Foundation.Core.ModelElement.name>id</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>anIngredient</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10016'>
+          <Foundation.Core.ModelElement.name>dish</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10017'>
+              <Foundation.Core.ModelElement.name>id</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>aDish</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10018'>
+          <Foundation.Core.ModelElement.name>ingredient_of</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10019'>
+          <Foundation.Core.ModelElement.name>carmel</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.23'/> <!-- anIngredient{3D62799F008C} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10020'>
+              <Foundation.Core.ModelElement.name>id</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>myCarmel</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10021'>
+          <Foundation.Core.ModelElement.name>menu</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10022'>
+              <Foundation.Core.ModelElement.name>id</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>menu</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10023'>
+          <Foundation.Core.ModelElement.name>entrees</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10024'>
+          <Foundation.Core.ModelElement.name>FoieGras</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.27'/> <!-- entrees{3D627D5900CB} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10025'>
+              <Foundation.Core.ModelElement.name>id</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>myFoieGras</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10026'>
+          <Foundation.Core.ModelElement.name>TMT</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.5'/> <!-- variant -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.generalization>
+            <Foundation.Core.Generalization xmi.idref = 'G.35'/> <!-- {TMT-&gt;tomato}{3D6C257D0119} -->
+          </Foundation.Core.GeneralizableElement.generalization>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Attribute xmi.id = 'S.10027'>
+              <Foundation.Core.ModelElement.name>param1</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>cell_phone</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.6'/> <!-- topic -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+            <Foundation.Core.Attribute xmi.id = 'S.10028'>
+              <Foundation.Core.ModelElement.name>resourceData</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+              <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+              <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.Attribute.initialValue>
+                 <Foundation.Data_Types.Expression>
+                  <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                  <Foundation.Data_Types.Expression.body>TMT</Foundation.Data_Types.Expression.body>
+                 </Foundation.Data_Types.Expression>
+              </Foundation.Core.Attribute.initialValue>
+              <Foundation.Core.StructuralFeature.type>
+                <Foundation.Core.DataType xmi.idref = 'G.32'/> <!-- &lt;undefined&gt; -->
+              </Foundation.Core.StructuralFeature.type>
+            </Foundation.Core.Attribute>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10029'>
+          <Foundation.Core.ModelElement.name>cell_phone</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- tomato -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+        </Foundation.Core.Class>
+        <Foundation.Core.Association xmi.id = 'G.7'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.8'/> <!-- scope -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Association.connection>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.9'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- EN -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.10'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10008'/> <!-- EN::tomato -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+          </Foundation.Core.Association.connection>
+        </Foundation.Core.Association>
+        <Foundation.Core.Association xmi.id = 'G.11'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.8'/> <!-- scope -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Association.connection>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.12'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10003'/> <!-- FR -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.13'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10009'/> <!-- FR::tomate -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+          </Foundation.Core.Association.connection>
+        </Foundation.Core.Association>
+        <Foundation.Core.Association xmi.id = 'G.14'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.15'/> <!-- occurance -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Association.connection>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.16'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10010'/> <!-- tomato.gif -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.17'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10005'/> <!-- tomato -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+          </Foundation.Core.Association.connection>
+        </Foundation.Core.Association>
+        <Foundation.Core.Association xmi.id = 'G.18'>
+          <Foundation.Core.ModelElement.name>tomato_confite_association</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.19'/> <!-- ingredient_of -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Association.connection>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.20'>
+              <Foundation.Core.ModelElement.name>anIngredient</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10005'/> <!-- tomato -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.21'>
+              <Foundation.Core.ModelElement.name>aDish</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- tomate confite farcie aux douze saveurs -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+          </Foundation.Core.Association.connection>
+        </Foundation.Core.Association>
+        <Foundation.Core.Association xmi.id = 'G.22'>
+          <Foundation.Core.ModelElement.name>caramels_confite</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.19'/> <!-- ingredient_of -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Association.connection>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.23'>
+              <Foundation.Core.ModelElement.name>anIngredient</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10019'/> <!-- carmel -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.24'>
+              <Foundation.Core.ModelElement.name>aDish</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- tomate confite farcie aux douze saveurs -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+          </Foundation.Core.Association.connection>
+        </Foundation.Core.Association>
+        <Foundation.Core.Association xmi.id = 'G.25'>
+          <Foundation.Core.ModelElement.name>entree_desert</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.26'/> <!-- menu -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Association.connection>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.27'>
+              <Foundation.Core.ModelElement.name>entrees</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10024'/> <!-- FoieGras -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.28'>
+              <Foundation.Core.ModelElement.name>dessert</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- tomate confite farcie aux douze saveurs -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+          </Foundation.Core.Association.connection>
+        </Foundation.Core.Association>
+        <Foundation.Core.Generalization xmi.id = 'G.33'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+          <Foundation.Core.Generalization.subtype>
+            <Foundation.Core.Class xmi.idref = 'S.10008'/> <!-- EN::tomato -->
+          </Foundation.Core.Generalization.subtype>
+          <Foundation.Core.Generalization.supertype>
+            <Foundation.Core.Class xmi.idref = 'S.10005'/> <!-- tomato -->
+          </Foundation.Core.Generalization.supertype>
+        </Foundation.Core.Generalization>
+        <Foundation.Core.Generalization xmi.id = 'G.34'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+          <Foundation.Core.Generalization.subtype>
+            <Foundation.Core.Class xmi.idref = 'S.10009'/> <!-- FR::tomate -->
+          </Foundation.Core.Generalization.subtype>
+          <Foundation.Core.Generalization.supertype>
+            <Foundation.Core.Class xmi.idref = 'S.10005'/> <!-- tomato -->
+          </Foundation.Core.Generalization.supertype>
+        </Foundation.Core.Generalization>
+        <Foundation.Core.Generalization xmi.id = 'G.35'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+          <Foundation.Core.Generalization.subtype>
+            <Foundation.Core.Class xmi.idref = 'S.10026'/> <!-- TMT -->
+          </Foundation.Core.Generalization.subtype>
+          <Foundation.Core.Generalization.supertype>
+            <Foundation.Core.Class xmi.idref = 'S.10005'/> <!-- tomato -->
+          </Foundation.Core.Generalization.supertype>
+        </Foundation.Core.Generalization>
+        <Foundation.Core.Dependency xmi.id = 'G.29'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Dependency.description></Foundation.Core.Dependency.description>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.30'/> <!-- instanceOf -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Dependency.client>
+            <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- tomate confite farcie aux douze saveurs -->
+          </Foundation.Core.Dependency.client>
+          <Foundation.Core.Dependency.supplier>
+            <Foundation.Core.Class xmi.idref = 'S.10013'/> <!-- desert -->
+          </Foundation.Core.Dependency.supplier>
+        </Foundation.Core.Dependency>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.2'>
+          <Foundation.Core.ModelElement.name>topic</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- EN -->
+            <Foundation.Core.Class xmi.idref = 'S.10003'/> <!-- FR -->
+            <Foundation.Core.Class xmi.idref = 'S.10005'/> <!-- tomato -->
+            <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- tomate confite farcie aux douze saveurs -->
+            <Foundation.Core.Class xmi.idref = 'S.10013'/> <!-- desert -->
+            <Foundation.Core.Class xmi.idref = 'S.10014'/> <!-- ingredient -->
+            <Foundation.Core.Class xmi.idref = 'S.10016'/> <!-- dish -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.3'>
+          <Foundation.Core.ModelElement.name>baseName</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10008'/> <!-- EN::tomato -->
+            <Foundation.Core.Class xmi.idref = 'S.10009'/> <!-- FR::tomate -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.4'>
+          <Foundation.Core.ModelElement.name>resource</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10010'/> <!-- tomato.gif -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.5'>
+          <Foundation.Core.ModelElement.name>variant</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10026'/> <!-- TMT -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.6'>
+          <Foundation.Core.ModelElement.name>topic</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Attribute</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Attribute xmi.idref = 'S.10027'/> <!-- param1 -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.8'>
+          <Foundation.Core.ModelElement.name>scope</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Association</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Association xmi.idref = 'G.7'/> <!-- {EN-EN::tomato}{3D626E2C00EA} -->
+            <Foundation.Core.Association xmi.idref = 'G.11'/> <!-- {FR-FR::tomate}{3D626ECC0000} -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.15'>
+          <Foundation.Core.ModelElement.name>occurance</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Association</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Association xmi.idref = 'G.14'/> <!-- {tomato.gif-tomato}{3D626FAE001F} -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.19'>
+          <Foundation.Core.ModelElement.name>ingredient_of</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Association</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Association xmi.idref = 'G.18'/> <!-- tomato_confite_association{3D6274D802DE} -->
+            <Foundation.Core.Association xmi.idref = 'G.22'/> <!-- caramels_confite{3D62799E01B5} -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.26'>
+          <Foundation.Core.ModelElement.name>menu</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Association</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Association xmi.idref = 'G.25'/> <!-- entree_desert{3D627D5702FD} -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.30'>
+          <Foundation.Core.ModelElement.name>instanceOf</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Dependency</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Dependency xmi.idref = 'G.29'/> <!-- {tomate confite farcie aux douze saveurs?desert}{3D6274140222} -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+      </Foundation.Core.Namespace.ownedElement>
+    </Model_Management.Model>  <!-- End Model G.1 -->
+  </XMI.content>
+  <XMI.extensions xmi.extender = 'Unisys.IntegratePlus.2'>
+    <UISModelElement xmi.id = 'G.36'>
+      <uisOwnedDiagram>
+        <UISDiagram xmi.id = 'S.10032'>
+          <uisDiagramName>Main</uisDiagramName>
+          <uisToolName>Rational Rose 98</uisToolName>
+          <uisDiagramStyle>ClassDiagram</uisDiagramStyle>
+          <uisDiagramPresentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.37'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     384, 1072, 210, 184,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=1,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- EN -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.38'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     416, 688, 314, 182,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 255,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=0,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10008'/> <!-- EN::tomato -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.39'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     412, 879, 54, 255,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.7'/> <!-- {EN-EN::tomato}{3D626E2C00EA} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.40'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     412, 929, 54, 155,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.9'/> <!-- {3D626E2D006D} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.41'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     412, 829, 54, 154,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.10'/> <!-- {3D626E2D007D} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.42'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2096, 1072, 210, 184,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=1,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10003'/> <!-- FR -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.43'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2080, 720, 314, 182,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 255,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=0,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10009'/> <!-- FR::tomate -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.44'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2088, 895, 54, 223,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.11'/> <!-- {FR-FR::tomate}{3D626ECC0000} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.45'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2088, 937, 54, 139,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.12'/> <!-- {3D626ECC030D} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.46'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2088, 853, 54, 138,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.13'/> <!-- {3D626ECC030E} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.47'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     720, 1648, 208, 182,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10013'/> <!-- desert -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.48'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     3072, 2992, 370, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10014'/> <!-- ingredient -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.49'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     3024, 3264, 254, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10016'/> <!-- dish -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.50'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     3328, 3392, 280, 126,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10018'/> <!-- ingredient_of -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.51'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     3408, 2976, 252, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10021'/> <!-- menu -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.52'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     3264, 3216, 190, 126,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10023'/> <!-- entrees -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.53'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     304, 208, 276, 182,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 255,FillColor.Green= 255,FillColor.Red= 128,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10010'/> <!-- tomato.gif -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.54'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1376, 208, 1402, 292,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10005'/> <!-- tomato -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.55'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2061, 542, 54, 228,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.34'/> <!-- {FR::tomate-&gt;tomato}{3D626EB80109} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.56'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     558, 208, 286, 54,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.14'/> <!-- {tomato.gif-tomato}{3D626FAE001F} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.57'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     500, 208, 170, 54,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.16'/> <!-- {3D626FAE02FD} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.58'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     616, 208, 170, 54,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.17'/> <!-- {3D626FAE030D} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.59'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     412, 526, 54, 196,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.33'/> <!-- {EN::tomato-&gt;tomato}{3D626E020242} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.60'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1136, 1664, 336, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10019'/> <!-- carmel -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.61'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1600, 1664, 374, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10024'/> <!-- FoieGras -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.62'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1120, 1024, 818, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- tomate confite farcie aux douze saveurs -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.63'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1038, 628, 54, 603,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.18'/> <!-- tomato_confite_association{3D6274D802DE} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.64'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1038, 491, 54, 328,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.20'/> <!-- anIngredient{3D6274D90261} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.65'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1038, 765, 54, 329,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.21'/> <!-- aDish{3D6274D90262} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.66'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1142, 1358, 54, 480,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.22'/> <!-- caramels_confite{3D62799E01B5} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.67'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1142, 1464, 54, 267,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.23'/> <!-- anIngredient{3D62799F008C} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.68'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1142, 1251, 54, 267,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.24'/> <!-- aDish{3D62799F009C} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.69'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1485, 1357, 54, 479,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.25'/> <!-- entree_desert{3D627D5702FD} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.70'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1485, 1463, 54, 267,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.27'/> <!-- entrees{3D627D5900CB} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.71'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1485, 1251, 54, 266,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.28'/> <!-- dessert{3D627D5900CC} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.72'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1552, 704, 648, 292,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 235,FillColor.Green= 235,FillColor.Red= 235,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10026'/> <!-- TMT -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.73'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1554, 506, 54, 157,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.35'/> <!-- {TMT-&gt;tomato}{3D6C257D0119} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.74'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     3520, 3200, 240, 126,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10029'/> <!-- cell_phone -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.75'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     798, 1351, 54, 466,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    ClassDependency
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Dependency xmi.idref = 'G.29'/> <!-- {tomate confite farcie aux douze saveurs?desert}{3D6274140222} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+          </uisDiagramPresentation>
+        </UISDiagram>
+        <UISDiagram xmi.id = 'S.10033'>
+          <uisDiagramName>Main</uisDiagramName>
+          <uisToolName>Rational Rose 98</uisToolName>
+          <uisDiagramStyle>ModuleDiagram</uisDiagramStyle>
+        </UISDiagram>
+      </uisOwnedDiagram>
+    </UISModelElement>
+  </XMI.extensions>
+</XMI>

@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniqueShapes xmlns:vxd="urn:schemas-microsoft-com:office:visio">
+   <Shape xmlns="urn:schemas-microsoft-com:office:visio" ID="1" NameU="3-D box" Type="Group" Master="0">
+
+      <XForm>
+
+         <PinX>2.5</PinX>
+
+         <PinY>7.75</PinY>
+
+         <Width Unit="IN" F="Inh">1.5</Width>
+
+         <Height Unit="IN" F="Inh">1</Height>
+
+         <LocPinX Unit="IN" F="Inh">0.75</LocPinX>
+
+         <LocPinY Unit="IN" F="Inh">0.5</LocPinY>
+
+         <Angle Unit="DEG" F="Inh">0</Angle>
+
+         <FlipX F="Inh">1</FlipX>
+
+         <FlipY F="Inh">0</FlipY>
+
+         <ResizeMode F="Inh">0</ResizeMode>
+
+      </XForm>
+
+      <Event>
+
+         <TheData F="No Formula">0</TheData>
+
+         <TheText F="No Formula">0</TheText>
+
+         <EventDblClick F="Inh">0</EventDblClick>
+
+         <EventXFMod F="No Formula">0</EventXFMod>
+
+         <EventDrop F="No Formula">0</EventDrop>
+
+      </Event>
+
+      <User NameU="ScaleFactor" ID="1">
+
+         <Value F="Inh">1</Value>
+
+         <Prompt F="No Formula"/>
+
+      </User>
+
+      <Control IX="0">
+
+         <X Unit="IN" F="Inh">-0.125</X>
+
+         <Y Unit="IN" F="Inh">-0.125</Y>
+
+         <XDyn Unit="IN" F="Inh">0</XDyn>
+
+         <YDyn Unit="IN" F="Inh">0</YDyn>
+
+         <XCon F="Inh">2</XCon>
+
+         <YCon F="Inh">2</YCon>
+
+         <CanGlue F="Inh">0</CanGlue>
+
+         <Prompt F="Inh">Adjust Depth and Orientation</Prompt>
+
+      </Control>
+
+      <Text>Linked to master</Text>
+
+      <Shapes>
+
+         <Shape ID="2" Type="Shape" MasterShape="6">
+
+            <XForm>
+
+               <PinX Unit="IN" F="Inh">0.75</PinX>
+
+               <PinY Unit="IN" F="Inh">-0.0625</PinY>
+
+               <Width Unit="IN" F="Inh">1.5</Width>
+
+               <Height Unit="IN" F="Inh">0.125</Height>
+
+               <LocPinX Unit="IN" F="Inh">0.75</LocPinX>
+
+               <LocPinY Unit="IN" F="Inh">0.0625</LocPinY>
+
+               <Angle Unit="DEG" F="Inh">0</Angle>
+
+               <FlipX F="Inh">0</FlipX>
+
+               <FlipY F="Inh">0</FlipY>
+
+               <ResizeMode F="Inh">0</ResizeMode>
+
+            </XForm>
+
+         </Shape>
+
+         <Shape ID="3" Type="Shape" MasterShape="7">
+
+            <XForm>
+
+               <PinX Unit="IN" F="Inh">-0.0625</PinX>
+
+               <PinY Unit="IN" F="Inh">0.5</PinY>
+
+               <Width Unit="IN" F="Inh">0.125</Width>
+
+               <Height Unit="IN" F="Inh">1</Height>
+
+               <LocPinX Unit="IN" F="Inh">0.0625</LocPinX>
+
+               <LocPinY Unit="IN" F="Inh">0.5</LocPinY>
+
+               <Angle Unit="DEG" F="Inh">0</Angle>
+
+               <FlipX F="Inh">0</FlipX>
+
+               <FlipY F="Inh">0</FlipY>
+
+               <ResizeMode F="Inh">0</ResizeMode>
+
+            </XForm>
+
+         </Shape>
+
+         <Shape ID="4" Type="Shape" MasterShape="5">
+
+            <XForm>
+
+               <PinX Unit="IN" F="Inh">0.75</PinX>
+
+               <PinY Unit="IN" F="Inh">0.5</PinY>
+
+               <Width Unit="IN" F="Inh">1.5</Width>
+
+               <Height Unit="IN" F="Inh">1</Height>
+
+               <LocPinX Unit="IN" F="Inh">0.75</LocPinX>
+
+               <LocPinY Unit="IN" F="Inh">0.5</LocPinY>
+
+               <Angle Unit="DEG" F="Inh">0</Angle>
+
+               <FlipX F="Inh">0</FlipX>
+
+               <FlipY F="Inh">0</FlipY>
+
+               <ResizeMode F="Inh">0</ResizeMode>
+
+            </XForm>
+
+         </Shape>
+
+      </Shapes>
+
+   </Shape>
+   <Shape xmlns="urn:schemas-microsoft-com:office:visio" ID="7" Type="Shape" LineStyle="27" FillStyle="27" TextStyle="27">
+
+      <XForm>
+
+         <PinX>3.375</PinX>
+
+         <PinY>3.25</PinY>
+
+         <Width Unit="IN" F="Guard(Abs(Scratch.X1))">0.125</Width>
+
+         <Height>1</Height>
+
+         <LocPinX Unit="IN" F="Width*0.5">0.0625</LocPinX>
+
+         <LocPinY F="Height*0.5">0.5</LocPinY>
+
+         <Angle Unit="DEG">0</Angle>
+
+         <FlipX>1</FlipX>
+
+         <FlipY F="Guard(0)">0</FlipY>
+
+         <ResizeMode>0</ResizeMode>
+
+      </XForm>
+
+      <Fill>
+
+         <FillForegnd F="Inh">14</FillForegnd>
+
+         <FillBkgnd F="Inh">1</FillBkgnd>
+
+         <FillPattern F="Inh">1</FillPattern>
+
+         <ShdwForegnd F="Inh">0</ShdwForegnd>
+
+         <ShdwBkgnd F="Inh">1</ShdwBkgnd>
+
+         <ShdwPattern F="Guard(0)">0</ShdwPattern>
+
+         <FillForegndTrans F="Inh">0</FillForegndTrans>
+
+         <FillBkgndTrans F="Inh">0</FillBkgndTrans>
+
+         <ShdwForegndTrans F="Inh">0</ShdwForegndTrans>
+
+         <ShdwBkgndTrans F="Inh">0</ShdwBkgndTrans>
+
+      </Fill>
+
+      <Protection>
+
+         <LockWidth>0</LockWidth>
+
+         <LockHeight>0</LockHeight>
+
+         <LockMoveX>0</LockMoveX>
+
+         <LockMoveY>0</LockMoveY>
+
+         <LockAspect F="Inh">0</LockAspect>
+
+         <LockDelete>0</LockDelete>
+
+         <LockBegin F="Inh">0</LockBegin>
+
+         <LockEnd F="Inh">0</LockEnd>
+
+         <LockRotate>0</LockRotate>
+
+         <LockCrop F="Inh">0</LockCrop>
+
+         <LockVtxEdit F="Inh">0</LockVtxEdit>
+
+         <LockTextEdit>0</LockTextEdit>
+
+         <LockFormat F="Inh">0</LockFormat>
+
+         <LockGroup F="Inh">0</LockGroup>
+
+         <LockCalcWH F="Inh">0</LockCalcWH>
+
+         <LockSelect F="Inh">0</LockSelect>
+
+      </Protection>
+
+      <Help>
+
+         <HelpTopic></HelpTopic>
+
+         <Copyright>Copyright (c) 2001 Microsoft Corporation.  All rights reserved.</Copyright>
+
+      </Help>
+
+      <Group>
+
+         <SelectMode F="Inh">1</SelectMode>
+
+         <DisplayMode F="Inh">2</DisplayMode>
+
+         <IsDropTarget F="Inh">0</IsDropTarget>
+
+         <IsSnapTarget F="Inh">1</IsSnapTarget>
+
+         <IsTextEditTarget F="Inh">1</IsTextEditTarget>
+
+         <DontMoveChildren>1</DontMoveChildren>
+
+      </Group>
+
+      <Scratch IX="0">
+
+         <X Unit="IN">-0.125</X>
+
+         <Y Unit="IN">-0.125</Y>
+
+         <A F="No Formula">0</A>
+
+         <B F="No Formula">0</B>
+
+         <C F="No Formula">0</C>
+
+         <D F="No Formula">0</D>
+
+      </Scratch>
+
+      <Geom IX="0">
+
+         <NoFill>0</NoFill>
+
+         <NoLine>0</NoLine>
+
+         <NoShow>0</NoShow>
+
+         <NoSnap F="No Formula">0</NoSnap>
+
+         <MoveTo IX="1">
+
+            <X Unit="IN">0</X>
+
+            <Y Unit="IN" F="Scratch.Y1">-0.125</Y>
+
+         </MoveTo>
+
+         <LineTo IX="2">
+
+            <X Unit="IN" F="Width">0.125</X>
+
+            <Y Unit="IN">0</Y>
+
+         </LineTo>
+
+         <LineTo IX="3">
+
+            <X Unit="IN" F="Geometry1.X2">0.125</X>
+
+            <Y F="Height">1</Y>
+
+         </LineTo>
+
+         <LineTo IX="4">
+
+            <X Unit="IN" F="Geometry1.X1">0</X>
+
+            <Y Unit="IN" F="Height+Scratch.Y1">0.875</Y>
+
+         </LineTo>
+
+         <LineTo IX="5">
+
+            <X Unit="IN" F="Geometry1.X1">0</X>
+
+            <Y Unit="IN" F="Geometry1.Y1">-0.125</Y>
+
+         </LineTo>
+
+      </Geom>
+
+      <Text/>
+
+   </Shape>
+   <Shape xmlns="urn:schemas-microsoft-com:office:visio" ID="8" Type="Shape" LineStyle="26" FillStyle="26" TextStyle="26">
+
+      <XForm>
+
+         <PinX>2.5</PinX>
+
+         <PinY>4.75</PinY>
+
+         <Width>1.5</Width>
+
+         <Height>1</Height>
+
+         <LocPinX F="Width*0.5">0.75</LocPinX>
+
+         <LocPinY F="Height*0.5">0.5</LocPinY>
+
+         <Angle Unit="DEG">0</Angle>
+
+         <FlipX F="Guard(0)">0</FlipX>
+
+         <FlipY F="Guard(0)">0</FlipY>
+
+         <ResizeMode>0</ResizeMode>
+
+      </XForm>
+
+      <Fill>
+
+         <FillForegnd F="Inh">1</FillForegnd>
+
+         <FillBkgnd F="Inh">0</FillBkgnd>
+
+         <FillPattern F="Inh">1</FillPattern>
+
+         <ShdwForegnd F="Inh">0</ShdwForegnd>
+
+         <ShdwBkgnd F="Inh">1</ShdwBkgnd>
+
+         <ShdwPattern F="Guard(0)">0</ShdwPattern>
+
+         <FillForegndTrans F="Inh">0</FillForegndTrans>
+
+         <FillBkgndTrans F="Inh">0</FillBkgndTrans>
+
+         <ShdwForegndTrans F="Inh">0</ShdwForegndTrans>
+
+         <ShdwBkgndTrans F="Inh">0</ShdwBkgndTrans>
+
+      </Fill>
+
+      <Help>
+
+         <HelpTopic></HelpTopic>
+
+         <Copyright>Copyright (c) 2001 Microsoft Corporation.  All rights reserved.</Copyright>
+
+      </Help>
+
+      <Protection>
+
+         <LockWidth>0</LockWidth>
+
+         <LockHeight>0</LockHeight>
+
+         <LockMoveX>0</LockMoveX>
+
+         <LockMoveY>0</LockMoveY>
+
+         <LockAspect F="Inh">0</LockAspect>
+
+         <LockDelete>0</LockDelete>
+
+         <LockBegin F="Inh">0</LockBegin>
+
+         <LockEnd F="Inh">0</LockEnd>
+
+         <LockRotate>0</LockRotate>
+
+         <LockCrop F="Inh">0</LockCrop>
+
+         <LockVtxEdit F="Inh">0</LockVtxEdit>
+
+         <LockTextEdit F="Inh">0</LockTextEdit>
+
+         <LockFormat F="Inh">0</LockFormat>
+
+         <LockGroup F="Inh">0</LockGroup>
+
+         <LockCalcWH F="Inh">0</LockCalcWH>
+
+         <LockSelect F="Inh">0</LockSelect>
+
+      </Protection>
+
+      <Group>
+
+         <SelectMode F="Inh">1</SelectMode>
+
+         <DisplayMode F="Inh">2</DisplayMode>
+
+         <IsDropTarget F="Inh">0</IsDropTarget>
+
+         <IsSnapTarget F="Inh">1</IsSnapTarget>
+
+         <IsTextEditTarget F="Inh">1</IsTextEditTarget>
+
+         <DontMoveChildren>1</DontMoveChildren>
+
+      </Group>
+
+      <Geom IX="0">
+
+         <NoFill>0</NoFill>
+
+         <NoLine>0</NoLine>
+
+         <NoShow>0</NoShow>
+
+         <NoSnap>0</NoSnap>
+
+         <MoveTo IX="1">
+
+            <X F="Width*0">0</X>
+
+            <Y F="Height*0">0</Y>
+
+         </MoveTo>
+
+         <LineTo IX="2">
+
+            <X F="Width*1">1.5</X>
+
+            <Y F="Height*0">0</Y>
+
+         </LineTo>
+
+         <LineTo IX="3">
+
+            <X F="Width*1">1.5</X>
+
+            <Y F="Height*1">1</Y>
+
+         </LineTo>
+
+         <LineTo IX="4">
+
+            <X F="Width*0">0</X>
+
+            <Y F="Height*1">1</Y>
+
+         </LineTo>
+
+         <LineTo IX="5">
+
+            <X F="Geometry1.X1">0</X>
+
+            <Y F="Geometry1.Y1">0</Y>
+
+         </LineTo>
+
+      </Geom>
+
+      <Text>Ungrouped</Text>
+
+   </Shape>
+   <Shape xmlns="urn:schemas-microsoft-com:office:visio" ID="9" NameU="Triangle" Type="Shape" Master="2">
+
+      <XForm>
+
+         <PinX>6.125</PinX>
+
+         <PinY>4.5</PinY>
+
+         <Width Unit="IN" F="Inh">1.5</Width>
+
+         <Height Unit="IN" F="Inh">1.5</Height>
+
+         <LocPinX Unit="IN" F="Inh">0.75</LocPinX>
+
+         <LocPinY Unit="IN" F="Inh">0.5</LocPinY>
+
+         <Angle Unit="DEG" F="Inh">0</Angle>
+
+         <FlipX F="Inh">0</FlipX>
+
+         <FlipY F="Inh">0</FlipY>
+
+         <ResizeMode F="Inh">0</ResizeMode>
+
+      </XForm>
+
+      <Event>
+
+         <TheData F="No Formula">0</TheData>
+
+         <TheText F="No Formula">0</TheText>
+
+         <EventDblClick F="Inh">0</EventDblClick>
+
+         <EventXFMod F="No Formula">0</EventXFMod>
+
+         <EventDrop F="No Formula">0</EventDrop>
+
+      </Event>
+
+      <Text>Triangle</Text>
+
+   </Shape>
+</UniqueShapes>

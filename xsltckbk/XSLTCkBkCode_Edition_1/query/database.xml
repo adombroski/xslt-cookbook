@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by Salvatore R Mangano (Man Machine Interfaces) -->
+<database>
+  <suppliers>
+    <supplier id="S1" name="Smith" status="20" city="London"/>
+    <supplier id="S2" name="Jones" status="10" city="Paris"/>
+    <supplier id="S3" name="Blake" status="30" city="Paris"/>
+    <supplier id="S4" name="Clark" status="20" city="London"/>
+    <supplier id="S5" name="Adams" status="30" city="Athens"/>
+  </suppliers>
+  <parts>
+    <part id="P1" name="Nut" color="Red" weight="12" city="London"/>
+    <part id="P2" name="Bult" color="Green" weight="17" city="Paris"/>
+    <part id="P3" name="Screw" color="Blue" weight="17" city="Rome"/>
+    <part id="P4" name="Screw" color="Red" weight="14" city="London"/>
+    <part id="P5" name="Cam" color="Blue" weight="12" city="Paris"/>
+    <part id="P6" name="Cog" color="Red" weight="19" city="London"/>
+  </parts>
+  <inventory>
+    <invrec sid="S1" pid="P1" qty="300"/>
+    <invrec sid="S1" pid="P2" qty="200"/>
+    <invrec sid="S1" pid="P3" qty="400"/>
+    <invrec sid="S1" pid="P4" qty="200"/>
+    <invrec sid="S1" pid="P5" qty="100"/>
+    <invrec sid="S1" pid="P6" qty="100"/>
+    <invrec sid="S2" pid="P1" qty="300"/>
+    <invrec sid="S2" pid="P2" qty="400"/>
+    <invrec sid="S3" pid="P2" qty="200"/>
+    <invrec sid="S4" pid="P2" qty="200"/>
+    <invrec sid="S4" pid="P4" qty="300"/>
+    <invrec sid="S4" pid="P5" qty="400"/>
+  </inventory>
+</database>

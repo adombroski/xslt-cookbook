@@ -1,0 +1,1573 @@
+Chapter 14
+Extending and Embedding XSLT
+Saxon Extension Functions
+XSLT 1.0 (Saxon version 6.5.4)
+<xsl:stylesheet 
+ version="1.1" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:Math="java:java.lang.Math" 
+ exclude-result-prefixes="Math">
+  
+ <xsl:script implements-prefix="Math"
+                   xmlns:Math="java:java.lang.Math"
+                   language="java"
+                   src="java:java.lang.Math"/>
+<xsl:stylesheet 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+ <xsl:variable name="PI" select="4 * Math:atan(1.0)" 
+               xmlns:Math="java:java.lang.Math"/>
+<!-- ... -->
+</xsl:stylesheet>
+XSLT 2.0 (Saxon version 8.x)
+<xsl:stylesheet version="2.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+ xmlns:math="java:java.lang.Math" 
+ exclude-result-prefixes="math">
+
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  
+  <xsl:template match="/">
+    <pi><xsl:value-of select="4 * math:atan(1.0)"/></pi>
+  </xsl:template>
+  
+</xsl:stylesheet>
+Saxon Extension Elements
+XSLT 1.0 (Saxon version 6.5.4)
+<xsl:stylesheet 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:acmeX="http://www.acmeX.com/com.acemX.SuperExtensionFactory"
+extension-element-prefixes="acmeX">
+   
+<!-- ... -->
+
+</xsl:stylesheet>
+XSLT 2.0 (Saxon version 8.x)
+Xalan Java 2 Extension Functions
+XSLT 1.0 (Xalan-Java 2.6.2)
+Java Extension Function Using the Class 
+Format Namespace
+<xsl:stylesheet 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:Math="xalan://java.lang.Math">
+   
+<xalan:component prefix="Math" functions="sin cos tan atan">
+ <xalan:script lang="javaclass" src="xalan://java.lang.Math"/>
+</xalan:component>
+   
+<xsl:variable name="pi" select="4.0 *"/>
+
+<!-- ... -->
+
+</xsl:stylesheet>
+
+Java Extension Function Using the Package 
+Format Namespace
+<xsl:stylesheet 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:myJava="xalan://java.lang">
+   
+<xalan:component prefix="Math" functions="sin cos tan atan">
+ <xalan:script lang="javaclass" src="java.lang"/>
+</xalan:component>
+   
+<xsl:variable name="pi" select="4.0 * myJava:Math.atan(1.0)"/>
+   
+<!-- ... -->
+   
+</xsl:stylesheet>
+Java Extension Function Using the Java 
+Format Namespace
+<xsl:stylesheet 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:java="http://xml.apache.org/xslt/java">
+   
+<xalan:component prefix="Math" functions="sin cos tan atan">
+ <xalan:script lang="javaclass" src="http://xml.apache.org/xslt/java"/>
+</xalan:component>
+   
+<xsl:variable name=__QUOT?QUOT__ select="4.0 * java:java.lang.Math:atan(1.0)"/>
+   
+<!-- ... -->
+   
+</xsl:stylesheet>
+     
+Scripting Extension Function Using Inline 
+Script Code
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:trig="http://www.acmeX.com/extend/trig">
+  
+<xalan:component prefix="trig" functions="sin cons tan atan">
+  <xalan:script lang="javascript">
+    function sin (arg){ return Math.sin(arg);} 
+    function cos (arg){ return Math.cos(arg);} 
+    function tan (arg){ return Math.tan(arg);} 
+    function atan (arg){ return Math.atan(arg);} 
+  </xalan:script>
+</xalan:component>
+   
+<xsl:variable name="pi" select="4.0 * trig:atan(1.0)"/>
+   
+<!-- ... -->
+   
+</xsl:stylesheet>
+Xalan Java 2 Extension Elements
+Java Extension Element
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:MyExt="xalan://com.AcmeX.MyExtensionElement">
+extension-element-prefixes="MyExt">
+  
+<xalan:component prefix="MyExt" elements="superExtension">
+  <xalan:script lang="javasclass" 
+                src=" xalan:// com.AcmeX.MyExtensionElement"/>
+</xalan:component>
+   
+<xsl:template match="*">
+     <myExt:superExtension attr1="val1" attr2="val2">
+        <!-- ... -->
+     <myExt:superExtension>
+</xsl:template>
+   
+</xsl:stylesheet>
+public class com.AcmeX.MyExtensionElement
+{
+   
+public SomeType superExtension(
+          org.apache.xalan.extensions.XSLProcessorContext ctx,
+          org.apache.xalan.templates.ElemExtensionCall extensionElement)
+ {
+     //...
+ }
+   
+}
+Scripting Extension Elements
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:MyExt="xalan://com.AcmeX.MyExtensionElement">
+extension-element-prefixes="MyExt">
+  
+<xalan:component prefix="rep" elements="repeat">
+  <xalan:script lang="javascript">
+    function superExtension(ctx, elem)
+    {
+      /* ... */
+      return null ;
+    }
+  </xalan:script>
+</xalan:component>
+   
+<xsl:template match="*">
+     <myExt:superExtension attr1="val1" attr2="val2">
+        <!-- ... -->
+     <myExt:superExtension>
+</xsl:template>
+</xsl:stylesheet>
+XSLT 2.0 
+MSXML Extension Functions
+XSLT 1.0 
+<xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+  xmlns:ms="urn:schemas-microsoft-com:xslt" 
+  xmlns:myExt="urn:AcmeX.com:xslt">
+   
+  <ms:script language="JScript" implements-prefix="myExt">
+    <![CDATA[
+    function superExtension(ops) {
+         /* ... */
+       return result;
+    }
+    ]]>
+  </ms:script>
+   
+</xsl:stylesheet>
+1) Using Saxon's and Xalan's Native 
+Extensions
+XSLT 1.0
+You want to output to more than one destination
+<saxon:output href="toc.html">
+  <html>
+    <head><title>Table of Contents</title></head>
+    <body>
+      <xsl:apply-templates mode="toc" select="*"/>
+    </body>
+  </html>
+</saxon:output>
+<xalan:write file="toc.html">
+  <html>
+    <head><title>Table of Contents</title></head>
+    <body>
+      <xsl:apply-templates mode="toc" select="*"/>
+    </body>
+  </html>
+</xalan:write>
+<xsl:template match="doc">
+<xalan:open file="regular.xml"/>
+     <xsl:apply-templates select="*"/>
+<xalan:close file="regular.xml"/>
+<xsl:template/>
+   
+<xsl:template match="regular">
+  <xalan:write file="regular.xml">
+     <xsl:copy-of select="."/>
+  </xalan:write/>
+</xsl:template>
+   
+<xsl:template match="*">
+  <xsl:variable name="file" select="concat(local-name(  ),'.xml')"/>
+  <xalan:write select="$file">
+     <xsl:copy-of select="."/>
+  </xalan:write/>
+</xsl:template>
+ <xsl:result-document format="html" href="toc.html">
+  <html>
+    <head><title>Table of Contents</title></head>
+    <body>
+      <xsl:apply-templates mode="toc" select="*"/>
+    </body>
+  </html>
+</xsl:result-document>
+You want to split a complex transformation into a series of transformations in a 
+pipeline
+<xsl:stylesheet version="1.0"
+        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:pipe="xalan://PipeDocument"
+        extension-element-prefixes="pipe">
+ 
+ <xsl:param name="source"/>
+ <xsl:param name="target"/>
+ <!-- A list of elements to preserve. All others are stripped. -->
+ <xsl:param name="preserve-elems"/>
+ 
+ <pipe:pipeDocument source="{$source}" target="{$target}">
+   
+   <stylesheet href="strip.xslt">
+     <param name="preserve-elems" value="{$preserve-elems}"/>
+   </stylesheet>
+   
+   <stylesheet href="contents.xslt"/>
+   
+ </pipe:pipeDocument>
+ 
+</xsl:stylesheet>
+You want to work with dates and times
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+xmlns:date="http://exslt.org/dates-and-times">
+   
+<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:template match="/">
+  <html>
+    <head><title>My Dull Home Page</title></head>
+    <body>
+      <h1>My Dull Homepage</h1>
+      <div>It's <xsl:value-of select="date:time()"/> on <xsl:value-of 
+      select="date:date(  )"/> and this page is as dull as it was yesterday.</div>
+    </body>
+  </html>
+   
+</xsl:template>
+     
+</xsl:stylesheet>
+You need a more efficient implementation of set operations
+
+<xsl:varaible name="firstNames" select="set:destinct(person/firstname)"/>
+<xsl:apply-templates 
+        select="set:leading(following-sibling::xslx:else | 
+        following-sibling::xslx:elsif, following-sibling::xslx:if)"/>
+You want extended information about a node in the source tree
+systemId(  )
+systemId(node-set)
+Returns the system ID for the current node and the first node in the node set, 
+respectively. 
+lineNumber(  )
+lineNumber(node-set) 
+Returns the line number in the source document for the current node and the first 
+node in the node set, respectively. This function returns -1 if the line number is 
+unknown (for example, when the source is a DOM Document). 
+columnNumber(  )
+columnNumber(node-set) 
+Returns the column number in the source document for the current node and the first 
+node in the node set, respectively. This function returns -1 if the column number is 
+unknown (for example, when the source is a DOM Document): 
+<xsl:stylesheet version="1.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+ xmlns:xalan="http://xml.apache.org/xslt"
+ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
+   
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+     
+  <xsl:template match="foo">
+    <xsl:comment>Matched a foo on line <xsl:value-of 
+    select="info:lineNumber(  )"/> and column <xsl:value-of 
+    select="info:columnNumber(  )"/>.</xsl:comment>
+    <!-- ... -->
+  </xsl:template>     
+     
+</xsl:stylesheet>
+     
+You want to interact with a relational database
+<sql:connect driver="jdbc-driver" database="db name" 
+user="user name"password="user password"/>
+Creates a database connection. Each attribute can be an attribute value template. The 
+driver attribute names the JDBC driver class, and the database must be a name 
+that JDBC can associate with an actual database. 
+<sql:query table="the table" column="column names" 
+where="where clause" row-tag="row element name" column-
+tag="column element name" disable-output-escaping="yes or 
+no"/>
+Performs a query and writes the results to the output tree using elements to represent 
+the rows and columns. The names of these elements are specified by row-tag and 
+col-tag, respectively. The column attribute can contain a list of columns or use * 
+for all. 
+<sql:insert table="table name"> 
+Performs an SQL INSERT. The child elements (sql:column) specify the data to 
+be added to the table. 
+<sql:column name="col name" select="xpath expr"/>
+Used as a child of sql:insert. The value can be specified by the select 
+attribute or by the evaluation of the sql:column's child elements. However, in 
+both cases only the string value can be used. Hence, there is no way to deal with 
+other standard SQL data types. 
+sql:new(driver, db, user, password)
+Establishes a connection.
+sql:new(nodelist)
+Sets up a connection using information embedded as XML in the input document or 
+stylesheet. For example: 
+<DBINFO>
+  <dbdriver>org.enhydra.instantdb.jdbc.idbDriver</dbdriver>
+  <dburl>jdbc:idb:../../instantdb/sample.prp</dburl>
+  <user>jbloe</user>
+  <password>geron07moe</password>
+</DBINFO>
+   
+<xsl:param name="cinfo" select="//DBINFO"/>
+<xsl:variable name="db" select="sql:new($cinfo)"/>
+sql:query(xconObj, sql-query)
+Queries the database. The xconObj is returned by new( ). The function returns a 
+streamable result set in the form of a row-set node. You can work your way through 
+the row set one row at a time. The same row element is used repeatedly, so you can 
+begin transforming the row set before the entire result set is returned. 
+sql:pquery(xconObj,sql-query-with-params)
+sql:addParameter(xconObj, paramValue)
+sql:addParameterFromElement(xconObj,element) 
+sql:addParameterFromElement(xconObj,node-list)clearParameters(xconObj)
+Used together to implement parameterized queries. Parameters take the form of ? 
+characters embedded in the query. The various addParameter( ) functions set 
+these parameters with actual values before the query is executed. Use 
+clearParameters( ) to make the connection object forget about prior values. 
+sql:close(xconObj)
+Closes the connection to the database.
+You want to dynamically evaluate an XPath expression created at runtime
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:saxon="http://icl.com/saxon" 
+ xmlns:paths="http://www.ora.com/XSLTCookbook/NS/paths" 
+ exclude-result-prefixes="paths">
+   
+<xsl:output method="html"/>
+   
+<!-- This parameter is used to specify a document con taining a table that -->
+<!-- specifies how to locate info on people -->
+<xsl:param name="pathsDoc"/>
+     
+<xsl:template match="/">
+<html>
+  <head>
+    <title>People</title>
+  </head>
+  <body>
+  <!-- We load an Xpath expression out of a table [Symbol_Wingdings_224]
+  <!-- in an external document. -->
+  <xsl:variable name="peoplePath" 
+       select="document($pathsDoc)/*/paths:path[@type='people']/@xpath"/>
+    <table>
+    <tbody>
+      <tr>
+        <th>First</th>
+        <th>Last</th>
+      </tr>
+      <!-- Dynamically evaluate the xpath that locates information on --> 
+      <!-- each person -->
+      <xsl:for-each select="saxon:evaluate($peoplePath)">
+        <xsl:call-template name="process-person"/>
+      </xsl:for-each>
+    </tbody>
+  </table>
+  </body>
+</html>
+</xsl:template>
+   
+<xsl:template name="process-person">
+  <xsl:variable name="firstnamePath" 
+      select="document($pathsDoc)/*/paths:path[@type='first']/@xpath"/> 
+  <xsl:variable name="lastnamePath" 
+      select="document($pathsDoc)/*/paths:path[@type='last']/@xpath"/> 
+  <tr>
+    <!-- Dynamically evaluate the xpath that locates the person -->
+    <!-- specific info we want to process -->
+    <td><xsl:value-of select="saxon:evaluate($firstnamePath)"/></td>
+    <td><xsl:value-of select="saxon:evaluate($lastnamePath)"/></td>
+  </tr>
+</xsl:template>
+   
+</xsl:stylesheet>
+<paths:paths 
+  xmlns:paths="http://www.ora.com/XSLTCookbook/NS/paths">
+  <paths:path type="people" xpath="people/person"/>
+  <paths:path type="first" xpath="first"/>
+  <paths:path type="last" xpath="last"/>
+</paths:paths>
+<paths:paths xmlns:paths="http://www.ora.com/XSLTCookbook/NS/paths">
+  <paths:path type="people" xpath="people/person"/>
+  <paths:path type="first" xpath="@first"/>
+  <paths:path type="last" xpath="@last"/>
+</paths:paths>
+You want to change the value of a variable
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+xmlns:saxon="http://icl.com/saxon"
+extension-element-prefixes="saxon">
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:variable name="countFoo" select="0" saxon:assignable="yes"/>
+   
+<xsl:template name="foo">
+    <saxon:assign name="countFoo" select="$countFoo + 1"/>
+    <xsl:comment>This is invocation number <xsl:value-of select="$countFoo"/> of 
+template foo.</xsl:comment>       
+</xsl:template>
+   
+<!- ... -->
+   
+</xsl:stylesheet>
+You want to write first-class extension functions in XSLT 1.0
+<xsl:stylesheet version="1.0" 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:func="http://exslt.org/functions" 
+  xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings"
+  extension-element-prefixes="func">
+   
+  <xsl:template match="/">
+    <xsl:value-of 
+      select="str:substring-before-last('123456789a123456789a123',
+  </xsl:template>
+     
+  <func:function name="str:substring-before-last"> 
+  <xsl:param name="input"/>
+  <xsl:param name="substr"/>
+  
+  <func:result>
+    <xsl:if test="$substr and contains($input, $substr)">
+      <xsl:variable name="temp" 
+                    select="substring-after($input, $substr)" />
+      <xsl:value-of select="substring-before($input, $substr)" />
+      <xsl:if test="contains($temp, $substr)">
+        <xsl:value-of 
+             select="concat($substr,
+                            str:substring-before-last($temp, $substr))"/>
+      </xsl:if>
+    </xsl:if>
+  </func:result>
+</func:function>
+     
+</xsl:stylesheet>
+XSLT 2.0
+You want to handle and recover from dynamic errors
+<xsl:template match="/">
+  <test>
+    <xsl:value-of select="saxon:try(*[0], 'Index out of bounds')"/>
+    </test>
+ </xsl:template>
+  
+Extending XSLT with JavaScript
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:trig="http://www.ora.com/XSLTCookbook/extend/trig">
+  
+<xsl:output method="text"/>
+   
+<xalan:component prefix="trig" functions="sin">
+  <xalan:script lang="javascript">
+    function sin (arg){ return Math.sin(arg);} 
+  </xalan:script>
+</xalan:component>
+   
+<xsl:template match="/">
+  The sin of 45 degrees is <xsl:text/>
+  <xsl:value-of select="trig:sin(3.14159265 div 4)"/>
+</xsl:template>
+     
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:count="http://www.ora.com/XSLTCookbook/extend/counter">
+  
+<xsl:output method="text"/>
+   
+<xalan:component prefix="count" 
+                 functions="counter nextCount resetCount makeCounter">
+  <xalan:script lang="javascript">
+   
+    
+    function counter(initValue)
+    {
+      this.value = initValue ;
+    } 
+       
+    function nextCount(ctr) 
+    {
+      return ctr.value++ ;
+    }
+   
+    function resetCount(ctr, value) 
+    {
+      ctr.value = value  ;
+      return "" ;
+    }
+   
+    function makeCounter(initValue)
+    {
+      return new counter(initValue) ;
+    }
+    
+  </xalan:script>
+</xalan:component>
+   
+<xsl:template match="/">
+  <xsl:variable name="aCounter" select="count:makeCounter(0)"/>
+  Count: <xsl:value-of select="count:nextCount($aCounter)"/>
+  Count: <xsl:value-of select="count:nextCount($aCounter)"/>
+  Count: <xsl:value-of select="count:nextCount($aCounter)"/>
+  Count: <xsl:value-of select="count:nextCount($aCounter)"/>
+  <xsl:value-of select="count:resetCount($aCounter,0)"/>
+  Count: <xsl:value-of select="count:nextCount($aCounter)"/>
+</xsl:template>
+     
+</xsl:stylesheet>
+  Count: 0
+  Count: 1
+  Count: 2
+  Count: 3
+  Count: 0
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:regex="http://www.ora.com/XSLTCookbook/extend/regex">
+  
+<xsl:output method="text"/>
+   
+<xalan:component prefix="regex" 
+     functions="match leftContext rightContext getParenMatch makeRegExp">
+  <xalan:script lang="javascript">
+   
+    function Matcher(pattern)
+    {
+      this.re = new RegExp(pattern) ;
+      this.re.compile(pattern) ;
+      this.result="" ;
+      this.left="" ;
+      this.right="" ;
+    } 
+   
+    function match(matcher, input)
+    {
+      matcher.result = matcher.re.exec(input) ;
+      matcher.left = RegExp.leftContext ;
+      matcher.right = RegExp.rightContext ;
+      return matcher.result[0] ;
+    }
+           
+    function leftContext(matcher) 
+    {
+      return matcher.left ;
+    }
+   
+    function rightContext(matcher) 
+    {
+      return matcher.right ;
+    }
+   
+    function getParenMatch(matcher, which)
+    {
+      return matcher.result[which] ;
+    }
+    
+    function makeRegExp(pattern)
+    {
+      return new Matcher(pattern) ;
+    }
+    
+  </xalan:script>
+</xalan:component>
+   
+<xsl:template match="/">
+  <xsl:variable name="dateParser" 
+       select="regex:makeRegExp('(\d\d?)[/-](\d\d?)[/-](\d{4}|\d{2})')"/>
+  Match: <xsl:value-of 
+              select="regex:match($dateParser, 
+                     'I was born on 05/03/1964 in New York City.')"/>
+  Left: <xsl:value-of select="regex:leftContext($dateParser)"/>
+  Right: <xsl:value-of select="regex:rightContext($dateParser)"/>
+  Month: <xsl:value-of select="regex:getParenMatch($dateParser, 1)"/>
+  Day: <xsl:value-of select="regex:getParenMatch($dateParser,2)"/>
+  Year: <xsl:value-of select="regex:getParenMatch($dateParser,3)"/>
+</xsl:template>     
+</xsl:stylesheet>
+  Match: 05/03/1964
+  Left: I was born on
+  Right:  in New York City.
+  Month: 05
+  Day: 03
+  Year: 1964
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt"
+xmlns:rep="http://www.ora.com/XSLTCookbook/extend/repeat" 
+extension-element-prefixes="rep">
+  
+<xsl:output method="xml"/>
+   
+<xalan:component prefix="rep" elements="repeat">
+  <xalan:script lang="javascript">
+<![CDATA[
+    function repeat(ctx, elem)
+    {
+      //Get the attribute value n as an integer
+      n = parseInt(elem.getAttribute("n")) ;
+      //get the transformer which is required to execute nodes
+      xformer = ctx.getTransformer(  ) ;
+      //Execute content of repeat element n times
+      for(var ii=0; ii < n; ++ii)
+      {
+        node = elem.getFirstChild(  ) ;
+        while(node)
+        {
+          node.execute(xformer) ;
+          node = node.getNextSibling(  ) ;
+        }
+      }
+      //The return value is inserted into the output
+      //so return null to prevent this
+      return null ;
+    } 
+]]>
+  </xalan:script>
+</xalan:component>
+   
+<xsl:template match="/">
+  <tests>
+    <!--Use to duplicate text-->
+    <test1><rep:repeat n="10">a</rep:repeat></test1>
+    <!--Use to duplicate structure-->
+    <test2>
+      <rep:repeat n="10">
+        <Malady>
+          <FirstPart>Shim's</FirstPart>
+          <SecondPart>Syndrome</SecondPart>
+        </Malady>
+      </rep:repeat>
+    </test2>
+    <!--Use to repeat the execution of xslt code -->
+    <!--(which is really what we've been doing in test1 and test2)-->
+    <test3>
+      <rep:repeat n="10">
+        <xsl:for-each select="*">
+          <xsl:copy/>
+        </xsl:for-each>
+      </rep:repeat>
+    </test3>
+  </tests>
+</xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+java -cp /xalan/bin/xalan.jar:/xalan/bin/xercesImpl.jar:/xalan/bin/bsf.jar: /xalan/
+bin/js.jar org.apache.xalan.xslt.Process -in input.xml -xsl trans.xslt
+export CLASSPATH=/xalan/bin/xalan.jar:/xalan/bin/xercesImpl.jar:/
+xalan/bin/bsf.jar:/xalan/bin/js.jar
+Adding Extension Functions Using Java
+package com.ora.xsltckbk.util;
+   
+public class HexConverter 
+{
+   
+  public static String toHex(String intString) 
+  {
+    try 
+    {
+       Integer temp = new Integer(intString) ;
+       return new String("0x").concat(Integer.toHexString(temp.intValue(  ))) ;
+     } 
+     catch (Exception e) 
+    {
+       return new String("0x0") ;
+     }
+  }
+}
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt" 
+xmlns:hex="xalan://com.ora.xsltckbk.util.HexConverter" 
+exclude-result-prefixes="hex xalan">
+   
+<xsl:template match="group">
+enum <xsl:value-of select="@name"/> 
+{
+  <xsl:apply-templates mode="enum"/>
+} ;
+</xsl:template> 
+   
+<xsl:template match="constant" mode="enum">
+  <xsl:variable name="rep">
+    <xsl:call-template name="getRep"/>
+  </xsl:variable>
+  <xsl:value-of select="@name"/> = <xsl:value-of select="$rep"/>
+  <xsl:if test="following-sibling::constant">
+    <xsl:text>,</xsl:text>
+  </xsl:if>
+</xsl:template> 
+   
+<xsl:template match="constant">
+  <xsl:variable name="rep">
+    <xsl:call-template name="getRep"/>
+  </xsl:variable>
+const int <xsl:value-of select="@name"/> = <xsl:value-of select="$rep"/> ;
+</xsl:template> 
+   
+<xsl:template name="getRep">
+  <xsl:choose>
+    <xsl:when test="@rep = 'hex'">
+      <xsl:value-of select="hex:toHex(@value)"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="@value"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+package com.ora.xsltckbk.util ;
+import java.awt.* ;
+import java.awt.geom.* ;
+import java.awt.font.* ;
+import java.awt.image.*;
+   
+public class SVGFontMetrics
+{
+  public SVGFontMetrics(String fontName, int size)
+  {
+    m_font = new Font(fontName, Font.PLAIN, size) ;
+    BufferedImage bi
+        = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    m_graphics2D = bi.createGraphics(  ) ;
+  }
+   
+  public SVGFontMetrics(String fontName, int size, boolean bold, 
+                        boolean italic)
+  {
+    m_font = new Font(fontName, style(bold,italic) , size) ;
+    BufferedImage bi
+        = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    m_graphics2D = bi.createGraphics(  ) ;
+  }
+   
+  public double stringWidth(String str)
+  {
+    FontRenderContext frc = m_graphics2D.getFontRenderContext(  );
+    TextLayout layout = new TextLayout(str, m_font, frc);
+    Rectangle2D rect = layout.getBounds(  ) ;
+    return rect.getWidth(  ) ;
+  }
+   
+  public double stringHeight(String str)
+  {
+    FontRenderContext frc = m_graphics2D.getFontRenderContext(  );
+    TextLayout layout = new TextLayout(str, m_font, frc);
+    Rectangle2D rect = layout.getBounds(  ) ;
+    return rect.getHeight(  ) ;
+  }
+   
+  static private int style(boolean bold, boolean italic)
+  {
+    int style = Font.PLAIN ;
+    if (bold) { style |= Font.BOLD;}
+    if (italic) { style |= Font.ITALIC;}
+    return style ;
+  }
+   
+  private Font m_font = null ;
+  private Graphics2D m_graphics2D = null;
+}
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:xalan="http://xml.apache.org/xslt" 
+xmlns:font="xalan://com.ora.xsltckbk.util.SVGFontMetrics" 
+exclude-result-prefixes="font xalan">
+   
+<xsl:output method="xml"/>
+   
+<xsl:template match="/">
+  <svg width="100%" height="100%">
+    <xsl:apply-templates/>
+  </svg>
+</xsl:template>
+   
+<xsl:template match="text">
+  <xsl:variable name="fontMetrics" 
+      select="font:new(@font, @size, boolean(@weight), boolean(@stytle))"/>
+  <xsl:variable name="text" select="."/>
+  <xsl:variable name="width" select="font:stringWidth($fontMetrics, $text)"/>
+  <xsl:variable name="height" select="font:stringHeight($fontMetrics, $text)"/>
+  <xsl:variable name="style">
+    <xsl:if test="@style">
+      <xsl:value-of select="concat('font-style:',@style)"/>
+    </xsl:if>
+  </xsl:variable>
+  <xsl:variable name="weight">
+    <xsl:if test="@weight">
+      <xsl:value-of select="concat('font-weight:',@weight)"/>
+    </xsl:if>
+  </xsl:variable>
+  <g style="font-family:{@font};font-size:{@size};{$style};{$weight}">
+    <!-- Use the SVGFontMetrics info render a rectangle that is -->
+    <!-- slightly bigger than the expected size of the text -->
+    <!-- Adjust the y position based on the previous text size. -->
+    <rect x="10" 
+          y="{sum(preceding-sibling::text/@size) * 2}pt" 
+          width="{$width + 2}" 
+          height="{$height + 2}"
+          style="fill:none;stroke: black;stroke-width:0.5;"/>
+    <!-- Render the text so it is cenetered in the rectangle -->
+    <text x="11" 
+          y="{sum(preceding-sibling::text/@size) * 2 + @size div 2 + 2}pt">
+      <xsl:value-of select="."/>
+    </text>
+  </g>
+        
+</xsl:template>
+   
+</xsl:stylesheet>
+<TextWidthTest>
+  <text font="Serif" size="9">M's are BIG; l's are small;</text>
+  <text font="Serif" size="10">SVG makes handling text no fun at all</text>
+  <text font="Helvetica" size="12">But if I cheat with a little Java</text>
+  <text font="Arial" size="14" weight="bold">PROMISE ME YOU WON'T TELL MY MAMMA!
+  </text>
+  <text font="Century" size="16" style="italic">But if you do, I won't lose cheer.
+  </text>
+  <text font="Courier New" size="18" weight="bold" style="italic">Its really my 
+tech editor that I fear!</text>
+</TextWidthTest>
+Discussion
+package com.ora.xsltckbk.util ;
+import java.awt.* ;
+import java.awt.geom.* ;
+import java.lang.System ;
+   
+public class FontMetrics
+{
+  public FontMetrics(String fontName, int size)
+  {
+    //Any concrete component will do
+    Label component = new Label(  ) ;
+    m_metrics
+      = component.getFontMetrics(
+           new Font(fontName, Font.PLAIN, size)) ;
+    m_graphics = component.getGraphics(  ) ;
+  }
+   
+  public FontMetrics(String fontName, int size, boolean bold, boolean italic)
+  {
+    //Any concrete component will do
+    Label component = new Label(  ) ;
+    m_metrics
+      = component.getFontMetrics(
+           new Font(fontName, style(bold,italic) , size)) ;
+    m_graphics = component.getGraphics(  ) ;
+  }
+   
+  //Simple, but less accurate on some fonts
+  public int stringWidth(String str)
+  {
+    return  m_metrics.stringWidth(str) ;
+  }
+   
+  //Better accuracy on most fonts
+  public double stringWidthImproved(String str)
+  {
+    Rectangle2D rect = m_metrics.getStringBounds(str, m_graphics) ;
+    return rect.getWidth(  ) ;
+  }
+   
+  static private int style(boolean bold, boolean italic)
+  {
+    int style = Font.PLAIN ;
+    if (bold) { style |= Font.BOLD;}
+    if (italic) { style |= Font.ITALIC;}
+    return style ;
+  }
+   
+  private java.awt.FontMetrics m_metrics = null;
+  private java.awt.Graphics m_graphics = null ;
+}
+Adding Extension Elements Using Java
+<xsl:for-each select="document('new.xml')">
+     <!-- Process new document -->
+</xsl:for-each>
+package com.ora.xsltckbk;
+import com.icl.saxon.style.ExtensionElementFactory;
+import org.xml.sax.SAXException;
+   
+public class CkBkElementFactory implements ExtensionElementFactory {
+   
+    public Class getExtensionClass(String localname)  {
+        if (localname.equals("set-context")) return CkBkSetContext.class;
+        if (localname.equals("templtext")) return CkBkTemplText.class;
+        return null;
+    }
+   
+}
+<xsl:stylesheet version="1.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:xslx="http://com.ora.xsltckbk.CkBkElementFactory" 
+ extension-element-prefixes="xslx">
+   
+<xsl:template match="/">
+  <xslx:set-context select="foo/bar">
+    <xsl:value-of select="."/>
+  </xslx:set-context>
+</xsl:template>
+   
+</xsl:stylesheet>
+
+public class CkBkSetContext extends com.icl.saxon.style.StyleElement {
+   
+    Expression select = null;
+   
+    public boolean isInstruction(  ) {
+        return true;
+    }
+   
+    public boolean mayContainTemplateBody(  ) {
+        return true;
+    }
+    public void prepareAttributes(  ) 
+                      throws TransformerConfigurationException {
+   
+          StandardNames sn = getStandardNames(  );
+          AttributeCollection atts = getAttributeList(  );
+   
+          String selectAtt = null;
+   
+          for (int a=0; a<atts.getLength(  ); a++) {
+               int nc = atts.getNameCode(a);
+               int f = nc & 0xfffff;
+               if (f == sn.SELECT) {
+                  selectAtt = atts.getValue(a);
+             } else {
+                  checkUnknownAttribute(nc);
+             }
+        }
+   
+        if (selectAtt=  =null) {
+            reportAbsence("select");
+        } else {
+            select = makeExpression(selectAtt);
+        }
+    }
+   
+    public void validate(  ) throws TransformerConfigurationException {
+        checkWithinTemplate(  );
+    }
+    public void process(Context context) throws TransformerException
+    {
+        NodeEnumeration selection = select.enumerate(context, false);
+        if (!(selection instanceof LastPositionFinder)) {
+            selection = new LookaheadEnumerator(selection);
+        }
+   
+        Context c = context.newContext(  );
+        c.setLastPositionFinder((LastPositionFinder)selection);
+        int position = 1;
+   
+          if (selection.hasMoreElements(  )) {
+              NodeInfo node = selection.nextElement(  );
+              c.setPosition(position++);
+              c.setCurrentNode(node);
+              c.setContextNode(node);
+              processChildren(c);
+              context.setReturnValue(c.getReturnValue(  ));
+          }
+    }
+}
+<classes>
+  <class>
+    <name>MyClass1</name>
+  </class>
+   
+  <class>
+    <name>MyClass2</name>
+  </class>
+   
+  <class>
+    <name>MyClass3</name>
+    <bases>
+      <base>MyClass1</base>
+      <base>MyClass2</base>
+    </bases>
+  </class>
+  
+</classes>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     
+<xsl:output method="text"/>
+   
+<xsl:template match="class">
+class <xsl:value-of select="name"/> <xsl:apply-templates select="bases"/>
+{
+public:
+   
+  <xsl:value-of select="name"/>(  ) ;
+  ~<xsl:value-of select="name"/>(  ) ;
+  <xsl:value-of select="name"/>(const <xsl:value-of select="name"/>&amp; other) ;
+  <xsl:value-of select="name"/>&amp; operator =(const <xsl:value-of select="name"/>
+&amp; other) ;
+} ;
+</xsl:template>     
+   
+<xsl:template match="bases">
+<xsl:text>: public </xsl:text>
+<xsl:for-each select="base">
+  <xsl:value-of select="."/>
+  <xsl:if test="position(  ) != last(  )">
+    <xsl:text>, public </xsl:text>
+  </xsl:if>
+</xsl:for-each>
+</xsl:template>
+   
+<xsl:template match="text(  )"/>
+   
+</xsl:stylesheet>
+
+<xsl:stylesheet 
+ version="1.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:xslx="http://com.ora.xsltckbk.CkBkElementFactory" 
+ extension-element-prefixes="xslx">
+   
+<xsl:output method="text"/>
+   
+<xsl:template match="class">
+<xslx:templtext>
+class \name\ <xsl:apply-templates select="bases"/> 
+{
+public:
+   
+  \name\(  ) ;
+  ~\name\(  ) ;
+  \name\(const \name\&amp; other) ;
+  \name\&amp; operator =(const \name\&amp; other) ;
+} ;
+</xslx:templtext>
+</xsl:template>     
+   
+<xsl:template match="bases">
+<xslx:templtext>: public \base%', public '\</xslx:templtext>
+</xsl:template>
+   
+<xsl:template match="text(  )"/>
+   
+</xsl:stylesheet>
+package com.ora.xsltckbk;
+import java.util.Vector ;
+import java.util.Enumeration ;
+import com.icl.saxon.tree.AttributeCollection;
+import com.icl.saxon.*;
+import com.icl.saxon.expr.*;
+import javax.xml.transform.*;
+import com.icl.saxon.output.*;
+import com.icl.saxon.trace.TraceListener;
+import com.icl.saxon.om.NodeInfo;
+import com.icl.saxon.om.NodeEnumeration;
+import com.icl.saxon.style.StyleElement;
+import com.icl.saxon.style.StandardNames;
+import com.icl.saxon.tree.AttributeCollection;
+import com.icl.saxon.tree.NodeImpl;
+public class CkBkTemplText extends com.icl.saxon.style.StyleElement
+{
+  private static final int SCANNING_STATE = 0 ;
+  private static final int FOUND1_STATE   = 1 ;
+  private static final int EXPR_STATE     = 2 ;
+  private static final int FOUND2_STATE   = 3 ;
+  private static final int DELIMIT_STATE  = 4 ;
+...
+  private class CkBkTemplParam
+  {
+    public CkBkTemplParam(String prefix)
+    {
+      m_prefix = prefix ;
+    }
+   
+    public void process(Context context) throws TransformerException
+    {
+      if (!m_prefix.equals(""))
+      {
+          Outputter out = context.getOutputter(  );
+          out.setEscaping(false);
+          out.writeContent(m_prefix);
+          out.setEscaping(true);
+      }
+    }
+   
+    protected String m_prefix ;
+  }
+  private class CkBkValueTemplParam extends CkBkTemplParam
+  {
+    public CkBkValueTemplParam(String prefix, Expression value)
+    {
+      super(prefix) ;
+      m_value = value ;
+    }
+   
+    public void process(Context context) throws TransformerException
+    {
+      super.process(context) ;
+      Outputter out = context.getOutputter(  );
+      out.setEscaping(false);
+      if (m_value != null)
+      {
+          m_value.outputStringValue(out, context);
+      }
+      out.setEscaping(true);
+    }
+   
+    private Expression m_value ;
+   
+  }
+  private class CkBkListTemplParam extends CkBkTemplParam
+  {
+    public CkBkListTemplParam(String prefix, Expression list,
+                              Expression delimit)
+    {
+      super(prefix) ;
+      m_list = list ;
+      m_delimit = delimit ;
+    }
+   
+    public void process(Context context) throws TransformerException
+    {
+      super.process(context) ;
+      if (m_list != null)
+      {
+        NodeEnumeration m_listEnum = m_list.enumerate(context, false);
+   
+        Outputter out = context.getOutputter(  );
+        out.setEscaping(false);
+        while(m_listEnum.hasMoreElements(  ))
+        {
+          NodeInfo node = m_listEnum.nextElement(  );
+          if (node != null)
+          {
+            node.copyStringValue(out);
+          }
+          if (m_listEnum.hasMoreElements(  ) && m_delimit != null)
+          {
+            m_delimit.outputStringValue(out, context);
+          }
+        }
+        out.setEscaping(true);
+      }
+    }
+   
+    private Expression m_list = null;
+    private Expression m_delimit = null ;
+  }
+  private class CkBkStyleTemplParam extends CkBkTemplParam
+  {
+    public CkBkStyleTemplParam(StyleElement snode)
+    {
+      m_snode = snode ;
+    }
+   
+    public void process(Context context) throws TransformerException
+    {
+       if (m_snode.validationError != null)
+      {
+              fallbackProcessing(m_snode, context);
+       }
+      else
+      {
+           try
+        {
+           context.setStaticContext(m_snode.staticContext);
+           m_snode.process(context);
+         }
+        catch (TransformerException err)
+        {
+           throw snode.styleError(err);
+         }
+      }
+    }
+  }
+  public boolean isInstruction(  )
+  {
+      return true;
+  }
+   
+  public boolean mayContainTemplateBody(  )
+  {
+    return true;
+  }
+   
+  public void prepareAttributes(  ) throws TransformerConfigurationException
+  {
+    StandardNames sn = getStandardNames(  );
+     AttributeCollection atts = getAttributeList(  );
+     for (int a=0; a<atts.getLength(  ); a++)
+    {
+       int nc = atts.getNameCode(a);
+      checkUnknownAttribute(nc);
+    }  
+   }
+  public void validate(  ) throws TransformerConfigurationException
+  {
+      checkWithinTemplate(  );
+      m_TemplParms = new Vector(  ) ;
+   
+      NodeImpl node = (NodeImpl)getFirstChild(  );
+      String value ;
+      while (node!=null)
+      {
+        if (node.getNodeType(  ) =  = NodeInfo.TEXT)
+        {
+          parseTemplText(node.getStringValue(  )) ;
+        }
+        else
+        if (node instanceof StyleElement)
+        {
+           StyleElement snode = (StyleElement) node;
+          m_TemplParms.addElement(new CkBkStyleTemplParam(snode)) ;
+        }
+        node = (NodeImpl)node.getNextSibling(  );
+      }
+  }
+  public void process(Context context) throws TransformerException
+  {
+    Enumeration iter = m_TemplParms.elements(  ) ;
+    while (iter.hasMoreElements(  ))
+    {
+       CkBkTemplParam param = (CkBkTemplParam) iter.nextElement(  ) ;
+       param.process(context) ;
+    }
+  }
+  private void parseTemplText(String value)
+  {
+      //This state machine parses the text looking for parameters
+      int ii = 0 ;
+      int len = value.length(  ) ;
+   
+      int state = SCANNING_STATE ;
+      StringBuffer temp = new StringBuffer("") ;
+      StringBuffer expr = new StringBuffer("") ;
+      while(ii < len)
+      {
+        char c = value.charAt(ii++) ;
+        switch (state)
+        {
+          case SCANNING_STATE:
+          {
+            if (c =  = '\\')
+            {
+              state = FOUND1_STATE ;
+            }
+            else
+            {
+              temp.append(c) ;
+            }
+          }
+          break ;
+   
+          case FOUND1_STATE:
+          {
+            if (c =  = '\\')
+            {
+              temp.append(c) ;
+              state = SCANNING_STATE ;
+            }
+            else
+            {
+              expr.append(c) ;
+              state = EXPR_STATE ;
+            }
+          }
+          break ;
+   
+          case EXPR_STATE:
+          {
+            if (c =  = '\\')
+            {
+              state = FOUND2_STATE ;
+            }
+            else
+            {
+              expr.append(c) ;
+            }
+          }
+          break ;
+   
+          case FOUND2_STATE:
+          {
+            if (c =  = '\\')
+            {
+              state = EXPR_STATE ;
+              expr.append(c) ;
+            }
+            else
+            {
+              processParam(temp, expr) ;
+              state = SCANNING_STATE ;
+              temp = new StringBuffer("") ;
+                    temp.append(c) ;
+              expr = new StringBuffer("") ;
+            }
+          }
+          break ;
+        }
+          }
+      if (state =  = FOUND1_STATE || state =  = EXPR_STATE)
+      {
+          compileError("xslx:templtext dangling \\");
+      }
+      else
+      if (state =  = FOUND2_STATE)
+      {
+        processParam(temp, expr) ;
+      }
+      else
+      {
+        processParam(temp, new StringBuffer("")) ;
+      }
+  }
+   
+  private void processParam(StringBuffer prefix, StringBuffer expr)
+  {
+    if (expr.length(  ) =  = 0)
+    {
+      m_TemplParms.addElement(new CkBkTemplParam(new String(prefix))) ;
+    }
+    else
+    {
+      processParamExpr(prefix, expr) ;
+    }
+  }
+   
+  private void processParamExpr(StringBuffer prefix, StringBuffer expr)
+  {
+      int ii = 0 ;
+      int len = expr.length(  ) ;
+   
+      int state = SCANNING_STATE ;
+      StringBuffer list = new StringBuffer("") ;
+      StringBuffer delimit = new StringBuffer("") ;
+      while(ii < len)
+      {
+        char c = expr.charAt(ii++) ;
+        switch (state)
+        {
+          case SCANNING_STATE:
+          {
+            if (c =  = '%')
+            {
+              state = FOUND1_STATE ;
+            }
+            else
+            {
+              list.append(c) ;
+            }
+          }
+          break ;
+   
+          case FOUND1_STATE:
+          {
+            if (c =  = '%')
+            {
+              list.append(c) ;
+              state = SCANNING_STATE ;
+            }
+            else
+            {
+              delimit.append(c) ;
+              state = DELIMIT_STATE ;
+            }
+          }
+          break ;
+   
+          case DELIMIT_STATE:
+          {
+            if (c =  = '%')
+            {
+              state = FOUND2_STATE ;
+            }
+            else
+            {
+              delimit.append(c) ;
+            }
+          }
+          break ;
+        }
+      }
+      try
+      {
+        if (state =  = FOUND1_STATE)
+        {
+            compileError("xslx:templtext trailing %");
+        }
+        else
+        if (state =  = FOUND2_STATE)
+        {
+            compileError("xslx:templtext extra %");
+        }
+        else
+        if (state =  = SCANNING_STATE)
+        {
+          String prefixStr = new String(prefix) ;
+          Expression value = makeExpression(new String(list)) ;
+          m_TemplParms.addElement(
+                 new CkBkValueTemplParam(prefixStr, value)) ;
+        }
+        else
+        {
+          String prefixStr = new String(prefix) ;
+          Expression listExpr = makeExpression(new String(list)) ;
+          Expression delimitExpr = makeExpression(new String(delimit)) ;
+          m_TemplParms.addElement(
+            new CkBkListTemplParam(prefixStr, listExpr, delimitExpr)) ;
+        }
+      }
+      catch(Exception e)
+      {
+      }
+  }
+  //A vector of CBkTemplParms parse form text
+  private Vector m_TemplParms = null;
+ }
+<xsl:for-each select="expr1">
+  <xsl:variable name="pos" select="position(  )"/>
+  <xsl:value-of select="."/>
+  <xsl:if test="$pos != last(  )">
+    <xsl:value-of select="delim1"/>
+  </xsl:if>
+  <xsl:value-of select="expr2[$pos]"/>
+  <xsl:if test="$pos != last(  )">
+    <xsl:value-of select="delim2"/>
+  </xsl:if>
+</xsl:for-each >
+Using XSLT from Perl
+use XML::LibXSLT;
+use XML::LibXML;
+   
+# the arguments for this command are stylesheet and source files
+my( $style_file, @source_files ) = @ARGV;
+   
+# initialize the parser and XSLT processor
+my $parser = XML::LibXML->new(  );
+my $xslt = XML::LibXSLT->new(  );
+my $stylesheet = $xslt->parse_stylesheet_file( $style_file );
+   
+# for each source file: parse, transform, print out result
+foreach my $file ( @source_files ) {
+  my $source_doc = $parser->parse_file( $source_file );
+  my $result = $stylesheet->transform( $source_doc );
+  print $stylesheet->output_string( $result );
+}
+#Similar code from previous example has been elided.
+   
+my %params = {
+     param1 => 10,
+    param2 => 'foo',
+} ;
+   
+foreach my $file ( @source_files ) {
+  my $source_doc = $parser->parse_file( $file );
+  my $result = $stylesheet->transform($source_doc, %params);
+  print $stylesheet->output_string( $result );
+}
+use XML::Xalan;
+   
+  #Construct the transformer
+  my $tr = new XML::Xalan::Transformer;
+   
+  #Compile the stylesheet
+  my $compiled = $tr->compile_stylesheet_file("my.xsl");
+  
+  #Parse the input source document
+  my $parsed = $tr->parse_file("my.xml");
+   
+  my $dest_file = "myresult.xml" ;
+   
+  #Execute the transformation saving the result
+  $tr->transform_to_file($parsed, $compiled, $dest_file)
+    or die $tr->errstr;
+my $res = $tr->transform_to_data($parsed, $compiled);
+my $res = $tr->transform_to_data($src_file, $xsl_file);
+#Create a handler sub
+$out_handler = sub {
+     my ($ctx, $mesg) = @_;
+     print $ctx $mesg;
+ };
+#Invoke the transformation using the handler
+$tr->transform_to_handler(
+     $xmlfile, $xslfile, 
+     *STDERR, $out_handler);
+Using XSLT from Java
+public class Transform
+{
+   
+  public static void main(String[  ] args) throws Exception
+  {
+    if (args.length != 2)
+    {
+      System.err.println(
+        "Usage: java Transform [xmlfile] [xsltfile]");
+      System.exit(1);
+    }
+   
+    //Open the source and style sheet files
+    File xmlFile = new File(args[0]);
+    File xsltFile = new File(args[1]);
+   
+    //JAXP uses a Source interface to read data
+    Source xmlSource = new StreamSource(xmlFile);
+    Source xsltSource = new StreamSource(xsltFile);
+   
+    //Factory classes allow the specific XSLT processor
+    //to be hidden from the application by returning a
+    //standard Transformer interface
+    TransformerFactory transFact =
+      TransformerFactory.newInstance(  );
+    Transformer trans = transFact.newTransformer(xsltSource);
+   
+    //Applies the stylesheet to the source document
+    trans.transform(xmlSource, new StreamResult(System.out));
+ }
+}
+
+ 
+ 
+ 
+ 
+2		Extending and Embedding XSLT
+Java Extension Function Using the Java Format Namespace		3 of 30
+2
+	3
+DRAFT	O'Reilly & Associates	1/17/2006

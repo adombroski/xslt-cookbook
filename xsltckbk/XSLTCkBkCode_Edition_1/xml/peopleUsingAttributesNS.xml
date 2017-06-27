@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people xmlns="http://www.ora.com/XMLCookbook/namesapce/people" which="MeAndMyFriends">
+  <person firstname="Sal" lastname="Mangano" age="37" height="5.75"/>
+  <person firstname="Jane" lastname="Smith" age="28" height="5.10"/>
+  <person firstname="Rick" lastname="Winters" age="45" height="6.0"/>
+  <person firstname="James" lastname="O'Riely" age="33" height="5.5"/>
+</people>

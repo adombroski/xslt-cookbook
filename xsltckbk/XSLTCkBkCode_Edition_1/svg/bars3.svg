@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE svg
+  PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns:test="http://www.ora.com/XSLTCookbook/ns/test" width="400" height="400">
+   <g xmlns:emath="http://www.exslt.org/math" transform="translate(50,25) translate(150,175) rotate(-90) translate(-150,-175)">
+      <rect x="0" y="0" height="350" width="300" style="stroke: black;stroke-width:0.5;stroke-opacity:0.5;fill:none"/>
+   </g>
+   <g xmlns:emath="http://www.exslt.org/math" transform="translate(50,25)                              translate(150,175)                              rotate(-90)                              translate(-150,-175)                              scale(1,14)">
+      <line x1="27.272727272727273" y1="0" x2="27.272727272727273" y2="8.5" style="stroke-width: 5; stroke: red"/>
+      <text x="27.272727272727273" y="119" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(27.272727272727273,119)                                        rotate(90)                                        translate(-27.272727272727273,-119)" style="text-anchor: middle; font-size: 8">8.5</text>
+      <line x1="54.54545454545455" y1="0" x2="54.54545454545455" y2="22.0" style="stroke-width: 5; stroke: orange"/>
+      <text x="54.54545454545455" y="308" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(54.54545454545455,308)                                        rotate(90)                                        translate(-54.54545454545455,-308)" style="text-anchor: middle; font-size: 8">22.0</text>
+      <line x1="81.81818181818181" y1="0" x2="81.81818181818181" y2="13.9" style="stroke-width: 5; stroke: yellow"/>
+      <text x="81.81818181818181" y="194.6" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(81.81818181818181,194.6)                                        rotate(90)                                        translate(-81.81818181818181,-194.6)" style="text-anchor: middle; font-size: 8">13.9</text>
+      <line x1="109.0909090909091" y1="0" x2="109.0909090909091" y2="2.7" style="stroke-width: 5; stroke: green"/>
+      <text x="109.0909090909091" y="37.800000000000004" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(109.0909090909091,37.800000000000004)                                        rotate(90)                                        translate(-109.0909090909091,-37.800000000000004)" style="text-anchor: middle; font-size: 8">2.7</text>
+      <line x1="136.36363636363637" y1="0" x2="136.36363636363637" y2="13.0" style="stroke-width: 5; stroke: blue"/>
+      <text x="136.36363636363637" y="182" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(136.36363636363637,182)                                        rotate(90)                                        translate(-136.36363636363637,-182)" style="text-anchor: middle; font-size: 8">13.0</text>
+      <line x1="163.63636363636363" y1="0" x2="163.63636363636363" y2="5.0" style="stroke-width: 5; stroke: lime"/>
+      <text x="163.63636363636363" y="70" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(163.63636363636363,70)                                        rotate(90)                                        translate(-163.63636363636363,-70)" style="text-anchor: middle; font-size: 8">5.0</text>
+      <line x1="190.9090909090909" y1="0" x2="190.9090909090909" y2="4.0" style="stroke-width: 5; stroke: aqua"/>
+      <text x="190.9090909090909" y="56" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(190.9090909090909,56)                                        rotate(90)                                        translate(-190.9090909090909,-56)" style="text-anchor: middle; font-size: 8">4.0</text>
+      <line x1="218.1818181818182" y1="0" x2="218.1818181818182" y2="3.0" style="stroke-width: 5; stroke: teal"/>
+      <text x="218.1818181818182" y="42" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(218.1818181818182,42)                                        rotate(90)                                        translate(-218.1818181818182,-42)" style="text-anchor: middle; font-size: 8">3.0</text>
+      <line x1="245.45454545454547" y1="0" x2="245.45454545454547" y2="2.0" style="stroke-width: 5; stroke: brown"/>
+      <text x="245.45454545454547" y="28" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(245.45454545454547,28)                                        rotate(90)                                        translate(-245.45454545454547,-28)" style="text-anchor: middle; font-size: 8">2.0</text>
+      <line x1="272.72727272727275" y1="0" x2="272.72727272727275" y2="1.0" style="stroke-width: 5; stroke: black"/>
+      <text x="272.72727272727275" y="14" transform="scale(1,0.07142857142857142)                                        translate(0,10)                                        translate(272.72727272727275,14)                                        rotate(90)                                        translate(-272.72727272727275,-14)" style="text-anchor: middle; font-size: 8">1.0</text>
+   </g>
+</svg>

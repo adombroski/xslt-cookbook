@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc xmlns:doc1="doc2" xmlns="doc2">
+  <chapter number="1">
+    <section number="1">
+      <sub>
+        <p>
+          Once upon a time...
+          <ref type="footnote" number="1"/>
+        </p>
+      </sub>
+      <fig>Figure1</fig>
+    </section>
+    <footnote number="1">
+      Hey diddle diddle.
+    </footnote>
+  </chapter>
+  <chapter number="2">
+    <section number="1">
+      <p>
+        ... and they lived happily ever after.
+      </p>
+    </section>
+  </chapter>
+</doc>

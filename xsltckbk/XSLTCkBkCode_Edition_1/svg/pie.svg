@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE svg
+  PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="500" height="500">
+   <path xmlns:emath="http://www.exslt.org/math" style="stroke:black;stroke-width:0.5;fill: red" d="M 249.99999767948967 150.00000000000003 A 100 100,0,0,1,272.2520914564912 152.50720833922156 L 250 250 L 249.99999767948967 150.00000000000003"/>
+   <path xmlns:emath="http://www.exslt.org/math" style="stroke:black;stroke-width:0.5;fill: orange" d="M 272.2520914564912 152.50720833922156 A 100 100,0,0,1,312.3489791491602 171.81685092644588 L 250 250 L 272.2520914564912 152.50720833922156"/>
+   <path xmlns:emath="http://www.exslt.org/math" style="stroke:black;stroke-width:0.5;fill: yellow" d="M 312.3489791491602 171.81685092644588 A 100 100,0,0,1,347.49279114441634 227.74790628117853 L 250 250 L 312.3489791491602 171.81685092644588"/>
+   <path xmlns:emath="http://www.exslt.org/math" style="stroke:black;stroke-width:0.5;fill: green" d="M 347.49279114441634 227.74790628117853 A 100 100,0,0,1,328.1831476267396 312.3489809634082 L 250 250 L 347.49279114441634 227.74790628117853"/>
+   <path xmlns:emath="http://www.exslt.org/math" style="stroke:black;stroke-width:0.5;fill: blue" d="M 328.1831476267396 312.3489809634082 A 100 100,0,0,1,227.7479040188482 347.4927906280542 L 250 250 L 328.1831476267396 312.3489809634082"/>
+   <path xmlns:emath="http://www.exslt.org/math" style="stroke:black;stroke-width:0.5;fill: lime" d="M 227.7479040188482 347.4927906280542 A 100 100,0,0,1,250.00000696153097 150.00000000000023 L 250 250 L 227.7479040188482 347.4927906280542"/>
+   <text xmlns:emath="http://www.exslt.org/math" x="263.9955683659971" y="125.78597476084795" style="text-anchor:middle;font-size: 16;">1.0</text>
+   <text xmlns:emath="http://www.exslt.org/math" x="304.2354759765293" y="137.37889564739956" style="text-anchor:middle;font-size: 16;">2.0</text>
+   <text xmlns:emath="http://www.exslt.org/math" x="355.84053052531044" y="183.49599938258729" style="text-anchor:start;font-size: 16;">3.0</text>
+   <text xmlns:emath="http://www.exslt.org/math" x="371.8659889305204" y="277.81511714852695" style="text-anchor:start;font-size: 16;">4.0</text>
+   <text xmlns:emath="http://www.exslt.org/math" x="291.2848805932172" y="367.9854170412759" style="text-anchor:middle;font-size: 16;">5.0</text>
+   <text xmlns:emath="http://www.exslt.org/math" x="125.78597443607937" y="236.00443451640217" style="text-anchor:end;font-size: 16;">13.0</text>
+</svg>

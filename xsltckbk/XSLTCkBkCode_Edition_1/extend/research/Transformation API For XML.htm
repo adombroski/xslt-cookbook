@@ -1,0 +1,1060 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0039)http://xml.apache.org/xalan-j/trax.html -->
+<HTML><HEAD><TITLE>Transformation API For XML</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<SCRIPT language=JavaScript src="Transformation API For XML_files/script.js" 
+type=text/javascript></SCRIPT>
+
+<META content="MSHTML 6.00.2719.2200" name=GENERATOR></HEAD>
+<BODY text=#000000 vLink=#0000aa aLink=#ff0000 link=#0000ff bgColor=#ffffff 
+leftMargin=4 topMargin=4 marginwidth="4" marginheight="4">
+<TABLE cellSpacing=0 cellPadding=0 width=620 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top align=left width=135 height=60 rowSpan=3><IMG height=60 
+      hspace=0 src="Transformation API For XML_files/logo.gif" width=135 
+      border=0></TD>
+    <TD vAlign=top align=left width=456 colSpan=4 height=5><IMG height=5 
+      hspace=0 src="Transformation API For XML_files/line.gif" width=456 
+      border=0></TD>
+    <TD vAlign=top align=left width=29 height=60 rowSpan=3><IMG height=60 
+      hspace=0 src="Transformation API For XML_files/right.gif" width=29 
+      border=0></TD></TR>
+  <TR>
+    <TD vAlign=top align=left width=456 bgColor=#0086b2 colSpan=4 
+      height=35><IMG height=35 alt="" hspace=0 
+      src="Transformation API For XML_files/trax-header.jpg" width=456 
+    border=0></TD></TR>
+  <TR>
+    <TD vAlign=top align=left width=168 height=20><IMG height=20 hspace=0 
+      src="Transformation API For XML_files/bottom.gif" width=168 border=0></TD>
+    <TD vAlign=top align=left width=96 height=20><A 
+      onmouseover="rolloverOn('xml');" onmouseout="rolloverOff('xml');" 
+      href="http://xml.apache.org/" target=new><IMG height=20 
+      alt=http://xml.apache.org/ hspace=0 
+      src="Transformation API For XML_files/button-xml-lo.gif" width=96 
+      onload="rolloverLoad('xml','resources/button-xml-hi.gif','resources/button-xml-lo.gif');" 
+      border=0 name=xml></A></TD>
+    <TD vAlign=top align=left width=96 height=20><A 
+      onmouseover="rolloverOn('asf');" onmouseout="rolloverOff('asf');" 
+      href="http://www.apache.org/" target=new><IMG height=20 
+      alt=http://www.apache.org/ hspace=0 
+      src="Transformation API For XML_files/button-asf-lo.gif" width=96 
+      onload="rolloverLoad('asf','resources/button-asf-hi.gif','resources/button-asf-lo.gif');" 
+      border=0 name=asf></A></TD>
+    <TD vAlign=top align=left width=96 height=20><A 
+      onmouseover="rolloverOn('w3c');" onmouseout="rolloverOff('w3c');" 
+      href="http://www.w3.org/" target=new><IMG height=20 alt=http://www.w3.org/ 
+      hspace=0 src="Transformation API For XML_files/button-w3c-lo.gif" width=96 
+      onload="rolloverLoad('w3c','resources/button-w3c-hi.gif','resources/button-w3c-lo.gif');" 
+      border=0 name=w3c></A></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=620 border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top align=left width=120><IMG height=14 hspace=0 
+      src="Transformation API For XML_files/join.gif" width=120 border=0><BR><A 
+      onmouseover="rolloverOn('side-ext-4');" 
+      onmouseout="rolloverOff('side-ext-4');" 
+      href="http://xml.apache.org/index.html"><IMG height=12 alt=Home hspace=0 
+      src="Transformation API For XML_files/ext-4-label-3.jpg" width=120 
+      onload="rolloverLoad('side-ext-4','graphics/ext-4-label-2.jpg','graphics/ext-4-label-3.jpg');" 
+      border=0 name=side-ext-4></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-index');" 
+      onmouseout="rolloverOff('side-index');" 
+      href="http://xml.apache.org/xalan-j/index.html"><IMG height=12 
+      alt="Xalan-J 2.4.0" hspace=0 
+      src="Transformation API For XML_files/index-label-3.jpg" width=120 
+      onload="rolloverLoad('side-index','graphics/index-label-2.jpg','graphics/index-label-3.jpg');" 
+      border=0 name=side-index></A><BR><A 
+      onmouseover="rolloverOn('side-whatsnew');" 
+      onmouseout="rolloverOff('side-whatsnew');" 
+      href="http://xml.apache.org/xalan-j/whatsnew.html"><IMG height=12 
+      alt="What's New" hspace=0 
+      src="Transformation API For XML_files/whatsnew-label-3.jpg" width=120 
+      onload="rolloverLoad('side-whatsnew','graphics/whatsnew-label-2.jpg','graphics/whatsnew-label-3.jpg');" 
+      border=0 name=side-whatsnew></A><BR><A 
+      onmouseover="rolloverOn('side-dtm');" 
+      onmouseout="rolloverOff('side-dtm');" 
+      href="http://xml.apache.org/xalan-j/dtm.html"><IMG height=12 alt=DTM 
+      hspace=0 src="Transformation API For XML_files/dtm-label-3.jpg" width=120 
+      onload="rolloverLoad('side-dtm','graphics/dtm-label-2.jpg','graphics/dtm-label-3.jpg');" 
+      border=0 name=side-dtm></A><BR><A 
+      onmouseover="rolloverOn('side-xsltc_usage');" 
+      onmouseout="rolloverOff('side-xsltc_usage');" 
+      href="http://xml.apache.org/xalan-j/xsltc_usage.html"><IMG height=12 
+      alt="XSLTC Translets" hspace=0 
+      src="Transformation API For XML_files/xsltc_usage-label-3.jpg" width=120 
+      onload="rolloverLoad('side-xsltc_usage','graphics/xsltc_usage-label-2.jpg','graphics/xsltc_usage-label-3.jpg');" 
+      border=0 name=side-xsltc_usage></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-overview');" 
+      onmouseout="rolloverOff('side-overview');" 
+      href="http://xml.apache.org/xalan-j/overview.html"><IMG height=12 
+      alt=Overview hspace=0 
+      src="Transformation API For XML_files/overview-label-3.jpg" width=120 
+      onload="rolloverLoad('side-overview','graphics/overview-label-2.jpg','graphics/overview-label-3.jpg');" 
+      border=0 name=side-overview></A><BR><A 
+      onmouseover="rolloverOn('side-getstarted');" 
+      onmouseout="rolloverOff('side-getstarted');" 
+      href="http://xml.apache.org/xalan-j/getstarted.html"><IMG height=12 
+      alt="Getting Started" hspace=0 
+      src="Transformation API For XML_files/getstarted-label-3.jpg" width=120 
+      onload="rolloverLoad('side-getstarted','graphics/getstarted-label-2.jpg','graphics/getstarted-label-3.jpg');" 
+      border=0 name=side-getstarted></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-faq');" 
+      onmouseout="rolloverOff('side-faq');" 
+      href="http://xml.apache.org/xalan-j/faq.html"><IMG height=12 alt=FAQs 
+      hspace=0 src="Transformation API For XML_files/faq-label-3.jpg" width=120 
+      onload="rolloverLoad('side-faq','graphics/faq-label-2.jpg','graphics/faq-label-3.jpg');" 
+      border=0 name=side-faq></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-samples');" 
+      onmouseout="rolloverOff('side-samples');" 
+      href="http://xml.apache.org/xalan-j/samples.html"><IMG height=12 
+      alt="Sample Apps" hspace=0 
+      src="Transformation API For XML_files/samples-label-3.jpg" width=120 
+      onload="rolloverLoad('side-samples','graphics/samples-label-2.jpg','graphics/samples-label-3.jpg');" 
+      border=0 name=side-samples></A><BR><A 
+      onmouseover="rolloverOn('side-commandline');" 
+      onmouseout="rolloverOff('side-commandline');" 
+      href="http://xml.apache.org/xalan-j/commandline.html"><IMG height=12 
+      alt="Command Line" hspace=0 
+      src="Transformation API For XML_files/commandline-label-3.jpg" width=120 
+      onload="rolloverLoad('side-commandline','graphics/commandline-label-2.jpg','graphics/commandline-label-3.jpg');" 
+      border=0 name=side-commandline></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-usagepatterns');" 
+      onmouseout="rolloverOff('side-usagepatterns');" 
+      href="http://xml.apache.org/xalan-j/usagepatterns.html"><IMG height=12 
+      alt="Usage Patterns" hspace=0 
+      src="Transformation API For XML_files/usagepatterns-label-3.jpg" width=120 
+      onload="rolloverLoad('side-usagepatterns','graphics/usagepatterns-label-2.jpg','graphics/usagepatterns-label-3.jpg');" 
+      border=0 name=side-usagepatterns></A><BR><A 
+      onmouseover="rolloverOn('side-features');" 
+      onmouseout="rolloverOff('side-features');" 
+      href="http://xml.apache.org/xalan-j/features.html"><IMG height=12 
+      alt=Features hspace=0 
+      src="Transformation API For XML_files/features-label-3.jpg" width=120 
+      onload="rolloverLoad('side-features','graphics/features-label-2.jpg','graphics/features-label-3.jpg');" 
+      border=0 name=side-features></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><IMG height=12 alt=TrAX hspace=0 
+      src="Transformation API For XML_files/trax-label-1.jpg" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-ext-42');" 
+      onmouseout="rolloverOff('side-ext-42');" 
+      href="http://xml.apache.org/xalan-j/apidocs/index.html"><IMG height=12 
+      alt="API (Javadoc)" hspace=0 
+      src="Transformation API For XML_files/ext-42-label-3.jpg" width=120 
+      onload="rolloverLoad('side-ext-42','graphics/ext-42-label-2.jpg','graphics/ext-42-label-3.jpg');" 
+      border=0 name=side-ext-42></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-extensions');" 
+      onmouseout="rolloverOff('side-extensions');" 
+      href="http://xml.apache.org/xalan-j/extensions.html"><IMG height=12 
+      alt=Extensions hspace=0 
+      src="Transformation API For XML_files/extensions-label-3.jpg" width=120 
+      onload="rolloverLoad('side-extensions','graphics/extensions-label-2.jpg','graphics/extensions-label-3.jpg');" 
+      border=0 name=side-extensions></A><BR><A 
+      onmouseover="rolloverOn('side-extensionslib');" 
+      onmouseout="rolloverOff('side-extensionslib');" 
+      href="http://xml.apache.org/xalan-j/extensionslib.html"><IMG height=12 
+      alt="Extensions Library" hspace=0 
+      src="Transformation API For XML_files/extensionslib-label-3.jpg" width=120 
+      onload="rolloverLoad('side-extensionslib','graphics/extensionslib-label-2.jpg','graphics/extensionslib-label-3.jpg');" 
+      border=0 name=side-extensionslib></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-readme');" 
+      onmouseout="rolloverOff('side-readme');" 
+      href="http://xml.apache.org/xalan-j/readme.html"><IMG height=12 
+      alt="Release Notes" hspace=0 
+      src="Transformation API For XML_files/readme-label-3.jpg" width=120 
+      onload="rolloverLoad('side-readme','graphics/readme-label-2.jpg','graphics/readme-label-3.jpg');" 
+      border=0 name=side-readme></A><BR><A 
+      onmouseover="rolloverOn('side-builds');" 
+      onmouseout="rolloverOff('side-builds');" 
+      href="http://xml.apache.org/xalan-j/builds.html"><IMG height=12 
+      alt="Xalan-Java Builds" hspace=0 
+      src="Transformation API For XML_files/builds-label-3.jpg" width=120 
+      onload="rolloverLoad('side-builds','graphics/builds-label-2.jpg','graphics/builds-label-3.jpg');" 
+      border=0 name=side-builds></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-ext-64');" 
+      onmouseout="rolloverOff('side-ext-64');" 
+      href="http://xml.apache.org/xalan-j/design/design2_0_0.html"><IMG 
+      height=12 alt="Xalan 2 Design" hspace=0 
+      src="Transformation API For XML_files/ext-64-label-3.jpg" width=120 
+      onload="rolloverLoad('side-ext-64','graphics/ext-64-label-2.jpg','graphics/ext-64-label-3.jpg');" 
+      border=0 name=side-ext-64></A><BR><A 
+      onmouseover="rolloverOn('side-ext-66');" 
+      onmouseout="rolloverOff('side-ext-66');" 
+      href="http://xml.apache.org/xalan-j/xsltc/index.html"><IMG height=12 
+      alt="XSLTC Design" hspace=0 
+      src="Transformation API For XML_files/ext-66-label-3.jpg" width=120 
+      onload="rolloverLoad('side-ext-66','graphics/ext-66-label-2.jpg','graphics/ext-66-label-3.jpg');" 
+      border=0 name=side-ext-66></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-ext-70');" 
+      onmouseout="rolloverOff('side-ext-70');" 
+      href="http://xml.apache.org/xalan-j/readme.html#bugs"><IMG height=12 
+      alt=Bugs hspace=0 
+      src="Transformation API For XML_files/ext-70-label-3.jpg" width=120 
+      onload="rolloverLoad('side-ext-70','graphics/ext-70-label-2.jpg','graphics/ext-70-label-3.jpg');" 
+      border=0 name=side-ext-70></A><BR><A 
+      onmouseover="rolloverOn('side-ext-72');" 
+      onmouseout="rolloverOff('side-ext-72');" 
+      href="http://xml.apache.org/xalan-j/test/overview.html"><IMG height=12 
+      alt=Testing hspace=0 
+      src="Transformation API For XML_files/ext-72-label-3.jpg" width=120 
+      onload="rolloverLoad('side-ext-72','graphics/ext-72-label-2.jpg','graphics/ext-72-label-3.jpg');" 
+      border=0 name=side-ext-72></A><BR><IMG height=6 hspace=0 
+      src="Transformation API For XML_files/separator.gif" width=120 
+      border=0><BR><A onmouseover="rolloverOn('side-ext-76');" 
+      onmouseout="rolloverOff('side-ext-76');" 
+      href="http://xml.apache.org/xalan-j/readme.html#developer-list"><IMG 
+      height=12 alt=Credits hspace=0 
+      src="Transformation API For XML_files/ext-76-label-3.jpg" width=120 
+      onload="rolloverLoad('side-ext-76','graphics/ext-76-label-2.jpg','graphics/ext-76-label-3.jpg');" 
+      border=0 name=side-ext-76></A><BR><A 
+      onmouseover="rolloverOn('side-ext-78');" 
+      onmouseout="rolloverOff('side-ext-78');" 
+      href="http://xml.apache.org/xalan-j/xsltc/todo.html#developer-list"><IMG 
+      height=12 alt="XSLTC Credits" hspace=0 
+      src="Transformation API For XML_files/ext-78-label-3.jpg" width=120 
+      onload="rolloverLoad('side-ext-78','graphics/ext-78-label-2.jpg','graphics/ext-78-label-3.jpg');" 
+      border=0 name=side-ext-78></A><BR><IMG height=14 hspace=0 
+      src="Transformation API For XML_files/close.gif" width=120 
+border=0><BR></TD>
+    <TD vAlign=top align=left width=500>
+      <TABLE cellSpacing=0 cellPadding=3 border=0>
+        <TBODY>
+        <TR>
+          <TD>
+            <UL>
+              <LI><A 
+              href="http://xml.apache.org/xalan-j/trax.html#intro">Introduction</A> 
+
+              <LI><A 
+              href="http://xml.apache.org/xalan-j/trax.html#terminology">General 
+              Terminology</A> 
+              <LI><A 
+              href="http://xml.apache.org/xalan-j/trax.html#requirements">Requirements</A> 
+
+              <LI><A 
+              href="http://xml.apache.org/xalan-j/trax.html#model">Model</A> 
+              <LI><A 
+              href="http://xml.apache.org/xalan-j/trax.html#patterns">Patterns</A> 
+              </LI></UL><A name=intro><!--anchor--></A>
+            <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+              <TBODY>
+              <TR>
+                <TD width=494 bgColor=#666699 colSpan=2>
+                  <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD>
+                      <TD width=492 bgColor=#0086b2><FONT 
+                        face=arial,helvetica,sanserif color=#ffffff size=+1><IMG 
+                        height=2 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=2 
+                        border=0><B>Introduction</B></FONT></TD>
+                      <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+              <TR>
+                <TD width=10>&nbsp;</TD>
+                <TD width=484><FONT face=arial,helvetica,sanserif 
+                  color=#000000>
+                  <P>This document describes the transformation API for XML 
+                  (TrAX), the set of APIs contained in <A 
+                  href="http://xml.apache.org/xalan-j/apidocs/javax/xml/transform/package-summary.html">javax.xml.transform</A>, 
+                  <A 
+                  href="http://xml.apache.org/xalan-j/apidocs/javax/xml/transform/stream/package-summary.html">javax.xml.transform.stream</A>, 
+                  <A 
+                  href="http://xml.apache.org/xalan-j/apidocs/javax/xml/transform/dom/package-summary.html">javax.xml.transform.dom</A>, 
+                  and <A 
+                  href="http://xml.apache.org/xalan-j/apidocs/javax/xml/transform/sax/package-summary.html">javax.xml.transform.sax</A>.</P>
+                  <P>There is a broad need for Java applications to be able to 
+                  transform XML and related tree-shaped data structures. In 
+                  fact, XML is not normally very useful to an application 
+                  without going through some sort of transformation, unless the 
+                  semantic structure is used directly as data. Almost all 
+                  XML-related applications need to perform transformations. 
+                  Transformations may be described by Java code, Perl code, <A 
+                  href="http://www.w3.org/TR/xslt">XSLT</A> Stylesheets, other 
+                  types of script, or by proprietary formats. The inputs, one or 
+                  multiple, to a transformation, may be a URL, XML stream, a DOM 
+                  tree, SAX Events, or a proprietary format or data structure. 
+                  The output types are the pretty much the same types as the 
+                  inputs, but different inputs may need to be combined with 
+                  different outputs.</P>
+                  <P>The great challenge of a transformation API is how to deal 
+                  with all the possible combinations of inputs and outputs, 
+                  without becoming specialized for any of the given types.</P>
+                  <P>The Java community will greatly benefit from a common API 
+                  that will allow them to understand and apply a single model, 
+                  write to consistent interfaces, and apply the transformations 
+                  polymorphically. TrAX attempts to define a model that is clean 
+                  and generic, yet fills general application requirements across 
+                  a wide variety of uses. </P></FONT></TD></TR></TBODY></TABLE><BR><A 
+            name=terminology><!--anchor--></A>
+            <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+              <TBODY>
+              <TR>
+                <TD width=494 bgColor=#666699 colSpan=2>
+                  <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD>
+                      <TD width=492 bgColor=#0086b2><FONT 
+                        face=arial,helvetica,sanserif color=#ffffff size=+1><IMG 
+                        height=2 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=2 
+                        border=0><B>General Terminology</B></FONT></TD>
+                      <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+              <TR>
+                <TD width=10>&nbsp;</TD>
+                <TD width=484><FONT face=arial,helvetica,sanserif 
+                  color=#000000>
+                  <P>This section will explain some general terminology used in 
+                  this document. Technical terminology will be explained in the 
+                  Model section. In many cases, the general terminology overlaps 
+                  with the technical terminology.</P>
+                  <DL>
+                    <DT>Tree 
+                    <DD>This term, as used within this document, describes an 
+                    abstract structure that consists of nodes or events that may 
+                    be produced by XML. A Tree physically may be a DOM tree, a 
+                    series of well balanced parse events (such as those coming 
+                    from a SAX2 ContentHander), a series of requests (the result 
+                    of which can describe a tree), or a stream of marked-up 
+                    characters. 
+                    <DT>Source Tree(s) 
+                    <DD>One or more trees that are the inputs to the 
+                    transformation. 
+                    <DT>Result Tree(s) 
+                    <DD>One or more trees that are the output of the 
+                    transformation. 
+                    <DT>Transformation 
+                    <DD>The process of consuming a stream or tree to produce 
+                    another stream or tree. 
+                    <DT>Identity (or Copy) Transformation 
+                    <DD>The process of transformation from a source to a result, 
+                    making as few structural changes as possible and no 
+                    informational changes. The term is somewhat loosely used, as 
+                    the process is really a copy. from one "format" (such as a 
+                    DOM tree, stream, or set of SAX events) to another. 
+                    <DT>Serialization 
+                    <DD>The process of taking a tree and turning it into a 
+                    stream. In some sense, a serialization is a specialized 
+                    transformation. 
+                    <DT>Parsing 
+                    <DD>The process of taking a stream and turning it into a 
+                    tree. In some sense, parsing is a specialized 
+                    transformation. 
+                    <DT>Transformer 
+                    <DD>A Transformer is the object that executes the 
+                    transformation. 
+                    <DT>Transformation instructions 
+                    <DD>Describes the transformation. A form of code, script, or 
+                    simply a declaration or series of declarations. 
+                    <DT>Stylesheet 
+                    <DD>The same as "transformation instructions," except it is 
+                    likely to be used in conjunction with <A 
+                    href="http://www.w3.org/TR/xslt">XSLT</A>. 
+                    <DT>Templates 
+                    <DD>Another form of "transformation instructions." In the 
+                    TrAX interface, this term is used to describe processed or 
+                    compiled transformation instructions. The Source flows 
+                    through a Templates object to be formed into the Result. 
+                    <DT>Processor 
+                    <DD>A general term for the thing that may both process the 
+                    transformation instructions, and perform the transformation. 
+
+                    <DT>DOM 
+                    <DD>Document Object Model, specifically referring to the <A 
+                    href="http://www.w3.org/TR/DOM-Level-2">Document Object 
+                    Model (DOM) Level 2 Specification</A>. 
+                    <DT>SAX 
+                    <DD>Simple API for XML, specifically referring to the <A 
+                    href="http://www.megginson.com/SAX/SAX2">SAX 2.0 
+                    release</A>. </DD></DL></FONT></TD></TR></TBODY></TABLE><BR><A 
+            name=requirements><!--anchor--></A>
+            <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+              <TBODY>
+              <TR>
+                <TD width=494 bgColor=#666699 colSpan=2>
+                  <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD>
+                      <TD width=492 bgColor=#0086b2><FONT 
+                        face=arial,helvetica,sanserif color=#ffffff size=+1><IMG 
+                        height=2 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=2 
+                        border=0><B>Requirements</B></FONT></TD>
+                      <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+              <TR>
+                <TD width=10>&nbsp;</TD>
+                <TD width=484><FONT face=arial,helvetica,sanserif 
+                  color=#000000>
+                  <P>The following requirements have been determined from broad 
+                  experience with XML projects from the various members 
+                  participating on the JCP.</P>
+                  <UL>
+                    <LI>TrAX must provide a clean, simple interface for simple 
+                    uses. 
+                    <LI>TrAX must be powerful enough to be applied to a wide 
+                    range of uses, such as, e-commerce, content management, 
+                    server content delivery, and client applications. 
+                    <LI>A processor that implements a TrAX interface must be 
+                    optimizeable. Performance is a critical issue for most 
+                    transformation use cases. 
+                    <LI>As a specialization of the above requirement, a TrAX 
+                    processor must be able to support a compiled model, so that 
+                    a single set of transformation instructions can be compiled, 
+                    optimized, and applied to a large set of input sources. 
+                    <LI>TrAX must not be dependent an any given type of 
+                    transformation instructions. For instance, it must remain 
+                    independent of <A href="http://www.w3.org/TR/xslt">XSLT</A>. 
+
+                    <LI>TrAX must be able to allow processors to transform DOM 
+                    trees. 
+                    <LI>TrAX must be able to allow processors to produce DOM 
+                    trees. 
+                    <LI>TrAX must allow processors to transform SAX events. 
+                    <LI>TrAX must allow processors to produce SAX events. 
+                    <LI>TrAX must allow processors to transform streams of XML. 
+                    <LI>TrAX must allow processors to produce XML, HTML, and 
+                    other types of streams. 
+                    <LI>TrAX must allow processors to implement the various 
+                    combinations of inputs and outputs within a single 
+                    processor. 
+                    <LI>TrAX must allow processors to implement only a limited 
+                    set of inputs. For instance, it should be possible to write 
+                    a processor that implements the TrAX interfaces and that 
+                    only processes DOM trees, not streams or SAX events. 
+                    <LI>TrAX should allow a processor to implement 
+                    transformations of proprietary data structures. For 
+                    instance, it should be possible to implement a processor 
+                    that provides TrAX interfaces that performs transformation 
+                    of JDOM trees. 
+                    <LI>TrAX must allow the setting of serialization properties, 
+                    without constraint as to what the details of those 
+                    properties are. 
+                    <LI>TrAX must allow the setting of parameters to the 
+                    transformation instructions. 
+                    <LI>TrAX must support the setting of parameters and 
+                    properties as XML Namespaced items (i.e., qualified names). 
+                    <LI>TrAX must support URL resolution from within the 
+                    transformation, and have it return the needed data 
+                    structure. 
+                    <LI>TrAX must have a mechanism for reporting errors and 
+                    warnings to the calling application. 
+              </LI></UL></FONT></TD></TR></TBODY></TABLE><BR><A name=model><!--anchor--></A>
+            <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+              <TBODY>
+              <TR>
+                <TD width=494 bgColor=#666699 colSpan=2>
+                  <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD>
+                      <TD width=492 bgColor=#0086b2><FONT 
+                        face=arial,helvetica,sanserif color=#ffffff size=+1><IMG 
+                        height=2 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=2 
+                        border=0><B>Model</B></FONT></TD>
+                      <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+              <TR>
+                <TD width=10>&nbsp;</TD>
+                <TD width=484><FONT face=arial,helvetica,sanserif 
+                  color=#000000>
+                  <P>The section defines the abstract model for TrAX, apart from 
+                  the details of the interfaces.</P>
+                  <P>A TRaX <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-TransformerFactory">TransformerFactory</A> 
+                  is an object that processes transformation instructions, and 
+                  produces <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Templates">Templates</A> 
+                  (in the technical terminology). A <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Templates">Templates</A> 
+                  object provides a <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Transformer">Transformer</A>, 
+                  which transforms one or more <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Source">Source</A>s 
+                  into one or more <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Result">Result</A>s.</P>
+                  <P>To use the TRaX interface, you create a <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-TransformerFactory">TransformerFactory</A>, 
+                  which may directly provide a <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Transformer">Transformers</A>, 
+                  or which can provide <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Templates">Templates</A> 
+                  from a variety of <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Source">Source</A>s. 
+                  The <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Templates">Templates</A> 
+                  object is a processed or compiled representation of the 
+                  transformation instructions, and provides a <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Transformer">Transformer</A>. 
+                  The <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Transformer">Transformer</A> 
+                  processes a <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Transformer">Source</A> 
+                  according to the instructions found in the <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Templates">Templates</A>, 
+                  and produces a <A 
+                  href="http://xml.apache.org/xalan-j/trax.html#pattern-Result">Result</A>.</P>
+                  <P>The process of transformation from a tree, either in the 
+                  form of an object model, or in the form of parse events, into 
+                  a stream, is known as <I>serialization</I>. We believe this is 
+                  the most suitable term for this process, despite the overlap 
+                  with Java object 
+            serialization.</P></FONT></TD></TR></TBODY></TABLE><BR><A 
+            name=patterns><!--anchor--></A>
+            <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+              <TBODY>
+              <TR>
+                <TD width=494 bgColor=#666699 colSpan=2>
+                  <TABLE cellSpacing=0 cellPadding=0 width=494 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#039acc height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD>
+                      <TD width=492 bgColor=#0086b2><FONT 
+                        face=arial,helvetica,sanserif color=#ffffff size=+1><IMG 
+                        height=2 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=2 
+                        border=0><B>TRaX Patterns</B></FONT></TD>
+                      <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                        src="Transformation API For XML_files/void.gif" width=1 
+                        border=0></TD></TR>
+                    <TR>
+                      <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD>
+                      <TD width=492 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=492 border=0></TD>
+                      <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                        hspace=0 src="Transformation API For XML_files/void.gif" 
+                        width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+              <TR>
+                <TD width=10>&nbsp;</TD>
+                <TD width=484><FONT face=arial,helvetica,sanserif 
+                  color=#000000>
+                  <P>The intent, responsibilities, and thread safety of TrAX 
+                  objects:</P>
+                  <UL>
+                    <LI><A 
+                    href="http://xml.apache.org/xalan-j/trax.html#pattern-Processor">Processor</A> 
+
+                    <LI><A 
+                    href="http://xml.apache.org/xalan-j/trax.html#pattern-TransformerFactory">TransformerFactory</A> 
+
+                    <LI><A 
+                    href="http://xml.apache.org/xalan-j/trax.html#pattern-Templates">Templates</A> 
+
+                    <LI><A 
+                    href="http://xml.apache.org/xalan-j/trax.html#pattern-Transformer">Transformer</A> 
+
+                    <LI><A 
+                    href="http://xml.apache.org/xalan-j/trax.html#pattern-Source">Source</A> 
+
+                    <LI><A 
+                    href="http://xml.apache.org/xalan-j/trax.html#pattern-Result">Result</A> 
+                    </LI></UL><A name=pattern-Processor><!--anchor--></A>
+                  <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=484 bgColor=#666699 colSpan=2>
+                        <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#039acc height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#0086b2><FONT 
+                              face=arial,helvetica,sanserif color=#ffffff><IMG 
+                              height=2 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=2 border=0><B>Processor</B></FONT></TD>
+                            <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#017299 height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD width=10>&nbsp;</TD>
+                      <TD width=474><FONT face=arial,helvetica,sanserif 
+                        color=#000000 size=-1>
+                        <DL>
+                          <DT>Intent 
+                          <DD>Generic concept for the set of objects that 
+                          implement the TrAX interfaces. 
+                          <DT>Responsibilities 
+                          <DD>Create compiled transformation instructions, 
+                          transform sources, and manage transformation 
+                          parameters and properties. 
+                          <DT>Thread safety 
+                          <DD>Only the Templates object can be used concurrently 
+                          in multiple threads. The rest of the processor does 
+                          not do synchronized blocking, and so may not be used 
+                          to perform multiple concurrent operations. 
+                        </DD></DL></FONT></TD></TR></TBODY></TABLE><BR><A 
+                  name=pattern-TransformerFactory><!--anchor--></A>
+                  <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=484 bgColor=#666699 colSpan=2>
+                        <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#039acc height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#0086b2><FONT 
+                              face=arial,helvetica,sanserif color=#ffffff><IMG 
+                              height=2 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=2 
+                            border=0><B>TransformerFactory</B></FONT></TD>
+                            <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#017299 height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD width=10>&nbsp;</TD>
+                      <TD width=474><FONT face=arial,helvetica,sanserif 
+                        color=#000000 size=-1>
+                        <DL>
+                          <DT>Intent 
+                          <DD>Serve as a vendor-neutral Processor interface for 
+                          <A href="http://www.w3.org/TR/xslt">XSLT</A> and 
+                          similar processors. 
+                          <DT>Responsibilities 
+                          <DD>Serve as a factory for a concrete implementation 
+                          of an TransformerFactory, serve as a direct factory 
+                          for Transformer objects, serve as a factory for 
+                          Templates objects, and manage processor specific 
+                          features. 
+                          <DT>Thread safety 
+                          <DD>A TransformerFactory may not perform mulitple 
+                          concurrent operations. 
+                  </DD></DL></FONT></TD></TR></TBODY></TABLE><BR><A 
+                  name=pattern-Templates><!--anchor--></A>
+                  <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=484 bgColor=#666699 colSpan=2>
+                        <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#039acc height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#0086b2><FONT 
+                              face=arial,helvetica,sanserif color=#ffffff><IMG 
+                              height=2 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=2 border=0><B>Templates</B></FONT></TD>
+                            <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#017299 height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD width=10>&nbsp;</TD>
+                      <TD width=474><FONT face=arial,helvetica,sanserif 
+                        color=#000000 size=-1>
+                        <DL>
+                          <DT>Intent 
+                          <DD>The runtime representation of the transformation 
+                          instructions. 
+                          <DT>Responsibilities 
+                          <DD>A data bag for transformation instructions; act as 
+                          a factory for Transformers. 
+                          <DT>Thread safety 
+                          <DD>Threadsafe for concurrent usage over multiple 
+                          threads once construction is complete. 
+                      </DD></DL></FONT></TD></TR></TBODY></TABLE><BR><A 
+                  name=pattern-Transformer><!--anchor--></A>
+                  <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=484 bgColor=#666699 colSpan=2>
+                        <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#039acc height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#0086b2><FONT 
+                              face=arial,helvetica,sanserif color=#ffffff><IMG 
+                              height=2 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=2 border=0><B>Transformer</B></FONT></TD>
+                            <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#017299 height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD width=10>&nbsp;</TD>
+                      <TD width=474><FONT face=arial,helvetica,sanserif 
+                        color=#000000 size=-1>
+                        <DL>
+                          <DT>Intent 
+                          <DD>Act as a per-thread execution context for 
+                          transformations, act as an interface for performing 
+                          the transformation. 
+                          <DT>Responsibilities 
+                          <DD>Perform the transformation. 
+                          <DT>Thread safety 
+                          <DD>Only one instance per thread is safe. </DD></DL>
+                        <TABLE cellSpacing=3 cellPadding=0 width="100%" 
+border=0>
+                          <TBODY>
+                          <TR>
+                            <TD vAlign=top width=20><IMG height=24 alt=Note 
+                              hspace=0 
+                              src="Transformation API For XML_files/note.gif" 
+                              width=20 border=0></TD>
+                            <TD vAlign=top><FONT face=arial,helvetica,sanserif 
+                              color=#000000 size=-1><I>The Transformer is bound 
+                              to the Templates object that created 
+                            it.</I></FONT></TD></TR></TBODY></TABLE></FONT></TD></TR></TBODY></TABLE><BR><A 
+                  name=pattern-Source><!--anchor--></A>
+                  <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=484 bgColor=#666699 colSpan=2>
+                        <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#039acc height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#0086b2><FONT 
+                              face=arial,helvetica,sanserif color=#ffffff><IMG 
+                              height=2 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=2 border=0><B>Source</B></FONT></TD>
+                            <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#017299 height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD width=10>&nbsp;</TD>
+                      <TD width=474><FONT face=arial,helvetica,sanserif 
+                        color=#000000 size=-1>
+                        <DL>
+                          <DT>Intent 
+                          <DD>Serve as a single vendor-neutral object for 
+                          multiple types of input. 
+                          <DT>Responsibilities 
+                          <DD>Act as simple data holder for System IDs, DOM 
+                          nodes, streams, etc. 
+                          <DT>Thread safety 
+                          <DD>Threadsafe concurrently over multiple threads for 
+                          read-only operations; must be synchronized for edit 
+                          operations. </DD></DL></FONT></TD></TR></TBODY></TABLE><BR><A 
+                  name=pattern-Result><!--anchor--></A>
+                  <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=484 bgColor=#666699 colSpan=2>
+                        <TABLE cellSpacing=0 cellPadding=0 width=484 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD width=1 bgColor=#039acc height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#039acc height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#039acc><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#0086b2><FONT 
+                              face=arial,helvetica,sanserif color=#ffffff><IMG 
+                              height=2 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=2 border=0><B>Result</B></FONT></TD>
+                            <TD width=1 bgColor=#017299><IMG height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR>
+                          <TR>
+                            <TD width=1 bgColor=#0086b2 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD>
+                            <TD width=482 bgColor=#017299 height=1><IMG 
+                              height=1 hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=482 border=0></TD>
+                            <TD width=1 bgColor=#017299 height=1><IMG height=1 
+                              hspace=0 
+                              src="Transformation API For XML_files/void.gif" 
+                              width=1 border=0></TD></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD width=10>&nbsp;</TD>
+                      <TD width=474><FONT face=arial,helvetica,sanserif 
+                        color=#000000 size=-1>
+                        <P>Alternative name: ResultTarget.</P>
+                        <DL>
+                          <DT>Intent 
+                          <DD>Serve as a single object for multiple types of 
+                          output, so there can be simple process method 
+                          signatures. 
+                          <DT>Responsibilities 
+                          <DD>Act as simple data holder for output stream, DOM 
+                          node, ContentHandler, etc. 
+                          <DT>Thread safety 
+                          <DD>Threadsafe concurrently over multiple threads for 
+                          read-only, must be synchronized for edit. 
+                        </DD></DL></FONT></TD></TR></TBODY></TABLE><BR></FONT></TD></TR></TBODY></TABLE><BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><BR>
+<TABLE cellSpacing=0 cellPadding=0 width=620 border=0>
+  <TBODY>
+  <TR>
+    <TD bgColor=#0086b2><IMG height=1 src="" width=1></TD></TR>
+  <TR>
+    <TD align=middle><FONT color=#0086b2 size=-1><I>Copyright © 2002 The 
+      Apache Software Foundation. All Rights Reserved. 
+</I></FONT></TD></TR></TBODY></TABLE></BODY></HTML>

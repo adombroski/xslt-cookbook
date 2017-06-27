@@ -1,0 +1,463 @@
+Platform: NT
+Output: MBCS
+Rose Version: 6.5.9232.10
+********Object Flows Not supported ***********
+Global Symbol Entered; Model: 'tomato' with id G.1 at index  0
+Scoped Symbol Entered; Category: 'Logical View' with id S.10000 at index  0
+Scoped Symbol Entered; Class: 'EN' with id S.10001 at index  1
+Stereotype Entered: Class topic with id 'G.2' at index  0
+Scoped Symbol Entered; Attribute: 'subjectIdentity' with id S.10002 at index  2
+Scoped Symbol Entered; Class: 'FR' with id S.10003 at index  3
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Attribute: 'subjectIdentity' with id S.10004 at index  4
+Scoped Symbol Entered; Class: 'tomato' with id S.10005 at index  5
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Attribute: 'id' with id S.10006 at index  6
+Scoped Symbol Entered; Attribute: 'subjectIdentity' with id S.10007 at index  7
+Scoped Symbol Entered; Class: 'EN::tomato' with id S.10008 at index  8
+Stereotype Entered: Class baseName with id 'G.3' at index  1
+Scoped Symbol Entered; Class: 'FR::tomate' with id S.10009 at index  9
+Enter Stereotype: baseName Class is already present
+Scoped Symbol Entered; Class: 'tomato.gif' with id S.10010 at index  10
+Stereotype Entered: Class resource with id 'G.4' at index  2
+Scoped Symbol Entered; Class: 'tomate confite farcie aux douze saveurs' with id S.10011 at index  11
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Attribute: 'id' with id S.10012 at index  12
+Scoped Symbol Entered; Class: 'desert' with id S.10013 at index  13
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Class: 'ingredient' with id S.10014 at index  14
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Attribute: 'id' with id S.10015 at index  15
+Scoped Symbol Entered; Class: 'dish' with id S.10016 at index  16
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Attribute: 'id' with id S.10017 at index  17
+Scoped Symbol Entered; Class: 'ingredient_of' with id S.10018 at index  18
+Scoped Symbol Entered; Class: 'carmel' with id S.10019 at index  19
+Scoped Symbol Entered; Attribute: 'id' with id S.10020 at index  20
+Scoped Symbol Entered; Class: 'menu' with id S.10021 at index  21
+Scoped Symbol Entered; Attribute: 'id' with id S.10022 at index  22
+Scoped Symbol Entered; Class: 'entrees' with id S.10023 at index  23
+Scoped Symbol Entered; Class: 'FoieGras' with id S.10024 at index  24
+Scoped Symbol Entered; Attribute: 'id' with id S.10025 at index  25
+Scoped Symbol Entered; Class: 'TMT' with id S.10026 at index  26
+Stereotype Entered: Class variant with id 'G.5' at index  3
+Scoped Symbol Entered; Attribute: 'param1' with id S.10027 at index  27
+Stereotype Entered: Attribute topic with id 'G.6' at index  4
+Scoped Symbol Entered; Attribute: 'resourceData' with id S.10028 at index  28
+Scoped Symbol Entered; Class: 'cell_phone' with id S.10029 at index  29
+Global Symbol Entered; Association: '{EN-EN::tomato}{3D626E2C00EA}' with id G.7 at index  1
+Stereotype Entered: Association scope with id 'G.8' at index  5
+Global Symbol Entered; Role: '{3D626E2D006D}' with id G.9 at index  2
+Global Symbol Entered; Role: '{3D626E2D007D}' with id G.10 at index  3
+Global Symbol Entered; Association: '{FR-FR::tomate}{3D626ECC0000}' with id G.11 at index  4
+Enter Stereotype: scope Association is already present
+Global Symbol Entered; Role: '{3D626ECC030D}' with id G.12 at index  5
+Global Symbol Entered; Role: '{3D626ECC030E}' with id G.13 at index  6
+Global Symbol Entered; Association: '{tomato.gif-tomato}{3D626FAE001F}' with id G.14 at index  7
+Stereotype Entered: Association occurance with id 'G.15' at index  6
+Global Symbol Entered; Role: '{3D626FAE02FD}' with id G.16 at index  8
+Global Symbol Entered; Role: '{3D626FAE030D}' with id G.17 at index  9
+Global Symbol Entered; Association: 'tomato_confite_association{3D6274D802DE}' with id G.18 at index  10
+Stereotype Entered: Association ingredient_of with id 'G.19' at index  7
+Global Symbol Entered; Role: 'anIngredient{3D6274D90261}' with id G.20 at index  11
+Global Symbol Entered; Role: 'aDish{3D6274D90262}' with id G.21 at index  12
+Global Symbol Entered; Association: 'caramels_confite{3D62799E01B5}' with id G.22 at index  13
+Enter Stereotype: ingredient_of Association is already present
+Global Symbol Entered; Role: 'anIngredient{3D62799F008C}' with id G.23 at index  14
+Global Symbol Entered; Role: 'aDish{3D62799F009C}' with id G.24 at index  15
+Global Symbol Entered; Association: 'entree_desert{3D627D5702FD}' with id G.25 at index  16
+Stereotype Entered: Association menu with id 'G.26' at index  8
+Global Symbol Entered; Role: 'entrees{3D627D5900CB}' with id G.27 at index  17
+Global Symbol Entered; Role: 'dessert{3D627D5900CC}' with id G.28 at index  18
+Global Symbol Entered; Dependency: '{tomate confite farcie aux douze saveurs?desert}{3D6274140222}' with id G.29 at index  19
+Stereotype Entered: Dependency instanceOf with id 'G.30' at index  9
+Scoped Symbol Entered; Subsystem: 'Component View' with id S.10030 at index  30
+Scoped Symbol Entered; Category: 'Use Case View' with id S.10031 at index  31
+Create Model: tomato
+Create UMLClass: EN
+Stereotype Ref created for stereotype 'topic' of Class: EN
+Create AssociationRef for Class: EN
+Add Association End ref(G.9) Role: {3D626E2D006D}
+Global Symbol Entered; Basic Type: 'String' with id G.31 at index  20
+Create UMLClass: FR
+Stereotype Ref created for stereotype 'topic' of Class: FR
+Create AssociationRef for Class: FR
+Add Association End ref(G.12) Role: {3D626ECC030D}
+Create UMLClass: tomato
+Stereotype Ref created for stereotype 'topic' of Class: tomato
+Create AssociationRef for Class: tomato
+Switch Roles: Role1Type = Logical View::tomato.gif Role2Type = Logical View::tomato
+Add Association End ref(G.17) Role: {3D626FAE030D}
+Create AssociationRef for Class: tomato
+Add Association End ref(G.20) Role: anIngredient{3D6274D90261}
+Global Symbol Entered; Basic Type: '<undefined>' with id G.32 at index  21
+Create UMLClass: EN::tomato
+Stereotype Ref created for stereotype 'baseName' of Class: EN::tomato
+Create AssociationRef for Class: EN::tomato
+Switch Roles: Role1Type = Logical View::EN Role2Type = Logical View::EN\:\:tomato
+Add Association End ref(G.10) Role: {3D626E2D007D}
+Create UMLClass: FR::tomate
+Stereotype Ref created for stereotype 'baseName' of Class: FR::tomate
+Create AssociationRef for Class: FR::tomate
+Switch Roles: Role1Type = Logical View::FR Role2Type = Logical View::FR\:\:tomate
+Add Association End ref(G.13) Role: {3D626ECC030E}
+Create UMLClass: tomato.gif
+Stereotype Ref created for stereotype 'resource' of Class: tomato.gif
+Create AssociationRef for Class: tomato.gif
+Add Association End ref(G.16) Role: {3D626FAE02FD}
+Create UMLClass: tomate confite farcie aux douze saveurs
+Stereotype Ref created for stereotype 'topic' of Class: tomate confite farcie aux douze saveurs
+Create AssociationRef for Class: tomate confite farcie aux douze saveurs
+Switch Roles: Role1Type = Logical View::tomato Role2Type = Logical View::tomate confite farcie aux douze saveurs
+Add Association End ref(G.21) Role: aDish{3D6274D90262}
+Create AssociationRef for Class: tomate confite farcie aux douze saveurs
+Switch Roles: Role1Type = Logical View::carmel Role2Type = Logical View::tomate confite farcie aux douze saveurs
+Add Association End ref(G.24) Role: aDish{3D62799F009C}
+Create AssociationRef for Class: tomate confite farcie aux douze saveurs
+Switch Roles: Role1Type = Logical View::FoieGras Role2Type = Logical View::tomate confite farcie aux douze saveurs
+Add Association End ref(G.28) Role: dessert{3D627D5900CC}
+Create UMLClass: desert
+Stereotype Ref created for stereotype 'topic' of Class: desert
+Create UMLClass: ingredient
+Stereotype Ref created for stereotype 'topic' of Class: ingredient
+Create UMLClass: dish
+Stereotype Ref created for stereotype 'topic' of Class: dish
+Create UMLClass: ingredient_of
+Create UMLClass: carmel
+Create AssociationRef for Class: carmel
+Add Association End ref(G.23) Role: anIngredient{3D62799F008C}
+Create UMLClass: menu
+Create UMLClass: entrees
+Create UMLClass: FoieGras
+Create AssociationRef for Class: FoieGras
+Add Association End ref(G.27) Role: entrees{3D627D5900CB}
+Create UMLClass: TMT
+Stereotype Ref created for stereotype 'variant' of Class: TMT
+Stereotype Ref created for stereotype 'topic' of Attribute: param1
+Create UMLClass: cell_phone
+Process Association: {EN-EN::tomato}{3D626E2C00EA}
+Stereotype Ref created for stereotype 'scope' of Association: {EN-EN::tomato}{3D626E2C00EA}
+Role: 
+  Association End: EN
+  Association end: G.9 added to association G.7
+  Class/UseCase/Interface: EN
+Role: 
+  Association End: EN::tomato
+  Association end: G.10 added to association G.7
+  Class/UseCase/Interface: EN::tomato
+Process Association: {FR-FR::tomate}{3D626ECC0000}
+Stereotype Ref created for stereotype 'scope' of Association: {FR-FR::tomate}{3D626ECC0000}
+Role: 
+  Association End: FR
+  Association end: G.12 added to association G.11
+  Class/UseCase/Interface: FR
+Role: 
+  Association End: FR::tomate
+  Association end: G.13 added to association G.11
+  Class/UseCase/Interface: FR::tomate
+Process Association: {tomato.gif-tomato}{3D626FAE001F}
+Stereotype Ref created for stereotype 'occurance' of Association: {tomato.gif-tomato}{3D626FAE001F}
+Role: 
+  Association End: tomato.gif
+  Association end: G.16 added to association G.14
+  Class/UseCase/Interface: tomato.gif
+Role: 
+  Association End: tomato
+  Association end: G.17 added to association G.14
+  Class/UseCase/Interface: tomato
+Process Association: tomato_confite_association{3D6274D802DE}
+Stereotype Ref created for stereotype 'ingredient_of' of Association: tomato_confite_association{3D6274D802DE}
+Role: anIngredient
+  Association End: tomato
+  Association end: G.20 added to association G.18
+  Class/UseCase/Interface: tomato
+Role: aDish
+  Association End: tomate confite farcie aux douze saveurs
+  Association end: G.21 added to association G.18
+  Class/UseCase/Interface: tomate confite farcie aux douze saveurs
+Process Association: {EN-EN::tomato}{3D626E2C00EA}
+>>>>Already Defined -- Quit
+Process Association: {FR-FR::tomate}{3D626ECC0000}
+>>>>Already Defined -- Quit
+Process Association: {tomato.gif-tomato}{3D626FAE001F}
+>>>>Already Defined -- Quit
+Process Association: tomato_confite_association{3D6274D802DE}
+>>>>Already Defined -- Quit
+Process Association: caramels_confite{3D62799E01B5}
+Stereotype Ref created for stereotype 'ingredient_of' of Association: caramels_confite{3D62799E01B5}
+Role: anIngredient
+  Association End: carmel
+  Association end: G.23 added to association G.22
+  Class/UseCase/Interface: carmel
+Role: aDish
+  Association End: tomate confite farcie aux douze saveurs
+  Association end: G.24 added to association G.22
+  Class/UseCase/Interface: tomate confite farcie aux douze saveurs
+Process Association: entree_desert{3D627D5702FD}
+Stereotype Ref created for stereotype 'menu' of Association: entree_desert{3D627D5702FD}
+Role: entrees
+  Association End: FoieGras
+  Association end: G.27 added to association G.25
+  Class/UseCase/Interface: FoieGras
+Role: dessert
+  Association End: tomate confite farcie aux douze saveurs
+  Association end: G.28 added to association G.25
+  Class/UseCase/Interface: tomate confite farcie aux douze saveurs
+Process Association: caramels_confite{3D62799E01B5}
+>>>>Already Defined -- Quit
+Process Association: entree_desert{3D627D5702FD}
+>>>>Already Defined -- Quit
+CreateClassGeneralizations for pkg: Logical View
+CreateAClassGeneralization for class: Logical View::EN\:\:tomato
+Global Symbol Entered; Generalization: '{EN::tomato->tomato}{3D626E020242}' with id G.33 at index  22
+CreateAClassGeneralization for class: Logical View::FR\:\:tomate
+Global Symbol Entered; Generalization: '{FR::tomate->tomato}{3D626EB80109}' with id G.34 at index  23
+CreateAClassGeneralization for class: Logical View::TMT
+Global Symbol Entered; Generalization: '{TMT->tomato}{3D6C257D0119}' with id G.35 at index  24
+CreateClassGeneralizations for pkg: Use Case View
+Create Class Dependency: {tomate confite farcie aux douze saveurs?desert}{3D6274140222} @G.29
+Stereotype Ref created for stereotype 'instanceOf' of Dependency: {tomate confite farcie aux douze saveurs?desert}{3D6274140222}
+Create UMLStereotype: topic with id G.2
+Create UMLStereotype: baseName with id G.3
+Create UMLStereotype: resource with id G.4
+Create UMLStereotype: variant with id G.5
+Create UMLStereotype: topic with id G.6
+Create UMLStereotype: scope with id G.8
+Create UMLStereotype: occurance with id G.15
+Create UMLStereotype: ingredient_of with id G.19
+Create UMLStereotype: menu with id G.26
+Create UMLStereotype: instanceOf with id G.30
+Create Package diagrams for /tomato
+GenerateClassDiagrams -- category: Logical View
+New UISModelElement created @ G.36, extends G.1
+Scoped Symbol Entered; ClassDiagram: 'Main' with id S.10032 at index  32
+Generate Class Diagram: Logical View::Main
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.37
+** Class model id is S.10001
+AddPresentationForNoteView ignores label: 'EN'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.38
+** Class model id is S.10008
+AddPresentationForNoteView ignores label: 'EN::tomato'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<baseName>>'
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.39
+**Association model id = G.7
+Create UMLPresentation for Role # G.40
+Role Presentation: G.40, refers to G.9
+Create UMLPresentation for Role # G.41
+Role Presentation: G.41, refers to G.10
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: <<scope>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.42
+** Class model id is S.10003
+AddPresentationForNoteView ignores label: 'FR'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.43
+** Class model id is S.10009
+AddPresentationForNoteView ignores label: 'FR::tomate'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<baseName>>'
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.44
+**Association model id = G.11
+Create UMLPresentation for Role # G.45
+Role Presentation: G.45, refers to G.12
+Create UMLPresentation for Role # G.46
+Role Presentation: G.46, refers to G.13
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: <<scope>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.47
+** Class model id is S.10013
+AddPresentationForNoteView ignores label: 'desert'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.48
+** Class model id is S.10014
+AddPresentationForNoteView ignores label: 'ingredient'
+AddPresentationForNoteView ignores label: 'id = anIngredient
+'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.49
+** Class model id is S.10016
+AddPresentationForNoteView ignores label: 'dish'
+AddPresentationForNoteView ignores label: 'id = aDish
+'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.50
+** Class model id is S.10018
+AddPresentationForNoteView ignores label: 'ingredient_of'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.51
+** Class model id is S.10021
+AddPresentationForNoteView ignores label: 'menu'
+AddPresentationForNoteView ignores label: 'id = menu
+'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.52
+** Class model id is S.10023
+AddPresentationForNoteView ignores label: 'entrees'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.53
+** Class model id is S.10010
+AddPresentationForNoteView ignores label: 'tomato.gif'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<resource>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.54
+** Class model id is S.10005
+AddPresentationForNoteView ignores label: 'tomato'
+AddPresentationForNoteView ignores label: 'id = myTomato
+subjectIdentity : String = http://www.fed.gov/usda/doc/tomato.htm#gradeA
+'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+AddPresentationForNoteView fails--unknown noteview type
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.55
+Rose shortcoming forces dropping of label: <<baseName>>
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.56
+**Association model id = G.14
+Create UMLPresentation for Role # G.57
+Role Presentation: G.57, refers to G.16
+Create UMLPresentation for Role # G.58
+Role Presentation: G.58, refers to G.17
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: <<occurance>>
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.59
+Rose shortcoming forces dropping of label: <<baseName>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.60
+** Class model id is S.10019
+AddPresentationForNoteView ignores label: 'carmel'
+AddPresentationForNoteView ignores label: 'id = myCarmel
+'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.61
+** Class model id is S.10024
+AddPresentationForNoteView ignores label: 'FoieGras'
+AddPresentationForNoteView ignores label: 'id = myFoieGras
+'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.62
+** Class model id is S.10011
+AddPresentationForNoteView ignores label: 'tomate confite farcie aux douze saveurs'
+AddPresentationForNoteView ignores label: 'id = myConfite
+'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.63
+**Association model id = G.18
+Create UMLPresentation for Role # G.64
+Role Presentation: G.64, refers to G.20
+Create UMLPresentation for Role # G.65
+Role Presentation: G.65, refers to G.21
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +anIngredient
+Rose shortcoming forces dropping of label: +aDish
+Rose shortcoming forces dropping of label: tomato_confite_association
+Rose shortcoming forces dropping of label: <<ingredient_of>>
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.66
+**Association model id = G.22
+Create UMLPresentation for Role # G.67
+Role Presentation: G.67, refers to G.23
+Create UMLPresentation for Role # G.68
+Role Presentation: G.68, refers to G.24
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +anIngredient
+Rose shortcoming forces dropping of label: +aDish
+Rose shortcoming forces dropping of label: caramels_confite
+Rose shortcoming forces dropping of label: <<ingredient_of>>
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.69
+**Association model id = G.25
+Create UMLPresentation for Role # G.70
+Role Presentation: G.70, refers to G.27
+Create UMLPresentation for Role # G.71
+Role Presentation: G.71, refers to G.28
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: +entrees
+Rose shortcoming forces dropping of label: +dessert
+Rose shortcoming forces dropping of label: entree_desert
+Rose shortcoming forces dropping of label: <<menu>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.72
+** Class model id is S.10026
+AddPresentationForNoteView ignores label: 'TMT'
+AddPresentationForNoteView ignores label: '<<topic>> param1 = cell_phone
+resourceData = TMT
+'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<variant>>'
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.73
+Rose shortcoming forces dropping of label: <<variant>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.74
+** Class model id is S.10029
+AddPresentationForNoteView ignores label: 'cell_phone'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: ClassDependency
+Create UMLPresentation for Class Dep # G.75
+AddPresentationForNoteView ignores label: ''
+Rose shortcoming forces dropping of label: <<instanceOf>>
+GenerateScenarioDiagram -- category: Logical View
+GenerateStateActivityDiagram -- category: Logical View
+GenerateStateActivityDiagram -- class: EN
+GenerateStateActivityDiagram -- class: FR
+GenerateStateActivityDiagram -- class: tomato
+GenerateStateActivityDiagram -- class: EN::tomato
+GenerateStateActivityDiagram -- class: FR::tomate
+GenerateStateActivityDiagram -- class: tomato.gif
+GenerateStateActivityDiagram -- class: tomate confite farcie aux douze saveurs
+GenerateStateActivityDiagram -- class: desert
+GenerateStateActivityDiagram -- class: ingredient
+GenerateStateActivityDiagram -- class: dish
+GenerateStateActivityDiagram -- class: ingredient_of
+GenerateStateActivityDiagram -- class: carmel
+GenerateStateActivityDiagram -- class: menu
+GenerateStateActivityDiagram -- class: entrees
+GenerateStateActivityDiagram -- class: FoieGras
+GenerateStateActivityDiagram -- class: TMT
+GenerateStateActivityDiagram -- class: cell_phone
+Using existing UISModelElement @ G.36, extends G.1
+Scoped Symbol Entered; ModuleDiagram: 'Main' with id S.10033 at index  33
+Generate Module Diagram: Main

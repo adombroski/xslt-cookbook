@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foo:someElement xmlns:foo="http:/www.ora.com/XMLCookbook/namespace/foo">
+  <foo:aChild>
+    <foo:aGrandChild>
+    </foo:aGrandChild>
+    <foo:aGrandChild>
+      <doc:doc xmlns:doc="http:/www.ora.com/XMLCookbook/namespace/foo">
+        This documentation should not be removed or altered in any way.
+      </doc:doc>
+    </foo:aGrandChild>
+  </foo:aChild>
+</foo:someElement>

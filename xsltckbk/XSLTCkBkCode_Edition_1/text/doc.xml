@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+  <p>In the age of the internet, formats such HTML, XHTML and PDF clearly dominate the application of XSL and XSLT. However, plain old text will never become obsolete because it is the lowest common denominator in both human and machine-readable formats.  XML is often converted to text to be imported into another application that does not know how to read XML or does not interpret it the way you would prefer. Text output is also used when the result will be sent to a terminal or post processed in a Unix pipeline.</p>
+<p>Many recipes in this section place stress on XSLT techniques that create very generic XML to text converters. Here generic means that the transformation can easily be customized to work on many different XML inputs or produce a variety of outputs or both. The techniques employed in these recipes have application beyond specifics of a given recipe and often beyond the domain of text processing. In particular, you may want to look at recipes 5.2 through 5.5 even if they do not address a present need.</p>
+</doc>

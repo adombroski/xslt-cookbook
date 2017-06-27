@@ -1,0 +1,605 @@
+Chapter 6
+Exploiting XSLT 2.0
+1) Convert Simple Named Templates to 
+XSLT Functions
+
+<!-- Mathematical computations -->
+
+<xsl:function name="ckbk:factorial" as="xs:decimal">
+   <xsl:param name="n" as="xs:integer"/>
+   <xsl:sequence select="if ($n eq 0) then 1 
+                         else $n * ckbk:factorial($n - 1)"/> 
+</xsl:function>
+
+
+<-- Simple mappings -->
+
+<xsl:function name="ckbk:decodeColor" as="xs:string">
+     <xsl:param name="colorCode" as="xs:integer"/>
+     <xsl:variable name="colorLookup"
+                  select="('black','red','orange','yellow',
+                           'green','blue','indigo','violet','white')"/>
+     <xsl:sequence select="if ($colorCode ge 0 and 
+                               $colorCode lt count($colorLookup)) 
+                           then $colorLookup[$colorCode] 
+                           else 'no color'"/>
+</xsl:function>
+
+<-- String manipulations -->
+
+<xsl:function name="ckbk:reverse">
+    <xsl:param name="input" as="xs:string"/>
+    <xsl:sequence select="codepoints-to-string(reverse(
+                           string-to-codepoints($input)))"/>
+</xsl:function>
+
+Discussion 
+<xsl:function name="getParts" as="item()*">
+  <xsl:param name="startPartId" as="xs:string"/> 
+  <xsl:param name="endPartId" as="xs:string"/>
+  <xsl:sequence select="//Parts/part[@partId ge $startPartId 
+                                     and @partId le $endPartId]"/> 
+</xsl:function>
+<xsl:function name="getPartsElem" as="item()">
+	  <xsl:param name="startPartId" as="xs:string"/> 
+	  <xsl:param name="endPartId" as="xs:string"/>
+	  <Parts>
+   	   <xsl:copy-of select="//Parts/part[@partId ge $startPartId 
+                                         and @partId le $endPartId]"/>
+	  <Parts>	 
+</xsl:function>
+2) Prefer for-each-group Over 
+Muenchian Method of Grouping
+Group by values (group-by="expression")
+<xsl:template match="Employees">
+  <EmployeesByDept>
+	<xsl:for-each-group select="employee" group-by="@dept">
+	  <dept name="{current-grouping-key()}">
+	    <xsl:copy-of select="current-group()"/>
+	  </dept>
+    </xsl:for-each-group>
+  </EmployeesByDept>
+</xsl:template>
+Group by adjacent nodes (group-adjacent="expression")
+<xsl:template match="doc">
+    <xsl:copy>
+      <xsl:for-each-group select="*" group-adjacent="name()">
+        <xsl:if test="self::para">
+          <topic>
+            <xsl:copy-of select="current-group()"/>
+          </topic>
+        </xsl:if>
+      </xsl:for-each-group>
+    </xsl:copy>
+  </xsl:template>
+Group by starting node (group-starting-with="pattern")
+<xsl:template match="body">
+  <xsl:copy>
+    <xsl:for-each-group select="*" group-starting-with="h1">
+	  <div>
+	   <xsl:apply-templates select="current-group()"/>
+	  </div>
+   </xsl:for-each-group>
+  </xsl:copy>
+</xsl:template>
+Group by ending node (group-ending-with="pattern")
+ <xsl:stylesheet version="2.0"
+                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+ 
+  <xsl:template match="doc">
+    <xsl:copy>
+      <xsl:for-each-group select="para" 
+                          group-ending-with="para[position() mod 5 eq 0]">
+        <section>
+          <xsl:for-each select="current-group()">
+            <xsl:copy>
+              <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+          </xsl:for-each>
+        </section>
+      </xsl:for-each-group>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="@* | node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@* | node()"/>
+    </xsl:copy>
+  </xsl:template>
+</xsl:stylesheet>
+Discussion 
+<xsl:key name="products-by-category" select="product" use="@category"/>
+
+<xsl:template match="/">
+
+	<xsl:for-each select="//product[count(. | key('products-by-category', 
+@category)[1]) = 1]">
+	<xsl:variable name="current-grouping-key" 
+                  select="@category"/>
+	<xsl:variable name="current-group" 
+                  select="key('current-grouping-key', 
+                              $current-grouping-key)"/>
+    <xsl:for-each select="$current-group/*">
+	   <!-- processing for elements in group -->
+       <!-- you can use xsl:sort here also, if necessary -->
+    </xsl:for-each/>
+  </xsl:for-each/>
+
+<xsl:template match="/">
+
+3) Modularizing and Modes
+<xsl:template match="text()" mode="mode1"/>
+<xsl:template match="text()" mode="mode2"/>
+<xsl:template match="text()" mode="mode1 mode2"/>
+<xsl:template match="text()" mode="#all"/>
+Discussion
+<xsl:template match="author" mode="index">
+  <div class="author">
+    <xsl:apply-templates mode="#current"/>
+  </div>
+</xsl:template>
+<xsl:template match="author" mode="index body">
+  <div class="author">
+    <xsl:apply-templates mode="#current"/>
+  </div>
+</xsl:template>
+4) Using Types for Safety and Precision
+<xsl:stylesheet version="2.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+
+<!-- x is a sequence of zero or more strings -->
+<xsl:variable name="x" select="para" as="xs:string*"/>
+
+<!-- y is a sequence of one or more strings. We code the select in a way
+     that guarantees this although if you knew there must be at least one
+     para element, you could ommit the if expression -->
+<xsl:variable name="y" 
+              select="if (para) then para else ''" 
+              as="xs:string+"/>
+
+<!-- z is a sequence of one or more strings.  -->
+<xsl:variable name="z" select="para[1]" as="xs:string?"/>
+
+
+</xsl:stylesheet>
+<xsl:stylesheet version="2.0" 
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:my="http://www.mydomain.com/ns/my">
+
+<xsl:import-schema schema-location="my-schema.xsd"/>
+
+<xsl:template match="/">
+ <!--Validate that the resulting element conforms to my:BookType -->
+ <xsl:element name="Book" type="my:BookType">
+	 <xsl:apply-templates/>
+ </xsl:element>
+</xsl:template>
+
+<!-- … -->
+
+</xsl:stylesheet>
+
+5) Avoiding 1.0 to 2.0 Porting Pitfalls
+Types do not transparently convert to other types.
+    <xsl:variable name="a" select=" '10' "/>
+    <xsl:value-of select="sum($a, 1)"/> <!-- Error -->
+    <xsl:value-of select="sum(number($a), 1)"/> <!-- OK -->
+
+    <xsl:value-of select="string-length(10)"/> <!-- Error -->
+    <xsl:value-of select="string-length(string(10))"/> <!-- OK -->
+    <xsl:value-of select="string-length(string(true()))"/> 
+                                                   <!-- OK, equals 4 -->
+
+    <xsl:value-of select="1 + true()"/> <!-- Error -->
+    <xsl:value-of select="1 + number(true())"/> <!-- OK, equals 2 -->
+6) Emulating Object Oriented Reuse and 
+Design Patterns
+<xsl:template match="author | title | subtitle | deck" priority="1">
+  <a name="{generate-id()}">
+    <span class="{name()}">
+      <xsl:apply-templates/>
+    </span>
+  </a>
+</xsl:template>  
+
+<xsl:template match="author" priority="2">
+  <div>
+    <span class="by">By </span>
+    <xsl:next-match/>
+  </div>
+</xsl:template>  
+
+<xsl:template match="title" priority="2">
+  <h1 class="title"><xsl:next-match/></h1>
+</xsl:template>  
+
+<xsl:template match="deck" priority="2">
+  <h2 class="deck"><xsl:next-match/></h2>
+</xsl:template>  
+
+<xsl:template match="subtitle" priority="2">
+  <h2 class="subtitle"><xsl:next-match/></h2>
+</xsl:template> 
+<xsl:next-match>
+  <xsl:with-param name="indent" select="2"/>
+</xsl:next-match>
+<xsl:stylesheet version="2.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<!--Standard processing rules for doc -->
+<xsl:import href="doc.xslt"/>
+
+<!-- A custom parameter not invisioned by the author of doc.xslt -->
+<xsl:param name="customParam"/>
+
+<xsl:template match="/">
+ <!--Invoke templates from doc.xslt that have no 
+     knowledge of customParam -->
+  <xsl:apply-templates> 
+     <xsl:with-param name="customParam" 
+                     select="$customParam" tunnel="yes"/>
+   </xsl:apply-templates> 
+</xsl:template>
+
+
+<xsl:template match="heading1">
+    <!-- Do something special with heading1 elements 
+         based on customParam -->
+     <xsl:param name="customParam" tunnel="yes"/>
+     <!-- ... 
+                 -->
+</xsl:template>
+
+
+</xsl:stylesheet>
+
+Discussion
+Template Method
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" 
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+                xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+	
+  <xsl:output method="xhtml" indent="yes"/>
+
+  <xsl:param name="titlePrefix" select=" '' " as="xs:string"/>
+	
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title><xsl:value-of 
+                    select="concat($titlePrefix, /*/title)"/></title>
+      </head>
+      <body>
+        <xsl:call-template name="standard-processing-sequence"/>
+      </body>
+    </html>
+	</xsl:template>
+
+  <xsl:template name="standard-processing-sequence">
+	<xsl:apply-templates mode="front-matter">
+	  <xsl:with-param name="mode" select=" 'front-matter' " 
+                      tunnel="yes" as="xs:string"/>
+	</xsl:apply-templates>
+		
+	<xsl:apply-templates mode="toc">
+	  <xsl:with-param name="mode" select=" 'toc' " 
+                      tunnel="yes" as="xs:string"/>
+	</xsl:apply-templates>
+		
+	<xsl:apply-templates mode="body">
+  	  <xsl:with-param name="mode" select=" 'body' " 
+                      tunnel="yes" as="xs:string"/>
+	</xsl:apply-templates>
+		
+	<xsl:apply-templates mode="appendicies">
+	  <xsl:with-param name="mode" select=" 'appendicies' " 
+                      tunnel="yes" as="xs:string"/>
+	</xsl:apply-templates>
+  </xsl:template>
+	
+  <xsl:template match="/*" mode="#all">
+	<xsl:param name="mode"  tunnel="yes" as="xs:string"/>
+    <div class="{$mode}">
+      <xsl:apply-templates mode="#current"/>
+    </div>
+  </xsl:template>
+
+  <!-- Default templates for various modes go here - 
+       these can be overridden in importing stylesheets -->
+  	
+</xsl:stylesheet>
+Chain of Responsibility
+<xsl:template match="xhtm:td[matches(@class, '^keep-(\w+)')]"
+              mode="template" priority="2.1">
+
+</xsl:template>
+
+<xsl:template match="xhtm:td[matches(@class, '^(flow|list)-(\w+)')]"
+              mode="template" priority="2.2">
+
+</xsl:template>
+
+<xsl:template match="xhtm:td[matches(@class, '^repeat-(\w+)')]"
+              mode="template" priority="2.3">
+ 
+
+</xsl:template>
+
+<xsl:template match="xhtm:td[matches(@class, '^download-(\w+)')]"
+              mode="template" priority="2.4">
+
+
+</xsl:template> 
+
+
+<xsl:template match="xhtm:td[matches(@class, '^keep-(\w+)')]"
+              mode="template" priority="2.1">
+
+
+<xsl:template>
+Decorator
+7) Processing Unstructured Text with 
+Regular Expressions
+<xsl:template match="date">
+  <xsl:copy>
+    <xsl:analyze-string select="normalize-space(.)" 
+		regex="(\d\d\d\d) ( / | - ) (\d\d) ( / | - ) (\d\d)" 
+		flags="x">
+      <xsl:matching-substring>
+        <year><xsl:value-of select="regex-group(1)"/></year>
+        <month><xsl:value-of select="regex-group(3)"/></month>
+        <day><xsl:value-of select="regex-group(5)"/></day>
+      </xsl:matching-substring>
+      <xsl:non-matching-substring>
+        <error><xsl:value-of select="."/></error>
+      </xsl:non-matching-substring>
+    </xsl:analyze-string>
+  </xsl:copy>
+</xsl:template>
+<xsl:stylesheet version="2.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:fn="http://www.w3.org/2005/02/xpath-functions" 
+xmlns:xdt="http://www.w3.org/2005/02/xpath-datatypes">
+
+ <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+
+ <xsl:param name="csv-file" select=" 'test.csv' "/>  
+  
+  <xsl:template match="/">
+  
+    <converted-csv filename="{$csv-file}">
+      <xsl:for-each select="tokenize(unparsed-text($csv-file, 'UTF-8'),
+                                    '\n')">
+        <xsl:if test="normalize-space(.)">
+          <row>
+            <xsl:analyze-string select="." regex="," flags="x">
+              <xsl:non-matching-substring>
+                <col><xsl:value-of select="normalize-space(.)"/></col>
+              </xsl:non-matching-substring>
+            </xsl:analyze-string>
+          </row>
+        </xsl:if>
+      </xsl:for-each>
+    </converted-csv>
+    
+  </xsl:template>
+  
+</xsl:stylesheet>
+Discussion 
+<xsl:template match="text()">
+  <xsl:analyze-string select="." 
+                        regex='[\-+]?\d\.\d+\s*[eE][\-+]?\d+ |
+                               [\-+]?\d+\.\d+                | 
+                               [\-+]?\d+                     |
+                               "[^"]*?"                      ' 
+                        flags="x">
+      <xsl:matching-substring>
+        <xsl:choose>
+          <xsl:when test="matches(.,'[\-+]?\d\.\d+\s*[eE][\-+]?\d+')">
+            <scientific><xsl:value-of select="."/></scientific>          
+            </xsl:when>
+          <xsl:when test="matches(.,'[\-+]?\d+\.\d+')">
+            <decimal><xsl:value-of select="."/> </decimal>
+          </xsl:when>
+          <xsl:when test="matches(.,'[\-+]?\d+')">
+            <integer><xsl:value-of select="."/> </integer>
+          </xsl:when>
+          <xsl:when test='matches(.," "" [^""]*? "" ", "x")'>
+            <string><xsl:value-of select="."/></string>
+          </xsl:when>
+      </xsl:choose>
+    </xsl:matching-substring>
+  </xsl:analyze-string>
+</xsl:template>
+<!-- NOT VALID XSLT 2.0 - Author's wishful thinking --> 
+<xsl:template match="text()">
+  <xsl:analyze-string select="." 
+                      flags="x">
+    <xsl:matching-substring regex="[\-+]?\d\.\d+\s*[eE][\-+]?\d+">
+      <scientific><xsl:value-of select="."/></scientific>
+    </xsl:matching-substring>          
+    <xsl:matching-substring regex="[\-+]?\d+\.\d+'">
+      <decimal><xsl:value-of select="."/> </decimal>
+    </xsl:matching-substring>          
+    <xsl:matching-substring regex=" [\-+]?\d+')">
+      <integer><xsl:value-of select="."/> </integer>
+    </xsl:matching-substring>          
+    <xsl:matching-substring regex=' "[^"]*?" '>
+      <string><xsl:value-of select="."/></string>
+    </xsl:matching-substring>
+    <xsl:non=matching-substring>
+      <other><xsl:value-of select="."/></other>
+   </xsl:non=matching-substring>
+  </xsl:analyze-string>
+</xsl:template>
+8) Solving Difficult Serialization 
+Problems with Character Maps
+<xsl:character-map name="spaces">
+	<xsl:output-character char="&#xA0;" string="&amp;npsp;"/>
+	<xsl:output-character char="&#x2003;" string="&amp;emsp;"/>
+	<xsl:output-character char="&#x2007;" string="&amp;numsp;"/>
+	<xsl:output-character char="&#x2008;" string="&amp;puncsp;"/>
+	<xsl:output-character char="&#x2009;" string="&amp;thincsp;"/>
+	<xsl:output-character char="&#x200A;" string="&amp;hairsp;"/>
+</xsl:character-map>
+<?xml version="1.0"?>
+<!-- Define custom enties using the Unicode private use characters -->
+<!DOCTYPE xsl:stylesheet [
+  <!ENTITY start-comment "&#xE501;">
+  <!ENTITY end-comment "&#xE502;">
+]>
+
+<xsl:stylesheet version="2.0"
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<!-- Import the identity transform -->
+<xsl:import href="copy.xslt"/>
+
+<!-- Tell the serializer to use our character map, defined below -->
+<xsl:output use-character-maps="comment-delimiters"/>
+
+<!-- Define a key that will be used to identify elements that should be 
+commented out. -->
+<xsl:key name="omit-key" match="omit" use="@id"/>
+
+<!-- Map our custom entities to strings that form the syntax of XML start 
+and end comments -->
+<xsl:character-map name="comment-delimiters">
+  <xsl:output-character character="&start-comment;" string="&lt;!--"/>
+  <xsl:output-character character="&end-comment;" string="--&gt;"/>
+</xsl:character-map>
+
+<!-- Comment out those elements that have an id attribute that matches the 
+id of an omit element from an external document, omit.xml. -->
+<xsl:template match="*[key('omit-key',@id,doc('omit.xml'))]">
+  <xsl:text>&start-comment;</xsl:text>
+  <xsl:copy>
+  	<xsl:apply select="@* | *"/>
+  </xsl:copy>
+  <xsl:text>&end-comment;</xsl:text>
+</xsl:template>
+9) Outputting Multiple Documents
+<xsl:template match="products">
+	<xsl:for-each-group select="product" group-by="@type">
+	   <xsl:result-document href="prod-{current-grouping-key()}.xml">
+		<xsl:copy-of select="current-group()"/>
+	   </xsl:result-document>
+	</xsl:for-each-group>
+</xsl:template>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  
+ <!-- Default output format is XML -->
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  
+ <!-- Another named output format for HTML -->
+  <xsl:output method="html" encoding="UTF-8" indent="yes" name="html-out"/>
+
+<xsl:template match="/">
+  <xsl:apply-templates/>
+  <xsl:result-document href="result.html" format="html-out"> 
+    <xsl:apply-templates mode="html"/>
+  </xsl:result-document>
+</xsl:template>
+
+<!-- Other templates here -->
+  
+</xsl:stylesheet>
+Discussion 
+<xsl:variable name="tempDoc" as="document(element(*, my:document))">
+	<xsl:document type="my:document" validation="strict">
+	     <xsl:apply-templates select="/*"/>
+    </xsl:document>
+</xsl:variable>
+<xsl:result-document href="doc.xml">
+  <xsl:copy-of select="$tempDoc"/>
+</xsl:result-document>
+10) Handling String Literals Containing 
+Quote Characters
+<xsl:if test=' matches(., " "" [^""] "" | &apos;[^&apos;] &apos;  ","x") '>
+</xsl:if>
+
+<xsl:if test=" matches(., ' &quot; [^&quot;] &quot; | ''[^''] ''  ','x') ">
+</xsl:if>
+Discussion
+ <xsl:variable name="d-quote" select='"'/>
+ <xsl:variable name="s-quote" select="'"/>
+ <xsl:value-of select="concat('He said,', $d-quote, 'John', $s-quote, 's', 
+'dog turned green.', $d-quote)"/>
+11) Understanding the New Capabilities 
+of Old XSLT 1.0 Features.
+xsl:for-each
+*	Can now process arbitrary sequences in addition to sequences of nodes.
+	<xsl:for-each select="(1, 2, 3, 4, 5)">
+	   <xsl:value-of select="."/><xsl:text>)&#xa;</xsl:text>
+	</xsl:for-each>
+xsl:key
+*	The match and use attributes can now refer to global variables, 
+provided there is no circularity between the value of the variables and 
+the key.
+   <xsl:variable name="state" select=" 'active' "/>
+   <xsl:key name="state-key" match="employee[@state=$state]" use="@type"/>
+*	The use attribute can be replaced by the value of a sequence 
+constructor.
+<!--defining the value of a key using some sophisticated processing -->
+<xsl:key name="sick-key" select="employee">
+	<xsl:apply-templates select="record[@type='sick-day']" mode="sick-key"/>
+</xsl:key>
+xsl:message
+
+    <xsl:param name="terminate" select=" 'no' "/>
+
+    <xsl:template match="employee">
+      <xsl:if test="not(@type)">
+        <xsl:message terminate="{$terminate}"
+                     select=" 'Missing type attribute for employee' "/>
+      <xsl:if>
+	</xsl:template>
+
+xsl:number
+
+<-- This outputs 'Ten' -->
+<xsl:number value="10" format="Ww"/>
+
+<-- This outputs 'ten' -->
+<xsl:number value="10" format="w"/>
+
+<-- This outputs 'TEN' -->
+<xsl:number value="10" format="W"/>
+current()
+<!-- Match nodes with descendant elements that have an attributes whose 
+value matches the local name matched element -->
+<xsl:template match="*[descendant::*/@* = local-name(current())]">
+key()
+This eliminates the need to introduce xsl:for-each 
+instructions whose only purpose is to switch contents to a new 
+document so that key() can be used relative to that document.
+<!-- Code like this is no longer necessary -->
+<xsl:for-each select="doc('other.xml')">
+ <xsl:if test="key('some-key', $val)">
+	<!-- ...-->
+ </xsl:if>
+</xsl:for-each>
+
+<!-- Write this instead -->
+<xsl:if test="key('some-key', $val,
+                   doc('other.xml'))">
+	<!-- ...-->
+ </xsl:if>
+
+
+ 
+ 
+ 
+ 
+
+
+    
+    13

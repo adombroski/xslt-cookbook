@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE svg
+  PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns:tree="http://www.ora.com/XSLTCookbook/ns/tree" height="500" width="500">
+   <g transform="scale(19.23076923076923)">
+      <g>
+         <rect x="11.75" y="0" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         <line x1="12.75" y1="1" x2="12.75" y2="1.5" style="stroke: black; stroke-width:0.1;"/>
+         <line x1="1.05" y1="1.5" x2="15.350000000000001" y2="1.5" style="stroke: black; stroke-width:0.1;"/>
+         <line x1="1.05" y1="1.5" x2="1.05" y2="2" style="stroke: black; stroke-width:0.1;"/>
+         <line x1="3.6500000000000004" y1="1.5" x2="3.6500000000000004" y2="2" style="stroke: black; stroke-width:0.1;"/>
+         <line x1="15.350000000000001" y1="1.5" x2="15.350000000000001" y2="2" style="stroke: black; stroke-width:0.1;"/>
+         <g>
+            <rect x="0.050000000000000044" y="2" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+         <g>
+            <rect x="2.6500000000000004" y="2" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+         <g>
+            <rect x="14.350000000000001" y="2" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            <line x1="15.350000000000001" y1="3" x2="15.350000000000001" y2="3.5" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="15.350000000000001" y1="3.5" x2="15.350000000000001" y2="3.5" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="15.350000000000001" y1="3.5" x2="15.350000000000001" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <g>
+               <rect x="14.350000000000001" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+               <line x1="15.350000000000001" y1="5" x2="15.350000000000001" y2="5.5" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="10.15" y1="5.5" x2="20.55" y2="5.5" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="10.15" y1="5.5" x2="10.15" y2="6" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="20.55" y1="5.5" x2="20.55" y2="6" style="stroke: black; stroke-width:0.1;"/>
+               <g>
+                  <rect x="9.15" y="6" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                  <line x1="10.15" y1="7" x2="10.15" y2="7.5" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="6.25" y1="7.5" x2="14.05" y2="7.5" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="6.25" y1="7.5" x2="6.25" y2="8" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="8.850000000000001" y1="7.5" x2="8.850000000000001" y2="8" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="11.450000000000001" y1="7.5" x2="11.450000000000001" y2="8" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="14.05" y1="7.5" x2="14.05" y2="8" style="stroke: black; stroke-width:0.1;"/>
+                  <g>
+                     <rect x="5.25" y="8" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     <line x1="6.25" y1="9" x2="6.25" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="6.25" y1="9.5" x2="6.25" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="6.25" y1="9.5" x2="6.25" y2="10" style="stroke: black; stroke-width:0.1;"/>
+                     <g>
+                        <rect x="5.25" y="10" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     </g>
+                  </g>
+                  <g>
+                     <rect x="7.850000000000001" y="8" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     <line x1="8.850000000000001" y1="9" x2="8.850000000000001" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="8.850000000000001" y1="9.5" x2="8.850000000000001" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="8.850000000000001" y1="9.5" x2="8.850000000000001" y2="10" style="stroke: black; stroke-width:0.1;"/>
+                     <g>
+                        <rect x="7.850000000000001" y="10" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     </g>
+                  </g>
+                  <g>
+                     <rect x="10.450000000000001" y="8" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     <line x1="11.450000000000001" y1="9" x2="11.450000000000001" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="11.450000000000001" y1="9.5" x2="11.450000000000001" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="11.450000000000001" y1="9.5" x2="11.450000000000001" y2="10" style="stroke: black; stroke-width:0.1;"/>
+                     <g>
+                        <rect x="10.450000000000001" y="10" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     </g>
+                  </g>
+                  <g>
+                     <rect x="13.05" y="8" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     <line x1="14.05" y1="9" x2="14.05" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="14.05" y1="9.5" x2="14.05" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="14.05" y1="9.5" x2="14.05" y2="10" style="stroke: black; stroke-width:0.1;"/>
+                     <g>
+                        <rect x="13.05" y="10" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     </g>
+                  </g>
+               </g>
+               <g>
+                  <rect x="19.55" y="6" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                  <line x1="20.55" y1="7" x2="20.55" y2="7.5" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="16.650000000000002" y1="7.5" x2="24.450000000000006" y2="7.5" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="16.650000000000002" y1="7.5" x2="16.650000000000002" y2="8" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="19.250000000000004" y1="7.5" x2="19.250000000000004" y2="8" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="21.850000000000005" y1="7.5" x2="21.850000000000005" y2="8" style="stroke: black; stroke-width:0.1;"/>
+                  <line x1="24.450000000000006" y1="7.5" x2="24.450000000000006" y2="8" style="stroke: black; stroke-width:0.1;"/>
+                  <g>
+                     <rect x="15.650000000000002" y="8" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     <line x1="16.650000000000002" y1="9" x2="16.650000000000002" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="16.650000000000002" y1="9.5" x2="16.650000000000002" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="16.650000000000002" y1="9.5" x2="16.650000000000002" y2="10" style="stroke: black; stroke-width:0.1;"/>
+                     <g>
+                        <rect x="15.650000000000002" y="10" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     </g>
+                  </g>
+                  <g>
+                     <rect x="18.250000000000004" y="8" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     <line x1="19.250000000000004" y1="9" x2="19.250000000000004" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="19.250000000000004" y1="9.5" x2="19.250000000000004" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="19.250000000000004" y1="9.5" x2="19.250000000000004" y2="10" style="stroke: black; stroke-width:0.1;"/>
+                     <g>
+                        <rect x="18.250000000000004" y="10" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     </g>
+                  </g>
+                  <g>
+                     <rect x="20.850000000000005" y="8" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     <line x1="21.850000000000005" y1="9" x2="21.850000000000005" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="21.850000000000005" y1="9.5" x2="21.850000000000005" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="21.850000000000005" y1="9.5" x2="21.850000000000005" y2="10" style="stroke: black; stroke-width:0.1;"/>
+                     <g>
+                        <rect x="20.850000000000005" y="10" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     </g>
+                  </g>
+                  <g>
+                     <rect x="23.450000000000006" y="8" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     <line x1="24.450000000000006" y1="9" x2="24.450000000000006" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="24.450000000000006" y1="9.5" x2="24.450000000000006" y2="9.5" style="stroke: black; stroke-width:0.1;"/>
+                     <line x1="24.450000000000006" y1="9.5" x2="24.450000000000006" y2="10" style="stroke: black; stroke-width:0.1;"/>
+                     <g>
+                        <rect x="23.450000000000006" y="10" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+                     </g>
+                  </g>
+               </g>
+            </g>
+         </g>
+      </g>
+   </g>
+</svg>

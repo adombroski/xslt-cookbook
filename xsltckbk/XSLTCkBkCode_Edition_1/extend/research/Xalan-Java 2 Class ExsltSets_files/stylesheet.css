@@ -1,0 +1,39 @@
+BODY {
+	BACKGROUND-COLOR: #ffffff
+}
+#TableHeadingColor {
+	BACKGROUND: #ccccff
+}
+#TableSubHeadingColor {
+	BACKGROUND: #eeeeff
+}
+#TableRowColor {
+	BACKGROUND: #ffffff
+}
+#FrameTitleFont {
+	FONT-FAMILY: normal
+}
+#FrameHeadingFont {
+	FONT-FAMILY: normal
+}
+#FrameItemFont {
+	FONT-FAMILY: normal
+}
+#NavBarCell1 {
+	BACKGROUND-COLOR: #eeeeff
+}
+#NavBarCell1Rev {
+	BACKGROUND-COLOR: #00008b
+}
+#NavBarFont1 {
+	COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+#NavBarFont1Rev {
+	COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+#NavBarCell2 {
+	FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}
+#NavBarCell3 {
+	FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #ffffff
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shapes>
+  <shape id="c1" kind="circle" radius="3.2"/>
+  <shape id="s2" kind="square" side="1"/>
+  <shape id="c3" kind="circle" radius="4"/>
+  <shape id="t2" kind="triangle" base="2.7" height="3.3"/>
+  <shape id="s1" kind="square" side="3.2"/>
+  <shape id="t1" kind="triangle" base="1" height="3"/>
+  <shape id="c3" kind="rectangle" height="4.1" width="7"/>
+  <shape id="c4" kind="circle" radius="2.7"/>
+</shapes>

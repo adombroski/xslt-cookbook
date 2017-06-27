@@ -1,0 +1,10 @@
+td.gain
+{
+	color:black;
+}
+
+td.loss
+{
+	color:red;
+	font-weight:700;
+}

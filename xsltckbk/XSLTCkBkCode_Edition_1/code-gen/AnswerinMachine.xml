@@ -1,0 +1,1974 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<!DOCTYPE XMI SYSTEM 'uml.dtd' [
+<!ELEMENT uisToolName (#PCDATA)>
+<!ELEMENT uisDiagramName (#PCDATA)>
+<!ELEMENT uisDiagramStyle (#PCDATA)>
+<!ELEMENT uisDiagramPresentation (Foundation.Auxiliary_Elements.Presentation*)>
+<!ELEMENT UISDiagram (uisDiagramName, uisToolName, uisDiagramStyle, uisDiagramPresentation*)>
+<!ATTLIST UISDiagram xmi.id ID #REQUIRED>
+<!ELEMENT uisOwnedDiagram (UISDiagram*)>
+<!ELEMENT UISModelElement (uisOwnedDiagram*)>
+<!ATTLIST UISModelElement xmi.id ID #REQUIRED>
+<!ENTITY bs "&#38;#08;">
+<!ENTITY vt "&#38;#11;">
+<!ENTITY ff "&#38;#12;">
+]>
+<XMI xmi.version = '1.0'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Unisys.IntegratePlus.2</XMI.exporter>
+      <XMI.exporterVersion>4.0.3</XMI.exporterVersion>
+    </XMI.documentation>
+    <XMI.metamodel xmi.name = 'UML' xmi.version = '1.1'/>
+  </XMI.header>
+  <XMI.content>
+    <Model_Management.Model xmi.id = 'G.1'>
+      <Foundation.Core.ModelElement.name>AnswerinMachine</Foundation.Core.ModelElement.name>
+      <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+      <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+      <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+      <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+      <XMI.extension xmi.extender = 'Unisys.IntegratePlus.2'>
+        <XMI.reference xmi.idref = 'G.95'/>
+      </XMI.extension>
+      <Foundation.Core.Namespace.ownedElement>
+        <Foundation.Core.Class xmi.id = 'S.10001'>
+          <Foundation.Core.ModelElement.name>AnsweringMachine</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- StateMachine -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- AnswerinMachine -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.26'/> <!-- {3D6781D50020} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Operation xmi.id = 'S.10003'>
+              <Foundation.Core.ModelElement.name>doCmd</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.19'/> <!-- delegate -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.64'>
+                  <Foundation.Core.ModelElement.name>cmd</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.65'/> <!-- Command -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.66'>
+                  <Foundation.Core.ModelElement.name>doCmd.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+            <Foundation.Core.Operation xmi.id = 'S.10004'>
+              <Foundation.Core.ModelElement.name>moreMsgs</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.20'/> <!-- action -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.68'>
+                  <Foundation.Core.ModelElement.name>moreMsgs.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.69'/> <!-- bool -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+            <Foundation.Core.Operation xmi.id = 'S.10005'>
+              <Foundation.Core.ModelElement.name>playRemaining</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.20'/> <!-- action -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.70'>
+                  <Foundation.Core.ModelElement.name>playRemaining.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+            <Foundation.Core.Operation xmi.id = 'S.10006'>
+              <Foundation.Core.ModelElement.name>playCurrentMsg</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.20'/> <!-- action -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.71'>
+                  <Foundation.Core.ModelElement.name>playCurrentMsg.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+            <Foundation.Core.Operation xmi.id = 'S.10007'>
+              <Foundation.Core.ModelElement.name>advanceAndPlayMsg</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.20'/> <!-- action -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.72'>
+                  <Foundation.Core.ModelElement.name>advanceAndPlayMsg.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+            <Foundation.Core.Operation xmi.id = 'S.10008'>
+              <Foundation.Core.ModelElement.name>deleteMsg</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.20'/> <!-- action -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.73'>
+                  <Foundation.Core.ModelElement.name>deleteMsg.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+            <Foundation.Core.Operation xmi.id = 'S.10009'>
+              <Foundation.Core.ModelElement.name>sayGoodBye</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.20'/> <!-- action -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.74'>
+                  <Foundation.Core.ModelElement.name>sayGoodBye.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+            <Foundation.Core.Operation xmi.id = 'S.10010'>
+              <Foundation.Core.ModelElement.name>errorMsg</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.21'/> <!-- default -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.75'>
+                  <Foundation.Core.ModelElement.name>errorMsg.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Behavioral_Elements.State_Machines.StateMachine xmi.id = 'S.10002'>
+          <Foundation.Core.ModelElement.name>State/Activity Model</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <XMI.extension xmi.extender = 'Unisys.IntegratePlus.2'>
+            <XMI.reference xmi.idref = 'G.109'/>
+          </XMI.extension>
+          <Behavioral_Elements.State_Machines.StateMachine.context>
+            <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+          </Behavioral_Elements.State_Machines.StateMachine.context>
+          <Behavioral_Elements.State_Machines.StateMachine.top>
+            <Behavioral_Elements.State_Machines.CompositeState xmi.id = 'G.27'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.CompositeState.isConcurrent xmi.value = 'false'/>
+              <Behavioral_Elements.State_Machines.CompositeState.substate>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.id = 'G.3'>
+                  <Foundation.Core.ModelElement.name>Connected</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Behavioral_Elements.State_Machines.StateVertex.outgoing>
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.4'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.6'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.7'/> <!--  -->
+                  </Behavioral_Elements.State_Machines.StateVertex.outgoing>
+                  <Behavioral_Elements.State_Machines.StateVertex.incoming>
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.6'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.10'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.14'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.17'/> <!--  -->
+                  </Behavioral_Elements.State_Machines.StateVertex.incoming>
+                  <Behavioral_Elements.State_Machines.State.entry>
+                    <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.28'>
+                      <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                    </Behavioral_Elements.Common_Behavior.ActionSequence>
+                  </Behavioral_Elements.State_Machines.State.entry>
+                  <Behavioral_Elements.State_Machines.State.exit>
+                    <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.29'>
+                      <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                    </Behavioral_Elements.Common_Behavior.ActionSequence>
+                  </Behavioral_Elements.State_Machines.State.exit>
+                </Behavioral_Elements.State_Machines.SimpleState>
+                <Behavioral_Elements.State_Machines.PseudoState xmi.id = 'G.9'>
+                  <Foundation.Core.ModelElement.name>Start</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Behavioral_Elements.State_Machines.PseudoState.kind xmi.value = 'initial'/>
+                  <Behavioral_Elements.State_Machines.StateVertex.outgoing>
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.10'/> <!--  -->
+                  </Behavioral_Elements.State_Machines.StateVertex.outgoing>
+                </Behavioral_Elements.State_Machines.PseudoState>
+                <Behavioral_Elements.State_Machines.PseudoState xmi.id = 'G.12'>
+                  <Foundation.Core.ModelElement.name>GoodBye</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Behavioral_Elements.State_Machines.PseudoState.kind xmi.value = 'final'/>
+                  <Behavioral_Elements.State_Machines.StateVertex.incoming>
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.7'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.18'/> <!--  -->
+                  </Behavioral_Elements.State_Machines.StateVertex.incoming>
+                </Behavioral_Elements.State_Machines.PseudoState>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.id = 'G.13'>
+                  <Foundation.Core.ModelElement.name>HandlingMsg</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Behavioral_Elements.State_Machines.StateVertex.outgoing>
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.14'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.16'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.17'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.18'/> <!--  -->
+                  </Behavioral_Elements.State_Machines.StateVertex.outgoing>
+                  <Behavioral_Elements.State_Machines.StateVertex.incoming>
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.4'/> <!--  -->
+                    <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.16'/> <!--  -->
+                  </Behavioral_Elements.State_Machines.StateVertex.incoming>
+                  <Behavioral_Elements.State_Machines.State.entry>
+                    <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.47'>
+                      <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                    </Behavioral_Elements.Common_Behavior.ActionSequence>
+                  </Behavioral_Elements.State_Machines.State.entry>
+                  <Behavioral_Elements.State_Machines.State.exit>
+                    <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.48'>
+                      <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                    </Behavioral_Elements.Common_Behavior.ActionSequence>
+                  </Behavioral_Elements.State_Machines.State.exit>
+                </Behavioral_Elements.State_Machines.SimpleState>
+              </Behavioral_Elements.State_Machines.CompositeState.substate>
+            </Behavioral_Elements.State_Machines.CompositeState>
+          </Behavioral_Elements.State_Machines.StateMachine.top>
+          <Behavioral_Elements.State_Machines.StateMachine.transitions>
+            <Behavioral_Elements.State_Machines.Transition xmi.id = 'G.4'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.Transition.source>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.3'/> <!-- Connected -->
+              </Behavioral_Elements.State_Machines.Transition.source>
+              <Behavioral_Elements.State_Machines.Transition.target>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.13'/> <!-- HandlingMsg -->
+              </Behavioral_Elements.State_Machines.Transition.target>
+              <Behavioral_Elements.State_Machines.Transition.trigger>
+                <Behavioral_Elements.State_Machines.SignalEvent xmi.idref = 'G.30'/> <!-- NEXT_MSG -->
+              </Behavioral_Elements.State_Machines.Transition.trigger>
+              <Behavioral_Elements.State_Machines.Transition.guard>
+                <Behavioral_Elements.State_Machines.Guard xmi.id = 'G.34'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Behavioral_Elements.State_Machines.Guard.expression>
+                     <Foundation.Data_Types.BooleanExpression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>cntx.moreMsgs</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.BooleanExpression>
+                  </Behavioral_Elements.State_Machines.Guard.expression>
+                </Behavioral_Elements.State_Machines.Guard>
+              </Behavioral_Elements.State_Machines.Transition.guard>
+              <Behavioral_Elements.State_Machines.Transition.effect>
+                <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.33'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                    <Behavioral_Elements.Common_Behavior.UninterpretedAction xmi.id = 'G.32'>
+                      <Foundation.Core.ModelElement.name>cntx.playCurrentMsg</Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                      <Behavioral_Elements.Common_Behavior.Action.recurrence>
+                         <Foundation.Data_Types.Expression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body>1</Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.Expression>
+                      </Behavioral_Elements.Common_Behavior.Action.recurrence>
+                      <Behavioral_Elements.Common_Behavior.Action.target>
+                         <Foundation.Data_Types.ObjectSetExpression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.ObjectSetExpression>
+                      </Behavioral_Elements.Common_Behavior.Action.target>
+                      <Behavioral_Elements.Common_Behavior.Action.isAsynchronous xmi.value = 'false'/>
+                      <Behavioral_Elements.Common_Behavior.Action.script>
+                        
+                      </Behavioral_Elements.Common_Behavior.Action.script>
+                      <Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                        cntx.playCurrentMsg
+                      </Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                    </Behavioral_Elements.Common_Behavior.UninterpretedAction>
+                  </Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                </Behavioral_Elements.Common_Behavior.ActionSequence>
+              </Behavioral_Elements.State_Machines.Transition.effect>
+            </Behavioral_Elements.State_Machines.Transition>
+            <Behavioral_Elements.State_Machines.Transition xmi.id = 'G.6'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.Transition.source>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.3'/> <!-- Connected -->
+              </Behavioral_Elements.State_Machines.Transition.source>
+              <Behavioral_Elements.State_Machines.Transition.target>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.3'/> <!-- Connected -->
+              </Behavioral_Elements.State_Machines.Transition.target>
+              <Behavioral_Elements.State_Machines.Transition.trigger>
+                <Behavioral_Elements.State_Machines.SignalEvent xmi.idref = 'G.35'/> <!-- NEXT_MSG -->
+              </Behavioral_Elements.State_Machines.Transition.trigger>
+              <Behavioral_Elements.State_Machines.Transition.guard>
+                <Behavioral_Elements.State_Machines.Guard xmi.id = 'G.38'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Behavioral_Elements.State_Machines.Guard.expression>
+                     <Foundation.Data_Types.BooleanExpression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>!cntx.moreMsgs</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.BooleanExpression>
+                  </Behavioral_Elements.State_Machines.Guard.expression>
+                </Behavioral_Elements.State_Machines.Guard>
+              </Behavioral_Elements.State_Machines.Transition.guard>
+              <Behavioral_Elements.State_Machines.Transition.effect>
+                <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.37'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                    <Behavioral_Elements.Common_Behavior.UninterpretedAction xmi.id = 'G.36'>
+                      <Foundation.Core.ModelElement.name>cntx.playRemaining</Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                      <Behavioral_Elements.Common_Behavior.Action.recurrence>
+                         <Foundation.Data_Types.Expression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body>1</Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.Expression>
+                      </Behavioral_Elements.Common_Behavior.Action.recurrence>
+                      <Behavioral_Elements.Common_Behavior.Action.target>
+                         <Foundation.Data_Types.ObjectSetExpression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.ObjectSetExpression>
+                      </Behavioral_Elements.Common_Behavior.Action.target>
+                      <Behavioral_Elements.Common_Behavior.Action.isAsynchronous xmi.value = 'false'/>
+                      <Behavioral_Elements.Common_Behavior.Action.script>
+                        
+                      </Behavioral_Elements.Common_Behavior.Action.script>
+                      <Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                        cntx.playRemaining
+                      </Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                    </Behavioral_Elements.Common_Behavior.UninterpretedAction>
+                  </Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                </Behavioral_Elements.Common_Behavior.ActionSequence>
+              </Behavioral_Elements.State_Machines.Transition.effect>
+            </Behavioral_Elements.State_Machines.Transition>
+            <Behavioral_Elements.State_Machines.Transition xmi.id = 'G.7'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.Transition.source>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.3'/> <!-- Connected -->
+              </Behavioral_Elements.State_Machines.Transition.source>
+              <Behavioral_Elements.State_Machines.Transition.target>
+                <Behavioral_Elements.State_Machines.PseudoState xmi.idref = 'G.12'/> <!-- GoodBye -->
+              </Behavioral_Elements.State_Machines.Transition.target>
+              <Behavioral_Elements.State_Machines.Transition.trigger>
+                <Behavioral_Elements.State_Machines.SignalEvent xmi.idref = 'G.39'/> <!-- END -->
+              </Behavioral_Elements.State_Machines.Transition.trigger>
+              <Behavioral_Elements.State_Machines.Transition.effect>
+                <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.42'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                    <Behavioral_Elements.Common_Behavior.UninterpretedAction xmi.id = 'G.41'>
+                      <Foundation.Core.ModelElement.name>cntx.sayGoodBye</Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                      <Behavioral_Elements.Common_Behavior.Action.recurrence>
+                         <Foundation.Data_Types.Expression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body>1</Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.Expression>
+                      </Behavioral_Elements.Common_Behavior.Action.recurrence>
+                      <Behavioral_Elements.Common_Behavior.Action.target>
+                         <Foundation.Data_Types.ObjectSetExpression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.ObjectSetExpression>
+                      </Behavioral_Elements.Common_Behavior.Action.target>
+                      <Behavioral_Elements.Common_Behavior.Action.isAsynchronous xmi.value = 'false'/>
+                      <Behavioral_Elements.Common_Behavior.Action.script>
+                        
+                      </Behavioral_Elements.Common_Behavior.Action.script>
+                      <Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                        cntx.sayGoodBye
+                      </Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                    </Behavioral_Elements.Common_Behavior.UninterpretedAction>
+                  </Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                </Behavioral_Elements.Common_Behavior.ActionSequence>
+              </Behavioral_Elements.State_Machines.Transition.effect>
+            </Behavioral_Elements.State_Machines.Transition>
+            <Behavioral_Elements.State_Machines.Transition xmi.id = 'G.10'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.Transition.source>
+                <Behavioral_Elements.State_Machines.PseudoState xmi.idref = 'G.9'/> <!-- Start -->
+              </Behavioral_Elements.State_Machines.Transition.source>
+              <Behavioral_Elements.State_Machines.Transition.target>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.3'/> <!-- Connected -->
+              </Behavioral_Elements.State_Machines.Transition.target>
+              <Behavioral_Elements.State_Machines.Transition.trigger>
+                <Behavioral_Elements.State_Machines.SignalEvent xmi.idref = 'G.43'/> <!-- CONNECT -->
+              </Behavioral_Elements.State_Machines.Transition.trigger>
+              <Behavioral_Elements.State_Machines.Transition.effect>
+                <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.46'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                    <Behavioral_Elements.Common_Behavior.UninterpretedAction xmi.id = 'G.45'>
+                      <Foundation.Core.ModelElement.name>cntx.playRemaining</Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                      <Behavioral_Elements.Common_Behavior.Action.recurrence>
+                         <Foundation.Data_Types.Expression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body>1</Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.Expression>
+                      </Behavioral_Elements.Common_Behavior.Action.recurrence>
+                      <Behavioral_Elements.Common_Behavior.Action.target>
+                         <Foundation.Data_Types.ObjectSetExpression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.ObjectSetExpression>
+                      </Behavioral_Elements.Common_Behavior.Action.target>
+                      <Behavioral_Elements.Common_Behavior.Action.isAsynchronous xmi.value = 'false'/>
+                      <Behavioral_Elements.Common_Behavior.Action.script>
+                        
+                      </Behavioral_Elements.Common_Behavior.Action.script>
+                      <Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                        cntx.playRemaining
+                      </Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                    </Behavioral_Elements.Common_Behavior.UninterpretedAction>
+                  </Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                </Behavioral_Elements.Common_Behavior.ActionSequence>
+              </Behavioral_Elements.State_Machines.Transition.effect>
+            </Behavioral_Elements.State_Machines.Transition>
+            <Behavioral_Elements.State_Machines.Transition xmi.id = 'G.14'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.Transition.source>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.13'/> <!-- HandlingMsg -->
+              </Behavioral_Elements.State_Machines.Transition.source>
+              <Behavioral_Elements.State_Machines.Transition.target>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.3'/> <!-- Connected -->
+              </Behavioral_Elements.State_Machines.Transition.target>
+              <Behavioral_Elements.State_Machines.Transition.trigger>
+                <Behavioral_Elements.State_Machines.SignalEvent xmi.idref = 'G.49'/> <!-- DEL -->
+              </Behavioral_Elements.State_Machines.Transition.trigger>
+              <Behavioral_Elements.State_Machines.Transition.effect>
+                <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.52'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                    <Behavioral_Elements.Common_Behavior.UninterpretedAction xmi.id = 'G.51'>
+                      <Foundation.Core.ModelElement.name>cntx.deleteMsg</Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                      <Behavioral_Elements.Common_Behavior.Action.recurrence>
+                         <Foundation.Data_Types.Expression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body>1</Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.Expression>
+                      </Behavioral_Elements.Common_Behavior.Action.recurrence>
+                      <Behavioral_Elements.Common_Behavior.Action.target>
+                         <Foundation.Data_Types.ObjectSetExpression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.ObjectSetExpression>
+                      </Behavioral_Elements.Common_Behavior.Action.target>
+                      <Behavioral_Elements.Common_Behavior.Action.isAsynchronous xmi.value = 'false'/>
+                      <Behavioral_Elements.Common_Behavior.Action.script>
+                        
+                      </Behavioral_Elements.Common_Behavior.Action.script>
+                      <Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                        cntx.deleteMsg
+                      </Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                    </Behavioral_Elements.Common_Behavior.UninterpretedAction>
+                  </Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                </Behavioral_Elements.Common_Behavior.ActionSequence>
+              </Behavioral_Elements.State_Machines.Transition.effect>
+            </Behavioral_Elements.State_Machines.Transition>
+            <Behavioral_Elements.State_Machines.Transition xmi.id = 'G.16'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.Transition.source>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.13'/> <!-- HandlingMsg -->
+              </Behavioral_Elements.State_Machines.Transition.source>
+              <Behavioral_Elements.State_Machines.Transition.target>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.13'/> <!-- HandlingMsg -->
+              </Behavioral_Elements.State_Machines.Transition.target>
+              <Behavioral_Elements.State_Machines.Transition.trigger>
+                <Behavioral_Elements.State_Machines.SignalEvent xmi.idref = 'G.53'/> <!-- NEXT_MSG -->
+              </Behavioral_Elements.State_Machines.Transition.trigger>
+              <Behavioral_Elements.State_Machines.Transition.guard>
+                <Behavioral_Elements.State_Machines.Guard xmi.id = 'G.56'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Behavioral_Elements.State_Machines.Guard.expression>
+                     <Foundation.Data_Types.BooleanExpression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>cntx.moreMsgs</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.BooleanExpression>
+                  </Behavioral_Elements.State_Machines.Guard.expression>
+                </Behavioral_Elements.State_Machines.Guard>
+              </Behavioral_Elements.State_Machines.Transition.guard>
+              <Behavioral_Elements.State_Machines.Transition.effect>
+                <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.55'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                    <Behavioral_Elements.Common_Behavior.UninterpretedAction xmi.id = 'G.54'>
+                      <Foundation.Core.ModelElement.name>cntx.advanceAndPlayMsg</Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                      <Behavioral_Elements.Common_Behavior.Action.recurrence>
+                         <Foundation.Data_Types.Expression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body>1</Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.Expression>
+                      </Behavioral_Elements.Common_Behavior.Action.recurrence>
+                      <Behavioral_Elements.Common_Behavior.Action.target>
+                         <Foundation.Data_Types.ObjectSetExpression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.ObjectSetExpression>
+                      </Behavioral_Elements.Common_Behavior.Action.target>
+                      <Behavioral_Elements.Common_Behavior.Action.isAsynchronous xmi.value = 'false'/>
+                      <Behavioral_Elements.Common_Behavior.Action.script>
+                        
+                      </Behavioral_Elements.Common_Behavior.Action.script>
+                      <Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                        cntx.advanceAndPlayMsg
+                      </Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                    </Behavioral_Elements.Common_Behavior.UninterpretedAction>
+                  </Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                </Behavioral_Elements.Common_Behavior.ActionSequence>
+              </Behavioral_Elements.State_Machines.Transition.effect>
+            </Behavioral_Elements.State_Machines.Transition>
+            <Behavioral_Elements.State_Machines.Transition xmi.id = 'G.17'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.Transition.source>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.13'/> <!-- HandlingMsg -->
+              </Behavioral_Elements.State_Machines.Transition.source>
+              <Behavioral_Elements.State_Machines.Transition.target>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.3'/> <!-- Connected -->
+              </Behavioral_Elements.State_Machines.Transition.target>
+              <Behavioral_Elements.State_Machines.Transition.trigger>
+                <Behavioral_Elements.State_Machines.SignalEvent xmi.idref = 'G.57'/> <!-- NEXT_MSG -->
+              </Behavioral_Elements.State_Machines.Transition.trigger>
+              <Behavioral_Elements.State_Machines.Transition.guard>
+                <Behavioral_Elements.State_Machines.Guard xmi.id = 'G.60'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Behavioral_Elements.State_Machines.Guard.expression>
+                     <Foundation.Data_Types.BooleanExpression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>!cntx.moreMsgs</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.BooleanExpression>
+                  </Behavioral_Elements.State_Machines.Guard.expression>
+                </Behavioral_Elements.State_Machines.Guard>
+              </Behavioral_Elements.State_Machines.Transition.guard>
+              <Behavioral_Elements.State_Machines.Transition.effect>
+                <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.59'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                    <Behavioral_Elements.Common_Behavior.UninterpretedAction xmi.id = 'G.58'>
+                      <Foundation.Core.ModelElement.name>cntx.playRemaining</Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                      <Behavioral_Elements.Common_Behavior.Action.recurrence>
+                         <Foundation.Data_Types.Expression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body>1</Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.Expression>
+                      </Behavioral_Elements.Common_Behavior.Action.recurrence>
+                      <Behavioral_Elements.Common_Behavior.Action.target>
+                         <Foundation.Data_Types.ObjectSetExpression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.ObjectSetExpression>
+                      </Behavioral_Elements.Common_Behavior.Action.target>
+                      <Behavioral_Elements.Common_Behavior.Action.isAsynchronous xmi.value = 'false'/>
+                      <Behavioral_Elements.Common_Behavior.Action.script>
+                        
+                      </Behavioral_Elements.Common_Behavior.Action.script>
+                      <Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                        cntx.playRemaining
+                      </Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                    </Behavioral_Elements.Common_Behavior.UninterpretedAction>
+                  </Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                </Behavioral_Elements.Common_Behavior.ActionSequence>
+              </Behavioral_Elements.State_Machines.Transition.effect>
+            </Behavioral_Elements.State_Machines.Transition>
+            <Behavioral_Elements.State_Machines.Transition xmi.id = 'G.18'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Behavioral_Elements.State_Machines.Transition.source>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.13'/> <!-- HandlingMsg -->
+              </Behavioral_Elements.State_Machines.Transition.source>
+              <Behavioral_Elements.State_Machines.Transition.target>
+                <Behavioral_Elements.State_Machines.PseudoState xmi.idref = 'G.12'/> <!-- GoodBye -->
+              </Behavioral_Elements.State_Machines.Transition.target>
+              <Behavioral_Elements.State_Machines.Transition.trigger>
+                <Behavioral_Elements.State_Machines.SignalEvent xmi.idref = 'G.61'/> <!-- END -->
+              </Behavioral_Elements.State_Machines.Transition.trigger>
+              <Behavioral_Elements.State_Machines.Transition.effect>
+                <Behavioral_Elements.Common_Behavior.ActionSequence xmi.id = 'G.63'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                    <Behavioral_Elements.Common_Behavior.UninterpretedAction xmi.id = 'G.62'>
+                      <Foundation.Core.ModelElement.name>cntx.sayGoodBye</Foundation.Core.ModelElement.name>
+                      <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                      <Behavioral_Elements.Common_Behavior.Action.recurrence>
+                         <Foundation.Data_Types.Expression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body>1</Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.Expression>
+                      </Behavioral_Elements.Common_Behavior.Action.recurrence>
+                      <Behavioral_Elements.Common_Behavior.Action.target>
+                         <Foundation.Data_Types.ObjectSetExpression>
+                          <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                          <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                         </Foundation.Data_Types.ObjectSetExpression>
+                      </Behavioral_Elements.Common_Behavior.Action.target>
+                      <Behavioral_Elements.Common_Behavior.Action.isAsynchronous xmi.value = 'false'/>
+                      <Behavioral_Elements.Common_Behavior.Action.script>
+                        
+                      </Behavioral_Elements.Common_Behavior.Action.script>
+                      <Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                        cntx.sayGoodBye
+                      </Behavioral_Elements.Common_Behavior.UninterpretedAction.body>
+                    </Behavioral_Elements.Common_Behavior.UninterpretedAction>
+                  </Behavioral_Elements.Common_Behavior.ActionSequence.action>
+                </Behavioral_Elements.Common_Behavior.ActionSequence>
+              </Behavioral_Elements.State_Machines.Transition.effect>
+            </Behavioral_Elements.State_Machines.Transition>
+          </Behavioral_Elements.State_Machines.StateMachine.transitions>
+        </Behavioral_Elements.State_Machines.StateMachine>
+        <Behavioral_Elements.State_Machines.SignalEvent xmi.id = 'G.30'>
+          <Foundation.Core.ModelElement.name>NEXT_MSG</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Behavioral_Elements.State_Machines.SignalEvent.signal>
+            <Behavioral_Elements.Common_Behavior.Signal xmi.idref = 'G.31'/> <!-- NEXT_MSG -->
+          </Behavioral_Elements.State_Machines.SignalEvent.signal>
+        </Behavioral_Elements.State_Machines.SignalEvent>
+        <Behavioral_Elements.Common_Behavior.Signal xmi.id = 'G.31'>
+          <Foundation.Core.ModelElement.name>NEXT_MSG</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Behavioral_Elements.Common_Behavior.Signal>
+        <Behavioral_Elements.State_Machines.SignalEvent xmi.id = 'G.35'>
+          <Foundation.Core.ModelElement.name>NEXT_MSG</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Behavioral_Elements.State_Machines.SignalEvent.signal>
+            <Behavioral_Elements.Common_Behavior.Signal xmi.idref = 'G.31'/> <!-- NEXT_MSG -->
+          </Behavioral_Elements.State_Machines.SignalEvent.signal>
+        </Behavioral_Elements.State_Machines.SignalEvent>
+        <Behavioral_Elements.State_Machines.SignalEvent xmi.id = 'G.39'>
+          <Foundation.Core.ModelElement.name>END</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Behavioral_Elements.State_Machines.SignalEvent.signal>
+            <Behavioral_Elements.Common_Behavior.Signal xmi.idref = 'G.40'/> <!-- END -->
+          </Behavioral_Elements.State_Machines.SignalEvent.signal>
+        </Behavioral_Elements.State_Machines.SignalEvent>
+        <Behavioral_Elements.Common_Behavior.Signal xmi.id = 'G.40'>
+          <Foundation.Core.ModelElement.name>END</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Behavioral_Elements.Common_Behavior.Signal>
+        <Behavioral_Elements.State_Machines.SignalEvent xmi.id = 'G.43'>
+          <Foundation.Core.ModelElement.name>CONNECT</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Behavioral_Elements.State_Machines.SignalEvent.signal>
+            <Behavioral_Elements.Common_Behavior.Signal xmi.idref = 'G.44'/> <!-- CONNECT -->
+          </Behavioral_Elements.State_Machines.SignalEvent.signal>
+        </Behavioral_Elements.State_Machines.SignalEvent>
+        <Behavioral_Elements.Common_Behavior.Signal xmi.id = 'G.44'>
+          <Foundation.Core.ModelElement.name>CONNECT</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Behavioral_Elements.Common_Behavior.Signal>
+        <Behavioral_Elements.State_Machines.SignalEvent xmi.id = 'G.49'>
+          <Foundation.Core.ModelElement.name>DEL</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Behavioral_Elements.State_Machines.SignalEvent.signal>
+            <Behavioral_Elements.Common_Behavior.Signal xmi.idref = 'G.50'/> <!-- DEL -->
+          </Behavioral_Elements.State_Machines.SignalEvent.signal>
+        </Behavioral_Elements.State_Machines.SignalEvent>
+        <Behavioral_Elements.Common_Behavior.Signal xmi.id = 'G.50'>
+          <Foundation.Core.ModelElement.name>DEL</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Behavioral_Elements.Common_Behavior.Signal>
+        <Behavioral_Elements.State_Machines.SignalEvent xmi.id = 'G.53'>
+          <Foundation.Core.ModelElement.name>NEXT_MSG</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Behavioral_Elements.State_Machines.SignalEvent.signal>
+            <Behavioral_Elements.Common_Behavior.Signal xmi.idref = 'G.31'/> <!-- NEXT_MSG -->
+          </Behavioral_Elements.State_Machines.SignalEvent.signal>
+        </Behavioral_Elements.State_Machines.SignalEvent>
+        <Behavioral_Elements.State_Machines.SignalEvent xmi.id = 'G.57'>
+          <Foundation.Core.ModelElement.name>NEXT_MSG</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Behavioral_Elements.State_Machines.SignalEvent.signal>
+            <Behavioral_Elements.Common_Behavior.Signal xmi.idref = 'G.31'/> <!-- NEXT_MSG -->
+          </Behavioral_Elements.State_Machines.SignalEvent.signal>
+        </Behavioral_Elements.State_Machines.SignalEvent>
+        <Behavioral_Elements.State_Machines.SignalEvent xmi.id = 'G.61'>
+          <Foundation.Core.ModelElement.name>END</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Behavioral_Elements.State_Machines.SignalEvent.signal>
+            <Behavioral_Elements.Common_Behavior.Signal xmi.idref = 'G.40'/> <!-- END -->
+          </Behavioral_Elements.State_Machines.SignalEvent.signal>
+        </Behavioral_Elements.State_Machines.SignalEvent>
+        <Foundation.Core.DataType xmi.id = 'G.65'>
+          <Foundation.Core.ModelElement.name>Command</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Foundation.Core.DataType>
+        <Foundation.Core.DataType xmi.id = 'G.67'>
+          <Foundation.Core.ModelElement.name>void</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Foundation.Core.DataType>
+        <Foundation.Core.DataType xmi.id = 'G.69'>
+          <Foundation.Core.ModelElement.name>bool</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Foundation.Core.DataType>
+        <Foundation.Core.Class xmi.id = 'S.10011'>
+          <Foundation.Core.ModelElement.name>AnsweringMachineState</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'true'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.22'/> <!-- state -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- AnswerinMachine -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.specialization>
+            <Foundation.Core.Generalization xmi.idref = 'G.91'/> <!-- {Connected-&gt;AnsweringMachineState}{3D6782A402EE} -->
+            <Foundation.Core.Generalization xmi.idref = 'G.92'/> <!-- {HandlingMsg-&gt;AnsweringMachineState}{3D6782EF0119} -->
+            <Foundation.Core.Generalization xmi.idref = 'G.93'/> <!-- {Start-&gt;AnsweringMachineState}{3D67B2FD004E} -->
+            <Foundation.Core.Generalization xmi.idref = 'G.94'/> <!-- {GoodBye-&gt;AnsweringMachineState}{3D67B31B02AF} -->
+          </Foundation.Core.GeneralizableElement.specialization>
+          <Foundation.Core.Classifier.associationEnd>
+            <Foundation.Core.AssociationEnd xmi.idref = 'G.25'/> <!-- {3D6781D5001F} -->
+          </Foundation.Core.Classifier.associationEnd>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Operation xmi.id = 'S.10012'>
+              <Foundation.Core.ModelElement.name>doCmd</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.23'/> <!-- pure -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.76'>
+                  <Foundation.Core.ModelElement.name>cntx</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.77'>
+                  <Foundation.Core.ModelElement.name>cmd</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.65'/> <!-- Command -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.78'>
+                  <Foundation.Core.ModelElement.name>doCmd.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10013'>
+          <Foundation.Core.ModelElement.name>Connected</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- AnswerinMachine -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.generalization>
+            <Foundation.Core.Generalization xmi.idref = 'G.91'/> <!-- {Connected-&gt;AnsweringMachineState}{3D6782A402EE} -->
+          </Foundation.Core.GeneralizableElement.generalization>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Operation xmi.id = 'S.10014'>
+              <Foundation.Core.ModelElement.name>doCmd</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.79'>
+                  <Foundation.Core.ModelElement.name>cntx</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.80'>
+                  <Foundation.Core.ModelElement.name>cmd</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.65'/> <!-- Command -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.81'>
+                  <Foundation.Core.ModelElement.name>doCmd.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10015'>
+          <Foundation.Core.ModelElement.name>HandlingMsg</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- AnswerinMachine -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.generalization>
+            <Foundation.Core.Generalization xmi.idref = 'G.92'/> <!-- {HandlingMsg-&gt;AnsweringMachineState}{3D6782EF0119} -->
+          </Foundation.Core.GeneralizableElement.generalization>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Operation xmi.id = 'S.10016'>
+              <Foundation.Core.ModelElement.name>doCmd</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.82'>
+                  <Foundation.Core.ModelElement.name>cntx</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.83'>
+                  <Foundation.Core.ModelElement.name>cmd</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.65'/> <!-- Command -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.84'>
+                  <Foundation.Core.ModelElement.name>doCmd.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10017'>
+          <Foundation.Core.ModelElement.name>Start</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- AnswerinMachine -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.generalization>
+            <Foundation.Core.Generalization xmi.idref = 'G.93'/> <!-- {Start-&gt;AnsweringMachineState}{3D67B2FD004E} -->
+          </Foundation.Core.GeneralizableElement.generalization>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Operation xmi.id = 'S.10018'>
+              <Foundation.Core.ModelElement.name>doCmd</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.85'>
+                  <Foundation.Core.ModelElement.name>cntx</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.86'>
+                  <Foundation.Core.ModelElement.name>cmd</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.65'/> <!-- Command -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.87'>
+                  <Foundation.Core.ModelElement.name>doCmd.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Class xmi.id = 'S.10019'>
+          <Foundation.Core.ModelElement.name>GoodBye</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Class.isActive xmi.value = 'false'/>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- AnswerinMachine -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.GeneralizableElement.generalization>
+            <Foundation.Core.Generalization xmi.idref = 'G.94'/> <!-- {GoodBye-&gt;AnsweringMachineState}{3D67B31B02AF} -->
+          </Foundation.Core.GeneralizableElement.generalization>
+          <Foundation.Core.ModelElement.taggedValue>
+            <Foundation.Extension_Mechanisms.TaggedValue>
+              <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+              <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+            </Foundation.Extension_Mechanisms.TaggedValue>
+          </Foundation.Core.ModelElement.taggedValue>
+          <Foundation.Core.Classifier.feature>
+            <Foundation.Core.Operation xmi.id = 'S.10020'>
+              <Foundation.Core.ModelElement.name>doCmd</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+              <Foundation.Core.BehavioralFeature.isQuery xmi.value = 'false'/>
+              <Foundation.Core.Operation.specification></Foundation.Core.Operation.specification>
+              <Foundation.Core.Operation.isPolymorphic xmi.value = 'false'/>
+              <Foundation.Core.Operation.concurrency xmi.value = 'sequential'/>
+              <Foundation.Core.BehavioralFeature.parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.88'>
+                  <Foundation.Core.ModelElement.name>cntx</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.89'>
+                  <Foundation.Core.ModelElement.name>cmd</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'inout'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.65'/> <!-- Command -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+                <Foundation.Core.Parameter xmi.id = 'G.90'>
+                  <Foundation.Core.ModelElement.name>doCmd.Return</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Parameter.defaultValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Parameter.defaultValue>
+                  <Foundation.Core.Parameter.kind xmi.value = 'return'/>
+                  <Foundation.Core.Parameter.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.67'/> <!-- void -->
+                  </Foundation.Core.Parameter.type>
+                </Foundation.Core.Parameter>
+              </Foundation.Core.BehavioralFeature.parameter>
+            </Foundation.Core.Operation>
+          </Foundation.Core.Classifier.feature>
+        </Foundation.Core.Class>
+        <Foundation.Core.Association xmi.id = 'G.24'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Core.Association.connection>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.25'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- AnsweringMachineState -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+            <Foundation.Core.AssociationEnd xmi.id = 'G.26'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+              <Foundation.Core.AssociationEnd.aggregation xmi.value = 'shared'/>
+              <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+              <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+              <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+              <Foundation.Core.AssociationEnd.type>
+                <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+              </Foundation.Core.AssociationEnd.type>
+            </Foundation.Core.AssociationEnd>
+          </Foundation.Core.Association.connection>
+        </Foundation.Core.Association>
+        <Foundation.Core.Generalization xmi.id = 'G.91'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+          <Foundation.Core.Generalization.subtype>
+            <Foundation.Core.Class xmi.idref = 'S.10013'/> <!-- Connected -->
+          </Foundation.Core.Generalization.subtype>
+          <Foundation.Core.Generalization.supertype>
+            <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- AnsweringMachineState -->
+          </Foundation.Core.Generalization.supertype>
+        </Foundation.Core.Generalization>
+        <Foundation.Core.Generalization xmi.id = 'G.92'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+          <Foundation.Core.Generalization.subtype>
+            <Foundation.Core.Class xmi.idref = 'S.10015'/> <!-- HandlingMsg -->
+          </Foundation.Core.Generalization.subtype>
+          <Foundation.Core.Generalization.supertype>
+            <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- AnsweringMachineState -->
+          </Foundation.Core.Generalization.supertype>
+        </Foundation.Core.Generalization>
+        <Foundation.Core.Generalization xmi.id = 'G.93'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+          <Foundation.Core.Generalization.subtype>
+            <Foundation.Core.Class xmi.idref = 'S.10017'/> <!-- Start -->
+          </Foundation.Core.Generalization.subtype>
+          <Foundation.Core.Generalization.supertype>
+            <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- AnsweringMachineState -->
+          </Foundation.Core.Generalization.supertype>
+        </Foundation.Core.Generalization>
+        <Foundation.Core.Generalization xmi.id = 'G.94'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+          <Foundation.Core.Generalization.subtype>
+            <Foundation.Core.Class xmi.idref = 'S.10019'/> <!-- GoodBye -->
+          </Foundation.Core.Generalization.subtype>
+          <Foundation.Core.Generalization.supertype>
+            <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- AnsweringMachineState -->
+          </Foundation.Core.Generalization.supertype>
+        </Foundation.Core.Generalization>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.2'>
+          <Foundation.Core.ModelElement.name>StateMachine</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.19'>
+          <Foundation.Core.ModelElement.name>delegate</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Operation</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Operation xmi.idref = 'S.10003'/> <!-- doCmd -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.20'>
+          <Foundation.Core.ModelElement.name>action</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Operation</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Operation xmi.idref = 'S.10004'/> <!-- moreMsgs -->
+            <Foundation.Core.Operation xmi.idref = 'S.10005'/> <!-- playRemaining -->
+            <Foundation.Core.Operation xmi.idref = 'S.10006'/> <!-- playCurrentMsg -->
+            <Foundation.Core.Operation xmi.idref = 'S.10007'/> <!-- advanceAndPlayMsg -->
+            <Foundation.Core.Operation xmi.idref = 'S.10008'/> <!-- deleteMsg -->
+            <Foundation.Core.Operation xmi.idref = 'S.10009'/> <!-- sayGoodBye -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.21'>
+          <Foundation.Core.ModelElement.name>default</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Operation</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Operation xmi.idref = 'S.10010'/> <!-- errorMsg -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.22'>
+          <Foundation.Core.ModelElement.name>state</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- AnsweringMachineState -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.23'>
+          <Foundation.Core.ModelElement.name>pure</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Operation</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Operation xmi.idref = 'S.10012'/> <!-- doCmd -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+      </Foundation.Core.Namespace.ownedElement>
+    </Model_Management.Model>  <!-- End Model G.1 -->
+  </XMI.content>
+  <XMI.extensions xmi.extender = 'Unisys.IntegratePlus.2'>
+    <UISModelElement xmi.id = 'G.95'>
+      <uisOwnedDiagram>
+        <UISDiagram xmi.id = 'S.10023'>
+          <uisDiagramName>Main</uisDiagramName>
+          <uisToolName>Rational Rose 98</uisToolName>
+          <uisDiagramStyle>ClassDiagram</uisDiagramStyle>
+          <uisDiagramPresentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.96'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     608, 912, 496, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=1,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10011'/> <!-- AnsweringMachineState -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.97'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     576, 320, 896, 592,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10001'/> <!-- AnsweringMachine -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.98'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     599, 703, 54, 230,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.24'/> <!-- {AnsweringMachineState-AnsweringMachine}{3D6781D40128} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.99'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     599, 747, 54, 142,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.25'/> <!-- {3D6781D5001F} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.100'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     599, 659, 54, 142,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.26'/> <!-- {3D6781D50020} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.101'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     448, 1328, 254, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10013'/> <!-- Connected -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.102'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     784, 1328, 290, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10015'/> <!-- HandlingMsg -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.103'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     784, 1190, 54, 143,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.92'/> <!-- {HandlingMsg-&gt;AnsweringMachineState}{3D6782EF0119} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.104'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     405, 1190, 54, 142,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.91'/> <!-- {Connected-&gt;AnsweringMachineState}{3D6782A402EE} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.105'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     112, 1328, 224, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10017'/> <!-- Start -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.106'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     118, 1190, 54, 143,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.93'/> <!-- {Start-&gt;AnsweringMachineState}{3D67B2FD004E} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.107'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1088, 1328, 224, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10019'/> <!-- GoodBye -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.108'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1088, 1190, 54, 143,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.94'/> <!-- {GoodBye-&gt;AnsweringMachineState}{3D67B31B02AF} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+          </uisDiagramPresentation>
+        </UISDiagram>
+        <UISDiagram xmi.id = 'S.10025'>
+          <uisDiagramName>Main</uisDiagramName>
+          <uisToolName>Rational Rose 98</uisToolName>
+          <uisDiagramStyle>ModuleDiagram</uisDiagramStyle>
+        </UISDiagram>
+      </uisOwnedDiagram>
+    </UISModelElement>
+    <UISModelElement xmi.id = 'G.109'>
+      <uisOwnedDiagram>
+        <UISDiagram xmi.id = 'S.10024'>
+          <uisDiagramName>NewDiagram</uisDiagramName>
+          <uisToolName>Rational Rose 98</uisToolName>
+          <uisDiagramStyle>StateDiagram</uisDiagramStyle>
+          <uisDiagramPresentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.110'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     704, 736, 494, 130,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.3'/> <!-- Connected -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.111'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     112, 960, 60, 60,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.PseudoState xmi.idref = 'G.9'/> <!-- Start -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.112'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1088, 1392, 84, 84,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.PseudoState xmi.idref = 'G.12'/> <!-- GoodBye -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.113'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1920, 736, 418, 130,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.SimpleState xmi.idref = 'G.13'/> <!-- HandlingMsg -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.114'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     704, 596, 162, 150,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Transition
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.6'/> <!--  -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.115'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1920, 596, 162, 150,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Transition
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.16'/> <!--  -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.116'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1331, 638, 819, 119,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Transition
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.4'/> <!--  -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.117'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     805, 1092, 536, 636,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Transition
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.7'/> <!--  -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.118'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     337, 874, 444, 202,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Transition
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.10'/> <!--  -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.119'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1331, 886, 818, 225,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Transition
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.14'/> <!--  -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.120'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1320, 944, 1046, 341,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Transition
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.17'/> <!--  -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.121'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1525, 1096, 845, 644,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Transition
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Behavioral_Elements.State_Machines.Transition xmi.idref = 'G.18'/> <!--  -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+          </uisDiagramPresentation>
+        </UISDiagram>
+      </uisOwnedDiagram>
+    </UISModelElement>
+  </XMI.extensions>
+</XMI>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions name="StockServices" targetNamespace="http://acme.com/services.wsdl" xmlns:acme="http://acme.com/services.wsdl" xmlns:xsd1="http://acme.com/stockquote.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema targetNamespace="http://acme.com/services.xsd" xmlns="http://www.w3.org/2000/10/XMLSchema">
+      <element name="Ticker">
+        <complexType>
+          <all>
+            <element name="tickerSymbol" type="string"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="TradePrice">
+        <complexType>
+          <all>
+            <element name="price" type="float"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="CompanyName">
+        <complexType>
+          <all>
+            <element name="company" type="string"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="ServicesInfo">
+        <complexType>
+          <sequence>
+            <element name="Services">
+              <complexType>
+                <sequence>
+                  <element name="Service" type="string" minOccurs="0" maxOccurs="unbounded"/>
+                </sequence>
+              </complexType>
+            </element>
+            <element name="Ports">
+              <complexType>
+                <sequence>
+                  <element name="Port" type="string" minOccurs="0" maxOccurs="unbounded"/>
+                </sequence>
+              </complexType>
+            </element>
+            <element name="Bindings">
+              <complexType>
+                <sequence>
+                  <element name="Binding" type="string" minOccurs="0" maxOccurs="unbounded"/>
+                </sequence>
+              </complexType>
+            </element>
+            <element name="PortTypes">
+              <complexType>
+                <sequence>
+                  <element name="Port" type="string" minOccurs="0" maxOccurs="unbounded"/>
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ServicesQuery">
+        <complexType>
+          <all>
+            <element name="Service" type="string"/>
+            <element name="Port" type="string"/>
+            <element name="Binding" type="string"/>
+            <element name="PortType" type="string"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="ServicesResponse">
+        <complexType>
+          <sequence>
+            <any/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="GetLastTradePriceInput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+  <message name="GetLastTradePriceOutput">
+    <part name="body" element="xsd1:TradePrice"/>
+  </message>
+  <message name="GetCompanyInput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+  <message name="GetCompanyOutput">
+    <part name="body" element="xsd1:CompanyName"/>
+  </message>
+  <message name="GetTickerInput">
+    <part name="body" element="xsd1:CompanyName"/>
+  </message>
+  <message name="GetTickerOutput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+  <message name="GetServicesInput"/>
+  <message name="GetServicesOutput">
+    <part name="body" element="xsd1:ServicesInfo"/>
+  </message>
+  <message name="QueryServicesInput">
+    <part name="body" element="xsd1:ServicesQuery"/>
+  </message>
+  <message name="QueryServicesOutput">
+    <part name="body" element="xsd1:ServicesRespose"/>
+  </message>
+  <portType name="StockPortType">
+    <operation name="GetLastTradePrice">
+      <input message="acme:GetLastTradePriceInput"/>
+      <output message="acme:GetLastTradePriceOutput"/>
+    </operation>
+    <operation name="GetTickerFromCompany">
+      <input message="acme:GetTickerInput"/>
+      <output message="acme:GetCompanyOutput"/>
+    </operation>
+    <operation name="GetCompanyFromTicker">
+      <input message="acme:GetCompanyInput"/>
+      <output message="acme:GetTickerOutput"/>
+    </operation>
+  </portType>
+  <portType name="ServicePortType">
+    <operation name="GetServices">
+      <input message="acme:GetServicesInput"/>
+      <output message="acme:GetServicesOutput"/>
+    </operation>
+    <operation name="QueryServices">
+      <input message="acme:QueryServicesInput"/>
+      <output message="acme:QueryServicesOutput"/>
+    </operation>
+  </portType>
+  <binding name="StockQuoteSoapBinding" type="acme:StockPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetLastTradePrice">
+      <soap:operation soapAction="http://acme.com/GetLastTradePrice"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="StockTickerSoapBinding" type="acme:StockPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetTickerFromCompany">
+      <soap:operation soapAction="http://acme.com/GetTickerSymbol"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="StockNameSoapBinding" type="acme:StockPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetCompanyFromTicker">
+      <soap:operation soapAction="http://acme.com/GetCompanyName"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="ServiceListSoapBinding" type="acme:ServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetServices">
+      <soap:operation soapAction="http://acme.com/GetServices"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="ServiceQuerySoapBinding" type="acme:ServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="QueryServices">
+      <soap:operation soapAction="http://acme.com/QueryServices"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="StockInfoService">
+    <documentation>Provides information about stocks.</documentation>
+    <port name="StockQuotePort" binding="acme:StockQuoteSoapBinding">
+      <soap:address location="http://acme.com/stockquote"/>
+    </port>
+    <port name="StockTickerToNamePort" binding="acme:StockTickerSoapBinding">
+      <soap:address location="http://acme.com/tickertoname"/>
+    </port>
+    <port name="StockNameToTickerPort" binding="acme:StockNameSoapBinding">
+      <soap:address location="http://acme.com/nametoticker"/>
+    </port>
+  </service>
+  <service name="ServiceInfoService">
+    <documentation>Provides information about avaialable services.</documentation>
+    <port name="ServiceListPort" binding="acme:ServiceListSoapBinding">
+      <soap:address location="http://acme.com/stockquote"/>
+    </port>
+    <port name="ServiceQueryPort" binding="acme:ServiceQuerySoapBinding">
+      <soap:address location="http://acme.com/tickertoname"/>
+    </port>
+  </service>
+</definitions>

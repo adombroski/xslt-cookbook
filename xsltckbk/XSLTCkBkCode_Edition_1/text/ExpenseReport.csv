@@ -1,0 +1,20 @@
+,,,,,,,,,,,,Statement No.,123,
+
+
+,,,,,,,,,,,Expense Statement,
+
+
+
+,,,Employee,,,,,,,,,Pay Period,
+
+,,,Name,Salvatore Mangano,,Emp #,1,,,,,From,1/1/02,
+,,,SSN,999-99-9999,,Position,Cook,
+,,,Department,XSLT Hacking,,Manager,Big Boss O'Reilly,,,,,To,1/31/02,
+
+,,,Date,Account,Description,Lodging,Transport,Fuel,Meals,Phone,Entertainment,Other,Total,
+
+,,,12/20/01,12345,Goofing off instead of going to confrence.,500.00,50.00,0,300.00,100,1000.00,300.00,
+
+,,,12/20/01,12345,On the beach,500.00,50.00,0,200.00,20,300.00,100.00,Sub Total,
+,,,Approved,,Notes,,,,,,,Advances,
+,,,,,,,,,,,,Total,

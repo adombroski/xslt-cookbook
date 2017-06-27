@@ -1,0 +1,702 @@
+
+(object Petal
+    version    	43
+    _written   	"Rose 6.5.9232.10"
+    charSet    	0)
+
+(object Class_Category "Algorithms"
+    quid       	"3D6D74E100CB"
+    exportControl 	"Public"
+    logical_models 	(list unit_reference_list
+	(object Class "algorithm"
+	    quid       	"3D6D74FC036B"
+	    stereotype 	"topic"
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "subjectIdentity"
+		    quid       	"3D6D75720203"
+		    initv      	"&NIST;/algorithm.html")))
+	(object Class "sort"
+	    quid       	"3D6D762802FD"
+	    stereotype 	"topic"
+	    used_nodes 	(list uses_relationship_list
+		(object Uses_Relationship
+		    quid       	"3D6D7641000F"
+		    stereotype 	"instanceOf"
+		    supplier   	"Logical View::Algorithms::algorithm"
+		    quidu      	"3D6D74FC036B"))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "subjectIdentity"
+		    quid       	"3D6D786900DA"
+		    initv      	"&NIST;/sort.html")))
+	(object Class "quicksort"
+	    quid       	"3D6D769C0119"
+	    stereotype 	"topic"
+	    used_nodes 	(list uses_relationship_list
+		(object Uses_Relationship
+		    quid       	"3D6D77F1002E"
+		    stereotype 	"instanceOf"
+		    supplier   	"Logical View::Algorithms::in-place sort"
+		    quidu      	"3D6D783701A5"))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "subjectIdentity"
+		    quid       	"3D6D7C7F006D"
+		    initv      	"&NIST;/quicksort.html")))
+	(object Class "in-place sort"
+	    quid       	"3D6D783701A5"
+	    superclasses 	(list inheritance_relationship_list
+		(object Inheritance_Relationship
+		    quid       	"3D6D7849000F"
+		    supplier   	"Logical View::Algorithms::sort"
+		    quidu      	"3D6D762802FD"))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "subjectIdentity"
+		    quid       	"3D6D789803C8"
+		    initv      	"&NIST;/inplacesort.html")))
+	(object Class "insertion sort"
+	    quid       	"3D6D78F80251"
+	    stereotype 	"topic"
+	    used_nodes 	(list uses_relationship_list
+		(object Uses_Relationship
+		    quid       	"3D6D796C0196"
+		    stereotype 	"instanceOf"
+		    supplier   	"Logical View::Algorithms::in-place sort"
+		    quidu      	"3D6D783701A5"))
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "subjectIdentity"
+		    quid       	"3D6D7D0101F4"
+		    initv      	"&NIST;/insertsrt.html")))
+	(object Class "quick sort demo"
+	    quid       	"3D6D79960242"
+	    stereotype 	"resource"
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "resourceRef"
+		    quid       	"3D6D7A60000F"
+		    initv      	"&DSAL;/QSort.html")))
+	(object Class "quick sort specification"
+	    quid       	"3D6D7BD8000F"
+	    class_attributes 	(list class_attribute_list
+		(object ClassAttribute "resourceRef"
+		    quid       	"3D6D7C04031C"
+		    initv      	"http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/quick/quicken.htm")))
+	(object Class "insertion sort definition"
+	    quid       	"3D6D7D58004E"
+	    documentation 	
+|Definition: Sort by repeatedly taking the next item and inserting it into the final data structure in its proper order with respect to items already inserted. Run time is O(n2) because of moves. 
+|
+|
+	    
+	    stereotype 	"resource")
+	(object Class "quick sort definition"
+	    quid       	"3D6D7DFA0280"
+	    documentation 	"Definition: An in-place sort algorithm that uses the divide and conquer paradigm. It picks an element from the array (the pivot), partitions the remaining elements into those greater than and less than this pivot, and recursively sorts the partitions. There are many variants of the basic scheme above: to select the pivot, to partition the array, to stop the recursion on small partitions, etc."
+	    stereotype 	"resource")
+	(object Association "$UNNAMED$0"
+	    quid       	"3D6D7A2002AF"
+	    stereotype 	"occurance"
+	    roles      	(list role_list
+		(object Role "$UNNAMED$1"
+		    quid       	"3D6D7A210128"
+		    supplier   	"Logical View::Algorithms::quick sort demo"
+		    quidu      	"3D6D79960242"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$2"
+		    quid       	"3D6D7A210129"
+		    supplier   	"Logical View::Algorithms::quicksort"
+		    quidu      	"3D6D769C0119")))
+	(object Association "$UNNAMED$3"
+	    quid       	"3D6D7BF60203"
+	    stereotype 	"occurance"
+	    roles      	(list role_list
+		(object Role "$UNNAMED$4"
+		    quid       	"3D6D7BF700DA"
+		    supplier   	"Logical View::Algorithms::quick sort specification"
+		    quidu      	"3D6D7BD8000F"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$5"
+		    quid       	"3D6D7BF700DB"
+		    supplier   	"Logical View::Algorithms::quicksort"
+		    quidu      	"3D6D769C0119")))
+	(object Association "$UNNAMED$6"
+	    quid       	"3D6D7D980280"
+	    stereotype 	"occurance"
+	    roles      	(list role_list
+		(object Role "$UNNAMED$7"
+		    quid       	"3D6D7D990148"
+		    supplier   	"Logical View::Algorithms::insertion sort definition"
+		    quidu      	"3D6D7D58004E"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$8"
+		    quid       	"3D6D7D990149"
+		    supplier   	"Logical View::Algorithms::insertion sort"
+		    quidu      	"3D6D78F80251")))
+	(object Association "$UNNAMED$9"
+	    quid       	"3D6D7E1C007D"
+	    stereotype 	"occurance"
+	    roles      	(list role_list
+		(object Role "$UNNAMED$10"
+		    quid       	"3D6D7E1C029F"
+		    supplier   	"Logical View::Algorithms::quick sort definition"
+		    quidu      	"3D6D7DFA0280"
+		    is_navigable 	TRUE)
+		(object Role "$UNNAMED$11"
+		    quid       	"3D6D7E1C02A0"
+		    supplier   	"Logical View::Algorithms::quicksort"
+		    quidu      	"3D6D769C0119"))))
+    logical_presentations 	(list unit_reference_list
+	(object ClassDiagram "Sorting"
+	    quid       	"3D6D74F102FD"
+	    title      	"Sorting"
+	    zoom       	100
+	    max_height 	28350
+	    max_width  	21600
+	    origin_x   	0
+	    origin_y   	0
+	    items      	(list diagram_item_list
+		(object ClassView "Class" "Logical View::Algorithms::algorithm" @1
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(2432, 528)
+		    label      	(object ItemLabel
+			Parent_View 	@1
+			location   	(2051, 469)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	762
+			justify    	0
+			label      	"algorithm")
+		    stereotype 	(object ItemLabel
+			Parent_View 	@1
+			location   	(2051, 419)
+			fill_color 	13434879
+			anchor     	10
+			nlines     	1
+			max_width  	762
+			justify    	0
+			label      	"<<topic>>")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D74FC036B"
+		    compartment 	(object Compartment
+			Parent_View 	@1
+			location   	(2051, 530)
+			icon_style 	"Icon"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	768)
+		    width      	780
+		    height     	242
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object ClassView "Class" "Logical View::Algorithms::sort" @2
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(1344, 528)
+		    label      	(object ItemLabel
+			Parent_View 	@2
+			location   	(1011, 469)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	666
+			justify    	0
+			label      	"sort")
+		    stereotype 	(object ItemLabel
+			Parent_View 	@2
+			location   	(1011, 419)
+			fill_color 	13434879
+			anchor     	10
+			nlines     	1
+			max_width  	666
+			justify    	0
+			label      	"<<topic>>")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D762802FD"
+		    compartment 	(object Compartment
+			Parent_View 	@2
+			location   	(1011, 530)
+			icon_style 	"Icon"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	671)
+		    width      	684
+		    height     	242
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object UsesView "" @3
+		    label      	(object ItemLabel
+			Parent_View 	@3
+			location   	(1864, 528)
+			anchor_loc 	1
+			nlines     	1
+			max_width  	60
+			justify    	0
+			label      	"")
+		    stereotype 	(object SegLabel @4
+			Parent_View 	@3
+			location   	(1853, 480)
+			anchor     	10
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"<<instanceOf>>"
+			pctDist    	0.470320
+			height     	49
+			orientation 	0)
+		    line_color 	3342489
+		    quidu      	"3D6D7641000F"
+		    client     	@2
+		    supplier   	@1
+		    line_style 	0)
+		(object ClassView "Class" "Logical View::Algorithms::in-place sort" @5
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(1344, 1056)
+		    label      	(object ItemLabel
+			Parent_View 	@5
+			location   	(947, 975)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	794
+			justify    	0
+			label      	"in-place sort")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D783701A5"
+		    compartment 	(object Compartment
+			Parent_View 	@5
+			location   	(947, 1036)
+			icon_style 	"Icon"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	800)
+		    width      	812
+		    height     	186
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object InheritView "" @6
+		    stereotype 	TRUE
+		    line_color 	3342489
+		    quidu      	"3D6D7849000F"
+		    client     	@5
+		    supplier   	@2
+		    line_style 	0)
+		(object ClassView "Class" "Logical View::Algorithms::quick sort demo" @7
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(2096, 2464)
+		    label      	(object ItemLabel
+			Parent_View 	@7
+			location   	(1759, 2405)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	674
+			justify    	0
+			label      	"quick sort demo")
+		    stereotype 	(object ItemLabel
+			Parent_View 	@7
+			location   	(1759, 2355)
+			fill_color 	13434879
+			anchor     	10
+			nlines     	1
+			max_width  	674
+			justify    	0
+			label      	"<<resource>>")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D79960242"
+		    compartment 	(object Compartment
+			Parent_View 	@7
+			location   	(1759, 2466)
+			icon_style 	"Icon"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	672)
+		    width      	692
+		    height     	242
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object ClassView "Class" "Logical View::Algorithms::quick sort specification" @8
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(832, 2432)
+		    label      	(object ItemLabel
+			Parent_View 	@8
+			location   	(7, 2351)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	1650
+			justify    	0
+			label      	"quick sort specification")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D7BD8000F"
+		    compartment 	(object Compartment
+			Parent_View 	@8
+			location   	(7, 2412)
+			icon_style 	"Icon"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	1647)
+		    width      	1668
+		    height     	186
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object ClassView "Class" "Logical View::Algorithms::insertion sort" @9
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(2000, 1552)
+		    label      	(object ItemLabel
+			Parent_View 	@9
+			location   	(1628, 1493)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	744
+			justify    	0
+			label      	"insertion sort")
+		    stereotype 	(object ItemLabel
+			Parent_View 	@9
+			location   	(1628, 1443)
+			fill_color 	13434879
+			anchor     	10
+			nlines     	1
+			max_width  	744
+			justify    	0
+			label      	"<<topic>>")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D78F80251"
+		    compartment 	(object Compartment
+			Parent_View 	@9
+			location   	(1628, 1554)
+			icon_style 	"Icon"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	750)
+		    width      	762
+		    height     	242
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object UsesView "" @10
+		    label      	(object ItemLabel
+			Parent_View 	@10
+			location   	(1653, 1289)
+			anchor_loc 	1
+			nlines     	1
+			max_width  	60
+			justify    	0
+			label      	"")
+		    stereotype 	(object SegLabel @11
+			Parent_View 	@10
+			location   	(1582, 1385)
+			anchor     	10
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"<<instanceOf>>"
+			pctDist    	0.500000
+			height     	120
+			orientation 	0)
+		    line_color 	3342489
+		    quidu      	"3D6D796C0196"
+		    client     	@9
+		    supplier   	@5
+		    line_style 	0)
+		(object ClassView "Class" "Logical View::Algorithms::insertion sort definition" @12
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(2448, 2048)
+		    label      	(object ItemLabel
+			Parent_View 	@12
+			location   	(2203, 2019)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	490
+			justify    	0
+			label      	"insertion sort definition")
+		    stereotype 	(object ItemLabel
+			Parent_View 	@12
+			location   	(2203, 1969)
+			fill_color 	13434879
+			anchor     	10
+			nlines     	1
+			max_width  	490
+			justify    	0
+			label      	"<<resource>>")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D7D58004E"
+		    width      	508
+		    height     	182
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object AssociationViewNew "$UNNAMED$6" @13
+		    location   	(2237, 1814)
+		    label      	(object SegLabel @14
+			Parent_View 	@13
+			location   	(2237, 1755)
+			font       	(object Font
+			    italics    	TRUE)
+			hidden     	TRUE
+			anchor     	1
+			anchor_loc 	1
+			nlines     	1
+			max_width  	60
+			justify    	0
+			label      	""
+			pctDist    	0.500000
+			height     	60
+			orientation 	0)
+		    stereotype 	(object SegLabel @15
+			Parent_View 	@13
+			location   	(2267, 1762)
+			anchor     	10
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"<<occurance>>"
+			pctDist    	1.000000
+			height     	53
+			orientation 	0)
+		    line_color 	3342489
+		    quidu      	"3D6D7D980280"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$7" @16
+			    Parent_View 	@13
+			    location   	(237, 262)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D6D7D990148"
+			    client     	@13
+			    supplier   	@12
+			    line_style 	0)
+			(object RoleView "$UNNAMED$8" @17
+			    Parent_View 	@13
+			    location   	(237, 262)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D6D7D990149"
+			    client     	@13
+			    supplier   	@9
+			    line_style 	0)))
+		(object ClassView "Class" "Logical View::Algorithms::quicksort" @18
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(624, 1552)
+		    label      	(object ItemLabel
+			Parent_View 	@18
+			location   	(243, 1493)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	762
+			justify    	0
+			label      	"quicksort")
+		    stereotype 	(object ItemLabel
+			Parent_View 	@18
+			location   	(243, 1443)
+			fill_color 	13434879
+			anchor     	10
+			nlines     	1
+			max_width  	762
+			justify    	0
+			label      	"<<topic>>")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D769C0119"
+		    compartment 	(object Compartment
+			Parent_View 	@18
+			location   	(243, 1554)
+			icon_style 	"Icon"
+			fill_color 	13434879
+			anchor     	2
+			nlines     	2
+			max_width  	768)
+		    width      	780
+		    height     	242
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object UsesView "" @19
+		    label      	(object ItemLabel
+			Parent_View 	@19
+			location   	(1004, 1290)
+			anchor_loc 	1
+			nlines     	1
+			max_width  	60
+			justify    	0
+			label      	"")
+		    stereotype 	(object SegLabel @20
+			Parent_View 	@19
+			location   	(899, 1244)
+			anchor     	10
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"<<instanceOf>>"
+			pctDist    	0.377574
+			height     	98
+			orientation 	0)
+		    line_color 	3342489
+		    quidu      	"3D6D77F1002E"
+		    client     	@18
+		    supplier   	@5
+		    line_style 	0)
+		(object AssociationViewNew "$UNNAMED$0" @21
+		    location   	(1359, 2007)
+		    stereotype 	(object SegLabel @22
+			Parent_View 	@21
+			location   	(1359, 1987)
+			anchor     	10
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"<<occurance>>"
+			pctDist    	0.500000
+			height     	21
+			orientation 	0)
+		    line_color 	3342489
+		    quidu      	"3D6D7A2002AF"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$1" @23
+			    Parent_View 	@21
+			    location   	(943, 455)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D6D7A210128"
+			    client     	@21
+			    supplier   	@7
+			    line_style 	0)
+			(object RoleView "$UNNAMED$2" @24
+			    Parent_View 	@21
+			    location   	(943, 455)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D6D7A210129"
+			    client     	@21
+			    supplier   	@18
+			    line_style 	0)))
+		(object AssociationViewNew "$UNNAMED$3" @25
+		    location   	(730, 2005)
+		    stereotype 	(object SegLabel @26
+			Parent_View 	@25
+			location   	(730, 1983)
+			anchor     	10
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"<<occurance>>"
+			pctDist    	0.500000
+			height     	23
+			orientation 	0)
+		    line_color 	3342489
+		    quidu      	"3D6D7BF60203"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$4" @27
+			    Parent_View 	@25
+			    location   	(186, 469)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D6D7BF700DA"
+			    client     	@25
+			    supplier   	@8
+			    line_style 	0)
+			(object RoleView "$UNNAMED$5" @28
+			    Parent_View 	@25
+			    location   	(186, 469)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D6D7BF700DB"
+			    client     	@25
+			    supplier   	@18
+			    line_style 	0)))
+		(object ClassView "Class" "Logical View::Algorithms::quick sort definition" @29
+		    ShowCompartmentStereotypes 	TRUE
+		    IncludeAttribute 	TRUE
+		    IncludeOperation 	TRUE
+		    location   	(272, 2032)
+		    label      	(object ItemLabel
+			Parent_View 	@29
+			location   	(59, 2003)
+			fill_color 	13434879
+			nlines     	1
+			max_width  	426
+			justify    	0
+			label      	"quick sort definition")
+		    stereotype 	(object ItemLabel
+			Parent_View 	@29
+			location   	(59, 1953)
+			fill_color 	13434879
+			anchor     	10
+			nlines     	1
+			max_width  	426
+			justify    	0
+			label      	"<<resource>>")
+		    icon_style 	"Icon"
+		    line_color 	3342489
+		    fill_color 	13434879
+		    quidu      	"3D6D7DFA0280"
+		    width      	444
+		    height     	182
+		    annotation 	8
+		    autoResize 	TRUE)
+		(object AssociationViewNew "$UNNAMED$9" @30
+		    location   	(436, 1806)
+		    stereotype 	(object SegLabel @31
+			Parent_View 	@30
+			location   	(436, 1687)
+			anchor     	10
+			anchor_loc 	1
+			nlines     	1
+			max_width  	450
+			justify    	0
+			label      	"<<occurance>>"
+			pctDist    	0.500000
+			height     	120
+			orientation 	0)
+		    line_color 	3342489
+		    quidu      	"3D6D7E1C007D"
+		    roleview_list 	(list RoleViews
+			(object RoleView "$UNNAMED$10" @32
+			    Parent_View 	@30
+			    location   	(-188, 254)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D6D7E1C029F"
+			    client     	@30
+			    supplier   	@29
+			    line_style 	0)
+			(object RoleView "$UNNAMED$11" @33
+			    Parent_View 	@30
+			    location   	(-188, 254)
+			    stereotype 	TRUE
+			    line_color 	3342489
+			    quidu      	"3D6D7E1C02A0"
+			    client     	@30
+			    supplier   	@18
+			    line_style 	0)))))))

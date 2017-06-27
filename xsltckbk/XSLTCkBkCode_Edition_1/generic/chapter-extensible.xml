@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="chapter.xsl"?>
+<chapter label="8">
+  <chapterinfo>
+    <author>
+      <surname>Mangano</surname>
+      <firstname>Sal</firstname>
+    </author>
+    <copyright>
+      <year>2002</year>
+      <holder>O'Reilly</holder>
+    </copyright>
+  </chapterinfo>
+  <title>XML to HTML</title>
+  <epigraph>
+    <para>That was a surprise to me - that people were prepared to painstakingly write HTML.</para>
+    <attribution>Tim Berners-Lee</attribution>
+  </epigraph>
+  <sect1>
+    <title>Using XSLT as a Styling Language</title>
+    <sect2>
+      <title>Problem</title>
+      <para>You want to use XSLT to stylize a XML document for dissemination via HTML.</para>
+    </sect2>
+    <sect2>
+      <title>Solution</title>
+      <para>Here we show an example for publishing a snippet of a DocBook document in HTML using a XSLT stylesheet. The document source is a portion of this chapter.</para>
+    </sect2>
+    <sect2>
+      <title>Discussion</title>
+      <para>DocBook is an example of a document centric DTD that enables you to author and store document content in a presentation-neutral form that captures the logical structure of the content. The beauty of authoring documents (especially technical ones) in a this form is that one can use XSLT to transform a single content specification into multiple delivery vehicles such as HTML, PDF, Microsoft Help files and Unix man pages. Although we present this recipe in terms of DocBook, the techniques are applicable to other public domain document schema or documents of your own creation. </para>
+    </sect2>
+  </sect1>
+</chapter>

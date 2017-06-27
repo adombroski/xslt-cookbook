@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 2.0//EN"
+"http://www.w3.org/TR/MathML2/dtd/mathml2.dtd">
+<math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <mrow>
+    <msub>
+      <mi>a</mi>
+      <mi>n</mi>
+    </msub>
+    <mo>=</mo>
+    <mrow>
+      <mfrac>
+        <mn>1</mn>
+        <msqrt>
+          <mn>5</mn>
+        </msqrt>
+      </mfrac>
+      <mo>&InvisibleTimes;</mo>
+      <mfenced open="[" close="]">
+        <mrow>
+          <msup>
+            <mfenced>
+              <mfrac>
+                <mrow>
+                  <mn>1</mn>
+                  <mo>+</mo>
+                  <msqrt>
+                    <mn>5</mn>
+                  </msqrt>
+                </mrow>
+                <mn>2</mn>
+              </mfrac>
+            </mfenced>
+            <mrow>
+              <mi>n</mi>
+              <mo>-</mo>
+              <mn>1</mn>
+            </mrow>
+          </msup>
+          <mo>-</mo>
+          <msup>
+            <mfenced>
+              <mfrac>
+                <mrow>
+                  <mn>1</mn>
+                  <mo>-</mo>
+                  <msqrt>
+                    <mn>5</mn>
+                  </msqrt>
+                </mrow>
+                <mn>2</mn>
+              </mfrac>
+            </mfenced>
+            <mrow>
+              <mi>n</mi>
+              <mo>-</mo>
+              <mn>1</mn>
+            </mrow>
+          </msup>
+        </mrow>
+      </mfenced>
+    </mrow>
+  </mrow>
+</math>
+

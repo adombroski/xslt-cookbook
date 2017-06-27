@@ -1,0 +1,1411 @@
+8
+XML to XML
+0) Introduction
+Example 8-1. copy.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:template match="node() | @*">
+  <xsl:copy>
+    <xsl:apply-templates select="@* | node()"/>
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+1) Converting Attributes to Elements
+XSLT 1.0
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:template match="@*">
+  <xsl:element name="{local-name(.)}" namespace="{namespace-uri(..)}">
+    <xsl:value-of select="."/>
+  </xsl:element>  
+</xsl:template>
+   
+</xsl:stylesheet>
+<xsl:template match="@*">
+  <xsl:variable name="namespace">
+    <xsl:choose>
+      <!--Use namespsace of attribute, if there is one -->
+      <xsl:when test="namespace-uri()">
+        <xsl:value-of select="namespace-uri()" />
+      </xsl:when>
+      <!--Otherwise use parents namespace -->
+      <xsl:otherwise>
+        <xsl:value-of select="namespace-uri(..)" />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+  <xsl:element name="{name()}" namespace="{$namespace}">
+    <xsl:value-of select="." />
+  </xsl:element>
+</xsl:template>
+Example 8-2. Input 
+<people which="MeAndMyFriends">
+  <person firstname="Sal" lastname="Mangano" age="38" height="5.75"/>
+  <person firstname="Mike" lastname="Palmieri" age="28" height="5.10"/>
+  <person firstname="Vito" lastname="Palmieri" age="38" height="6.0"/>
+  <person firstname="Vinny" lastname="Mari" age="37" height="5.8"/>
+</people>
+Example 8-3. A stylesheet that transforms person attributes only 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:template match="person/@*">
+  <xsl:element name="{local-name(.)}" namespace="{namespace-uri(..)}">
+    <xsl:value-of select="."/>
+  </xsl:element>  
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 8-4. Output 
+<people which="MeAndMyFriends">
+   
+   <person>
+      <firstname>Sal</firstname>
+      <lastname>Mangano</lastname>
+      <age>38</age>
+      <height>5.75</height>
+   </person>
+   
+   <person>
+      <firstname>Mike</firstname>
+      <lastname>Palmieri</lastname>
+      <age>28</age>
+      <height>5.10</height>
+   </person>
+   
+   <person>
+      <firstname>Vito</firstname>
+      <lastname>Palmieri</lastname>
+      <age>38</age>
+      <height>6.0</height>
+   </person>
+   
+   <person>
+      <firstname>Vinny</firstname>
+      <lastname>Mari</lastname>
+      <age>37</age>
+      <height>5.8</height>
+   </person>
+   
+</people>
+XSLT 2.0
+<xsl:template match="@*">
+  <xsl:variable name="namespace" 
+                select="if (namespace-uri()) then namespace-uri() 
+                                             else namespace-uri(..)"/>
+  <xsl:element name="{name()}" namespace="{$namespace}">
+    <xsl:value-of select="." />
+  </xsl:element>
+</xsl:template>
+2) Converting Elements to Attributes
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
+   
+<xsl:template match="person">
+  <xsl:copy>
+    <xsl:for-each select="*">
+      <xsl:attribute name="{local-name(.)}">
+        <xsl:value-of select="."/>
+      </xsl:attribute>  
+    </xsl:for-each>
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+XSLT 1.0
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
+   
+<xsl:template match="person">
+  <xsl:copy>
+    <xsl:for-each select="*">
+      <xsl:attribute name="{local-name(.)}">
+        <xsl:value-of select="."/>
+      </xsl:attribute>  
+      <xsl:copy-of select="@*"/>
+    </xsl:for-each>
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
+   
+<xsl:template match="person">
+  <xsl:copy>
+    <xsl:for-each select="*">
+      <xsl:attribute name="{local-name(.)}">
+        <xsl:value-of select="."/>
+      </xsl:attribute>  
+      <xsl:variable name="elem-name" select="local-name(.)"/>
+      <xsl:for-each select="@*">
+        <xsl:attribute name="{concat($elem-name,'-',local-name(.))}">
+          <xsl:value-of select="."/>
+        </xsl:attribute>  
+      </xsl:for-each>
+    </xsl:for-each>
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" indent="yes" version="1.0" encoding="UTF-8"/>
+   
+<!-- Match elements that are parents -->
+<xsl:template match="*[*]">
+  <xsl:choose>
+    <!-- Only convert children if this element has no attributes -->
+    <!-- of its own -->
+    <xsl:when test="not(@*)">
+      <xsl:copy>
+        <!-- Convert children to attributes if the child has -->
+        <!-- no children or attributes and has a unique name -->
+        <!-- amoung its siblings -->
+        <xsl:for-each select="*">
+          <xsl:choose>
+            <xsl:when test="not(*) and not(@*) and
+                            not(preceding-sibling::*[name() =
+                                                     name(current())]) 
+                            and 
+                            not(following-sibling::*[name() = 
+                                                     name(current())])">
+              <xsl:attribute name="{local-name(.)}">
+                <xsl:value-of select="."/>
+              </xsl:attribute>  
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:apply-templates select="."/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each>
+      </xsl:copy>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:copy>
+        <xsl:apply-templates/>
+      </xsl:copy>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+XSLT 2.0
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" indent="yes" version="1.0" encoding="UTF-8"/>
+   
+<!-- Match elements that are parents -->
+<xsl:template match="*[*]">
+  <xsl:choose>
+    <!-- Only convert children if this element has no attributes -->
+    <!-- of its own -->
+    <xsl:when test="not(@*)">
+      <xsl:copy>
+        <!-- Convert children to attributes if the child has -->
+        <!-- no children or attributes and has a unique name -->
+        <!-- amoung its siblings -->
+        <xsl:for-each-group select="*" group-by="name()">
+          <xsl:choose>
+            <xsl:when test="not(*) and count(current-group()) eq 1">
+              <xsl:attribute name="{local-name(.)}">
+                <xsl:value-of select="."/>
+              </xsl:attribute>
+              <!-- Copy attributes of child to parent element -->
+              <xsl:copy-of select="@*"/>  
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:apply-templates select="current-group()"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each-group>
+      </xsl:copy>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:copy>
+        <xsl:apply-templates select="@*| node()"/>
+      </xsl:copy>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+  
+</xsl:stylesheet>
+3) Renaming Elements or Attributes
+Example 8-5. Rename person to individual 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
+   
+<xsl:template match="person">
+  <individual>
+    <xsl:apply-templates select="@* | node()"/>
+  </individual>
+</xsl:template>
+   
+</xsl:stylesheet>
+...
+<xsl:template match="person">
+  <xsl:element name="individual">
+    <xsl:apply-templates/>
+  </xsl:element>
+</xsl:template>
+...
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
+   
+<xsl:template match="@lastname">
+  <xsl:attribute name="surname">
+    <xsl:value-of select="."/>
+  </xsl:attribute>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 8-6. A document using the namespace foo 
+<foo:someElement xmlns:foo="http://www.ora.com/XMLCookbook/namespaces/foo">
+  <foo:aChild>
+    <foo:aGrandChild/>
+    <foo:aGrandChild>
+    </foo:aGrandChild>
+  </foo:aChild>
+</foo:someElement>
+Example 8-7. A stylesheet that maps foo to bar 
+<xsl:stylesheet version="1.0"   
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:foo="http://www.ora.com/XMLCookbook/namespaces/foo"
+ xmlns:bar="http://www.ora.com/XMLCookbook/namespaces/bar">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="foo:*">
+  <xsl:element name="bar:{local-name()}">
+    <xsl:apply-templates/>
+  </xsl:element>
+</xsl:template>     
+   
+</xsl:stylesheet>
+Example 8-8. Output 
+<bar:someElement xmlns:bar="http://www.ora.com/XMLCookbook/namespaces/bar">
+   <bar:aChild>
+      <bar:aGrandChild/>
+      <bar:aGrandChild/>
+   </bar:aChild>
+</bar:someElement>
+Discussion
+Example 8-9. A generic table-driven rename stylesheet 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:ren="http://www.ora.com/namespaces/rename">
+   
+<xsl:import href="copy.xslt"/>
+   
+<!--Override in importing stylesheet -->
+<xsl:variable name="lookup"  select="/.."/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:template match="*">
+  <xsl:choose>
+    <xsl:when test="$lookup/ren:element[@from=name(current())]">
+      <xsl:element 
+           name="{$lookup/ren:element[@from=local-name(current())]/@to}">
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+      </xsl:element>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:apply-imports/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template match="@*">
+  <xsl:choose>
+    <xsl:when test="$lookup/ren:attribute[@from=name(current())]">
+      <xsl:attribute name="{$lookup/ren:attribute[@from=name(current())]/@to}">
+        <xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:apply-imports/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 8-10. Using the table driven stylesheet 
+<xsl:stylesheet version="1.0"
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:ren="http://www.ora.com/namespaces/rename">
+   
+<xsl:import href="TableDrivenRename.xslt"/>
+   
+<!-- Load the lookup table. We define it locally but it can also
+ come from an external file -->     
+<xsl:variable name="lookup"  select="document('')/*[ren:*]"/>
+   
+<!-- Define the renaming rules -->
+<ren:element from="person" to="individual"/>
+<ren:attribute from="firstname" to="givenname"/>
+<ren:attribute from="lastname" to="surname"/>
+<ren:attribute from="age" to="yearsOld"/>
+   
+</xsl:stylesheet>
+Example 8-11. Output 
+<?xml version="1.0" encoding="UTF-8"?>
+<people which="MeAndMyFriends">
+   
+   <individual givenname="Sal" surname="Mangano" yearsOld="38" height="5.75"/>
+   
+   <individual givenname="Mike" surname="Palmieri" yearsOld="28" height="5.10"/>
+   
+   <individual givenname="Vito" surname="Palmieri" yearsOld="38" height="6.0"/>
+   
+   <individual givenname="Vinny" surname="Mari" yearsOld="37" height="5.8"/>
+   
+</people>
+<clubs>
+  <club name="The 500 Club">
+    <members>
+       <member name="Joe Smith">
+         <position name="president"/>
+      </member>
+       <member name="Jill McFonald">
+         <position name="treasurer"/>
+      </member>
+       <!-- ... -->
+    <members>
+  </club>
+  <!-- ... -->
+<clubs>
+<xsl:stylesheet version="1.0"
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:ren="http://www.ora.com/namespaces/rename">
+   
+<xsl:import href="TableDrivenRename.xslt"/>
+   
+<!-- Load the lookup table. We define it locally but it can also
+ come from an external file -->     
+<xsl:variable name="lookup"  select="document('')/*[ren:*]"/>
+   
+<!-- Define the renaming rules -->
+<ren:attribute from="name" to="title"/>
+   
+<!--OVEVRIDE: Simply copy all names that are not attributes of position element -->
+<xsl:template match="@name[not(parent::position)]">
+     <xsl:copy/>
+</xsl:template>
+   
+</xsl:stylesheet>
+<foo:someElement xmlns:foo="http://www.ora.com/XMLCookbook/namespaces/foo" xmlns:
+doc="http://www.ora.com/XMLCookbook/namespaces/doc">
+  <foo:aChild>
+    <foo:aGrandChild/>
+    <foo:aGrandChild>
+      <doc:doc>This documentation should not be removed or altered in any way.
+      </doc:doc>
+    </foo:aGrandChild>
+  </foo:aChild>
+</foo:someElement>
+<bar:someElement xmlns:bar="http://www.ora.com/XMLCookbook/namespaces/bar">
+   <bar:aChild>
+      <bar:aGrandChild/>
+      <bar:aGrandChild>
+         <doc:doc xmlns:doc="http://www.ora.com/XMLCookbook/namespaces/doc" 
+            xmlns:foo="http://www.ora.com/XMLCookbook/namespaces/foo">
+          This documentation should not be removed or altered in any way.
+         </doc:doc>
+      </bar:aGrandChild>
+   </bar:aChild>
+</bar:someElement>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:foo="http://www.ora.com/XMLCookbook/namespaces/foo"
+ xmlns:bar="http://www.ora.com/XMLCookbook/namespaces/bar">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:strip-space elements="*"/>
+   
+<!-- For all elements create a new element with the same 
+name and namespace 
+-->
+<xsl:template match="*">
+  <xsl:element name="{name()}" namespace="{namespace-uri()}">
+    <xsl:apply-templates/>
+  </xsl:element>
+</xsl:template>
+   
+<xsl:template match="foo:*">
+  <xsl:element name="bar:{local-name()}">
+    <xsl:apply-templates/>
+  </xsl:element>
+</xsl:template>     
+   
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="*">
+  <xsl:element name="{local-name()}">
+    <xsl:apply-templates/>
+  </xsl:element>
+</xsl:template>
+   
+</xsl:stylesheet> 
+4) Merging Documents with Identical Schema
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="xml" indent="yes"/>
+   
+<xsl:param name="doc2"/> 
+   
+<xsl:template match="/*">
+  <xsl:copy>
+    <xsl:copy-of select="* | document($doc2)/*/*"/>
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 8-12. Document 1 
+<people which="MeAndMyFriends">
+     <person firstname="Sal" lastname="Mangano" age="38" height="5.75"/>
+     <person firstname="Mike" lastname="Palmieri" age="28" height="5.10"/>
+     <person firstname="Vito" lastname="Palmieri" age="38" height="6.0"/>
+     <person firstname="Vinny" lastname="Mari" age="37" height="5.8"/>
+</people>
+Example 8-13. Document 2 
+<people which="MeAndMyCoWorkers">
+     <person firstname="Sal" lastname="Mangano" age="38" height="5.75"/>
+     <person firstname="Al" lastname="Zehtooney" age="33" height="5.3"/>
+     <person firstname="Brad" lastname="York" age="38" height="6.0"/>
+     <person firstname="Charles" lastname="Xavier" age="32" height="5.8"/>
+</people>
+<xsl:stylesheet version="1.0"  
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:exsl="http://exslt.org/common">
+    
+    <xsl:import href="exsl.xsl" />
+
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:param name="doc2"/> 
+<!-- Here we introduce a 'key' attribute to make removing duplicates -->
+<!-- easier -->
+<xsl:variable name="all">
+  <xsl:for-each select="/*/person | document($doc2)/*/person">
+    <xsl:sort select="concat(@lastname,@firstname)"/>
+    <person key="{concat(@lastname, @firstname)}">
+      <xsl:copy-of select="@* | node()" />
+    </person>  </xsl:for-each>
+</xsl:variable>
+   
+<xsl:template match="/">
+     
+<people>
+     <xsl:for-each 
+         select="exsl:node-set($all)/person[not(@key = 
+                          preceding-sibling::person[1]/@key)]">
+          <xsl:copy-of select="."/>
+     </xsl:for-each>
+</people>
+     
+</xsl:template>
+<!-- Stylesheet: merge-simple-using-key.xslt -->
+<!-- Import this stylesheet into another that defines the key -->
+   
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:merge="http:www.ora.com/XSLTCookbook/mnamespaces/merge">
+     
+<xsl:param name="doc2"/> 
+   
+<xsl:template match="/*">
+  <!--Copy the outter most element of the source document -->
+  <xsl:copy>
+    <!-- For each child in the source, detemine if it should be 
+    copied to the destination based on its existence in the other document.
+    -->
+    <xsl:for-each select="*">
+    
+      <!-- Call a template which determines a unique key value for this
+           element. It must be defined in the including stylesheet. 
+      -->  
+      <xsl:variable name="key-value">
+        <xsl:call-template name="merge:key-value"/>
+      </xsl:variable>
+      
+      <xsl:variable name="element" select="."/>
+      <!--This for-each is simply to change context 
+          to the second document 
+      -->
+      <xsl:for-each select="document($doc2)/*">
+        <!-- Use key as a mechanism for testing the precence 
+             of the element in the second document. The 
+             key should be defined by the including stylesheet
+        -->
+        <xsl:if test="not(key('merge:key', $key-value))">
+          <xsl:copy-of select="$element"/>
+        </xsl:if>
+      </xsl:for-each>
+      
+    </xsl:for-each>
+   
+    <!--Copy all elements in the second document -->
+    <xsl:copy-of select="document($doc2)/*/*"/>
+    
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+<!-- This stylesheet defines uniqueness of elements in terms of a key. -->
+<xsl:stylesheet version="1.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:merge="http:www.ora.com/XSLTCookbook/mnamespaces/merge">
+   
+<xsl:include href="merge-simple-using-key.xslt"/>
+   
+<!--A person is uniquely defined by the concatenation of 
+    last and first names -->
+<xsl:key name="merge:key" match="person" 
+         use="concat(@lastname,@firstname)"/>
+   
+<xsl:output method="xml" indent="yes"/>
+   
+<!-- This template retrives the key value for an element -->
+<xsl:template name="merge:key-value">
+  <xsl:value-of select="concat(@lastname,@firstname)"/>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 8-14. A reusable stylesheet that implements the merge in terms of a union 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:vset="http:/www.ora.com/XSLTCookbook/namespaces/vset">
+   
+<xsl:import href="../query/vset.ops.xslt"/>
+   
+<xsl:output method="xml" indent="yes"/>
+   
+<xsl:param name="doc2"/> 
+   
+<xsl:template match="/*">
+  <xsl:copy>
+    <xsl:call-template name="vset:union">
+      <xsl:with-param name="nodes1" select="*"/>
+      <xsl:with-param name="nodes2" select="document($doc2)/*/*"/>
+    </xsl:call-template>
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 8-15. A stylesheet defining what element equality means 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:vset="http:/www.ora.com/XSLTCookbook/namespaces/vset">
+   
+<xsl:import href="merge-using-vset-union.xslt"/>
+   
+<xsl:template match="person" mode="vset:element-equality">
+  <xsl:param name="other"/>
+  <xsl:if test="concat(@lastname,@firstname) = 
+                concat($other/@lastname,$other/@firstname)">  
+    <xsl:value-of select="true()"/>
+  </xsl:if>
+</xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+Example 8-16. XML-containing documents to be merged 
+<mergeDocs>
+  <doc path="people1.xml"/>
+  <doc path="people2.xml"/>
+  <doc path="people3.xml"/>
+  <doc path="people4.xml"/>
+</mergeDocs>
+Example 8-17. A stylesheet for merging the documents (assumes no duplicates are in the 
+content) 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="xml" indent="yes"/>
+   
+<xsl:variable name="docs" select="/*/doc"/>
+   
+<xsl:template match="mergeDocs">
+     <xsl:apply-templates select="doc[1]"/>
+</xsl:template>
+   
+<!--Match the first doc to create the top most element -->
+<xsl:template match="doc">
+  <xsl:variable name="path" select="@path"/>
+  <xsl:for-each select="document($path)/*">
+    <xsl:copy>
+       <!-- Merge children of doc 1 -->
+      <xsl:copy-of select="@* | *"/>
+       <!--Loop over remaining docs to merge their children -->
+      <xsl:for-each select="$docs[position() > 1]">
+          <xsl:copy-of select="document(@path)/*/*"/>
+      </xsl:for-each>
+    </xsl:copy>
+  </xsl:for-each> 
+</xsl:template>
+   
+</xsl:stylesheet>
+     
+5) Merging Documents with Unlike Schema
+Incorporate one document as a subpart of a parent document
+<MyNoteBook>
+  <friends>
+  </friends>
+  <coworkers>
+  </coworkers>
+  <projects>
+    <project>Replalce mapML with XSLT engine using Xalan C++</project>
+    <project>Figure out the meaning of life.</project>
+    <project>Figure out where the dryer is hinding all those missing 
+socks</project>
+  </projects>  
+</MyNoteBook>
+   
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="copy.xslt"/>
+   
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:strip-space elements="*"/>
+  
+  <xsl:template match="friends | coworkers">
+    <xsl:copy>
+      <xsl:variable name="file" select="concat(local-name(),'.xml')"/>
+      <xsl:copy-of select="document($file)/*/*"/>
+    </xsl:copy>
+  </xsl:template>
+...
+</xsl:stylesheet>
+   
+<?xml version="1.0" encoding="UTF-8"?>
+<MyNoteBook>
+   <friends>
+      <person firstname="Sal" lastname="Mangano" age="38" height="5.75"/>
+      <person firstname="Mike" lastname="Palmieri" age="28" height="5.10"/>
+      <person firstname="Vito" lastname="Palmieri" age="38" height="6.0"/>
+      <person firstname="Vinny" lastname="Mari" age="37" height="5.8"/>
+   </friends>
+   <coworkers>
+      <person firstname="Sal" lastname="Mangano" age="38" height="5.75"/>
+      <person firstname="Al" lastname="Zehtooney" age="33" height="5.3"/>
+      <person firstname="Brad" lastname="York" age="38" height="6.0"/>
+      <person firstname="Charles" lastname="Xavier" age="32" height="5.8"/>
+   </coworkers>
+   <projects>
+      <project>Replalce mapML with XSLT engine using Xalan C++</project>
+      <project>Figure out the meaning of life.</project>
+      <project>Figure out where the dryer is hinding all those missing socks
+      </project>
+   </projects>
+</MyNoteBook>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" indent="yes"/>
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="xi:include" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xsl:for-each select="document(@href)"> 
+    <xsl:apply-templates/>
+  </xsl:for-each>
+</xsl:template> 
+   
+</xsl:stylesheet>
+Weave two documents together
+<animals>
+  <mammals>
+    <animal common="chimpanzee" species="Pan troglodytes" order="Primates"/>
+    <animal common="human" species="Homo Sapien" family="Primates"/>
+  </mammals>
+  <reptiles>
+    <animal common="boa constrictor" species="Boa constrictor" order="Squamata"/>
+    <animal common="gecko" species="Gekko gecko" order="Squamata"/>
+  </reptiles>
+  <birds>
+    <animal common="sea gull" species="Larus occidentalis" 
+order="Charadriiformes"/>
+    <animal common="Black-Backed Woodpecker" species="Picoides arcticus"
+    order="Piciformes"/>
+  </birds>
+</animals>
+<animals>
+  <mammals>
+    <animal common="hippo" species="Hippopotamus amphibius" 
+    family=" Hippopotamidae"/>
+    <animal common="arabian camel" species="Camelus dromedarius" 
+family="Camelidae"/>
+  </mammals>
+  <insects>
+    <animal common="Lady Bug" species="Adalia bipunctata" family="Coccinellidae"/>
+    <animal common="Dung Bettle" species=" Onthophagus australis"
+    family="Scarabaeidae"/>
+  </insects>
+  <amphibians>
+    <animal common="Green Sea Turtle" species="Chelonia mydas" 
+family="Cheloniidae"/>
+    <animal common="Green Tree Frog" species=" Hyla cinerea" family="Hylidae "/>
+  </amphibians>
+</animals>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+<xsl:strip-space elements="*"/>
+   
+  <xsl:param name="doc2file"/>
+  
+  <xsl:variable name="doc2" select="document($doc2file)"/>
+  <xsl:variable name="thisDocsClasses" select="/*/*"/>
+  
+<xsl:template match="/*">
+  <xsl:copy>
+    <!-- Merge common sections between source doc and doc2. Also includes
+          sections unique to source doc. -->
+    <xsl:for-each select="*">
+      <xsl:copy>
+        <xsl:copy-of select="*"/>
+        <xsl:copy-of select="$doc2/*/*[name() = name(current())]/*"/>
+      </xsl:copy>
+    </xsl:for-each>
+   
+    <!-- Merge sections unique to doc2 -->
+    <xsl:for-each select="$doc2/*/*">
+      <xsl:if test="not($thisDocsClasses[name() = name(current())])">
+        <xsl:copy-of select="."/>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:copy>
+</xsl:template>
+  
+</xsl:stylesheet>
+<animals>
+   <mammals>
+      <animal common="chimpanzee" species="Pan troglodytes" order="Primates"/>
+      <animal common="human" species="Homo Sapien" order="Primates"/>
+      <animal common="hippo" species="Hippopotamus amphibius" 
+      family=" Hippopotamidae"/>
+      <animal common="arabian camel" species="Camelus dromedarius" 
+      family="Camelidae"/>
+   </mammals>
+   <reptiles>
+      <animal common="boa constrictor" species="Boa constrictor" order="Squamata"/>
+      <animal common="gecko" species="Gekko gecko" order="Squamata"/>
+   </reptiles>
+   <birds>
+      <animal common="sea gull" species="Larus occidentalis" 
+      order="Charadriiformes"/>
+      <animal common="Black-Backed Woodpecker" species="Picoides arcticus" 
+      order="Piciformes"/>
+   </birds>
+   <insects>
+      <animal common="Lady Bug" species="Adalia bipunctata" 
+family="Coccinellidae"/>
+      <animal common="Dung Bettle" species=" Onthophagus australis" 
+      family="Scarabaeidae"/>
+   </insects>
+   <amphibians>
+      <animal common="Green Sea Turtle" species="Chelonia mydas"
+      family="Cheloniidae"/>
+      <animal common="Green Tree Frog" species=" Hyla cinerea" family="Hylidae "/>
+   </amphibians>
+</animals>
+     
+     
+Join elements from two documents to make new elements
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="copy.xslt"/>
+  
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  
+  <xsl:param name="doc2file"/>
+  
+  <xsl:variable name="doc2" select="document($doc2file)"/>
+   
+  <xsl:template match="person">
+    <xsl:copy>
+      <xsl:for-each select="@*">
+        <xsl:element name="{local-name()}">
+          <xsl:value-of select="."/>
+        </xsl:element>
+      </xsl:for-each>
+      <xsl:variable name="matching-person" 
+          select="$doc2/*/person[@name=concat(current()/@firstname,' ',
+                                              current()/@lastname)]"/>
+      <xsl:element name="smoker">
+        <xsl:value-of select="$matching-person/@smoker"/>
+      </xsl:element>
+      <xsl:element name="sex">
+        <xsl:value-of select="$matching-person/@sex"/>
+      </xsl:element>
+    </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+6) Splitting Documents
+XSLT 1.0
+<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:include href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="salesperson">
+  <xsl:variable name="outFile" 
+  select="concat('salesperson.',translate(@name,' ','_'),'.xml')"/>        
+  <!-- Non-standard saxon xsl:document! -->
+  <xsl:document href="{$outFile}"> 
+       <xsl:copy>
+              <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+       </xsl:copy>
+  </xsl:document>
+</xsl:template>
+   
+<xsl:template match="salesBySalesperson">
+  <xsl:apply-templates/>
+</xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:import href="copy.xslt"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+<xsl:strip-space elements="*"/>
+     
+<xsl:template match="salesperson">
+  <xsl:variable name="outFile" 
+      select="concat('salesperson.',translate(@name,' ','_'),'.xml')"/>        
+  <xsl:document href="{$outFile}">
+       <xsl:copy>
+              <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+       </xsl:copy>
+  </xsl:document>
+   
+  <xi:include href="{$outFile}" 
+                        xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+</xsl:template>   
+   
+</xsl:stylesheet>
+  <xsl:element name="xi:include" 
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+    <xsl:attribute name="href">
+      <xsl:value-of select="$outFile"/>
+    </xsl:attribute> 
+  </xsl:element>
+7) Flattening an XML Hierarchy
+<people>
+  <union>
+    <person>
+      <firstname>Warren</firstname>
+      <lastname>Rosenbaum</lastname>
+      <age>37</age>
+      <height>5.75</height>
+    </person>
+    <person>
+      <firstname>Dror</firstname>
+      <lastname>Seagull</lastname>
+      <age>28</age>
+      <height>5.10</height>
+    </person>
+    <person>
+      <firstname>Mike</firstname>
+      <lastname>Heavyman</lastname>
+      <age>45</age>
+      <height>6.0</height>
+    </person>
+    <person>
+      <firstname>Theresa</firstname>
+      <lastname>Archul</lastname>
+      <age>37</age>
+      <height>5.5</height>
+    </person>
+  </union>
+  <salaried>
+    <person>
+      <firstname>Sal</firstname>
+      <lastname>Mangano</lastname>
+      <age>37</age>
+      <height>5.75</height>
+    </person>
+    <person>
+      <firstname>Jane</firstname>
+      <lastname>Smith</lastname>
+      <age>28</age>
+      <height>5.10</height>
+    </person>
+    <person>
+      <firstname>Rick</firstname>
+      <lastname>Winters</lastname>
+      <age>45</age>
+      <height>6.0</height>
+    </person>
+    <person>
+      <firstname>James</firstname>
+      <lastname>O'Riely</lastname>
+      <age>33</age>
+      <height>5.5</height>
+    </person>
+  </salaried>
+</people>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="copy.xslt"/>
+   
+  <xsl:output method="xml" version="1.0" encoding="UTF-8"/>
+    
+  <xsl:template match="people">
+    <xsl:copy>
+      <!--discard parents of person elements --> 
+      <xsl:apply-templates select="*/person" />
+    </xsl:copy>
+  </xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="copy.xslt"/>
+   
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" 
+  omit-xml-declaration="yes"/>
+      
+  <!--discard parents of person elements --> 
+  <xsl:template match="*[person]">
+       <xsl:apply-templates/>
+  </xsl:template>
+   
+<xsl:template match="person">
+  <xsl:copy>
+    <xsl:apply-templates select="@*"/>
+    <xsl:attribute name="class">
+      <xsl:value-of select="local-name(..)"/>
+    </xsl:attribute>
+    <xsl:apply-templates/>
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="copy.xslt"/>
+   
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" />
+      
+  <!--discard parents of person elements --> 
+  <xsl:template match="*[person]">
+       <xsl:apply-templates/>
+  </xsl:template>
+   
+<xsl:template match="person">
+  <xsl:copy>
+    <xsl:copy-of select="@*"/>
+    <xsl:element name="class">
+      <xsl:value-of select="local-name(..)"/>
+    </xsl:element>
+    <xsl:apply-templates/>
+  </xsl:copy>
+</xsl:template>
+   
+</xsl:stylesheet>
+<people>
+...
+    <person>
+      <class>union</class>
+      <firstname>Warren</firstname>
+      <lastname>Rosenbaum</lastname>
+      <age>37</age>
+      <height>5.75</height>
+    </person>
+                                      <— Whitespace gap here!
+   
+    <person>
+      <class>salaried</class>
+      <firstname>Sal</firstname>
+      <lastname>Mangano</lastname>
+      <age>37</age>
+      <height>5.75</height>
+    </person>
+...
+ </people>
+     
+8) Deepening an XML Hierarchy
+Add structure based on existing data
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="copy.xslt"/>
+  
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:strip-space elements="*"/>
+   
+  <xsl:template match="people">
+    <union>
+       <xsl:apply-templates select="person[@class = 'union']" />
+    </union>
+    <salaried>
+       <xsl:apply-templates select="person[@class = 'salaried']" />
+    </salaried>
+  </xsl:template>  
+   
+</xsl:stylesheet>
+Add structure to correct a poorly designed document
+<people>
+  <class name="union"/>
+  <person>
+    <firstname>Warren</firstname>
+    <lastname>Rosenbaum</lastname>
+    <age>37</age>
+    <height>5.75</height>
+  </person>
+...
+  <person>
+    <firstname>Theresa</firstname>
+    <lastname>Archul</lastname>
+    <age>37</age>
+    <height>5.5</height>
+  </person>
+  <class name="salaried"/>
+  <person>
+    <firstname>Sal</firstname>
+    <lastname>Mangano</lastname>
+    <age>37</age>
+    <height>5.75</height>
+  </person>
+...
+  <person>
+    <firstname>James</firstname>
+    <lastname>O'Riely</lastname>
+    <age>33</age>
+    <height>5.5</height>
+  </person>
+</people>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="copy.xslt"/>
+  
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:strip-space elements="*"/>
+   
+  <!-- The total number of people -->
+  <xsl:variable name="num-people" select="count(/*/person)"/>     
+  
+  <xsl:template match="class">
+    <!--The last position we want to consider. -->
+    <xsl:variable name="pos" 
+             select="$num-people - 
+               count(following-sibling::class/following-sibling::person)"/>
+    <xsl:element name="{@name}">
+      <!-- Copy people that follow this class but whose  position is 
+           less than or equal to $pos.-->   
+      <xsl:copy-of 
+              select="following-sibling::person[position() &lt;= $pos]"/>
+     </xsl:element> 
+  </xsl:template>
+   
+<!-- Ignore person elements. They were coppied above. -->
+<xsl:template match="person"/>
+   
+</xsl:stylesheet>
+<xsl:key name="people" match="person" 
+         use="preceding-sibling::class[1]/@name" />
+   
+<xsl:template match="people">
+  <people>
+    <xsl:apply-templates select="class" />
+  </people>
+</xsl:template>
+   
+<xsl:template match="class">
+  <xsl:element name="{@name}">
+    <xsl:copy-of select="key('people', @name)" />
+  </xsl:element>
+</xsl:template>
+<xsl:template match="people">
+  <people>
+    <xsl:apply-templates select="class[1]" />
+  </people>
+</xsl:template>
+   
+<xsl:template match="class">
+  <xsl:element name="{@name}">
+    <xsl:apply-templates select="following-sibling::*[1][self::person]" />
+  </xsl:element>
+  <xsl:apply-templates select="following-sibling::class[1]" />
+</xsl:template>
+   
+<xsl:template match="person">
+  <xsl:copy-of select="." />
+  <xsl:apply-templates select="following-sibling::*[1][self::person]" />
+</xsl:template>
+XSLT 2.0
+Add structure based on existing data
+<xsl:template match="people">
+  <xsl:for-each-group select="person" 
+                      group-by="preceding-sibling::class[1]/@name">
+      <xsl:element name="{curent-grouping-key()">
+        <xsl:apply-templates select="current-group()" />
+      </xsl:element>
+    </xsl:for-each>
+</xsl:template> 
+Add structure to correct a poorly designed document
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:import href="copy.xslt"/>
+
+	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+	
+	<xsl:template match="people">
+	   <xsl:copy>
+	     <xsl:for-each-group select="*" group-starting-with="class">
+		<xsl:element name="{@name}">
+		   <xsl:apply-templates select="current-group()[not(self::class)]"/>
+		</xsl:element>
+	     </xsl:for-each-group>
+	   </xsl:copy>
+	</xsl:template>
+	
+</xsl:stylesheet>
+Discussion
+Add structure based on existing data
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     
+  <xsl:import href="copy.xslt"/>
+  
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:strip-space elements="*"/>
+   
+  <!-- build a unique list of all classes -->
+  <xsl:variable name="classes" 
+            select="/*/*/@class[not(. = ../preceding-sibling::*/@class)]"/>  
+  <xsl:template match="/*">
+    <!-- For each class create an element named after that 
+         class that contains elements of that class -->
+    <xsl:for-each select="$classes">
+      <xsl:variable name="class-name" select="."/>
+      <xsl:element name="{$class-name}">
+        <xsl:for-each select="/*/*[@class=$class-name]">
+          <xsl:copy>
+            <xsl:apply-templates/>
+          </xsl:copy>
+        </xsl:for-each>
+      </xsl:element>
+   </xsl:for-each>
+  </xsl:template>       
+   
+</xsl:stylesheet>
+Add structure to correct a poorly designed document
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:import href="copy.xslt"/>
+  
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:strip-space elements="*"/>
+     
+  <xsl:template match="class">
+    <!--All people following this class element -->
+    <xsl:variable name="nodes1" select="following-sibling::person"/>
+    <!--All people following the next class element -->
+    <xsl:variable name="nodes2" 
+          select="following-sibling::class/following-sibling::person"/>
+    <xsl:element name="{@name}">
+      <xsl:copy-of select="$nodes1[count(. | $nodes2) != count($nodes2)]"/>
+     </xsl:element> 
+  </xsl:template>
+   
+<xsl:template match="person"/>
+   
+</xsl:stylesheet>
+     
+9) Reorganizing an XML Hierarchy
+XSLT 1.0
+<salesBySalesperson>
+  <salesperson name="John Adams" seniority="1">
+    <product sku="10000" totalSales="10000.00"/>
+    <product sku="20000" totalSales="50000.00"/>
+    <product sku="25000" totalSales="920000.00"/>
+  </salesperson>
+  <salesperson name="Wendy Long" seniority="5">
+    <product sku="10000" totalSales="990000.00"/>
+    <product sku="20000" totalSales="150000.00"/>
+    <product sku="30000" totalSales="5500.00"/>
+  </salesperson>
+  <salesperson name="Willie B. Aggressive" seniority="10">
+    <product sku="10000" totalSales="1110000.00"/>
+    <product sku="20000" totalSales="150000.00"/>
+    <product sku="25000" totalSales="2920000.00"/>
+    <product sku="30000" totalSales="115500.00"/>
+    <product sku="70000" totalSales="10000.00"/>
+  </salesperson>
+  <salesperson name="Arty Outtolunch" seniority="10"/>
+</salesBySalesperson>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:key name="sales_key" match="salesperson" use="product/@sku"/>
+   
+<xsl:variable name="products" select="//product"/>
+<xsl:variable name="unique-products" 
+    select="$products[not(@sku = preceding::product/@sku)]"/>
+   
+<xsl:template match="/">
+  <salesByProduct>
+    <xsl:for-each select="$unique-products">
+      <xsl:variable name="sku" select="@sku"/>
+      <xsl:copy> 
+        <xsl:copy-of select="$sku"/>
+        <xsl:attribute name="totalSales">
+          <xsl:value-of select="sum($products[@sku=$sku]/@totalSales)"/>
+        </xsl:attribute>
+        <xsl:for-each select="key('sales_key',$sku)">
+          <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:attribute name="sold">
+              <xsl:value-of select="product[@sku=$sku]/@totalSales"/>
+            </xsl:attribute>
+          </xsl:copy>
+        </xsl:for-each>
+      </xsl:copy>
+    </xsl:for-each>
+  </salesByProduct>
+</xsl:template>
+   
+</xsl:stylesheet>
+<salesByProduct>
+   <product sku="10000" totalSales="2110000">
+      <salesperson name="John Adams" seniority="1" sold="10000.00"/>
+      <salesperson name="Wendy Long" seniority="5" sold="990000.00"/>
+      <salesperson name="Willie B. Aggressive" seniority="10" sold="1110000.00"/>
+   </product>
+   <product sku="20000" totalSales="350000">
+      <salesperson name="John Adams" seniority="1" sold="50000.00"/>
+      <salesperson name="Wendy Long" seniority="5" sold="150000.00"/>
+      <salesperson name="Willie B. Aggressive" seniority="10" sold="150000.00"/>
+   </product>
+   <product sku="25000" totalSales="3840000">
+      <salesperson name="John Adams" seniority="1" sold="920000.00"/>
+      <salesperson name="Willie B. Aggressive" seniority="10" sold="2920000.00"/>
+   </product>
+   <product sku="30000" totalSales="121000">
+      <salesperson name="Wendy Long" seniority="5" sold="5500.00"/>
+      <salesperson name="Willie B. Aggressive" seniority="10" sold="115500.00"/>
+   </product>
+   <product sku="70000" totalSales="10000">
+      <salesperson name="Willie B. Aggressive" seniority="10" sold="10000.00"/>
+   </product>
+</salesByProduct>$
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:variable name="doc" select="/"/>
+   
+<xsl:key name="product_key" match="product" use="@sku"/>
+<xsl:key name="sales_key" match="salesperson" use="product/@sku"/>
+   
+<xsl:variable name="products" select="//product"/>
+   
+<xsl:template match="/">
+  <salesByProduct>
+    <xsl:for-each select="$products[count(.|key('product_key',@sku)[1]) 
+                           = 1]">
+      <xsl:variable name="sku" select="@sku"/>
+      <xsl:copy> 
+        <xsl:copy-of select="$sku"/>
+        <xsl:attribute name="totalSales">
+          <xsl:value-of select="sum(key('product_key',$sku)/@totalSales)"/>
+        </xsl:attribute>
+        <xsl:for-each select="key('sales_key',$sku)">
+          <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:attribute name="sold">
+              <xsl:value-of select="product[@sku=$sku]/@totalSales"/>
+            </xsl:attribute>
+          </xsl:copy>
+        </xsl:for-each>
+      </xsl:copy>
+    </xsl:for-each>
+  </salesByProduct>
+</xsl:template>
+   
+</xsl:stylesheet>
+XSLT 2.0
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+ <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+ <xsl:template match="/">
+  <salesByProduct>
+   <!-- Group products by sku -->
+   <xsl:for-each-group select="//product" group-by="@sku">
+    <xsl:copy>
+	 <xsl:copy-of select="@sku"/>
+     <!-- Use current-group() to toatl up sales -->
+	 <xsl:attribute name="totalSales" 
+                    select="format-number(sum(current-group()/@totalSales),'#')"/>
+	 <!-- Copy salperson elements that contain a child product with sku of current 
+          product group -->
+     <xsl:for-each select="/*/salesperson">
+	  <xsl:if test="product[@sku eq current-grouping-key()]">
+       <xsl:copy>
+        <xsl:copy-of select="@*"/>
+       </xsl:copy>
+      </xsl:if>
+     </xsl:for-each>
+	</xsl:copy>
+   </xsl:for-each-group>
+  </salesByProduct>
+ </xsl:template>
+</xsl:stylesheet>
+
+ 
+ 
+ 
+ 
+26		XML to XML
+9) Reorganizing an XML Hierarchy		27 of 27
+26
+	27
+DRAFT	O'Reilly & Associates	1/16/2006

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextWidthTest>
+  <text font="Serif" size="9">M's are BIG; l's are small;</text>
+  <text font="Serif" size="10">SVG makes handling text no fun at all</text>
+  <text font="Helvetica" size="12">But if I cheat with a little Java</text>
+  <text font="Arial" size="14" weight="bold">PROMISE ME YOU WON'T TELL MY MAMMA!</text>
+  <text font="Century" size="16" style="italic">But if you do, I won't lose cheer.</text>
+  <text font="Courier New" size="18" weight="bold" style="italic">Its really my tech editor that I fear!</text>
+</TextWidthTest>

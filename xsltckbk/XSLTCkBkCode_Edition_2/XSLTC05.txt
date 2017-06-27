@@ -1,0 +1,1204 @@
+Chapter 5
+Selecting and Traversing
+Introduction
+Example 5-1. SalesBySalesPerson.xml 
+<?xml version="1.0" encoding="UTF-8"?>
+<salesBySalesperson>
+  <salesperson name="John Adams" seniority="1">
+     <product sku="10000" totalSales="10000.00"/>
+     <product sku="20000" totalSales="50000.00"/>
+     <product sku="25000" totalSales="920000.00"/>
+  </salesperson>
+  <salesperson name="Wendy Long" seniority="5">
+     <product sku="10000" totalSales="990000.00"/>
+     <product sku="20000" totalSales="150000.00"/>
+     <product sku="30000" totalSales="5500.00"/>
+  </salesperson>
+  <salesperson name="Willie B. Aggressive" seniority="10">
+     <product sku="10000" totalSales="1110000.00"/>
+     <product sku="20000" totalSales="150000.00"/>
+     <product sku="25000" totalSales="2920000.00"/>
+     <product sku="30000" totalSales="115500.00"/>
+     <product sku="70000" totalSales="10000.00"/>
+  </salesperson>
+  <salesperson name="Arty Outtolunch" seniority="10"/>
+</salesBySalesperson>
+Example 5-2. orgchart.xml 
+<?xml version="1.0" encoding="UTF-8"?>
+<employee name="Jil Michel" sex="female">
+     <employee name="Nancy Pratt" sex="female">
+          <employee name="Phill McKraken" sex="male"/>
+          <employee name="Ima Little" sex="female">
+               <employee name="Betsy Ross" sex="female"/>
+          </employee>
+     </employee>
+     <employee name="Jane Doe" sex="female">
+          <employee name="Walter H. Potter" sex="male"/>
+          <employee name="Wendy B.K. McDonald" sex="female">
+               <employee name="Craig F. Frye" sex="male"/>
+               <employee name="Hardy Hamburg" sex="male"/>
+               <employee name="Rich Shaker" sex="male"/>
+          </employee>
+     </employee>
+     <employee name="Mike Rosenbaum" sex="male">
+          <employee name="Cindy Post-Kellog" sex="female">
+               <employee name="Allen Bran" sex="male"/>
+               <employee name="Frank N. Berry" sex="male"/>
+               <employee name="Jack Apple" sex="male"/>
+          </employee>
+          <employee name="Oscar A. Winner" sex="male">
+               <employee name="Jack Nickolas" sex="male">
+                    <employee name="R.P. McMurphy" sex="male"/>
+               </employee>
+               <employee name="Tom Hanks" sex="male">
+                    <employee name="Forest Gump" sex="male"/>
+                    <employee name="Andrew Beckett" sex="male"/>
+               </employee>
+               <employee name="Susan Sarandon" sex="female">
+                    <employee name="Helen Prejean" sex="female"/>
+               </employee>
+          </employee>
+     </employee>
+</employee>
+1) Ignoring Duplicate Elements
+XSLT 1.0
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:template match="/">
+
+<products>
+     <xsl:for-each select="//product[not(@sku=preceding::product/@sku)]">
+          <xsl:copy-of select="."/>
+     </xsl:for-each>
+</products>
+</xsl:template>     
+   
+</xsl:stylesheet>
+
+<products>
+     <product sku="10000" totalSales="10000.00"/>
+     <product sku="10000" totalSales="990000.00"/>
+     <product sku="10000" totalSales="1110000.00"/>
+     <product sku="20000" totalSales="50000.00"/>
+     <product sku="20000" totalSales="150000.00"/>
+     <product sku="20000" totalSales="150000.00"/>
+     <product sku="25000" totalSales="920000.00"/>
+     <product sku="25000" totalSales="2920000.00"/>
+     <product sku="30000" totalSales="5500.00"/>
+     <product sku="30000" totalSales="115500.00"/>
+     <product sku="70000" totalSales="10000.00"/>
+</products>
+   
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:template match="/products ">
+<products>
+     <xsl:for-each select="product[not(@sku=preceding-sibling::product/@sku)]">
+          <xsl:copy-of select="."/>
+     </xsl:for-each>
+</products>
+</xsl:template>     
+   
+</xsl:stylesheet>
+<xsl:for-each select="//product[not(@sku=../preceding-sibling::*/product/@sku)]">
+     <xsl:copy-of select="."/>
+</xsl:for-each>
+<xsl:for-each 
+     select="/salesperson/product[not(@name=preceding-sibling::product[1]/@name]">
+     <!-- do something with each uniquiely named product -->
+</xsl:for-each>
+XSLT 2.0
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  
+  <xsl:template match="/">
+    <products>
+      <xsl:for-each-group select="//product" group-by="@sku">
+        <xsl:copy-of select="current-group()[1]"/>
+      </xsl:for-each-group>
+    </products>
+  </xsl:template>
+  
+</xsl:stylesheet>
+Discussion
+XSLT 1.0
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:exslt=" http://exslt.org">
+
+     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:template match="/">
+     
+<xsl:variable name="products">
+     <xsl:for-each select="//product">
+          <xsl:sort select="@sku"/>
+          <xsl:copy-of select="."/>
+     </xsl:for-each>
+</xsl:variable>
+     
+<products>
+     <xsl:for-each select="exslt:node-set($products)/product">
+          <xsl:variable name="pos" select="position(  )"/>
+          <xsl:if test="$pos = 1 or 
+          not(@sku = $products/preceding-sibling::product[1]/@sku">
+               <xsl:copy-of select="."/>
+          </xsl:if>
+     </xsl:for-each>
+</products>
+     
+</xsl:template>
+<xsl:stylesheet version="1.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:exslt=" http://exslt.org">
+
+     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:template match="/">
+     
+<xsl:variable name="people">
+     <xsl:for-each select="//person">
+          <xsl:sort select="concat(@lastname,@firstname)"/>
+          <xsl:copy-of select="."/>
+     </xsl:for-each>
+</xsl:variable>
+     
+<products>
+     <xsl:for-each select="exslt:node-set($people/)person">
+          <xsl:variable name="pos" select="position(  )"/>
+          <xsl:if test="$pos = 1 or 
+               concat(@lastname,@firstname) != 
+                          concat(people/person[$pos - 1]/@lastname,
+                                 people/person[$pos - 1]/@firstname)">
+               <xsl:copy-of select="."/>
+          </xsl:if>
+     </xsl:for-each>
+</products>
+     
+</xsl:template>
+<xsl:template match="/">
+<products>
+     <xsl:for-each select="//product[not(@sku=preceding::product[1]/@sku)]">
+          <xsl:sort select="@sku"/>
+          <xsl:copy-of select="."/>
+     </xsl:for-each>
+</products>
+</xsl:template>
+<xsl:template match="/">
+     
+<xsl:variable name="products">
+     <xsl:for-each select="//product">
+     <!— sort removed from here —>
+          <xsl:copy-of select="."/>
+     </xsl:for-each>
+</xsl:variable>
+     
+<products>
+     <xsl:for-each select="exsl:node-set($products)/product">
+          <xsl:sort select="@sku"/>
+          <xsl:variable name="pos" select="position(  )"/>
+          <xsl:if test="$pos = 1 or 
+               @sku != $products/product[$pos - 1]/@sku">
+               <xsl:copy-of select="."/>
+          </xsl:if>
+     </xsl:for-each>
+</products>
+</xsl:template>
+XSLT 2.0
+<measurements>
+  <data time="12:00:00" value="1.0"/>
+  <data time="12:00:01" value="1.0"/>
+  <data time="12:00:02" value="1.1"/>
+  <data time="12:00:03" value="1.1"/>
+  <data time="12:00:04" value="1.0"/>
+  <data time="12:00:05" value="1.1"/>
+  <data time="12:00:06" value="1.2"/>
+  <data time="12:00:07" value="1.3"/>
+  <data time="12:00:08" value="1.4"/>
+  <data time="12:00:09" value="1.6"/>
+  <data time="12:00:10" value="1.9"/>
+  <data time="12:00:11" value="2.1"/>
+  <data time="12:00:12" value="1.7"/>
+  <data time="12:00:13" value="1.5"/>
+</measurements>
+
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  
+  <xsl:template match="/measurements">
+    <xsl:copy>
+      <xsl:for-each-group select="data" group-adjacent="@value">
+        <xsl:copy-of select="current-group()[1]"/>
+      </xsl:for-each-group>
+    </xsl:copy>
+  </xsl:template>
+  
+</xsl:stylesheet>
+
+<!--Output -->
+<measurements>
+   <data time="12:00:00" value="1.0"/>
+   <data time="12:00:02" value="1.1"/>
+   <data time="12:00:04" value="1.0"/>
+   <data time="12:00:05" value="1.1"/>
+   <data time="12:00:06" value="1.2"/>
+   <data time="12:00:07" value="1.3"/>
+   <data time="12:00:08" value="1.4"/>
+   <data time="12:00:09" value="1.6"/>
+   <data time="12:00:10" value="1.9"/>
+   <data time="12:00:11" value="2.1"/>
+   <data time="12:00:12" value="1.7"/>
+   <data time="12:00:13" value="1.5"/>
+</measurements>
+2) Selecting All but a Specific Element
+Solution
+<xsl:apply-templates select="*[not(self::element-to-ignore)]"/>
+<xsl:for-each select="*[not(self::element-to-ignore)]">
+...
+</xsl:for-each>
+Discussion
+<xsl:apply-templates select="*[name(  ) != 'element-to-ignore']"/>
+<!--This will fail if the author decided to use SALES:product instead of 
+sales:product -->
+<xsl:apply-templates select="*[name(  ) != 'sales:product']"/>
+<xsl:apply-templates select="*[generate-id(  ) != generate-id($node-to-ignore)]"/>
+3) Selecting Nodes by Context
+XSLT 1.0
+<doc>
+  <heading>Structure, I don't need any stinkin structure</heading>
+  <para>1.1</para>
+  <para>1.2</para>
+  <para>1.3</para>
+  <para>1.4</para>
+  <heading>Confessions of a flat earther</heading>
+  <para>2.1</para>
+  <para>2.2</para>
+  <para>2.3</para>
+  <heading>Flat hierarchies save trees!</heading>
+  <para>3.1</para>
+  <para>3.2</para>
+</doc>
+
+ <xsl:template match="/doc">
+	<xsl:copy>
+	  <!-- First select the bracketing elements -->
+      <xsl:apply-templates select="heading"/>
+    </xsl:copy>
+ </xsl:template>
+ 
+<!-- Match on the braketing elements --> 
+ <xsl:template match="heading">
+  <!-- Compute how many of the desired elements (para) follow this heading -->
+  <xsl:variable name="numFollowingPara" select="count(following-sibling::para)"/>
+   
+  <!-- Compute how many of the desired elements (para) follow the next heading 
+       and subtract from the preceding count to get the position of the last
+       para in this group-->
+  <xsl:variable name="lastParaInHeading" 
+      select="$numFollowingPara -
+             count(following-sibling::heading[1]/following-sibling::para)"/>
+
+	<!-- You now can select the desired elements by their position relative to 
+         The current heading -->
+  
+    <xsl:apply-templates 
+      select="following-sibling::para[position() &lt;= $lastParaInHeading]"/>
+
+  </xsl:template>
+XSLT 2.0
+<xsl:template match="/doc">
+  <xsl:copy>
+	  <xsl:for-each-group select="*" group-starting-with="heading">
+        <!--Select the para elements in the group bracketed by heading -->
+        <xsl:apply-templates select="current-group()[self::para]"/> 
+	  </xsl:for-each-group>             
+  </xsl:copy>
+</xsl:template>
+4) Performing a Preorder Traversal
+<xsl:template match="node(  )">
+     <!-- Do something with current node -->
+   
+     <!--Process children -->
+     <xsl:apply-templates/>
+</xsl:template>
+Discussion
+Example 5-3. Stylesheet 
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="text"/>
+<xsl:strip-space elements="*"/>
+     
+<xsl:template match="/employee" priority="10">
+     <xsl:value-of select="@name"/><xsl:text> is the head of the company. 
+</xsl:text>
+     <xsl:call-template name="HeShe"/><xsl:text> manages </xsl:text>
+     <xsl:call-template name="manages"/>
+     <xsl:apply-templates/>
+</xsl:template>
+     
+<xsl:template match="employee[employee]">
+     <xsl:value-of select="@name"/><xsl:text> is a manager. </xsl:text>
+     <xsl:call-template name="HeShe"/> <xsl:text> manages </xsl:text>
+     <xsl:call-template name="manages"/>
+     <xsl:apply-templates/>
+</xsl:template>
+   
+<xsl:template match="employee">
+     <xsl:value-of select="@name"/><xsl:text> has no worries. </xsl:text>
+     <xsl:text>&#xa;&#xa;</xsl:text>
+</xsl:template>
+   
+<xsl:template name="HeShe">
+     <xsl:choose>
+          <xsl:when test="@sex = 'male' ">
+               <xsl:text>He</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+               <xsl:text>She</xsl:text>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+     
+<xsl:template name="manages">
+     <xsl:for-each select="*">
+          <xsl:choose>
+            <xsl:when test="position(  ) != last(  ) and last(  ) > 2">
+              <xsl:value-of select="@name"/><xsl:text>, </xsl:text>
+            </xsl:when>
+            <xsl:when test="position(  ) = last(  ) and last(  ) > 1">
+              <xsl:text> and </xsl:text><xsl:value-of 
+                         select="@name"/><xsl:text>. </xsl:text>
+            </xsl:when>
+            <xsl:when test="last(  ) = 1">
+              <xsl:value-of select="@name"/><xsl:text>. </xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@name"/>
+            </xsl:otherwise>
+          </xsl:choose> 
+     </xsl:for-each>
+     <xsl:text>&#xa;&#xa;</xsl:text>
+</xsl:template>
+</xsl:stylesheet>
+Example 5-4. Output 
+Jil Michel is the head of the company. She manages Nancy Pratt, Jane Doe,  and Mike 
+Rosenbaum. 
+   
+Nancy Pratt is a manager. She manages Phill McKraken and Ima Little. 
+   
+Phill McKraken has no worries. 
+   
+Ima Little is a manager. She manages Betsy Ross. 
+   
+Betsy Ross has no worries. 
+   
+Jane Doe is a manager. She manages Walter H. Potter and Wendy B.K. McDonald. 
+   
+Walter H. Potter has no worries. 
+   
+Wendy B.K. McDonald is a manager. She manages Craig F. Frye, Hardy Hamburg,  and 
+Rich 
+Shaker. 
+   
+Craig F. Frye has no worries. 
+   
+Hardy Hamburg has no worries. 
+   
+Rich Shaker has no worries. 
+   
+Mike Rosenbaum is a manager. He manages Cindy Post-Kellog and Oscar A. Winner. 
+   
+Cindy Post-Kellog is a manager. She manages Allen Bran, Frank N. Berry,  and Jack 
+Apple. 
+   
+Allen Bran has no worries. 
+   
+Frank N. Berry has no worries. 
+   
+Jack Apple has no worries. 
+   
+Oscar A. Winner is a manager. He manages Jack Nickolas, Tom Hanks,  and Susan 
+Sarandon. 
+   
+Jack Nickolas is a manager. He manages R.P. McMurphy. 
+   
+R.P. McMurphy has no worries. 
+   
+Tom Hanks is a manager. He manages Forest Gump and Andrew Beckett. 
+   
+Forest Gump has no worries. 
+   
+Andrew Beckett has no worries. 
+   
+Susan Sarandon is a manager. She manages Helen Prejean. 
+   
+Helen Prejean has no worries.
+Example 5-5. MathML fragment representing x2+4x+4 = 0 
+<apply>
+     <eq/>
+     <apply>
+          <plus/>
+          <apply>
+               <power/>
+               <ci>x</ci>
+               <cn>2</cn>
+          </apply>
+          <apply>
+               <times/>
+               <cn>4</cn>
+               <ci>x</ci>
+          </apply>
+          <cn>4</cn>
+     </apply>
+     <cn>0</cn>
+</apply>
+Example 5-6. Stylesheet to convert MathML fragment to prefix notation 
+<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="1.0"
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     <xsl:output method="text"/>
+     <xsl:strip-space elements="*"/>
+     
+     <xsl:template match="apply">
+          <xsl:value-of select="local-name(*[1])"/>
+          <xsl:text>(</xsl:text>
+          <xsl:apply-templates/>
+          <xsl:text>)</xsl:text>
+          <xsl:if test="following-sibling::*">,</xsl:if>
+     </xsl:template>
+     
+     <xsl:template match="ci|cn">
+          <xsl:value-of select="."/>
+          <xsl:if test="following-sibling::*">,</xsl:if>
+     </xsl:template>
+</xsl:stylesheet>
+Example 5-7. Output 
+eq(plus(power(x,2),times(4,x),4),0)
+5) Performing a Postorder Traversal
+<xsl:template match="node(  )">
+     <!--Process children -->
+     <xsl:apply-templates/>
+   
+     <!-- Do something with current node -->
+   
+</xsl:template>
+Discussion
+Example 5-8. Stylesheet 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="text"/>
+<xsl:strip-space elements="*"/>
+     
+<xsl:template match="/employee" priority="10">
+     <xsl:apply-templates/>
+     <xsl:value-of select="@name"/><xsl:text> is the head of the company. 
+</xsl:text>
+     <xsl:call-template name="reportsTo"/>
+     <xsl:call-template name="HimHer"/> <xsl:text>. </xsl:text>
+     <xsl:text>&#xa;&#xa;</xsl:text>
+</xsl:template>
+     
+<xsl:template match="employee[employee]">
+     <xsl:apply-templates/>
+     <xsl:value-of select="@name"/><xsl:text> is a manager. </xsl:text>
+     <xsl:call-template name="reportsTo"/>
+     <xsl:call-template name="HimHer"/> <xsl:text>. </xsl:text>
+     <xsl:text>&#xa;&#xa;</xsl:text>
+</xsl:template>
+   
+<xsl:template match="employee">
+     <xsl:text>Nobody reports to </xsl:text>
+     <xsl:value-of select="@name"/><xsl:text>. &#xa;</xsl:text>
+</xsl:template>
+   
+<xsl:template name="HimHer">
+     <xsl:choose>
+       <xsl:when test="@sex = 'male' ">
+         <xsl:text>him</xsl:text>
+       </xsl:when>
+       <xsl:otherwise>
+         <xsl:text>her</xsl:text>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+     
+<xsl:template name="reportsTo">
+     <xsl:for-each select="*">
+       <xsl:choose>
+         <xsl:when test="position(  ) &lt; last(  ) - 1 and last(  ) > 2">
+          <xsl:value-of select="@name"/><xsl:text>, </xsl:text>
+         </xsl:when>
+         <xsl:when test="position(  ) = last(  ) - 1  and last(  ) > 1">
+          <xsl:value-of select="@name"/><xsl:text> and </xsl:text>
+         </xsl:when>
+         <xsl:when test="position(  ) = last(  ) and last(  ) = 1">
+          <xsl:value-of select="@name"/><xsl:text> reports to </xsl:text>
+         </xsl:when>
+         <xsl:when test="position(  ) = last(  )">
+          <xsl:value-of select="@name"/><xsl:text> report to </xsl:text>
+         </xsl:when>
+         <xsl:otherwise>
+          <xsl:value-of select="@name"/>
+         </xsl:otherwise>
+       </xsl:choose> 
+     </xsl:for-each>
+</xsl:template>
+          
+</xsl:stylesheet>
+Example 5-9. Output 
+Nobody reports to Phill McKraken. 
+Nobody reports to Betsy Ross. 
+Ima Little is a manager. Betsy Ross reports to her. 
+   
+Nancy Pratt is a manager. Phill McKraken and Ima Little report to her. 
+   
+Nobody reports to Walter H. Potter. 
+Nobody reports to Craig F. Frye. 
+Nobody reports to Hardy Hamburg. 
+Nobody reports to Rich Shaker. 
+Wendy B.K. McDonald is a manager. Craig F. Frye, Hardy Hamburg and Rich Shaker 
+report to her. 
+   
+Jane Doe is a manager. Walter H. Potter and Wendy B.K. McDonald report to her. 
+   
+Nobody reports to Allen Bran. 
+Nobody reports to Frank N. Berry. 
+Nobody reports to Jack Apple. 
+Cindy Post-Kellog is a manager. Allen Bran, Frank N. Berry and Jack Apple report to 
+her. 
+   
+Nobody reports to R.P. McMurphy. 
+Jack Nickolas is a manager. R.P. McMurphy reports to him. 
+   
+Nobody reports to Forest Gump. 
+Nobody reports to Andrew Beckett. 
+Tom Hanks is a manager. Forest Gump and Andrew Beckett report to him. 
+   
+Nobody reports to Helen Prejean. 
+Susan Sarandon is a manager. Helen Prejean reports to her. 
+   
+Oscar A. Winner is a manager. Jack Nickolas, Tom Hanks and Susan Sarandon report to 
+him. 
+   
+Mike Rosenbaum is a manager. Cindy Post-Kellog and Oscar A. Winner report to him. 
+   
+Jil Michel is the head of the company. Nancy Pratt, Jane Doe and Mike Rosenbaum 
+report to her.
+     
+6) Performing an In-Order Traversal
+<xsl:template match="node(  )">
+     <!--Process left subtree -->
+     <xsl:apply-templates select="*[1]"/>
+     
+     <!-- Do something with current node -->
+     
+     <!--Process right subtree --> 
+     <xsl:apply-templates select="*[2]"/>
+</xsl:template>
+<xsl:template match="node(  )">
+     <xsl:variable name="current-node" select="."/>
+     <!--Process left subtree -->
+     <xsl:apply-templates select="*[1]"/>
+     
+     <!-- Do something with $current-node -->
+   
+     <!-- Apply recursively to middle children     
+     <xsl:for-each select="*[position(  ) > 1 and position(  ) &lt; last(  )">
+          
+          <!-- Process "left" subtree --> 
+          <xsl:apply-templates select="."/>
+   
+          <!--Do something with $current-node -->
+   
+     </xsl:for-each>
+   
+     <!--Process right subtree -->
+     <xsl:apply-templates select="*[last(  )]"/>
+   
+</xsl:template>
+ 
+Figure 5-1. N-ary to binary tree equivalent
+Discussion
+Example 5-10. Input MathML fragment 
+<apply>
+     <eq/>
+     <apply>
+          <plus/>
+          <apply>
+               <minus/>
+               <ci>y</ci>
+               <cn>2</cn>
+          </apply>
+          <apply>
+               <times/>
+               <cn>4</cn>
+               <apply>
+                    <plus/>
+                    <ci>x</ci>
+                    <cn>1</cn>
+               </apply>
+          </apply>
+          <cn>8</cn>
+     </apply>
+     <cn>0</cn>
+</apply>
+Example 5-11. In-order traversal of MathML fragment to produce a C expression 
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:C="http://www.ora.com/XSLTCookbook/nampespaces/C">
+
+     <xsl:output method="text"/>
+     <xsl:strip-space elements="*"/>
+   
+     <!-- Table to convert from MathML operation names to C operators -->
+     <C:operator mathML="plus" c="+" precedence="2"/>
+     <C:operator mathML="minus" c="-" precedence="2"/>
+     <C:operator mathML="times" c="*" precedence="3"/>
+     <C:operator mathML="div" c="/" precedence="3"/>
+     <C:operator mathML="mod" c="%" precedence="3"/>
+     <C:operator mathML="eq" c="=  =" precedence="1"/>
+     
+     <!-- load operation conversion table into a variable -->               
+     <xsl:variable name="ops" select="document('')/*/C:operator"/>
+          
+     <xsl:template match="apply"> 
+          <xsl:param name="parent-precedence" select="0"/>
+          
+          <!-- Map mathML operation to operator name and precedence -->
+          <xsl:variable name="mathML-opName" select="local-name(*[1])"/>
+          <xsl:variable name="c-opName" 
+               select="$ops[@mathML=$mathML-opName]/@c"/>
+          <xsl:variable name="c-opPrecedence"
+               select="$ops[@mathML=$mathML-opName]/@precedence"/>
+          
+          <!-- Parenthises required if if the precedence of the containing
+           expression is greater than current sub-expression -->
+          <xsl:if test="$parent-precedence > $c-opPrecedence">
+          <xsl:text>(</xsl:text>
+          </xsl:if>
+   
+          <!-- Recursively process the left sub-tree which is at 
+               position 2 in MathML apply element-->          
+          <xsl:apply-templates select="*[2]">
+               <xsl:with-param name="parent-precedence" 
+                    select="$c-opPrecedence"/>
+          </xsl:apply-templates>
+          
+          <!-- Process the current node (i.e. the operator at 
+               position 1 in MathML apply element -->
+          <xsl:value-of select="concat(' ',$c-opName,' ')"/>
+          
+          <!-- Recursively process middle children -->
+          <xsl:for-each select="*[position(  )>2 and 
+                              position(  ) &lt; last(  )]">
+               <xsl:apply-templates select=".">
+                    <xsl:with-param name="parent-precedence"
+                         select="$c-opPrecedence"/>
+               </xsl:apply-templates>
+               <xsl:value-of select="concat(' ',$c-opName,' ')"/>
+          </xsl:for-each>
+          
+          <!-- Recursively process right subtree-->
+          <xsl:apply-templates select="*[last(  )]">
+               <xsl:with-param name="parent-precedence" 
+                         select="$c-opPrecedence"/>
+          </xsl:apply-templates>
+   
+          <!-- Parenthises required if if the precedence of the containing
+               expression is greater than current sub-expression -->
+          <xsl:if test="$parent-precedence > $c-opPrecedence">
+               <xsl:text>)</xsl:text>
+          </xsl:if>
+          
+     </xsl:template>     
+   
+     <xsl:template match="ci|cn">
+          <xsl:value-of select="."/>
+     </xsl:template>
+   
+</xsl:stylesheet>
+Example 5-12. Output 
+y - 2 + 4 * (x + 1) + 8 =  = 0
+7) Performing a Level-Order Traversal
+<xsl:for-each select="//*">
+     <xsl:sort select="count(ancestor::*)" data-type="number"/>
+     <!--  process the current element -->
+</xsl:for-each>
+<xsl:template match="/*">
+     <xsl:call-template name="level-order"/>
+</xsl:template>
+   
+<xsl:template name="level-order">
+<xsl:param name="max-level" select="10"/>
+<xsl:param name="current-level" select="1"/>
+   
+<xsl:choose>
+     <xsl:when test="$current-depth &lt;= $max-level">
+          <!-- process the current level -->
+          <xsl:call-template name="level-order-aux">
+               <xsl:with-param name="level" 
+                         select="$current-level"/>
+               <xsl:with-param name="actual-level" 
+                         select="$current-level"/>
+          </xsl:call-template>
+          <!-- process the next level -->
+          <xsl:call-template name="level-order">
+               <xsl:with-param name="current-level" 
+                         select="$current-level + 1"/>
+          </xsl:call-template>
+     </xsl:when>
+</xsl:choose>
+   
+</xsl:template>
+   
+<xsl:template name="level-order-aux">
+     <xsl:param name="level" select="1"/>
+     <xsl:param name="actual-level" select="1"/>
+     <xsl:choose>
+          <xsl:when test="$level = 1">
+               <!-- Process the current element here -->
+               <!-- $actual-level is the number of the current level -->
+          </xsl:when>
+          <xsl:otherwise>
+               <!-- Recursively descend to the next level on 
+                    all children -->
+               <xsl:for-each select="*">
+                    <xsl:call-template name="level-order-aux">
+                         <xsl:with-param name="level" 
+                              select="$level - 1"/>
+                         <xsl:with-param name="actual-level"
+                              select="$actual-level"/>
+                    </xsl:call-template>
+               </xsl:for-each>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+<xsl:param name="max-level">
+  <xsl:for-each select="//*[not(*)]">
+    <xsl:sort select="count(ancestor::*)" data-type="number" order="descending" />
+    <xsl:if test="position(  ) = 1">
+      <xsl:value-of select="count(ancestor::*) + 1" />
+    </xsl:if>
+  </xsl:for-each>
+</xsl:param>
+Discussion
+Example 5-13. Level-order traversal of orgrchart.xml using sort 
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     <xsl:output method="text"/>
+   
+<xsl:template match="/">
+  <xsl:for-each select="//employee">
+    <xsl:sort select="count(ancestor::*)" order="ascending"/>
+    <xsl:variable name="level" select="count(ancestor::*)"/>
+    <xsl:choose>
+      <xsl:when test="$level = 0">
+        <xsl:value-of select="@name"/>
+        <xsl:text> is the head honcho.&#xA;</xsl:text>
+      </xsl:when>
+       <xsl:otherwise>
+         <xsl:value-of select="@name"/>
+       <xsl:text> has </xsl:text>
+       <xsl:value-of select="$level"/>
+       <xsl:text> boss(es) to knock off.&#xA;</xsl:text>
+     </xsl:otherwise>
+    </xsl:choose>
+  </xsl:for-each>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 5-14. Output 
+Jil Michel is the head honcho.
+Nancy Pratt has 1 boss(es) to knock off.
+Jane Doe has 1 boss(es) to knock off.
+Mike Rosenbaum has 1 boss(es) to knock off.
+Phill McKraken has 2 boss(es) to knock off.
+Ima Little has 2 boss(es) to knock off.
+Walter H. Potter has 2 boss(es) to knock off.
+Wendy B.K. McDonald has 2 boss(es) to knock off.
+Cindy Post-Kellog has 2 boss(es) to knock off.
+Oscar A. Winner has 2 boss(es) to knock off.
+Betsy Ross has 3 boss(es) to knock off.
+Craig F. Frye has 3 boss(es) to knock off.
+Hardy Hamburg has 3 boss(es) to knock off.
+Rich Shaker has 3 boss(es) to knock off.
+Allen Bran has 3 boss(es) to knock off.
+Frank N. Berry has 3 boss(es) to knock off.
+Jack Apple has 3 boss(es) to knock off.
+Jack Nickolas has 3 boss(es) to knock off.
+Tom Hanks has 3 boss(es) to knock off.
+Susan Sarandon has 3 boss(es) to knock off.
+R.P. McMurphy has 4 boss(es) to knock off.
+Forest Gump has 4 boss(es) to knock off.
+Andrew Beckett has 4 boss(es) to knock off.
+Helen Prejean has 4 boss(es) to knock off.
+Example 5-15. Level-order traversal of orgrchart.xml using recursion 
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="text" version="1.0" encoding="UTF-8"/>
+   
+<xsl:strip-space elements="*"/>
+     
+<xsl:template match="/employee">
+     <xsl:call-template name="level-order"/>
+</xsl:template>
+   
+<xsl:template name="level-order">
+<xsl:param name="max-depth" select="10"/>
+<xsl:param name="current-depth" select="0"/>
+   
+<xsl:choose>
+  <xsl:when test="$current-depth &lt;= $max-depth">
+    <xsl:variable name="text">
+      <xsl:call-template name="level-order-aux">
+         <xsl:with-param name="level" select="$current-depth"/>
+        <xsl:with-param name="actual-level" select="$current-depth"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:if test="normalize-space($text)">
+      <xsl:value-of select="$text"/>
+      <xsl:text>&#xa;</xsl:text>
+      <xsl:call-template name="level-order">
+        <xsl:with-param name="current-depth" select="$current-depth + 1"/>
+        </xsl:call-template>
+    </xsl:if>
+  </xsl:when>
+</xsl:choose>
+   
+</xsl:template>
+   
+<xsl:template name="level-order-aux">
+  <xsl:param name="level" select="0"/>
+  <xsl:param name="actual-level" select="0"/>
+  <xsl:choose>
+    <xsl:when test="$level = 0">
+      <xsl:choose>
+        <xsl:when test="$actual-level = 0">
+      <xsl:value-of select="@name"/>
+      <xsl:text> is the head honcho.&#xA;</xsl:text>
+     </xsl:when>
+     <xsl:otherwise>
+       <xsl:value-of select="@name"/>
+       <xsl:text> has </xsl:text>
+       <xsl:value-of select="$actual-level"/>
+       <xsl:text> boss(es) to knock off.&#xA;</xsl:text>
+     </xsl:otherwise>
+    </xsl:choose>
+   </xsl:when>
+   <xsl:otherwise>
+      <xsl:for-each select="employee">
+         <xsl:call-template name="level-order-aux">
+           <xsl:with-param name="level" select="$level - 1"/>
+           <xsl:with-param name="actual-level" select="$actual-level"/>
+         </xsl:call-template>
+      </xsl:for-each>
+   </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 5-16. Output 
+Jil Michel is the head honcho.
+   
+Nancy Pratt has 1 boss(es) to knock off.
+Jane Doe has 1 boss(es) to knock off.
+Mike Rosenbaum has 1 boss(es) to knock off.
+   
+Phill McKraken has 2 boss(es) to knock off.
+Ima Little has 2 boss(es) to knock off.
+Walter H. Potter has 2 boss(es) to knock off.
+Wendy B.K. McDonald has 2 boss(es) to knock off.
+Cindy Post-Kellog has 2 boss(es) to knock off.
+Oscar A. Winner has 2 boss(es) to knock off.
+   
+Betsy Ross has 3 boss(es) to knock off.
+Craig F. Frye has 3 boss(es) to knock off.
+Hardy Hamburg has 3 boss(es) to knock off.
+Rich Shaker has 3 boss(es) to knock off.
+Allen Bran has 3 boss(es) to knock off.
+Frank N. Berry has 3 boss(es) to knock off.
+Jack Apple has 3 boss(es) to knock off.
+Jack Nickolas has 3 boss(es) to knock off.
+Tom Hanks has 3 boss(es) to knock off.
+Susan Sarandon has 3 boss(es) to knock off.
+   
+R.P. McMurphy has 4 boss(es) to knock off.
+Forest Gump has 4 boss(es) to knock off.
+Andrew Beckett has 4 boss(es) to knock off.
+Helen Prejean has 4 boss(es) to knock off.
+<xsl:key name="level" match="employee" use="count(ancestor::*)"/>
+   
+<xsl:template match="/">
+     <xsl:for-each select="key('level',3)">
+          <!-- do something with the nodes on level 3 --> 
+     </xsl:for-each>
+</xsl:template>
+<xsl:key name="level" match="//employee" use="count(ancestor::*)"/>
+   
+<xsl:template match="/">
+     <xsl:for-each select="key('level',3)[@sex='female']">
+          <!-- do something with the female employees on level 3 --> 
+     </xsl:for-each>
+</xsl:template>
+8) Processing Nodes by Position
+<xsl:apply-templates>
+     <xsl:sort select="position(  )" order="descending" data-type="number"/>
+</xsl:apply-templates>
+<xsl:for-each select="*">
+     <xsl:sort select="position()" order="descending" data-type="number"/>
+     <!-- ... -->
+</xsl:for-each>
+<xsl:for-each select="*">
+     <xsl:sort select="(position(  ) - 1)  mod 3" />
+     <!-- ... -->
+</xsl:for-each>
+<xsl:for-each select="*[position(  ) mod 3 = 1]">
+    <xsl:apply-templates 
+         select=". | following-sibling::*[position(  ) &lt; 3]" />
+</xsl:for-each>
+<xsl:template name="aggregation">
+     <xsl:param name="node-set"/>
+     <xsl:choose>
+       <xsl:when test="$node-set">
+         <!--We compute some function of the first element that produces 
+         a value that we want to aggregate. The function may depend on
+         the type of the element (i.e. it can be polymorphic)-->
+         <xsl:variable name="first">
+          <xsl:apply-templates select="$node-set[1]" mode="calc"/>
+         </xsl:variable>
+         <!--We recursivly process the remaining nodes using position(  ) -->
+         <xsl:variable name="rest">
+          <xsl:call-template name="aggregation">
+            <xsl:with-param name="node-set" 
+              select="$node-set[position(  )!=1]"/>
+            </xsl:call-template>
+         </xsl:variable>
+         <!-- We perform some aggragation operation. This might not require
+            a call to a template. For example, this might be 
+            $first + $rest           or 
+            $first * $rest           or
+            concat($first,$rest)      etc. -->
+         <xsl:call-template name="aggregate-func">
+          <xsl:with-param name="a" select="$first"/>     
+          <xsl:with-param name="b" select="$rest"/>     
+         </xsl:call-template>
+       </xsl:when>
+       <!-- Here IDENTITY-VALUE should be replaced with the identity
+            under the aggragate-func. For example, 0 is the identity
+            for addition, 1 is the identity for subtarction, "" is the
+            identity for concatentation, etc. -->
+       <xsl:otherwise>IDENTITY-VALUE</xsl:otherwise>
+</xsl:template>
+Discussion
+<xsl:for-each select="*">
+     <xsl:sort select="position(  )"/>
+     <!-- ... -->
+</xsl:for-each>
+   
+<xsl:for-each select="*">
+     <!-- ... -->
+</xsl:for-each>
+Example 5-17. 2-columns-orgchat.xslt stylesheet 
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="text" />
+<xsl:strip-space elements="*"/>
+   
+<xsl:template match="employee[employee]">
+<xsl:value-of select="@name"/>
+<xsl:text>&#xA;</xsl:text>
+<xsl:call-template name="dup">
+     <xsl:with-param name="input" select=" '-' "/>
+     <xsl:with-param name="count" select="80"/>
+</xsl:call-template>
+<xsl:text>&#xA;</xsl:text>
+<xsl:for-each select="employee[(position(  ) - 1) mod 2 = 0]">
+     <xsl:value-of select="@name"/>
+     <xsl:call-template name="dup">
+          <xsl:with-param name="input" select=" ' ' "/>
+          <xsl:with-param name="count" select="40 - string-length(@name)"/>
+     </xsl:call-template>
+     <xsl:value-of select="following-sibling::*[1]/@name"/>
+     <xsl:text>&#xA;</xsl:text>
+</xsl:for-each>
+<xsl:text>&#xA;</xsl:text>
+<xsl:apply-templates/>
+</xsl:template>
+   
+<xsl:template name="dup">
+<xsl:param name="input"/>
+<xsl:param name="count" select="1"/>
+<xsl:choose>
+     <xsl:when test="not($count) or not($input)"/>
+     <xsl:when test="$count = 1">
+          <xsl:value-of select="$input"/>
+     </xsl:when>
+     <xsl:otherwise>
+          <xsl:if test="$count mod 2">
+               <xsl:value-of select="$input"/>
+          </xsl:if>
+          <xsl:call-template name="dup">
+               <xsl:with-param name="input" 
+                    select="concat($input,$input)"/>
+               <xsl:with-param name="count" 
+                    select="floor($count div 2)"/>
+          </xsl:call-template>     
+     </xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 5-18. Output 
+Jil Michel
+------------------------------------------------------------
+Nancy Pratt                   Jane Doe
+Mike Rosenbaum                
+   
+Nancy Pratt
+------------------------------------------------------------
+Phill McKraken                Ima Little
+   
+Ima Little
+------------------------------------------------------------
+Betsy Ross                    
+   
+Jane Doe
+------------------------------------------------------------
+Walter H. Potter              Wendy B.K. McDonald
+   
+Wendy B.K. McDonald
+------------------------------------------------------------
+Craig F. Frye                 Hardy Hamburg
+Rich Shaker                   
+   
+Mike Rosenbaum
+------------------------------------------------------------
+Cindy Post-Kellog             Oscar A. Winner
+   
+Cindy Post-Kellog
+------------------------------------------------------------
+Allen Bran                    Frank N. Berry
+Jack Apple                    
+   
+Oscar A. Winner
+------------------------------------------------------------
+Jack Nickolas                 Tom Hanks
+Susan Sarandon                
+   
+Jack Nickolas
+------------------------------------------------------------
+R.P. McMurphy                 
+   
+Tom Hanks
+------------------------------------------------------------
+Forest Gump                   Andrew Beckett
+   
+Susan Sarandon
+------------------------------------------------------------
+Helen Prejean
+Example 5-19. Total-commission.xslt stylesheet 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     <xsl:output method="text"/>
+   
+<xsl:template match="salesBySalesperson">
+     <xsl:text>Total commision = </xsl:text>
+     <xsl:call-template name="total-commision">
+          <xsl:with-param name="salespeople" select="*"/>
+     </xsl:call-template>
+</xsl:template>
+   
+<!-- By default salespeople get 2% commsison and no base salary -->
+<xsl:template match="salesperson" mode="commision">
+     <xsl:value-of select="0.02 * sum(product/@totalSales)"/>
+</xsl:template>
+   
+<!-- salespeople with seniority > 4 get $10000.00 base + 0.5% commsison -->
+<xsl:template match="salesperson[@seniority > 4]" mode="commision" priority="1">
+     <xsl:value-of select="10000.00 + 0.05 * sum(product/@totalSales)"/>
+</xsl:template>
+   
+<!-- salespeople with seniority > 8 get (seniority * $2000.00) base + 0.8% 
+commsison -->
+<xsl:template match="salesperson[@seniority > 8]" mode="commision" priority="2">
+     <xsl:value-of select="@seniority * 2000.00 + 0.08 * 
+          sum(product/@totalSales)"/>
+</xsl:template>
+     
+<xsl:template name="total-commision">
+     <xsl:param name="salespeople"/>
+     <xsl:choose>
+       <xsl:when test="$salespeople">
+         <xsl:variable name="first">
+          <xsl:apply-templates select="$salespeople[1]" mode="commision"/>
+         </xsl:variable>
+         <xsl:variable name="rest">
+          <xsl:call-template name="total-commision">
+            <xsl:with-param name="salespeople" 
+              select="$salespeople[position()!=1]"/>
+          </xsl:call-template>
+         </xsl:variable>
+         <xsl:value-of select="$first + $rest"/>
+       </xsl:when>
+       <xsl:otherwise>0</xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 5-20. Output 
+Total commision = 471315
+XSLT 2.0
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                xmlns:ckbk="http://www.oreilly.com/catalog/xsltckbk">
+
+<xsl:output method="text"/>
+   
+<xsl:template match="salesBySalesperson">
+  <xsl:text>Total commision = </xsl:text>
+  <xsl:value-of select="ckbk:total-commision(*)"/>
+</xsl:template>
+   
+<!-- By default salespeople get 2% commsison and no base salary -->
+<xsl:template match="salesperson" mode="commision" as="xs:double">
+  <xsl:sequence select="0.02 * sum(product/@totalSales)"/>
+</xsl:template>
+   
+<!-- salespeople with seniority > 4 get $10000.00 base + 0.5% commsison -->
+<xsl:template match="salesperson[@seniority > 4]" mode="commision" 
+              priority="1" as="xs:double">
+  <xsl:sequence select="10000.00 + 0.05 * sum(product/@totalSales)"/>
+</xsl:template>
+   
+<!-- salespeople with seniority > 8 get (seniority * $2000.00) base + 0.8% 
+commsison -->
+<xsl:template match="salesperson[@seniority > 8]" mode="commision" 
+              priority="2" as="xs:double">
+  <xsl:sequence select="@seniority * 2000.00 + 0.08 * 
+                        sum(product/@totalSales)"/>
+</xsl:template>
+     
+<xsl:function name="ckbk:total-commision" as="xs:double">
+  <xsl:param name="salespeople" as="node()*"/>
+  <xsl:sequence select="sum(for $s in $salespeople return ckbk:commision($s))"/>
+</xsl:function>
+   
+<xsl:function name="ckbk:commision" as="xs:double">
+  <xsl:param name="salesperson" as="node()"/>
+  <xsl:apply-templates select="$salesperson" mode="commision"/>
+</xsl:function>
+
+ 
+ 
+ 
+ 
+2		Selecting and Traversing
+1) Ignoring Duplicate Elements				3 of  of 23
+2
+		3
+DRAFT	O'Reilly & Associates	1/16/2006

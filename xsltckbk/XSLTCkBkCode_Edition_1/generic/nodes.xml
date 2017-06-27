@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node name="A">
+	<node name="B">
+		<node name="D"/>
+		<node name="E">
+			<node name="F"/>
+			<node name="G"/>
+			<node name="H"/>
+		</node>
+	</node>
+	<node name="C"></node>
+</node>

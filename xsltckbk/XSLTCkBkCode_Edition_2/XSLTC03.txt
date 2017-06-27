@@ -1,0 +1,1831 @@
+3
+Numbers and Math
+1) Formatting Numbers
+Formatting numbers into columns using a fixed number of decimal places
+Example 3-1. Input 
+<numbers>
+  <number>10</number>
+  <number>3.5</number>
+  <number>4.44</number>
+  <number>77.7777</number>
+  <number>-8</number>
+  <number>1</number>
+  <number>444</number>
+  <number>1.1234</number>
+  <number>7.77</number>
+  <number>3.1415927</number>
+  <number>10</number>
+  <number>9</number>
+  <number>8</number>
+  <number>7</number>
+  <number>666</number>
+  <number>5555</number>
+  <number>-4444444</number>
+  <number>22.33</number>
+  <number>18</number>
+  <number>36.54</number>
+  <number>43</number>
+  <number>99999</number>
+  <number>999999</number>
+  <number>9999999</number>
+  <number>32</number>
+  <number>64</number>
+  <number>-64.0001</number>
+</numbers>
+Example 3-2. format-numbers-into-columns.xslt 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     <xsl:output method="text" />
+   
+<xsl:variable name="numCols" select="3"/>
+   
+<xsl:template match="numbers">
+  <xsl:for-each select="number[position(  ) mod $numCols = 1]">
+    <xsl:apply-templates 
+         select=". | following-sibling::number[position(  ) &lt; $numCols]" 
+         mode="format"/>
+    <xsl:text>&#xa;</xsl:text> 
+  </xsl:for-each>
+</xsl:template>
+   
+<xsl:template match="number" name="format" mode="format">
+  <xsl:param name="number" select="." />
+  <xsl:call-template name="leading-zero-to-space">
+    <xsl:with-param name="input" 
+                    select="format-number($number,
+                                          '0000000.0000  ;0000000.0000- ')"/>
+  </xsl:call-template>
+</xsl:template>
+   
+<xsl:template name="leading-zero-to-space">
+  <xsl:param name="input"/>
+  <xsl:choose>
+    <xsl:when test="starts-with($input,'0')">
+    <xsl:value-of select="' '"/>
+    <xsl:call-template name="leading-zero-to-space">
+      <xsl:with-param name="input" select="substring-after($input,'0')"/>
+    </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="$input"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Example 3-3. Output 
+     10.0000        3.5000        4.4400
+     77.7777        8.0000-       1.0000
+    444.0000        1.1234        7.7700
+      3.1416       10.0000        9.0000
+      8.0000        7.0000      666.0000
+   5555.0000  4444444.0000-      22.3300
+     18.0000       36.5400       43.0000
+  99999.0000   999999.0000  9999999.0000
+     32.0000       64.0000       64.0001-
+Formatting money like U.S. accountants
+Example 3-4. Accountant-friendly format 
+<xsl:template match="number" name="format" mode="format">
+  <xsl:param name="number" select="." />
+  <xsl:text> $ </xsl:text>
+  <xsl:call-template name="leading-zero-to-space">
+    <xsl:with-param name="input" 
+                    select="format-number($number,
+                                          ' 0000000.00 ;(0000000.00)')"/>
+  </xsl:call-template>
+</xsl:template>
+     
+Output:
+$       10.00  $        3.50  $       4.44
+$       77.78  $       (8.00) $       1.00
+$      444.00  $        1.12  $       7.77
+$        3.14  $       10.00  $       9.00
+$        8.00  $        7.00  $     666.00
+$     5555.00  $ (4444444.00) $      22.33
+$       18.00  $       36.54  $      43.00
+$    99999.00  $   999999.00  $ 9999999.00
+$       32.00  $       64.00  $     (64.00)
+Formatting numbers for many European countries
+Example 3-5. European-number format 
+<xsl:stylesheet version="1.0" 
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+     xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings">
+   
+<xsl:output method="text" />
+   
+<!-- From Recipe 2.5 ... -->
+<xsl:include href="../strings/str.dup.xslt"/>
+   
+<xsl:variable name="numCols" select="3"/>     
+   
+<xsl:decimal-format name="WesternEurope" 
+                    decimal-separator="," grouping-separator="."/> 
+   
+<xsl:template match="numbers">
+  <xsl:for-each select="number[position(  ) mod $numCols = 1]">
+    <xsl:apply-templates 
+         select=". | following-sibling::number[position(  ) &lt; $numCols]" 
+         mode="format"/>
+    <xsl:text>&#xa;</xsl:text> 
+  </xsl:for-each>
+</xsl:template>
+   
+<xsl:template match="number" name="format" mode="format">
+  <xsl:param name="number" select="." />
+  <xsl:call-template name="pad">
+    <xsl:with-param name="string" 
+                    select="format-number($number,'#.###,00','WesternEurope')"/>
+  </xsl:call-template>
+</xsl:template>
+   
+<xsl:template name="pad">
+  <xsl:param name="string"/>
+  <xsl:param name="width" select="16"/>
+  <xsl:call-template name="str:dup">
+    <xsl:with-param name="input" select="' '"/>
+    <xsl:with-param name="count" select="$width - string-length($string)"/>
+  </xsl:call-template>
+  <xsl:value-of select="$string"/>
+</xsl:template>
+   
+</xsl:stylesheet>
+     
+Output:
+           10,00            3,50            4,44
+           77,78           -8,00            1,00
+          444,00            1,12            7,77
+            3,14           10,00            9,00
+            8,00            7,00          666,00
+        5.555,00   -4.444.444,00           22,33
+           18,00           36,54           43,00
+       99.999,00      999.999,00    9.999.999,00
+           32,00           64,00          -64,00
+Converting numbers to Roman numerals
+Example 3-6. Roman-numeral format 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings">
+     <xsl:output method="text" />
+   
+<xsl:include href="../strings/str.dup.xslt"/>
+   
+<xsl:variable name="numCols" select="3"/>
+   
+<xsl:template match="numbers">
+  <xsl:for-each select="number[position(  ) &lt;= $numCols]">
+    <xsl:text>            </xsl:text>
+    <xsl:number value="position(  )" format="I"/><xsl:text>   </xsl:text> 
+  </xsl:for-each>  
+    <xsl:text>&#xa;     </xsl:text> 
+  <xsl:for-each select="number[position(  ) &lt;= $numCols]">
+    <xsl:text>————————  </xsl:text>
+  </xsl:for-each>  
+    <xsl:text>&#xa;</xsl:text> 
+  <xsl:for-each select="number[position(  ) mod $numCols = 1]">
+    <xsl:call-template name="pad">
+      <xsl:with-param name="string">
+        <xsl:number value="position(  )" format="i"/>
+      </xsl:with-param>
+      <xsl:with-param name="width" select="4"/>
+    </xsl:call-template>|<xsl:text/> <!-- See recipe 7.1 -->
+    <xsl:apply-templates 
+         select=". | following-sibling::number[position(  ) &lt; $numCols]" 
+         mode="format"/>
+    <xsl:text>&#xa;</xsl:text> 
+  </xsl:for-each>
+</xsl:template>
+   
+<xsl:template match="number" name="format" mode="format">
+  <xsl:param name="number" select="." />
+  <xsl:call-template name="pad">
+    <xsl:with-param name="string" select="format-number(.,'#,###.00')"/>
+  </xsl:call-template>
+</xsl:template>
+   
+<xsl:template name="pad">
+  <xsl:param name="string"/>
+  <xsl:param name="width" select="16"/>
+  <xsl:call-template name="str:dup">
+    <xsl:with-param name="input" select="' '"/>
+    <xsl:with-param name="count" select="$width - string-length($string)"/>
+  </xsl:call-template>
+  <xsl:value-of select="$string"/>
+</xsl:template>
+   
+</xsl:stylesheet>
+     
+Output:
+            I                II             III
+     ----------------  --------------  --------------
+   i|           10.00            3.50            4.44
+  ii|           77.78           -8.00            1.00
+ iii|          444.00            1.12            7.77
+  iv|            3.14           10.00            9.00
+   v|            8.00            7.00          666.00
+  vi|        5,555.00   -4,444,444.00           22.33
+ vii|           18.00           36.54           43.00
+viii|       99,999.00      999,999.00    9,999,999.00
+  ix|           32.00           64.00          -64.00
+Creating column numbers like a spreadsheet
+Example 3-7. Spreadsheet-like column numbers 
+<xsl:template match="numbers">
+  <xsl:for-each select="number[position(  ) &lt;= $numCols]">
+    <xsl:text>          </xsl:text>
+    <xsl:number value="position(  )" format="A"/><xsl:text>   </xsl:text> 
+    <xsl:text>     </xsl:text>
+  </xsl:for-each>  
+    <xsl:text>&#xa;</xsl:text> 
+  <xsl:for-each select="number[position(  ) &lt;= $numCols]">
+    <xsl:text>  ---------------- </xsl:text>
+  </xsl:for-each>  
+    <xsl:text>&#xa;</xsl:text> 
+  <xsl:for-each select="number[position(  ) mod $numCols = 1]">
+    <xsl:value-of select="position(  )"/><xsl:text>|</xsl:text>
+    <xsl:apply-templates 
+         select=". | following-sibling::number[position(  ) &lt; $numCols]" 
+         mode="format"/>
+    <xsl:text>&#xa;</xsl:text> 
+  </xsl:for-each>
+</xsl:template>
+   
+<xsl:template match="number" name="format" mode="format">
+  <xsl:param name="number" select="." />
+  <xsl:call-template name="pad">
+    <xsl:with-param name="string" select="format-number(.,'#,###.00')"/>
+  </xsl:call-template>
+  <xsl:text>   </xsl:text> 
+</xsl:template>
+   
+Output:
+       A              B              C
+  ------------  ------------  ------------
+1|     10.0000        3.5000        4.4400
+2|     77.7777        8.0000-       1.0000
+3|    444.0000        1.1234        7.7700
+4|      3.1416       10.0000        9.0000
+5|      8.0000        7.0000      666.0000
+6|   5555.0000  4444444.0000-      22.3300
+7|     18.0000       36.5400       43.0000
+8|  99999.0000   999999.0000  9999999.0000
+9|     32.0000       64.0000       64.0001-
+Formatting numbers using Arabic characters
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings">
+   
+<xsl:output method="text"  encoding="UTF-8"/>
+   
+<xsl:include href="../strings/str.dup.xslt"/>
+   
+<!-- This states that zero starts at character 0x660, which implies one is 0x661, 
+etc. -->
+<xsl:decimal-format name="Arabic" zero-digit="&#x660;"/> 
+     
+<xsl:template match="numbers">
+  <xsl:for-each select="number">
+      <xsl:call-template name="pad">
+        <xsl:with-param name="string" select="format-number(.,'#,###.00')"/>
+      </xsl:call-template> = <xsl:text/>
+      <xsl:value-of select="format-number(.,'#,###.&#x660;&#x660;','Arabic')"/>
+     <xsl:text>&#xa;</xsl:text> 
+  </xsl:for-each>
+</xsl:template>
+   
+<xsl:template name="pad">
+  <xsl:param name="string"/>
+  <xsl:param name="width" select="16"/>
+  <xsl:value-of select="$string"/>
+  <xsl:call-template name="str:dup">
+    <xsl:with-param name="input" select="' '"/>
+    <xsl:with-param name="count" select="$width - string-length($string)"/>
+  </xsl:call-template>
+</xsl:template>
+   
+</xsl:stylesheet>
+Rounding Numbers to a Specified Precision
+Solution
+XSLT 1.0
+<xsl:value-of select="round($pi * 10000) div 10000"/>
+<xsl:value-of select="ceiling($pi * 10000) div 10000"/>
+<xsl:value-of select="floor($pi * 10000) div 10000"/>
+<xsl:value-of select="format-number($pi,'#.####')"/>
+<xsl:value-of select="format-number($pi * 100,'#.####')"/>
+<xsl:variable name="pi-to-5-sig" select="format-number($pi,'#.#####')"/>
+<xsl:value-of select="substring($pi-to-5-sig,1,string-length($pi-to-5-sig) -1)"/>
+XSLT 2.0
+Discussion
+<xsl:value-of select="round($pi * 10000000000000000) div 10000000000000000"/>
+<xsl:value-of select="concat(substring-before($pi,'.'),
+                       '.', 
+                       substring(substring-after($pi,'.'),1,4))"/>
+<xsl:variable name="whole" select="substring-before($pi,'.')"/>
+<xsl:variable name="frac" select="substring-after($pi,'.')"/>
+<xsl:value-of select="concat($whole,
+                       '.', 
+                       substring($frac,1,3),
+                    round(substring($frac,4,2) div 10))"/>
+Converting from Roman Numerals to 
+Numbers
+Problem
+Solution
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+  xmlns:math="http://www.ora.com/XSLTCookbook/math">
+   
+<ckbk:romans>
+  <ckbk:roman value="1">i</ckbk:roman>
+  <ckbk:roman value="1">I</ckbk:roman>
+  <ckbk:roman value="5">v</ckbk:roman>
+  <ckbk:roman value="5">V</ckbk:roman>
+  <ckbk:roman value="10">x</ckbk:roman>
+  <ckbk:roman value="10">X</ckbk:roman>
+  <ckbk:roman value="50">l</ckbk:roman>
+  <ckbk:roman value="50">L</ckbk:roman>
+  <ckbk:roman value="100">c</ckbk:roman>
+  <ckbk:roman value="100">C</ckbk:roman>
+  <ckbk:roman value="500">d</ckbk:roman>
+  <ckbk:roman value="500">D</ckbk:roman>
+  <ckbk:roman value="1000">m</ckbk:roman>
+  <ckbk:roman value="1000">M</ckbk:roman>
+</ckbk:romans>
+   
+<xsl:variable name="ckbk:roman-nums" select="document('')/*/*/ckbk:roman"/>
+   
+<xsl:template name="ckbk:roman-to-number">
+  <xsl:param name="roman"/>
+  
+  <xsl:variable name="valid-roman-chars">
+    <xsl:value-of select="document('')/*/ckbk:romans"/>
+  </xsl:variable>
+   
+  <xsl:choose>
+    <!-- returns true if there are any non-Roman characters in the string -->
+    <xsl:when test="translate($roman,$valid-roman-chars,'')">NaN</xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="ckbk:roman-to-number-impl">
+        <xsl:with-param name="roman" select="$roman"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>  
+</xsl:template>
+   
+<xsl:template name="ckbk:roman-to-number-impl">
+  <xsl:param name="roman"/>
+  <xsl:param name="value" select="0"/>
+  
+  <xsl:variable name="len" select="string-length($roman)"/>
+  
+  <xsl:choose>
+    <xsl:when test="not($len)">
+      <xsl:value-of select="$value"/>
+    </xsl:when>
+    <xsl:when test="$len = 1">
+      <xsl:value-of select="$value + $ckbk:roman-nums[. = $roman]/@value"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="roman-num"  
+          select="$ckbk:roman-nums[. = substring($roman, 1, 1)]"/>
+      <xsl:choose>
+        <xsl:when test="$roman-num/following-sibling::ckbk:roman =
+           substring($roman, 2, 1)">
+          <xsl:call-template name="ckbk:roman-to-number-impl">
+            <xsl:with-param name="roman" select="substring($roman,2,$len - 1)"/>
+            <xsl:with-param name="value" select="$value - $roman-num/@value"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="ckbk:roman-to-number-impl">
+            <xsl:with-param name="roman" select="substring($roman,2,$len - 1)"/>
+            <xsl:with-param name="value" select="$value + $roman-num/@value"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:otherwise>
+  </xsl:choose>
+  
+</xsl:template>
+</xsl:stylesheet>
+Discussion
+<xsl:variable name="roman-value" 
+     select="($c = 'i' or $c = 'I') * 1 +
+            ($c = 'v' or $c = 'V') * 5 +
+            ($c = 'x' or $c = 'X') * 10 +
+            ($c = 'l' or $c = 'L') * 50 +
+            ($c = 'c' or $c = 'C') * 100 +
+            ($c = 'd' or $c = 'D') * 500 +
+            ($c = 'm' or $c = 'M') * 1000)"/>
+<xsl:variable name="roman-value" select="(1,5,10,50,100,500,1000)
+     [index-of(('I', 'V', 'X', 'L', 'C', 'D', 'M'),upper-case($c))]"/>  
+Converting from One Base to Another
+Solution
+<xsl:variable name="ckbk:base-lower" 
+    select="'0123456789abcdefghijklmnopqrstuvwxyz'"/>
+   
+<xsl:variable name="ckbk:base-upper" 
+    select="'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+   
+<xsl:template name="ckbk:convert-base">
+  <xsl:param name="number"/>
+  <xsl:param name="from-base"/>
+  <xsl:param name="to-base"/>
+  
+  <xsl:variable name="number-base10">
+    <xsl:call-template name="ckbk:convert-to-base-10">
+      <xsl:with-param name="number" select="$number"/>
+      <xsl:with-param name="from-base" select="$from-base"/>
+    </xsl:call-template>
+  </xsl:variable>
+  <xsl:call-template name="ckbk:convert-from-base-10">
+    <xsl:with-param name="number" select="$number-base10"/>
+    <xsl:with-param name="to-base" select="$to-base"/>
+  </xsl:call-template>
+</xsl:template>
+<xsl:template name="ckbk:convert-to-base-10">
+  <xsl:param name="number"/>
+  <xsl:param name="from-base"/>
+   
+  <xsl:variable name="num" 
+          select="translate($number,$ckbk:base-upper, $ckbk:base-lower)"/>
+  <xsl:variable name="valid-in-chars" 
+     select="substring($ckbk:base-lower,1,$from-base)"/>
+  
+  <xsl:choose>
+    <xsl:when test="$from-base &lt; 2 or $from-base > 36">NaN</xsl:when>
+    <xsl:when test="not($num) or translate($num,$valid-in-chars,'')">NaN</xsl:when>
+    <xsl:when test="$from-base = 10">
+      <xsl:value-of select="$number"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="ckbk:convert-to-base-10-impl">
+        <xsl:with-param name="number" select="$num"/>
+        <xsl:with-param name="from-base" select="$from-base"/>
+        <xsl:with-param name="from-chars" select="$valid-in-chars"/>
+     </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:convert-to-base-10-impl">
+  <xsl:param name="number"/>
+  <xsl:param name="from-base"/>
+  <xsl:param name="from-chars"/>
+   
+  <xsl:param name="result" select="0"/>
+   
+  <xsl:variable name="value" 
+      select="string-length(substring-before($from-
+chars,substring($number,1,1)))"/>
+   
+  <xsl:variable name="total" select="$result * $from-base + $value"/>
+  
+  <xsl:choose>
+    <xsl:when test="string-length($number) = 1">
+      <xsl:value-of select="$total"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="ckbk:convert-to-base-10-impl">
+        <xsl:with-param name="number" select="substring($number,2)"/>
+        <xsl:with-param name="from-base" select="$from-base"/>
+        <xsl:with-param name="from-chars" select="$from-chars"/>
+        <xsl:with-param name="result" select="$total"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:convert-from-base-10">
+  <xsl:param name="number"/>
+  <xsl:param name="to-base"/>
+   
+  <xsl:choose>
+    <xsl:when test="$to-base &lt; 2 or $to-base > 36">NaN</xsl:when>
+    <xsl:when test="number($number) != number($number)">NaN</xsl:when>
+    <xsl:when test="$to-base = 10">
+      <xsl:value-of select="$number"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="ckbk:convert-from-base-10-impl">
+        <xsl:with-param name="number" select="$number"/>
+        <xsl:with-param name="to-base" select="$to-base"/>
+     </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:convert-from-base-10-impl">
+  <xsl:param name="number"/>
+  <xsl:param name="to-base"/>
+  <xsl:param name="result"/>
+  
+  <xsl:variable name="to-base-digit" 
+      select="substring($ckbk:base-lower,$number mod $to-base + 1,1)"/>
+  
+  <xsl:choose>
+    <xsl:when test="$number >= $to-base">
+      <xsl:call-template name="ckbk:convert-from-base-10-impl">
+        <xsl:with-param name="number" select="floor($number div $to-base)"/>
+        <xsl:with-param name="to-base" select="$to-base"/>
+        <xsl:with-param name="result" select="concat($to-base-digit,$result)"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="concat($to-base-digit,$result)"/>
+      </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+Discussion
+Implementing Common Math Functions
+Solution
+XSLT 1.0
+Absolute value: ckbk:abs(x)
+<xsl:template name="ckbk:abs">
+     <xsl:param name="x"/>
+     
+     <xsl:choose>
+          <xsl:when test="$x &lt; 0">
+               <xsl:value-of select="$x * -1"/>
+          </xsl:when>
+          <xsl:otherwise>
+               <xsl:value-of select="$x"/>
+          </xsl:otherwise>
+     </xsl:choose>
+     
+</xsl:template>
+<xsl:template name="ckbk:abs">
+     <xsl:param name="x"/>
+     <xsl:value-of select="(1 - 2 *($x &lt; 0)) * $x"/>
+</xsl:template>
+Square root: ckbk:sqrt(x)
+<xsl:template name="ckbk:sqrt">
+     <!-- The number you want to find the square root of -->
+     <xsl:param name="number" select="0"/>
+     <!-- The current 'try'.  This is used internally. -->
+     <xsl:param name="try" select="1"/>
+     <!-- The current iteration, checked against maxiter to limit loop count -->
+     <xsl:param name="iter" select="1"/>
+     <!-- Set this up to ensure against infinite loops -->
+     <xsl:param name="maxiter" select="20"/>
+     <!-- This template was written by Nate Austin using Sir Isaac Newton's
+      method of finding roots -->
+     <xsl:choose>
+       <xsl:when test="$try * $try = $number or $iter > $maxiter">
+         <xsl:value-of select="$try"/>
+       </xsl:when>
+       <xsl:otherwise>
+         <xsl:call-template name="ckbk:sqrt">
+          <xsl:with-param name="number" select="$number"/>
+          <xsl:with-param name="try" select="$try - 
+                         (($try * $try - $number) div (2 * $try))"/>
+          <xsl:with-param name="iter" select="$iter + 1"/>
+          <xsl:with-param name="maxiter" select="$maxiter"/>
+         </xsl:call-template>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:sqrt">
+     <!-- The number you want to find the square root of -->
+     <xsl:param name="number" select="0"/>
+     <!-- The current 'try'.  This is used internally. -->
+     <xsl:param name="try" select="($number &lt; 100) +
+                       ($number >= 100 and $number &lt; 1000) * 10 +
+                       ($number >= 1000 and $number &lt; 10000) * 31 +
+                       ($number >= 10000) * 100"/>
+<!-- rest of code the same -->
+</xsl:template>
+Logarithms: ckbk:log10(number), ckbk:log(number), and ckbk:logN(x,base)
+<!-- A fundemetal rule of logarithms -->
+ckbk:logN(x,base) = ckbk:logN(x,diffBase) div ckbk:logN(base, diffBase)
+<xsl:template name="ckbk:log10">
+     <xsl:param name="number" select="1"/>
+   
+     <xsl:param name="n" select="0"/> <!-- book keeping for whole part of 
+                              result -->
+     
+     <xsl:choose>
+       <xsl:when test="$number &lt;= 0"> <!-- Logarithms are undefined for 0
+                               and negative numbers. -->
+         <xsl:value-of select="'NaN'"/>
+       </xsl:when>
+       <xsl:when test="$number &lt; 1">  <!-- Fractional numbers have 
+                               negative logs -->
+         <xsl:call-template name="ckbk:log10">
+          <xsl:with-param name="number" select="$number * 10"/>
+          <xsl:with-param name="n" select="$n - 1"/>
+         </xsl:call-template>
+       </xsl:when>
+       <xsl:when test="$number > 10"> <!-- Numbers greater than 10 have logs 
+                               greater than 1 -->
+         <xsl:call-template name="ckbk:log10">
+          <xsl:with-param name="number" select="$number div 10"/>
+          <xsl:with-param name="n" select="$n + 1"/>
+         </xsl:call-template>
+       </xsl:when>
+       <xsl:when test="$number = 10"> 
+         <xsl:value-of select="$n + 1"/>
+       </xsl:when>
+       <xsl:otherwise>          <!-- We only need to know how to compute
+                          for numbers in range [1,10) -->
+         <xsl:call-template name="ckbk:log10-util">
+           <xsl:with-param name="number" select="$number"/>
+           <xsl:with-param name="n" select="$n"/>
+         </xsl:call-template>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+   
+<!-- Computes log (natural) of number-->
+<xsl:template name="ckbk:log">
+     <xsl:param name="number" select="1"/>
+   
+     <xsl:variable name="log10-e" select="0.4342944819"/>
+     <xsl:variable name="log10">
+       <xsl:call-template name="ckbk:log10">
+         <xsl:with-param name="number" select="$number"/>
+       </xsl:call-template>
+     </xsl:variable>
+     <xsl:value-of select="$log10 div $log10-e"/>
+</xsl:template>
+   
+<!-- Computes log to base b of number-->
+<xsl:template name="ckbk:log-b">
+     <xsl:param name="number" select="1"/>
+     <xsl:param name="base" select="2"/>
+   
+     <xsl:variable name="log10-base">
+        <xsl:call-template name="ckbk:log10">
+         <xsl:with-param name="number" select="$base"/>
+       </xsl:call-template>
+     </xsl:variable>
+   
+     <xsl:variable name="log10">
+       <xsl:call-template name="ckbk:log10">
+         <xsl:with-param name="number" select="$number"/>
+       </xsl:call-template>
+     </xsl:variable>
+     <xsl:value-of select="$log10 div $log10-base"/>
+</xsl:template>
+   
+<!-- Computes log10 of numbers in the range [1,10) and 
+returns the result + n-->
+<xsl:template name="ckbk:log10-util">
+     <xsl:param name="number"/>
+     
+     <xsl:param name="n"/>
+     <xsl:param name="frac" select="0"/> 
+         <!-- book keeping variable for fractional part -->
+     <xsl:param name="k" select="0"/>      <!-- iteration counter -->
+     <xsl:param name="divisor" select="2"/> 
+         <!-- sucessive powers of 2 used to build up frac -->
+     <xsl:param name="maxiter" select="38"/> 
+         <!-- Number of iterations. 38 is more than sufficient to get 
+          at least 10 dec place prec -->
+   
+     <xsl:variable name="x" select="$number * $number"/>
+     
+     <xsl:choose>
+       <xsl:when test="$k >= $maxiter">
+         <!-- Round to 10 decimal places -->
+         <xsl:value-of select="$n + round($frac * 10000000000) div 
+               10000000000"/> 
+       </xsl:when>
+       <xsl:when test="$x &lt; 10">
+         <xsl:call-template name="ckbk:log10-util">
+          <xsl:with-param name="number" select="$x"/>
+          <xsl:with-param name="n" select="$n"/>
+          <xsl:with-param name="k" select="$k + 1"/>
+          <xsl:with-param name="divisor" select="$divisor * 2"/>
+          <xsl:with-param name="frac" select="$frac"/>
+          <xsl:with-param name="maxiter" select="$maxiter"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="ckbk:log10-util">
+          <xsl:with-param name="number" select="$x div 10"/>
+          <xsl:with-param name="n" select="$n"/>
+          <xsl:with-param name="k" select="$k + 1"/>
+          <xsl:with-param name="divisor" select="$divisor * 2"/>
+          <xsl:with-param name="frac" select="$frac + (1 div $divisor)"/>
+          <xsl:with-param name="maxiter" select="$maxiter"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+n 
+The whole part of the answer passed in by ckbk:log10. This parameter is not 
+strictly necessary because it could have held onto it until ckbk:log10-util did 
+its part. However, it eliminates the need to capture the result of ckbk:log10-
+util in a variable. 
+frac 
+The fractional part of the answer. This is what we are really after.
+k 
+An iteration counter that is incremented on each recursive call. The recursion 
+terminates when $k > $maxiter. 
+divisor 
+A number that is set to the next higher power of 2 on each recursive call (e.g., 
+2,4,8,16,...). The value 1 div $divisor is added to frac as you approximate 
+the logarithm. 
+maxiter 
+The number of iterations used to compute frac. The higher maxiter is, the 
+greater the precision of the result (up to the limits of IEEE floating point). A 
+parameter need not be used, but it opens the possibility of extending log10 to allow 
+the caller to determine the required number of iterations and hence tweak speed 
+versus accuracy. 
+Power: ckbk:power(base,power)
+<xsl:template name="ckbk:power">
+     <xsl:param name="base"/>
+     <xsl:param name="power"/>
+     <xsl:choose>
+       <xsl:when test="$power = 0">
+         <xsl:value-of select="1"/>
+       </xsl:when>
+         <xsl:otherwise>
+         <xsl:variable name="temp">
+           <xsl:call-template name="ckbk:power">
+           <xsl:with-param name="base" select="$base"/>
+           <xsl:with-param name="power" select="$power - 1"/>
+           </xsl:call-template>
+         </xsl:variable>
+         <xsl:value-of select="$base * $temp"/>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:power">
+     <xsl:param name="base"/>
+     <xsl:param name="power"/>
+     <xsl:param name="result" select="1"/>
+     <xsl:choose>
+       <xsl:when test="number($base) != $base or number($power) != $power">
+         <xsl:value-of select="'NaN'"/>
+       </xsl:when>
+       <xsl:when test="$power = 0">
+         <xsl:value-of select="$result"/>
+       </xsl:when>
+       <xsl:otherwise>
+         <xsl:call-template name="ckbk:power">
+          <xsl:with-param name="base" select="$base * $base"/>
+          <xsl:with-param name="power" select="floor($power div 2)"/>
+          <xsl:with-param name="result" 
+               select="$result * $base * ($power mod 2) + 
+                     $result * not($power mod 2)"/>
+         </xsl:call-template>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:power-f">
+     <xsl:param name="base"/>
+     <xsl:param name="power"/>
+     
+     <xsl:choose>
+       <xsl:when test="number($base) != $base or number($power) != $power">
+         <xsl:value-of select="'NaN'"/>
+       </xsl:when>
+       <xsl:when test="$power &lt; 0">
+         <xsl:variable name="result">
+         <xsl:call-template name="ckbk:power-f">
+          <xsl:with-param name="base" select="$base"/>
+          <xsl:with-param name="power" select="-1 * $power"/>
+         </xsl:call-template>
+         </xsl:variable>
+         <xsl:value-of select="1 div $result"/>
+       </xsl:when>
+       <xsl:otherwise>
+         <xsl:variable name="powerN" select="floor($power)"/>
+          <xsl:variable name="resultN">
+          <xsl:call-template name="ckbk:power">
+            <xsl:with-param name="base" select="$base"/>
+            <xsl:with-param name="power" select="$powerN"/>
+          </xsl:call-template>
+         </xsl:variable>
+         <xsl:choose>
+          <xsl:when test="$power - $powerN">
+            <xsl:variable name="resultF">
+              <xsl:call-template name="ckbk:power-frac">
+               <xsl:with-param name="base" select="$base"/>
+               <xsl:with-param name="power" select="$power - $powerN"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:value-of select="$resultN * $resultF"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$resultN"/>
+           </xsl:otherwise>
+         </xsl:choose>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="ckbk:power-frac">
+     <xsl:param name="base"/>
+     <xsl:param name="power"/>
+   
+     <xsl:param name="n" select="1"/>
+     <xsl:param name="ln_base">
+       <xsl:call-template name="ckbk:log">
+         <xsl:with-param name="number" select="$base"/>
+       </xsl:call-template>
+     </xsl:param>
+     <xsl:param name="ln_base_n" select="$ln_base"/>
+     <xsl:param name="power_n" select="$power"/>
+     <xsl:param name="n_fact" select="$n"/>
+     <xsl:param name="result" select="1"/>
+      
+     <xsl:choose>
+       <xsl:when test="20 >= $n">
+         <xsl:call-template name="ckbk:power-frac">
+           <xsl:with-param name="base" select="$base"/>
+           <xsl:with-param name="power" select="$power"/>
+           <xsl:with-param name="n" select="$n + 1"/>
+           <xsl:with-param name="ln_base" select="$ln_base "/>
+           <xsl:with-param name="ln_base_n" select="$ln_base_n * $ln_base"/>
+           <xsl:with-param name="power_n" select="$power_n * $power"/>
+           <xsl:with-param name="n_fact" select="$n_fact * ($n+1)"/>
+           <xsl:with-param name="result" select="$result + 
+                         ($power_n * $ln_base_n) div $n_fact"/>
+         </xsl:call-template>
+       </xsl:when>
+     <xsl:otherwise>
+       <xsl:value-of select="round($result * 1000000000) div 1000000000"/>
+     </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+Figure 3-1. Maclaurin series for power
+Factorial
+<xsl:template name="ckbk:fact">
+     <xsl:param name="number" select="0"/>
+     <xsl:param name="result" select="1"/>
+     <xsl:choose>
+       <xsl:when test="$number &lt; 0 or floor($number) != $number">
+         <xsl:value-of select="'NaN'"/>
+       </xsl:when>
+       <xsl:when test="$number &lt; 2">
+         <xsl:value-of select="$result"/>
+       </xsl:when>
+       <xsl:otherwise>
+         <xsl:call-template name="ckbk:fact">
+          <xsl:with-param name="number" select="$number - 1"/>
+          <xsl:with-param name="result" select="$number * $result"/>
+         </xsl:call-template>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:prod-range">
+     <xsl:param name="start" select="1"/>
+     <xsl:param name="end" select="1"/>
+     <xsl:param name="result" select="1"/>
+     <xsl:choose>
+       <xsl:when test="$start > $end">
+         <xsl:value-of select="$result"/>
+       </xsl:when>
+       <xsl:otherwise>
+         <xsl:call-template name="ckbk:prod-range">
+          <xsl:with-param name="start" select="$start + 1"/>
+          <xsl:with-param name="end" select="$end"/>
+          <xsl:with-param name="result" select="$start * $result"/>
+         </xsl:call-template>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+XSLT 2.0
+<!-- Power -->
+<xsl:function name="ckbk:power" as="xs:double">
+   <xsl:param name="base" as="xs:double"/>
+   <xsl:param name="exp" as="xs:integer"/>
+   <xsl:sequence 
+        select="if ($exp lt 0) then ckbk:power(1.0 div $base, -$exp) 
+                else 
+                if ($exp eq 0) 
+                then 1e0 
+                else $base * ckbk:power($base, $exp - 1)"/>
+</xsl:function>
+
+
+<!-- Sqrt -->
+<xsl:function name="ckbk:sqrt" as="xs:double">
+   <xsl:param name="number" as="xs:double"/>
+   <xsl:variable name="try" select="if ($number lt 100.0) then 1.0
+                                    else if ($number gt 100.0 and $number lt
+                                             1000.0) then 10.0
+                                    else if ($number gt 1000.0 and $number lt
+                                             10000.0) then 31.0
+                                    else 100.00" as="xs:decimal"/>
+                                      
+   <xsl:sequence select="if ($number ge 0) then ckbk:sqrt($number,$try,1,20) 
+                         else 'NaN'"/>
+</xsl:function>
+  
+<xsl:function name="ckbk:sqrt" as="xs:double">
+    <xsl:param name="number" as="xs:double"/>
+    <xsl:param name="try" as="xs:double"/>
+    <xsl:param name="iter" as="xs:integer"/>
+    <xsl:param name="maxiter" as="xs:integer"/>
+    
+    <xsl:variable name="result" select="$try * $try" as="xs:double"/>
+    <xsl:sequence select="if ($result eq $number or $iter gt $maxiter) 
+                          then $try 
+                          else ckbk:sqrt($number, ($try - (($result - $number) 
+                                         div (2 * $try))), $iter + 1, $maxiter)"/>
+</xsl:function>
+
+<!-- Factorial -->
+<xsl:function name="ckbk:factorial" as="xs:decimal">
+    <xsl:param name="n" as="xs:integer"/>
+    <xsl:sequence select="if ($n eq 0) then 1 else $n * ckbk:factorial($n - 1)"/> 
+</xsl:function>
+
+<!-- Prod-range -->
+<xsl:function name="ckbk:prod-range" as="xs:decimal">
+    <xsl:param name="from" as="xs:integer"/>
+    <xsl:param name="to" as="xs:integer"/>
+    <xsl:sequence select="if ($from ge $to) 
+                          then $from 
+                          else $from * ckbk:prod-range($from + 1, $to)"/> 
+</xsl:function>    
+    
+<!-- Log10 -->
+<xsl:function name="ckbk:log10" as="xs:double">
+  <xsl:param name="number" as="xs:double"/>
+  <xsl:sequence select="if ($number le 0) then 'NaN' else ckbk:log10($number,0)"/>
+</xsl:function>
+  
+<xsl:function name="ckbk:log10" as="xs:double">
+    <xsl:param name="number" as="xs:double"/>
+    <xsl:param name="n" as="xs:double"/>
+    <xsl:sequence select="if ($number le 1) 
+                          then ckbk:log10($number * 10, $n - 1) 
+                          else if($number gt 10) 
+                          then ckbk:log10($number div 10, $n + 1)
+                          else if($number eq 10) 
+                          then $n + 1
+                          else $n + ckbk:log10-util($number,0,0,2,38)"/>
+  </xsl:function>
+    
+  <xsl:function name="ckbk:log10-util" as="xs:double">
+    <xsl:param name="number" as="xs:double"/>
+    <xsl:param name="frac" as="xs:double"/>
+    <xsl:param name="iter" as="xs:integer"/>
+    <xsl:param name="divisor" as="xs:double"/>
+    <xsl:param name="maxiter" as="xs:integer"/>
+    
+    <xsl:variable name="x" select="$number * $number"/>
+
+    <xsl:sequence select="if ($iter ge $maxiter)
+                          then round-half-to-even($frac,10)
+                          else if ($x lt 10)
+                          then ckbk:log10-util($x,$frac,$iter + 1, 
+                                               $divisor * 2, $maxiter)
+                          else ckbk:log10-util($x div 10,
+                                               $frac + (1 div $divisor),
+                                               $iter + 1, $divisor * 2,
+                                               $maxiter)"/>
+</xsl:function>
+    
+Discussion
+Computing Sums and Products
+Solution
+XSLT 1.0
+<xsl:template name="ckbk:sum">
+  <!-- Initialize nodes to empty node set -->
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="result" select="0"/>
+  <xsl:choose>
+    <xsl:when test="not($nodes)">
+      <xsl:value-of select="$result"/>
+    </xsl:when>
+    <xsl:otherwise>
+        <!-- call or apply template that will determine value of node 
+          unless the node is literally the value to be summed -->
+      <xsl:variable name="value">
+        <xsl:call-template name="some-function-of-a-node">
+          <xsl:with-param name="node" select="$nodes[1]"/>
+        </xsl:call-template>
+      </xsl:variable>
+       <!-- recurse to sum rest -->
+      <xsl:call-template name="ckbk:sum">
+        <xsl:with-param name="nodes" select="$nodes[position(  ) != 1]"/>
+        <xsl:with-param name="result" select="$result + $value"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:sum-dvc">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="dvc-threshold" select="100"/>
+  <xsl:choose>
+    <xsl:when test="count($nodes) &lt;= $dvc-threshold">
+        <xsl:call-template name="ckbk:sum">
+          <xsl:with-param name="nodes" select="$nodes"/>
+          <xsl:with-param name="result" select="$result"/>
+        </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="half" select="floor(count($nodes) div 2)"/>
+      <xsl:variable name="sum1">
+        <xsl:call-template name="ckbk:sum-dvc">
+          <xsl:with-param name="nodes" select="$nodes[position(  ) &lt;= $half]"/>
+         <xsl:with-param name="result" select="$result"/>
+          <xsl:with-param name="dvc-threshold" select="$dvc-threshold"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:call-template name="ckbk:sum-dvc">
+         <xsl:with-param name="nodes" select="$nodes[position(  ) > $half]"/>
+         <xsl:with-param name="result" select="$sum1"/>
+          <xsl:with-param name="dvc-threshold" select="$dvc-threshold"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:sum-batcher">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="batch-size" select="500"/>
+  <xsl:choose>
+    <xsl:when test="not($nodes)">
+      <xsl:value-of select="$result"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="batch-sum">
+        <xsl:call-template name="ckbk:sum">
+          <xsl:with-param name="nodes" 
+               select="$nodes[position(  ) &lt; $batch-size]"/>
+          <xsl:with-param name="result" select="$result"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:call-template name="ckbk:sum-batcher">
+          <xsl:with-param name="nodes" select="$nodes[position(  ) >= $batch-
+size]"/>
+          <xsl:with-param name="result" select="$batch-sum"/>
+          <xsl:with-param name="batch-size" select="$batch-size"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:product">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="result" select="1"/>
+  <xsl:choose>
+    <xsl:when test="not($nodes)">
+      <xsl:value-of select="$result"/>
+    </xsl:when>
+    <xsl:otherwise>
+        <!-- call or apply template that will determine value of node unless the 
+node 
+        is literally the value to be multiplied -->
+      <xsl:variable name="value">
+        <xsl:call-template name="some-function-of-a-node">
+          <xsl:with-param name="node" select="$nodes[1]"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:call-template name="ckbk:product">
+        <xsl:with-param name="nodes" select="$nodes[position(  ) != 1]"/>
+        <xsl:with-param name="result" select="$result * $value"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="ckbk:product-batcher">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="result" select="1"/>
+  <xsl:param name="batch-size" select="500"/>
+  <xsl:choose>
+    <xsl:when test="not($nodes)">
+      <xsl:value-of select="$result"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="batch-product">
+        <xsl:call-template name="ckbk:product">
+          <xsl:with-param name="nodes" select="$nodes[position(  ) &lt; $batch-
+size]"/>
+          <xsl:with-param name="result" select="$result"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:call-template name="ckbk:product-batcher">
+          <xsl:with-param name="nodes" select="$nodes[position(  ) >= $batch-
+size]"/>
+          <xsl:with-param name="result" select="$batch-product"/>
+          <xsl:with-param name="batch-size" select="$batch-size"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="ckbk:product-dvc">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="result" select="1"/>
+  <xsl:param name="dvc-threshold" select="100"/>
+  <xsl:choose>
+    <xsl:when test="count($nodes) &lt;= $dvc-threshold">
+        <xsl:call-template name="ckbk:product">
+          <xsl:with-param name="nodes" select="$nodes"/>
+          <xsl:with-param name="result" select="$result"/>
+        </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="half" select="floor(count($nodes) div 2)"/>
+      <xsl:variable name="product1">
+        <xsl:call-template name="ckbk:product-dvc">
+          <xsl:with-param name="nodes" select="$nodes[position(  ) &lt;= $half]"/>
+         <xsl:with-param name="result" select="$result"/>
+          <xsl:with-param name="dvc-threshold" select="$dvc-threshold"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:call-template name="ckbk:product-dvc">
+         <xsl:with-param name="nodes" select="$nodes[position(  ) > $half]"/>
+         <xsl:with-param name="result" select="$product1"/>
+          <xsl:with-param name="dvc-threshold" select="$dvc-threshold"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+ 
+XSLT 2.0
+<!—Sum of squares -->
+<xsl:value select="sum(for $i in $nodes return $i * $i)"/>
+<xsl:function name="ckbk:prod" as="xs:double">
+   <xsl:param name="numbers" as="xs:double*"/>
+   <xsl:sequence select="if (count($numbers) eq 0) then 0
+                         else if (count($numbers) = 1) then $numbers[1]
+                         else $numbers[1] * ckbk:prod(subsequence($numbers,2))"/> 
+</xsl:function>
+XSLT 1.0
+Chapter 14 shows how to make a reusable batch and divide-and-
+conquer drivers. 
+XSLT 2.0
+<xsl:function name="ckbk:factorial" as="xs:double">
+   <xsl:param name="n" as="xs:integer"/>
+   <xsl:sequence select="if ($n eq 0) then 1 else ckbk:prod(1 to $n)"/> 
+</xsl:function>
+<xsl:function name="ckbk:factorial" as="xs:decimal">
+   <xsl:param name="n" as="xs:integer"/>
+   <xsl:sequence select="if ($n eq 0) then 1 else $n * ckbk:factorial($n - 1)"/> 
+</xsl:function>
+Finding Minimums and Maximums
+Solution
+XSLT 1.0
+Example 3-8. EXSLT min and max implement directly from the definition 
+<xsl:template name="ckbk:min">
+   <xsl:param name="nodes" select="/.." />
+   <xsl:choose>
+      <xsl:when test="not($nodes)">NaN</xsl:when>
+      <xsl:otherwise>
+         <xsl:for-each select="$nodes">
+            <xsl:sort data-type="number" />
+            <xsl:if test="position(  ) = 1">
+               <xsl:value-of select="number(.)" />
+            </xsl:if>
+         </xsl:for-each>
+      </xsl:otherwise>
+   </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="ckbk:max">
+   <xsl:param name="nodes" select="/.." />
+   <xsl:choose>
+      <xsl:when test="not($nodes)">NaN</xsl:when>
+      <xsl:otherwise>
+         <xsl:for-each select="$nodes">
+            <xsl:sort data-type="number" order="descending" />
+            <xsl:if test="position(  ) = 1">
+               <xsl:value-of select="number(.)" />
+            </xsl:if>
+         </xsl:for-each>
+      </xsl:otherwise>
+   </xsl:choose>
+</xsl:template>
+Example 3-9. min and max implemented with divide and conquer 
+<xsl:template name="ckbk:max">
+     <xsl:param name="nodes" select="/.."/>
+     <xsl:param name="max"/>
+  <xsl:variable name="count" select="count($nodes)"/>
+  <xsl:variable name="aNode" select="$nodes[ceiling($count div 2)]"/>
+  <xsl:choose>
+    <xsl:when test="not($count)">
+      <xsl:value-of select="number($max)"/>
+    </xsl:when>
+    <xsl:when test="number($aNode) != number($aNode)">
+      <xsl:value-of select="number($aNode)"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="ckbk:max">
+        <xsl:with-param name="nodes" select="$nodes[not(. &lt;= number($aNode))]"/>
+        <xsl:with-param name="max">
+          <xsl:choose>
+            <xsl:when test="not($max) or $aNode > $max">
+              <xsl:value-of select="$aNode"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$max"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:with-param>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="ckbk:min">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="min"/>
+  <xsl:variable name="count" select="count($nodes)"/>
+  <xsl:variable name="aNode" select="$nodes[ceiling($count div 2)]"/>
+  <xsl:choose>
+    <xsl:when test="not($count)">
+      <xsl:value-of select="number($min)"/>
+    </xsl:when>
+    <xsl:when test="number($aNode) != number($aNode)">
+      <xsl:value-of select="number($aNode)"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="ckbk:min">
+        <xsl:with-param name="nodes" select="$nodes[not(. >= number($aNode))]"/>
+        <xsl:with-param name="min">
+          <xsl:choose>
+            <xsl:when test="not($min) or $aNode &lt; $min">
+              <xsl:value-of select="$aNode"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$min"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:with-param>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+ 
+<xsl:template name="ckbk:lowest">
+   <xsl:param name="nodes" select="/.." />
+   <xsl:if test="$nodes and not($nodes[number(.) != number(.)])">
+      <xsl:variable name="min">
+         <xsl:for-each select="$nodes">
+            <xsl:sort data-type="number" />
+            <xsl:if test="position(  ) = 1">
+               <xsl:value-of select="number(.)" />
+            </xsl:if>
+         </xsl:for-each>
+      </xsl:variable>
+      <xsl:copy-of select="$nodes[. = $min]" />
+   </xsl:if>
+</xsl:template>
+Example 3-10. Lowest implemented by reusing ckbk:min 
+<xsl:template name="ckbk:lowest">
+     <xsl:param name="nodes" select="/.."/>
+   
+     <xsl:variable name="min">
+       <xsl:call-template name="ckbk:min">
+         <xsl:with-param name="nodes" select="$nodes"/>
+       </xsl:call-template>
+     </xsl:variable> 
+     <xsl:choose>
+       <xsl:when test="number($min) = number($min)">
+         <xsl:copy-of select="$nodes[. = $min]"/>
+       </xsl:when>
+     </xsl:choose>
+</xsl:template>
+Example 3-11. Lowest implemented without reuse of ckbk:min 
+<xsl:template name="ckbk:lowest">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="lowest" select="/.."/>
+  <xsl:variable name="index" select="ceiling(count($nodes) div 2)"/>
+  <xsl:variable name="aNode" select="$nodes[$index]"/>
+  <xsl:choose>
+    <xsl:when test="not($index)">
+      <xsl:copy-of select="$lowest"/>
+    </xsl:when>
+    <xsl:when test="number($aNode) != number($aNode)"/>
+    <xsl:otherwise>
+      <xsl:choose>
+        <xsl:when test="not($lowest) or $aNode &lt; $lowest">
+           <xsl:call-template name="ckbk:lowest">
+            <xsl:with-param name="nodes" select="$nodes[not(. >= $aNode)]"/>
+            <xsl:with-param name="lowest" select="$nodes[. = $aNode]"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:when test="$aNode = $lowest">
+           <xsl:call-template name="ckbk:lowest">
+            <xsl:with-param name="nodes" select="$nodes[not(. >= $aNode)]"/>
+            <xsl:with-param name="lowest" select="$lowest|$nodes[$index]"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+           <xsl:call-template name="ckbk:lowest">
+            <xsl:with-param name="nodes" select="$nodes[not(. >= $aNode)]"/>
+            <xsl:with-param name="lowest" select="$lowest"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+XSLT 2.0
+<xsl:template name="ckbk:min">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="min" select="number('NaN')"/>
+  <xsl:choose>
+    <xsl:when test="not($nodes)">
+      <xsl:value-of select="number($min)"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="aNode" select="$nodes[1]"/>
+      <xsl:call-template name="ckbk:min">
+        <xsl:with-param name="nodes" select="$nodes[position(  ) > 1]"/>
+        <xsl:with-param name="min">
+          <xsl:choose>
+            <xsl:when test="$aNode &lt; $min or string($min) = 'NaN'">
+              <xsl:value-of select="$aNode"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$min"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:with-param>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+<xsl:template name="ckbk:min-max">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="nodes-for-max" select="$nodes"/>
+  <xsl:param name="min"/>
+  <xsl:param name="max"/>
+  <xsl:variable name="count1" select="count($nodes)"/>
+  <xsl:variable name="aNode1" select="$nodes[ceiling($count1 div 2)]"/>
+  <xsl:variable name="count2" select="count($nodes-for-max)"/>
+  <xsl:variable name="aNode2" select="$nodes-for-max[ceiling($count2 div 2)]"/>
+  <xsl:choose>
+    <xsl:when test="not($count1) and not($count2)">
+      <xsl:value-of select="concat(number($min),',',number($max))"/>
+    </xsl:when>
+    <xsl:when test="number($aNode1) != number($aNode1) and 
+               number($aNode2) != number($aNode2)">
+      <xsl:value-of select="concat(number($aNode1),',',number($aNode2))"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="ckbk:min-max">
+        <xsl:with-param name="nodes" select="$nodes[not(. >= number($aNode1))]"/>
+        <xsl:with-param name="nodes-for-max" 
+          select="$nodes-for-max[not(. &lt;= number($aNode2))]"/>
+        <xsl:with-param name="min">
+          <xsl:choose>
+            <xsl:when test="not($min) or $aNode1 &lt; $min">
+              <xsl:value-of select="$aNode1"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$min"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:with-param>
+        <xsl:with-param name="max">
+          <xsl:choose>
+            <xsl:when test="not($max) or $aNode2 > $max">
+              <xsl:value-of select="$aNode2"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$max"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:with-param>
+      </xsl:call-template>
+    </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+Computing Statistical Functions
+XSLT 1.0
+<xsl:template name="ckbk:median">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:variable name="count" select="count($nodes)"/>
+  <xsl:variable name="middle" select="ceiling($count div 2)"/>
+  <xsl:variable name="even" select="not($count mod 2)"/>
+   
+  <xsl:variable name="m1">
+    <xsl:for-each select="$nodes">
+      <xsl:sort data-type="number"/>
+      <xsl:if test="position(  ) = $middle">
+        <xsl:value-of select=". + ($even * ./following-sibling::*[1])"/>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:variable>
+   
+  <!-- The median -->
+  <xsl:value-of select="$m1 div ($even + 1)"/>
+ </xsl:template>
+<xsl:template name="ckbk:mode">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="max" select="0"/>
+  <xsl:param name="mode" select="/.."/>
+   
+  <xsl:choose>
+    <xsl:when test="not($nodes)">
+      <xsl:copy-of select="$mode"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="first" select="$nodes[1]"/>
+     <xsl:variable name="try" select="$nodes[. = $first]"/>
+      <xsl:variable name="count" select="count($try)"/>
+      <!-- Recurse with nodes not equal to first -->
+      <xsl:call-template name="ckbk:mode">
+        <xsl:with-param name="nodes" select="$nodes[not(. = $first)]"/>
+        <!-- If we have found a node that is more frequent then 
+          pass the count otherwise pass the old max count -->
+        <xsl:with-param name="max" 
+          select="($count > $max) * $count + not($count > $max) * $max"/>
+        <!-- Compute the new mode as ... -->
+        <xsl:with-param name="mode">
+          <xsl:choose>
+            <!-- the first element in try if we found a new max -->
+            <xsl:when test="$count > $max">
+             <xsl:copy-of select="$try[1]"/>
+            </xsl:when>
+            <!-- the old mode union the first element in try if we 
+               found an equivalent count to current max -->
+            <xsl:when test="$count = $max">
+             <!-- Caution: you will need to convert $mode to a -->
+             <!-- node set if you are using a version of XSLT -->
+             <!-- that does not convert automatically -->
+             <xsl:copy-of select="$mode | $try[1]"/>
+            </xsl:when>
+            <!-- othewise the old mode stays the same -->
+            <xsl:otherwise>
+              <xsl:copy-of select="$mode"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:with-param>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>  
+</xsl:template>
+<xsl:template name="ckbk:variance">
+  <xsl:param name="nodes" select="/.."/>
+  <xsl:param name="sum" select="0"/>
+  <xsl:param name="sum-sq" select="0"/>
+  <xsl:param name="count" select="0"/>
+  <xsl:choose>
+    <xsl:when test="not($nodes)">
+      <xsl:value-of select="($sum-sq - ($sum * $sum) div $count) div ($count - 
+1)"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="value" select="$nodes[1]"/>
+      <xsl:call-template name="ckbk:variance">
+        <xsl:with-param name="nodes" select="$nodes[position(  ) != 1]"/>
+        <xsl:with-param name="sum" select="$sum + $value"/>
+        <xsl:with-param name="sum-sq" select="$sum-sq + ($value * $value)"/>
+        <xsl:with-param name="count" select="$count + 1"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+XSLT 2.0
+<-- Median -->
+<xsl:function name="ckbk:median">
+  <xsl:param name="nodes" as="xs:double*" />
+  
+  <xsl:variable name="count" select="count($nodes)"/>
+  <xsl:variable name="middle" select="ceiling($count div 2)"/>
+   
+  <xsl:variable name="sorted" as="xs:double*">
+    <xsl:perform-sort select="$nodes">
+      <xsl:sort data-type="number"/>
+    </xsl:perform-sort>
+  </xsl:variable>
+
+<-- Mode -->
+<xsl:function name="ckbk:mode" as="item()*">
+    <xsl:param name="nodes" as="item()*"/>
+	<!-- First locate the distinct values -->
+    <xsl:variable name="distinct" select="distinct-values($nodes)" as="item()*"/>
+	<!--Get a sequence of occurance counts of the distinct values -->
+    <xsl:variable name="counts" 
+                  select="for $i in $distinct return count($nodes[. = $i])" 
+                  as="xs:integer*"/>
+	<!--Find the max of the counts -->
+    <xsl:variable name="max" select="max($counts)" as="xs:integer?"/>
+    <!-- Now return those values that have the max count --> 
+    <xsl:sequence select="$distinct[position() = index-of($counts,$max)]"/>
+ </xsl:function>
+
+<-- Variance -->
+<xsl:function name="ckbk:variance" as="xs:double">
+    <xsl:param name="nodes" as="xs:double*"/>
+    <xsl:variable name="sum" select="sum($nodes)"/>
+    <xsl:variable name="count" select="count($nodes)"/>
+    <xsl:sequence select="if ($count lt 2) 
+                          then 0 
+                          else sum(for $i in $nodes return $i * $i) - 
+                               $sum * $sum) div 
+                                 ($count * $count - $count)"/>
+</xsl:function>
+
+
+Computing Combinatorial Functions
+XSLT 1.0
+<xsl:template name="ckbk:P">
+     <xsl:param name="n" select="1"/>
+     <xsl:param name="r" select="1"/>
+      <xsl:choose>
+        <xsl:when test="$n &lt; 0 or $r &lt; 0">NaN</xsl:when>
+        <xsl:when test="$n = 0">0</xsl:when>
+        <xsl:otherwise>
+               <xsl:call-template name="prod-range">
+               <xsl:with-param name="start" select="$r + 1"/>
+               <xsl:with-param name="end" select="$n"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="ckbk:C">
+     <xsl:param name="n" select="1"/>
+     <xsl:param name="r" select="1"/>
+      <xsl:choose>
+        <xsl:when test="$n &lt; 0 or $r &lt; 0">NaN</xsl:when>
+        <xsl:when test="$n = 0">0</xsl:when>
+        <xsl:otherwise>
+          <xsl:variable name="min" 
+               select="($r &lt;= $n - $r) * $r +  ($r > $n - $r) * $n - $r"/>
+          <xsl:variable name="max" 
+               select="($r >= $n - $r) * $r +  ($r &lt; $n - $r) * $n - $r"/>
+          <xsl:variable name="numerator">
+            <xsl:call-template name="prod-range">
+                 <xsl:with-param name="start" select="$max + 1"/>
+                 <xsl:with-param name="end" select="$n"/>
+            </xsl:call-template>
+          </xsl:variable>
+          <xsl:variable name="denominator">
+            <xsl:call-template name="ckbk:fact">
+              <xsl:with-param name="number" select="$min"/>
+            </xsl:call-template>
+          </xsl:variable>
+          <xsl:value-of select="$numerator div $denominator"/>
+        </xsl:otherwise>
+      </xsl:choose>
+</xsl:template>
+XSLT 2.0
+<xsl:function name="ckbk:P" as="xs:decimal">
+  <xsl:param name="r" as="xs:integer"/>
+  <xsl:param name="n" as="xs:integer"/>
+  <xsl:sequence select="if ($n eq 0) then 0 else ckbk:prod-range($r + 1, $n)"/>
+</xsl:function>
+   
+<xsl:function name="ckbk:C" as="xs:decimal">
+  <xsl:param name="r" as="xs:integer"/>
+  <xsl:param name="n" as="xs:integer"/>
+  <xsl:variable name="min" select="min( ($r, $n - $r) )" as="xs:integer"/>
+  <xsl:variable name="max" select="max( ($r, $n - $r) )" as="xs:integer"/>
+  <xsl:sequence select="if ($n eq 0) then 0 
+                        else ckbk:prod-range($max + 1, $n) div 
+                             ckbk:factorial($min)"/>
+</xsl:function> 
+Testing Bits
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    version="1.0" id="bittesting">
+   
+<!--powers of two-->
+<xsl:variable name="bit15" select="32768"/>
+<xsl:variable name="bit14" select="16384"/>
+<xsl:variable name="bit13" select="8192"/>
+<xsl:variable name="bit12" select="4096"/>
+<xsl:variable name="bit11" select="2048"/>
+<xsl:variable name="bit10" select="1024"/>
+<xsl:variable name="bit9"  select="512"/>
+<xsl:variable name="bit8"  select="256"/>
+<xsl:variable name="bit7"  select="128"/>
+<xsl:variable name="bit6"  select="64"/>
+<xsl:variable name="bit5"  select="32"/>
+<xsl:variable name="bit4"  select="16"/>
+<xsl:variable name="bit3"  select="8"/>
+<xsl:variable name="bit2"  select="4"/>
+<xsl:variable name="bit1"  select="2"/>
+<xsl:variable name="bit0"  select="1"/>
+   
+<xsl:template name="bitTest">
+  <xsl:param name="num"/>
+  <xsl:param name="bit" select="$bit0"/>
+  <xsl:choose>
+    <xsl:when test="( $num mod ( $bit * 2 ) ) -
+                    ( $num mod ( $bit ) )">1</xsl:when>
+    <xsl:otherwise>0</xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="bitAnd">
+  <xsl:param name="num1"/>
+  <xsl:param name="num2"/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="test" select="$bit15"/>
+  
+  <xsl:variable name="nextN1" 
+      select="($num1 >= $test) * ($num1 - $test) + not($num1 >= $test) * $num1"/>
+  <xsl:variable name="nextN2" 
+      select="($num2 >= $test) * ($num2 - $test) + not($num2 >= $test) * $num2"/>
+  
+  <xsl:choose>
+    <xsl:when test="$test &lt; 1">
+      <xsl:value-of select="$result"/>
+    </xsl:when>  
+    <xsl:when test="$num1 >= $test and $num2 >= $test">
+      <xsl:call-template name="bitAnd">
+        <xsl:with-param name="num1" select="$nextN1"/>
+        <xsl:with-param name="num2" select="$nextN2"/>
+        <xsl:with-param name="result" select="$result + $test"/>
+        <xsl:with-param name="test" select="$test div 2"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="bitAnd">
+        <xsl:with-param name="num1" select="$nextN1"/>
+        <xsl:with-param name="num2" select="$nextN2"/>
+        <xsl:with-param name="result" select="$result"/>
+        <xsl:with-param name="test" select="$test div 2"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="bitOr">
+  <xsl:param name="num1"/>
+  <xsl:param name="num2"/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="test" select="$bit15"/>
+   
+  <xsl:variable name="nextN1" 
+      select="($num1 >= $test) * ($num1 - $test) + not($num1 >= $test) * $num1"/>
+  <xsl:variable name="nextN2" 
+      select="($num2 >= $test) * ($num2 - $test) + not($num2 >= $test) * $num2"/>
+  
+  <xsl:choose>
+    <xsl:when test="$test &lt; 1">
+      <xsl:value-of select="$result"/>
+    </xsl:when>  
+    <xsl:when test="$num1 >= $test or $num2 >= $test">
+      <xsl:call-template name="bitOr">
+        <xsl:with-param name="num1" select="$nextN1"/>
+        <xsl:with-param name="num2" select="$nextN2"/>
+        <xsl:with-param name="result" select="$result + $test"/>
+        <xsl:with-param name="test" select="$test div 2"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="bitOr">
+        <xsl:with-param name="num1" select="$nextN1"/>
+        <xsl:with-param name="num2" select="$nextN2"/>
+        <xsl:with-param name="result" select="$result"/>
+        <xsl:with-param name="test" select="$test div 2"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="bitXor">
+  <xsl:param name="num1"/>
+  <xsl:param name="num2"/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="test" select="$bit15"/>
+   
+  <xsl:variable name="nextN1" 
+      select="($num1 >= $test) * ($num1 - $test) + not($num1 >= $test) * $num1"/>
+  <xsl:variable name="nextN2" 
+      select="($num2 >= $test) * ($num2 - $test) + not($num2 >= $test) * $num2"/>
+  
+  <xsl:choose>
+    <xsl:when test="$test &lt; 1">
+      <xsl:value-of select="$result"/>
+    </xsl:when>  
+    <xsl:when test="$num1 >= $test and not($num2 >= $test) 
+        or not($num1 >= $test) and $num2 >= $test">
+      <xsl:call-template name="bitXor">
+        <xsl:with-param name="num1" select="$nextN1"/>
+        <xsl:with-param name="num2" select="$nextN2"/>
+        <xsl:with-param name="result" select="$result + $test"/>
+        <xsl:with-param name="test" select="$test div 2"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="bitXor">
+        <xsl:with-param name="num1" select="$nextN1"/>
+        <xsl:with-param name="num2" select="$nextN2"/>
+        <xsl:with-param name="result" select="$result"/>
+        <xsl:with-param name="test" select="$test div 2"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="bitNot">
+  <xsl:param name="num"/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="test" select="$bit15"/>
+  
+  <xsl:choose>
+    <xsl:when test="$test &lt; 1">
+      <xsl:value-of select="$result"/>
+    </xsl:when>  
+    <xsl:when test="$num >= $test">
+      <xsl:call-template name="bitNot">
+        <xsl:with-param name="num" select="$num - $test"/>
+        <xsl:with-param name="result" select="$result"/>
+        <xsl:with-param name="test" select="$test div 2"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="bitNot">
+        <xsl:with-param name="num" select="$num"/>
+        <xsl:with-param name="result" select="$result + $test"/>
+        <xsl:with-param name="test" select="$test div 2"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+<xsl:template name="bitAnd">
+  <xsl:param name="num1"/>
+  <xsl:param name="num2"/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="pow2" select="$bit0"/>
+  
+  <xsl:choose>
+    <xsl:when test="$num1 &lt; 1 or $num2 &lt; 1">
+      <xsl:value-of select="$result"/>
+    </xsl:when>  
+    <xsl:when test="$num1 mod 2 and $num2 mod 2">
+      <xsl:call-template name="bitAnd">
+        <xsl:with-param name="num1" select="floor($num1 div 2)"/>
+        <xsl:with-param name="num2" select="floor($num2 div 2)"/>
+        <xsl:with-param name="result" select="$result + $pow2"/>
+        <xsl:with-param name="pow2" select="$pow2 * 2"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="bitAnd">
+        <xsl:with-param name="num1" select="floor($num1 div 2)"/>
+        <xsl:with-param name="num2" select="floor($num2 div 2)"/>
+        <xsl:with-param name="result" select="$result"/>
+        <xsl:with-param name="pow2" select="$pow2 * 2"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="bitOr">
+  <xsl:param name="num1"/>
+  <xsl:param name="num2"/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="pow2" select="$bit0"/>
+  
+  <xsl:choose>
+    <xsl:when test="$num1 &lt; 1 and $num2 &lt; 1">
+      <xsl:value-of select="$result"/>
+    </xsl:when>  
+    <xsl:when test="boolean($num1 mod 2) or boolean($num2 mod 2)">
+      <xsl:call-template name="bitOr">
+        <xsl:with-param name="num1" select="floor($num1 div 2)"/>
+        <xsl:with-param name="num2" select="floor($num2 div 2)"/>
+        <xsl:with-param name="result" select="$result + $pow2"/>
+        <xsl:with-param name="pow2" select="$pow2 * 2"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="bitOr">
+        <xsl:with-param name="num1" select="floor($num1 div 2)"/>
+        <xsl:with-param name="num2" select="floor($num2 div 2)"/>
+        <xsl:with-param name="result" select="$result"/>
+        <xsl:with-param name="pow2" select="$pow2 * 2"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="bitXor">
+  <xsl:param name="num1"/>
+  <xsl:param name="num2"/>
+  <xsl:param name="result" select="0"/>
+  <xsl:param name="pow2" select="$bit0"/>
+  
+  <xsl:choose>
+    <xsl:when test="$num1 &lt; 1 and $num2 &lt; 1">
+      <xsl:value-of select="$result"/>
+    </xsl:when>  
+    <xsl:when test="$num1 mod 2 + $num2 mod 2 = 1">
+      <xsl:call-template name="bitXor">
+        <xsl:with-param name="num1" select="floor($num1 div 2)"/>
+        <xsl:with-param name="num2" select="floor($num2 div 2)"/>
+        <xsl:with-param name="result" select="$result + $pow2"/>
+        <xsl:with-param name="pow2" select="$pow2 * 2"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="bitXor">
+        <xsl:with-param name="num1" select="floor($num1 div 2)"/>
+        <xsl:with-param name="num2" select="floor($num2 div 2)"/>
+        <xsl:with-param name="result" select="$result"/>
+        <xsl:with-param name="pow2" select="$pow2 * 2"/>
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+ 
+ 
+ 
+ 
+34		Numbers and Math
+Testing Bits		35 of 35
+34
+	35
+DRAFT	O'Reilly & Associates	1/16/2006

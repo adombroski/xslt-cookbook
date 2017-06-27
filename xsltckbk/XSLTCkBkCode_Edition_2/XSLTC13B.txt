@@ -1,0 +1,2743 @@
+Chapter 13
+Vertical XSLT Application Recipes
+1) Converting Visio VDX Documents to SVG
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:v="urn:schemas-microsoft-com:office:visio"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:math="java.lang.Math"
+  xmlns:jDouble="java.lang.Double"
+  xmlns:saxon="http://icl.com/saxon"
+  exclude-result-prefixes="v math saxon jDouble"
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.0">
+   
+  <xsl:output method="xml"
+    version="1.0"
+    omit-xml-declaration="no"
+    media-type="image/svg+xml"
+    encoding="iso-8859-1"
+    indent="yes"
+    cdata-section-elements="style"
+    doctype-public="-//W3C//DTD SVG 1.0//EN"
+    doctype-system="http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"
+    />
+  <xsl:param name="pageNumber" select="1"/>
+  <xsl:param name="userScale"  select="100"/>
+   
+  <!-- =  =  =  =  Variables (ie, Constants) =  =  =  =  =  =  =  =  =  =  =  =  =  
+= -->
+  <!-- Color map -->
+  <xsl:variable name="Colors"
+                select="//v:Colors[position(  )=1]/v:ColorEntry"/>
+   
+  <!-- Page being processed -->
+  <xsl:variable name="Page"
+            select="/v:VisioDocument/v:Pages/v:Page[number($pageNumber)]"/>
+   
+  <!-- Template Masters -->
+  <xsl:variable name="Masters"
+                select="//v:Masters[position(  )=1]/v:Master"/>
+   
+  <!-- viewBox Master -->
+  <xsl:variable name="viewBoxMaster"
+                select="$Masters[@NameU='viewBox']"/>
+   
+  <!-- Ratio of font height to width (fudge factor) -->
+  <xsl:variable name="fontRatio"
+                select="2"/>
+   
+  <!-- Pi (SVG uses degrees, Visio uses radians) -->
+  <xsl:variable name="pi" select="3.14159265358979323846264338327"/>
+  <!-- Included files -->
+  <xsl:include href="visio-style.xsl"/>
+  <xsl:include href="visio-text.xsl"/>
+  <xsl:include href="visio-masters.xsl"/>
+  <xsl:include href="visio-nurbs.xsl"/>
+   
+   <!-- Scripts -->
+  <xsl:template name="required-scripts">
+    <script xlink:href="wordwrap.js" type="text/ecmascript"/>
+  </xsl:template>
+   
+  <xsl:template match="/v:VisioDocument">
+    <xsl:apply-templates
+      select="$Page"/>
+  </xsl:template>
+  <!-- =  =  =  =  =  =  =  = Page =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  
+=  =  =-->
+  <xsl:template match="v:Page">
+    <xsl:message>
+      <xsl:value-of select="@NameU"/>
+    </xsl:message>
+    <svg id="{@NameU}">
+      <xsl:attribute name="xml:space">
+        <xsl:value-of select="'preserve'"/>
+      </xsl:attribute>
+      <xsl:choose>
+        <!-- Use viewBox with name 'default' if present -->
+        <xsl:when test="//v:Shape[@Master=$viewBoxMaster/@ID
+                        and @NameU='default'][1]">
+          <xsl:for-each
+            select="//v:Shape[@Master=$viewBoxMaster/@ID
+                    and @NameU='default']">
+            <xsl:attribute name="viewBox">
+              <xsl:value-of select="concat(
+                                    v:XForm/v:PinX*$userScale, ' ',
+                                    -v:XForm/v:PinY*$userScale, ' ',
+                                    v:XForm/v:Width*$userScale, ' ',
+                                    v:XForm/v:Height*$userScale)"/>
+            </xsl:attribute>
+          </xsl:for-each>
+        </xsl:when>
+        <!-- Otherwise, center on sheet -->
+        <xsl:otherwise>
+          <xsl:attribute name="viewBox">
+            <xsl:value-of select="concat('0 ', 
+                                  -v:PageSheet/v:PageProps/v:PageHeight
+                                    *$userScale, ' ', 
+                                  v:PageSheet/v:PageProps/v:PageWidth
+                                    *$userScale, ' ',
+                                  v:PageSheet/v:PageProps/v:PageHeight
+                                    *$userScale)"/>
+          </xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:call-template name="required-scripts"/>
+      <xsl:call-template name="predefined-pattern-fgnds"/>
+      <xsl:call-template name="predefined-markers"/>
+      <xsl:apply-templates select="../../v:StyleSheets"/>
+      <xsl:apply-templates select="v:Shapes/v:Shape"/>
+    </svg>
+  </xsl:template>
+   
+  <!-- =  =  =  =  =  =  =  = StyleSheets =  =  =  =  =  =  =  =  = -->
+  <xsl:template match="v:StyleSheets">
+    <defs>
+      <xsl:for-each select="v:StyleSheet">
+        <!-- Line style -->
+        <style id="ss-line-{@ID}" type="text/css">
+          <xsl:text>*.ss-line-</xsl:text><xsl:value-of select="@ID"/>
+          <xsl:text> { </xsl:text>
+          <xsl:call-template name="recursive-line-style">
+            <xsl:with-param name="ss" select="."/>
+          </xsl:call-template>
+          <xsl:text> }</xsl:text>
+        </style>
+        <!-- Fill style -->
+        <style id="ss-fill-{@ID}" type="text/css">
+          <xsl:text>*.ss-fill-</xsl:text><xsl:value-of select="@ID"/>
+          <xsl:text> { </xsl:text>
+          <xsl:call-template name="recursive-fill-style">
+            <xsl:with-param name="ss" select="."/>
+          </xsl:call-template>
+          <xsl:text> }</xsl:text>
+        </style>
+        <!-- Text style -->
+        <style id="ss-text-{@ID}" type="text/css">
+          <xsl:text>*.ss-text-</xsl:text><xsl:value-of select="@ID"/>
+          <xsl:text> { </xsl:text>
+          <xsl:call-template name="recursive-text-style">
+            <xsl:with-param name="ss" select="."/>
+          </xsl:call-template>
+          <xsl:text> } </xsl:text>
+        </style>
+      </xsl:for-each>
+    </defs>
+  </xsl:template>
+   
+  <!-- Recurse through StyleSheet inheritance -->
+  <xsl:template name="recursive-line-style">
+    <xsl:param name="ss"/>
+    <xsl:if test="$ss/@LineStyle">
+      <xsl:call-template name="recursive-line-style">
+        <xsl:with-param name="ss"
+          select="$ss/../v:StyleSheet[@ID=$ss/@LineStyle]"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:apply-templates select="$ss/v:Line" mode="style"/>
+  </xsl:template>
+   
+  <xsl:template name="recursive-fill-style">
+    <xsl:param name="ss"/>
+    <xsl:if test="$ss/@FillStyle">
+      <xsl:call-template name="recursive-fill-style">
+        <xsl:with-param name="ss"
+          select="$ss/../v:StyleSheet[@ID=$ss/@FillStyle]"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:apply-templates select="$ss/v:Fill" mode="style"/>
+  </xsl:template>
+   
+  <xsl:template name="recursive-text-style">
+    <xsl:param name="ss"/>
+    <xsl:if test="$ss/@TextStyle">
+      <xsl:call-template name="recursive-text-style">
+        <xsl:with-param name="ss"
+          select="$ss/../v:StyleSheet[@ID=$ss/@TextStyle]"/>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:apply-templates select="$ss/v:Char|$ss/v:Para" mode="style"/>
+  </xsl:template>
+   
+  <!-- This template returns a string for the line style -->
+  <xsl:template match="v:Line" mode="style">
+    <xsl:for-each select="v:LineWeight">
+      <xsl:text>stroke-width:</xsl:text>
+      <xsl:value-of select=". * $userScale"/><xsl:text>;</xsl:text>
+    </xsl:for-each>
+    <xsl:for-each select="v:LineColor">
+      <xsl:choose>
+        <xsl:when test="../v:LinePattern > 0">
+          <xsl:text>stroke:</xsl:text>
+          <xsl:call-template name="lookup-color">
+            <xsl:with-param name="c_el" select="."/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:when test="../v:LinePattern = 0">
+          <xsl:text>stroke:none</xsl:text>
+        </xsl:when>
+      </xsl:choose>
+      <xsl:text>;</xsl:text>
+    </xsl:for-each>
+    <xsl:for-each select="v:EndArrow">
+      <xsl:choose>
+        <xsl:when test=". = 0">
+          <xsl:value-of select="string('marker-end:none;')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat('marker-end:url(#EndArrow-', .,
+                                '-', ../v:EndArrowSize, ');')"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+    <xsl:apply-templates select="v:LinePattern[. &gt; 1]" mode="style"/>
+  </xsl:template>
+   
+  <!-- This template returns a string for the fill style -->
+  <xsl:template match="v:Fill" mode="style">
+    <xsl:for-each select="v:FillForegnd">
+      <xsl:choose>
+        <xsl:when test="../v:FillPattern = 1">
+          <xsl:text>fill:</xsl:text>
+          <xsl:call-template name="lookup-color">
+            <xsl:with-param name="c_el" select="."/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:when test="../v:FillPattern = 0">
+          <xsl:text>fill:none</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>fill:url(#</xsl:text>
+          <xsl:value-of select="generate-id(../..)"/>
+          <xsl:text>-pat)</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:text>;</xsl:text>
+    </xsl:for-each>
+  </xsl:template>
+   
+  <!-- This template returns a string for the text style -->
+  <xsl:template match="v:Char|v:Para" mode="style">
+    <xsl:for-each select="v:Color">
+      <!-- I don't think Visio handles filled characters -->
+      <xsl:text>stroke:none</xsl:text>
+      <xsl:text>;fill:</xsl:text>
+      <xsl:call-template name="lookup-color">
+        <xsl:with-param name="c_el" select="."/>
+      </xsl:call-template>
+      <xsl:text>;</xsl:text>
+    </xsl:for-each>
+    <xsl:for-each select="v:Size">
+      <xsl:text>font-size:</xsl:text>
+      <xsl:value-of select=". * $userScale"/><xsl:text>;</xsl:text>
+    </xsl:for-each>
+    <xsl:for-each select="v:HorzAlign">
+      <xsl:text>text-anchor:</xsl:text>
+      <xsl:choose>
+        <xsl:when test="(. = 0) or (. = 3)">
+          <xsl:text>start</xsl:text>
+        </xsl:when>
+        <xsl:when test=". = 1">
+          <xsl:text>middle</xsl:text>
+        </xsl:when>
+        <xsl:when test=". = 2">
+          <xsl:text>end</xsl:text>
+        </xsl:when>
+      </xsl:choose>
+      <xsl:text>;</xsl:text>
+    </xsl:for-each>
+  </xsl:template>
+   
+  <!-- Ignore all other StyleSheet elements -->
+  <xsl:template match="*[parent::v:StyleSheet]" priority="-100"/>
+  <!-- =  =  =  =  =  =  = Shape =  =  =  =  =  =  =  =  =  =  =  =  = -->
+  <xsl:template match="v:Shape">
+   
+    <xsl:variable name="master"
+                  select="/v:VisioDocument//v:Masters[1]/
+                           v:Master[@ID=current(  )/@Master]"/>
+   
+    <xsl:variable name="svgElement">
+      <xsl:choose>
+         <!-- Check for special svgElement property in shape ... -->
+        <xsl:when test="./v:Prop/v:Label[.='svgElement']">
+          <xsl:value-of
+            select="./v:Prop/v:Label[.='svgElement']/../v:Value"/>
+        </xsl:when>
+         <!-- ... and in master -->
+        <xsl:when test="@Master and 
+                        $master//v:Prop/v:Label[.='svgElement']">
+          <xsl:value-of
+            select="$master//v:Prop/v:Label[.='svgElement']/../v:Value"/>
+        </xsl:when>
+   
+         <!-- The simple case maps a shape onto a svg (g)roup -->     
+        <xsl:otherwise>
+          <xsl:value-of select="'g'"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+   
+    <xsl:choose>
+   
+      <xsl:when test="@Master and string($svgElement)
+                      and contains($specialMasters, $svgElement)">
+        <xsl:call-template name="choose-special-master">
+          <xsl:with-param name="master" select="$master"/>
+          <xsl:with-param name="masterElement" select="$svgElement"/>
+        </xsl:call-template>
+      </xsl:when>
+   
+      <xsl:when test="($svgElement = 'defs') or ($svgElement = 'g') or
+                      ($svgElement = 'symbol')">
+        <xsl:choose>
+          <xsl:when test="v:Hyperlink">
+            <!-- Surround shape with 'a' element -->
+            <!-- This is a minimal implementation.  It doesn't support
+                 multiple links, subaddress, etc. -->
+            <a xlink:title="{v:Hyperlink/v:Description}"
+              xlink:href="{v:Hyperlink/v:Address}">
+              <xsl:if test="v:Hyperlink/v:NewWindow">
+                <xsl:attribute name="show">
+                  <xsl:value-of select="new"/>
+                </xsl:attribute>
+              </xsl:if>
+              <xsl:element name="{$svgElement}">
+                <xsl:call-template name="userShape"/>
+              </xsl:element>
+            </a>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:element name="{$svgElement}">
+              <xsl:call-template name="userShape"/>
+            </xsl:element>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:template>
+  <!-- This does the processing for normal 'user' shapes -->
+  <xsl:template name="userShape">
+    <xsl:variable name="master"
+      select="/v:VisioDocument/v:Masters
+              /v:Master[(@ID=current(  )/@Master)
+                        and (current(  )/@Type != 'Group')]
+              /v:Shapes/v:Shape |
+              /v:VisioDocument/v:Masters
+              /v:Master[@ID=current(  )
+              /ancestor::v:Shape[@Master]/@Master]
+              //v:Shape[@ID=current(  )/@MasterShape] | ."/>
+   
+    <xsl:call-template name="setIdAttribute"/>
+   
+    <xsl:attribute name="class">
+      <xsl:for-each select="($master[@LineStyle])[last(  )]">
+        <xsl:text> ss-line-</xsl:text>
+        <xsl:value-of select="@LineStyle"/>
+      </xsl:for-each>
+      <xsl:for-each select="($master[@FillStyle])[last(  )]">
+        <xsl:text> ss-fill-</xsl:text>
+        <xsl:value-of select="@FillStyle"/>
+      </xsl:for-each>
+    </xsl:attribute>
+    <xsl:attribute name="style">
+      <xsl:for-each select="$master">
+        <xsl:apply-templates select="./v:Line" mode="style"/>
+        <xsl:apply-templates select="./v:Fill" mode="style"/>
+      </xsl:for-each>
+    </xsl:attribute>
+    <xsl:for-each select="v:XForm">
+      <xsl:call-template name="transformAttribute">
+      </xsl:call-template>
+    </xsl:for-each>
+    <!-- This is to create the custom pattern -->
+    <xsl:apply-templates select="v:Fill" mode="Shape"/>
+    <xsl:for-each select="v:Geom">
+      <xsl:apply-templates select="v:Ellipse"/>
+      <xsl:if test="v:MoveTo or v:LineTo">
+        <xsl:call-template name="pathElement"/>
+      </xsl:if>
+    </xsl:for-each>
+    <xsl:for-each select="($master/v:Text)[last(  )]">
+      <xsl:apply-templates select="."/>
+    </xsl:for-each>
+   
+    <xsl:apply-templates select="v:Shapes/v:Shape"/>
+   
+    <!-- Add elements from properties -->
+    <xsl:for-each select="v:Prop">
+      <xsl:choose>
+        <xsl:when test="starts-with(v:Label, 'svg-element')">
+          <!-- This is sort of ugly - it may disappear some day -->
+          <xsl:value-of disable-output-escaping="yes" select="v:Value"/>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:template>
+   
+  <xsl:template match="v:Ellipse">
+    <!-- This is a somewhat limited translation.  It assumes that the
+         axes are parallel to the x & y axes, and the lower-left corner
+         of the bounding box is at the origin (which appears to be the
+         way Visio draws them by default). -->
+    <ellipse id="ellipse-{generate-id(ancestor::v:Shape[1])}"
+      cx="{v:X*$userScale}" cy="{-v:Y*$userScale}"
+      rx="{v:X*$userScale}" ry="{v:Y*$userScale}"/>
+  </xsl:template>
+   
+  <!-- =  =  =  =  =  =  =  = Utility templates =  =  =  =  =  =  =  =  =  =  =  =  
+=  = -->
+   
+  <!-- Lookup color value in Colors element -->
+  <xsl:template name="lookup-color">
+    <xsl:param name="c_el"/>
+    <xsl:choose>
+      <xsl:when test="starts-with($c_el, '#')">
+        <xsl:value-of select="$c_el"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$Colors[@IX=string($c_el)]/@RGB"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  <xsl:template name="setIdAttribute">
+    <xsl:attribute name="id">
+      <xsl:choose>
+        <xsl:when test="@NameU">
+          <xsl:value-of select="@NameU"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="generate-id(.)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+  </xsl:template>
+   
+  <!-- Translate XForm element into transform attribute -->
+  <xsl:template name="transformAttribute">
+    <xsl:attribute name="transform">
+      <xsl:text>translate(</xsl:text>
+      <xsl:value-of select="concat((v:PinX - v:LocPinX)*$userScale,
+                            ',', -(v:PinY - v:LocPinY)*$userScale)"/>
+      <xsl:if test="v:Angle != 0">
+        <xsl:text>) rotate(</xsl:text>
+        <xsl:value-of select="-v:Angle*180 div $pi"/>
+        <xsl:value-of select="concat(',', v:LocPinX*$userScale,
+                              ',', -v:LocPinY*$userScale)"/>
+      </xsl:if>
+      <xsl:text>)</xsl:text>
+    </xsl:attribute>
+  </xsl:template>
+  <!-- Translate Geom element into path element -->
+  <xsl:template name="pathElement">
+    <xsl:variable name="pathID">
+      <xsl:text>path-</xsl:text>
+      <xsl:choose>
+        <xsl:when test="ancestor::v:Shape[1]/@NameU">
+          <xsl:value-of select="ancestor::v:Shape[1]/@NameU"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="generate-id(ancestor::v:Shape[1])"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <path id="{$pathID}">
+      <xsl:attribute name="d">
+        <xsl:for-each select="v:*">
+          <xsl:choose>
+            <xsl:when test="name(  ) = 'MoveTo'">
+              <xsl:value-of select="concat('M', v:X*$userScale,
+                                    ',', -v:Y*$userScale, ' ')"/>
+            </xsl:when>
+            <xsl:when test="name(  ) = 'LineTo'">
+              <xsl:value-of select="concat('L', v:X*$userScale,
+                                    ',', -v:Y*$userScale, ' ')"/>
+            </xsl:when>
+            <xsl:when test="name(  ) = 'EllipticalArcTo'">
+              <!-- If we don't have access to trig functions, the
+                   arc will just be represented by two line segments-->
+              <xsl:choose>
+                <xsl:when test="function-available('math:atan2')">
+                  <xsl:call-template name="ellipticalArcPath"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="concat('L', v:A*$userScale,
+                                        ',', -v:B*$userScale,
+                                        ' L', v:X*$userScale,
+                                        ',', -v:Y*$userScale, ' ')"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:when>
+            <xsl:when test="(name(  ) = 'NoFill') or (name(  ) = 'NoLine') or
+                            (name(  ) = 'NoShow') or (name(  ) = 'NoSnap')">
+              <!-- Ignore these -->
+            </xsl:when>
+            <xsl:when test="name(  ) = 'NURBSTo'">
+              <xsl:call-template name="NURBSPath"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:message>
+                <xsl:text>Warning: unsupported path command found:</xsl:text>
+                <xsl:value-of select="name(  )"/>
+                <xsl:text>; replacing with LineTo</xsl:text>
+              </xsl:message>
+              <xsl:value-of select="concat('L', v:X*$userScale,
+                                    ',', -v:Y*$userScale, ' ')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each>
+      </xsl:attribute>
+      <xsl:if test="v:NoFill = 1">
+        <xsl:attribute name="fill"><xsl:text>none</xsl:text></xsl:attribute>
+      </xsl:if>
+    </path>
+  </xsl:template>
+   
+  <!-- This template calculates the path string for an elliptical arc -->
+   
+  <xsl:template name="ellipticalArcPath">
+   
+  <!-- Figure sweep based on angle from current point -->
+  <!-- to (X,Y) and (A,B) -->
+   
+  <!-- TODO: figure a better way to make sure the preceding
+       sibling is a drawing element -->
+   
+    <xsl:variable name="lastX"
+      select="preceding-sibling::*[1]/v:X"/>
+    <xsl:variable name="lastY"
+      select="preceding-sibling::*[1]/v:Y"/>
+    <xsl:variable name="angle"
+      select="math:atan2(v:Y - $lastY, v:X - $lastX)
+              - math:atan2(v:B - $lastY, v:A - $lastX)"/>
+    <xsl:variable name="sweep">
+      <xsl:choose>
+        <xsl:when test="$angle &gt; 0
+                        and math:abs($angle) &lt; 180">
+          <xsl:value-of select='0'/>
+        </xsl:when>
+        <xsl:when test="$angle &lt; 0
+                        and math:abs($angle) &gt; 180">
+          <xsl:value-of select='0'/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select='1'/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:value-of select="concat('A',
+                   (preceding-sibling::*[1]/v:X - v:X)*$userScale, ',',
+                   (preceding-sibling::*[1]/v:Y - v:Y)*$userScale, ' ',
+                   v:C,  ' 0,', $sweep, ' ', v:X*$userScale, ',',
+                   -v:Y*$userScale, ' ')"/>
+  </xsl:template>
+   
+</xsl:stylesheet>
+2) Working with Excel XML Spreadsheets
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" 
+xmlns:o="urn:schemas-
+microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" 
+xmlns:
+ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/
+REC-html40">
+  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+    <Author>Salvatore R. Mangano</Author>
+    <LastAuthor>Salvatore R. Mangano</LastAuthor>
+    <Created>2002-08-18T00:43:49Z</Created>
+    <LastSaved>2002-08-18T02:19:21Z</LastSaved>
+    <Company>Descriptix</Company>
+    <Version>10.3501</Version>
+  </DocumentProperties>
+  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+    <DownloadComponents/>
+    <LocationOfComponents HRef="/"/>
+  </OfficeDocumentSettings>
+  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+    <WindowHeight>9915</WindowHeight>
+    <WindowWidth>10140</WindowWidth>
+    <WindowTopX>240</WindowTopX>
+    <WindowTopY>255</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Bottom"/>
+      <Borders/>
+      <Font/>
+      <Interior/>
+      <NumberFormat/>
+      <Protection/>
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="msft">
+    <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="5" x:FullColumns="1" 
+    x:FullRows="1">
+      <Row>
+        <Cell>
+          <Data ss:Type="String">Date</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Price</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Volume</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="Number">20010817</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">61.88</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">260163</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="Number">20010820</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">62.7</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">241859</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="Number">20010821</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">60.78</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">233989</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="Number">20010822</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">60.66</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">387444</Data>
+        </Cell>
+      </Row>
+    </Table>
+    <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+      <Selected/>
+      <Panes>
+        <Pane>
+          <Number>3</Number>
+          <ActiveRow>11</ActiveRow>
+          <ActiveCol>5</ActiveCol>
+        </Pane>
+      </Panes>
+      <ProtectObjects>False</ProtectObjects>
+      <ProtectScenarios>False</ProtectScenarios>
+    </WorksheetOptions>
+  </Worksheet>
+</Workbook>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+                xmlns:o="urn:schemas-microsoft-com:office:office" 
+                xmlns:x="urn:schemas-microsoft-com:office:excel" 
+                xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+     
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  
+  <!-- The name of the top level element -->
+  <xsl:param name="topLevelName" select=" 'Table' "/>
+  <!-- The name of each row -->
+  <xsl:param name="rowName" select=" 'Row' "/>
+  <!-- The namespace to use -->
+  <xsl:param name="namespace"/>
+  <!-- The namespace prefix to use -->
+  <xsl:param name="namespacePrefix"/>
+  <!-- The character to use if column names contain white space -->
+  <xsl:param name="wsSub" select="'_'"/>
+  <!--Determines which row contains the col names-->
+  <xsl:param name="colNamesRow" select="1"/>
+  <!--Determines which row the data begins -->
+  <xsl:param name="dataRowStart" select="2"/>
+  <!-- If false then cells with null or whitespace only content -->
+  <!-- will be skipped -->
+  <xsl:param name="includeEmpty" select="true(  )"/>
+  <!-- If false then author and creation meta data will not be put -->
+  <!-- into a comment-->
+  <xsl:param name="includeComment" select="true(  )"/>
+  
+  <!--Normalize the namespacePrefix -->
+  <xsl:variable name="nsp">
+    <xsl:if test="$namespace">
+      <!-- Only use prefix if namespace is specified -->
+      <xsl:choose>
+        <xsl:when test="contains($namespacePrefix,':')">
+          <xsl:value-of 
+               select="concat(translate(substring-before(
+                                            $namespacePrefix,
+                                            ':'),' ',''),':')"/>
+        </xsl:when>
+        <xsl:when test="translate($namespacePrefix,' ','')">
+          <xsl:value-of 
+               select="concat(translate($namespacePrefix,' ',''),':')"/>
+        </xsl:when>
+        <xsl:otherwise/>
+      </xsl:choose>
+    </xsl:if>
+  </xsl:variable>
+  
+  <!--Get the names of all the columns with white space replaced by  -->
+  <xsl:variable name="COLS" select="/*/*/*/ss:Row[$colNamesRow]/ss:Cell"/>
+  
+  <xsl:template match="o:DocumentProperties">
+    <xsl:if test="$includeComment">
+      <xsl:text>&#xa;</xsl:text>
+      <xsl:comment>
+       <xsl:text>&#xa;</xsl:text>
+        <xsl:if test="normalize-space(o:Company)">
+          <xsl:text>Company: </xsl:text>
+          <xsl:value-of select="o:Company"/>
+          <xsl:text>&#xa;</xsl:text>
+        </xsl:if>
+        <xsl:text>Author: </xsl:text>
+        <xsl:value-of select="o:Author"/>
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>Created on: </xsl:text>
+        <xsl:value-of select="translate(o:Created,'TZ',' ')"/>
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>Last Author: </xsl:text>
+        <xsl:value-of select="o:LastAuthor"/>
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>Saved on:</xsl:text>
+        <xsl:value-of select="translate(o:LastSaved,'TZ',' ')"/>
+        <xsl:text>&#xa;</xsl:text>
+      </xsl:comment>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template match="ss:Table">
+    <xsl:element 
+         name="{concat($nsp,translate($topLevelName,
+                       '&#x20;&#x9;&#xA;',$wsSub))}" 
+         namespace="{$namespace}">
+      <xsl:apply-templates select="ss:Row[position(  ) >= $dataRowStart]"/>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="ss:Row">
+    <xsl:element
+        name="{concat($nsp,translate($rowName,
+                      '&#x20;&#x9;&#xA;',$wsSub))}" 
+        namespace="{$namespace}">
+      <xsl:for-each select="ss:Cell">
+        <xsl:variable name="pos" select="position(  )"/>
+   
+       <!-- Get the correct column name even if there were empty -->
+       <!-- cols in original spreadsheet -->     
+        <xsl:variable name="colName">
+          <xsl:choose>
+            <xsl:when test="@ss:Index and 
+                            $COLS[@ss:Index = current(  )/@ss:Index]">
+              <xsl:value-of 
+                  select="$COLS[@ss:Index = current(  )/@ss:Index]/ss:Data"/>
+            </xsl:when>
+            <xsl:when test="@ss:Index">
+              <xsl:value-of 
+                    select="$COLS[number(current(  )/@ss:Index)]/ss:Data"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$COLS[$pos]/ss:Data"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:if test="$includeEmpty or 
+                      translate(ss:Data,'&#x20;&#x9;&#xA;','')">
+          <xsl:element
+               name="{concat($nsp,translate($colName,
+                                      '&#x20;&#x9;&#xA;',$wsSub))}" 
+               namespace="{$namespace}">
+            <xsl:value-of select="ss:Data"/>
+          </xsl:element>
+        </xsl:if>
+        
+      </xsl:for-each>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="text(  )"/>
+  
+</xsl:stylesheet>
+<Table>
+  <Row>
+    <Date>20010817</Date>
+    <Price>61.88</Price>
+    <Volume>260163</Volume>
+  </Row>
+  <Row>
+    <Date>20010820</Date>
+    <Price>62.7</Price>
+    <Volume>241859</Volume>
+  </Row>
+  <Row>
+    <Date>20010821</Date>
+    <Price>60.78</Price>
+    <Volume>233989</Volume>
+  </Row>
+  <Row>
+    <Date>20010822</Date>
+    <Price>60.66</Price>
+    <Volume>387444</Volume>
+  </Row>
+</Table>
+XSLT 2.0
+<xsl:stylesheet version="2.0"
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+ xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+ xmlns:fn="http://www.w3.org/2005/02/xpath-functions" 
+ xmlns:o="urn:schemas-microsoft-com:office:office" 
+ xmlns:x="urn:schemas-microsoft-com:office:excel" 
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:ckbk="http://www.oreilly.com/xsltckbk">
+ 
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  
+  <!-- The name of the top level element -->
+  <xsl:param name="topLevelName" select=" 'Table' " as="xs:string"/>
+  <!-- The name of each row -->
+  <xsl:param name="rowName" select=" 'Row' " as="xs:string"/>
+  <!-- The namespace to use -->
+  <xsl:param name="namespace" select=" '' " as="xs:string"/>
+  <!-- The namespace prefix to use -->
+  <xsl:param name="namespacePrefix" select=" '' " as="xs:string" />
+  <!-- The character to use if column names contain white space -->
+  <xsl:param name="wsSub" select="'_'" as="xs:string"/>
+  <!--Determines which row contains the col names-->
+  <xsl:param name="colNamesRow" select="1" as="xs:integer"/>
+  <!--Determines which row the data begins -->
+  <xsl:param name="dataRowStart" select="2" as="xs:integer"/>
+  <!-- If false then cells with null or whitespace only content -->
+  <!-- will be skipped -->
+  <xsl:param name="includeEmpty" select="true( )" as="xs:boolean"/>
+  <!-- If false then author and creation meta data will not be put -->
+  <!-- into a comment-->
+  <xsl:param name="includeComment" select="true( )" as="xs:boolean"/>
+  
+  <!--Normalize the namespacePrefix -->
+  <xsl:variable name="nsp" as="xs:string" 
+       select="if (contains($namespacePrefix,':')) 
+         then concat(translate(substring-before($namespacePrefix,':'),' ',''),':')
+         else
+         if (matches($namespacePrefix,'\W'))
+         then concat(translate($namespacePrefix,' ',''),':') 
+         else '' "/>
+   
+  <!--Get the names of all the columns-->
+  <xsl:variable name="COLS" select="/*/*/*/ss:Row[$colNamesRow]/ss:Cell"/>
+  
+  <xsl:template match="o:DocumentProperties">
+    <xsl:if test="$includeComment">
+      <xsl:text>&#xa;</xsl:text>
+      <xsl:comment select="concat('&#xa;',
+                                  ckbk:comment(o:Company), 
+                                  ckbk:comment(o:Author),
+                                  ckbk:comment(o:Created,'Created on'),
+                                  ckbk:comment(o:LastAuthor,'Last Author'),
+                                  ckbk:comment(o:LastSaved,'Saved on'))"/>
+    </xsl:if>
+    <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+  
+  <xsl:template match="ss:Table">
+    <xsl:element
+        name="{ckbk:makeName($nsp,$topLevelName,$wsSub)}" 
+         namespace="{$namespace}">
+      <xsl:apply-templates select="ss:Row[position() ge $dataRowStart]"/>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="ss:Row">
+    <xsl:element
+        name="{ckbk:makeName($nsp,$rowName,$wsSub)}" 
+        namespace="{$namespace}">
+      <xsl:for-each select="ss:Cell">
+        <xsl:variable name="pos" select="position()"/>
+   
+       <!-- Get the correct column name even if there were empty -->
+       <!-- cols in original spreadsheet -->     
+        <xsl:variable name="colName" as="xs:string" 
+               select="if (@ss:Index and $COLS[@ss:Index = current()/@ss:Index]) 
+                       then $COLS[@ss:Index = current()/@ss:Index]/ss:Datae
+                       else
+                       if (@ss:Index)
+                       then $COLS[number(current()/@ss:Index)]/ss:Data
+                       else $COLS[$pos]/ss:Data"/>
+        
+        <xsl:if test="$includeEmpty or 
+                      translate(ss:Data,'&#x20;&#x9;&#xA;','')">
+          <xsl:element
+               name="{ckbk:makeName($nsp,$colName,$wsSub)}" 
+               namespace="{$namespace}">
+            <xsl:value-of select="ss:Data"/>
+          </xsl:element>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="text()"/>
+
+ <xsl:function name="ckbk:makeName" as="xs:string">
+  <xsl:param name="nsp" as="xs:string"/>
+  <xsl:param name="name" as="xs:string"/>
+  <xsl:param name="wsSub" as="xs:string"/>
+  <xsl:sequence select="concat($nsp,translate($name,
+                                      '&#x20;&#x9;&#xA;',$wsSub))"/>
+ </xsl:function>
+ 
+ <xsl:function name="ckbk:comment" as="xs:string">
+  <xsl:param name="elem"/>
+  <xsl:sequence select="ckbk:comment($elem, local-name($elem))"/>
+ </xsl:function>
+
+ <xsl:function name="ckbk:comment" as="xs:string">
+  <xsl:param name="elem"/>
+  <xsl:param name="label" as="xs:string"/>
+  <xsl:sequence select="if (normalize-space($elem)) 
+                                       then concat($label,': ',$elem,'&#xa;')
+                                       else '' "/>
+ </xsl:function>
+  
+</xsl:stylesheet>
+Discussion
+  <xsl:param name="WSNum" select="1"/>
+   
+  <xsl:variable name="COLS" 
+         select="/*/ss:Worksheet[$WSNum]/*/ss:Row[$colNamesRow]/ss:Cell"/>
+   
+  <xsl:template match="ss:Workbook">
+    <xsl:element name="{concat($nsp,translate($topLevelName,
+                      '&#x20;&#x9;&#xA;',$wsSub))}" 
+                 namespace="{$namespace}">
+      <xsl:apply-templates select="ss:Worksheet[number($WSNum)]/ss:Table"/>
+    </xsl:element>
+  </xsl:template>
+  <xsl:template match="ss:Workbook">
+    <xsl:element name="{concat($nsp,translate($topLevelName,
+                      '&#x20;&#x9;&#xA;',$wsSub))}" 
+                 namespace="{$namespace}">
+      <xsl:choose>
+        <xsl:when test="number($WSNum) > 0">
+          <xsl:apply-templates 
+               select="ss:Worksheet[number($WSNum)]/ss:Table">
+            <xsl:with-param name="COLS" 
+                 select="ss:Worksheet[number($WSNum)]
+                                         /*/ss:Row[$colNamesRow]/ss:Cell"/>
+          </xsl:apply-templates>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:for-each select="ss:Worksheet">
+            <xsl:element 
+                 name="{concat($nsp,translate(@ss:Name,
+                        '&#x20;&#x9;&#xA;',$wsSub))}"
+                 namespace="{$namespace}">
+              <xsl:apply-templates select="ss:Table">
+                <xsl:with-param name="COLS" 
+                                select="*/ss:Row[$colNamesRow]/ss:Cell"/>
+              </xsl:apply-templates>
+            </xsl:element>
+          </xsl:for-each>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="ss:Table">
+    <xsl:param name="COLS"/>
+      <xsl:apply-templates select="ss:Row[position(  ) >= $dataRowStart]">
+        <xsl:with-param name="COLS" select="$COLS"/>
+      </xsl:apply-templates>
+  </xsl:template>
+  
+  <xsl:template match="ss:Row">
+    <xsl:param name="COLS"/>
+   
+     <!-- The rest is the same as original ... -->
+     
+  </xsl:template>
+3) Generating XTM Topic Maps from UML 
+Models via XMI
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xslt [
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  
+=-->
+  <!-- XMI's high level organization constructs    -->
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  
+=-->
+  <!ENTITY FC "Foundation.Core">
+  <!ENTITY FX "Foundation.Extension_Mechanisms">
+  <!ENTITY FD "Foundation.Data_Types">
+  <!ENTITY MM "Model_Management.Model">
+  <!ENTITY ME "&FC;.ModelElement">
+   
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  
+=-->
+  <!-- Abbreviations for the basic elements of a XMI -->
+  <!-- file that are of most interest to this        -->
+  <!-- stylesheet.                                   -->
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  
+=-->
+  <!--Some generic kind of UML element -->
+  <!ENTITY ELEM "&FC;.Namespace.ownedElement">
+  <!--The association as a whole -->
+  <!ENTITY ASSOC "&FC;.Association">
+  <!--The connection part of the association-->
+  <!ENTITY CONN "&ASSOC;.connection">
+  <!--The ends of an association. -->
+  <!ENTITY END "&ASSOC;End">
+  <!ENTITY CONNEND "&CONN;/&END;">
+  <!ENTITY ENDTYPE "&END;.type">
+  <!-- A UML class -->
+  <!ENTITY CLASS "&FC;.Class">
+  <!--The name of some UML entity -->
+  <!ENTITY NAME "&FC;.ModelElement.name">
+  <!--A UML sterotype -->
+  <!ENTITY STEREOTYPE "&ME;.stereotype/&FX;.Stereotype">
+  <!--The place where UML documentation is stored in XMI. -->
+  <!-- We use for resource data -->
+  <!ENTITY TAGGEDVALUE 
+     "&ME;.taggedValue/&FX;.TaggedValue/&FX;.TaggedValue.value">
+  <!-- A Supertype relation (inheritance) -->
+  <!ENTITY SUPERTYPE "&FC;.Generalization.supertype">
+  <!ENTITY SUBTYPE "&FC;.Generalization.subtype">
+  <!ENTITY SUPPLIER "&FC;.Dependency.supplier">
+  <!ENTITY CLIENT "&FC;.Dependency.client">
+  <!ENTITY DEPENDENCY 
+      "/XMI/XMI.content/&MM;/&ELEM;/&FC;.Dependency">
+  <!ENTITY EXPRBODY 
+       "&FC;.Attribute.initialValue/&FD;.Expression/&FD;.Expression.body">
+  <!ENTITY ATTR "&CLASS;ifier.feature/&FC;.Attribute">
+  <!--Used for pointing at standard XTM PSIs -->
+  <!ENTITY TM.ORG "http://www.topicmaps.org/xtm/index.html">
+]>
+   
+<xsl:stylesheet version="1.0"  
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+                xmlns:xtm="http://www.topicmaps.org/xtm/1.0" 
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+   
+ <xsl:param name="termOnErr" select="true(  )"/>
+ 
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  <!--Index classes by their name -->
+  <xsl:key name="classKey" match="&CLASS;" use="@xmi.id"/>
+  <!-- Index Stereoptypes by both name and xmi.id -->
+  <xsl:key name="stereotypeKey" 
+                 match="&FX;.Stereotype" use="@xmi.id"/>
+  <xsl:key name="stereotypeKey"
+                 match="&FX;.Stereotype" use="&NAME;"/>
+  
+  <!-- The xmi ids of stereoptypes used to encode topic maps in UML  -->
+  <!-- We use these as an efficient means for checking if a sterotype-->
+  <!--  is attached to an element                                    -->
+   
+  <xsl:variable name="OCCURANCE_ID" 
+                select="key('stereotypeKey','occurance')/@xmi.id"/>
+  <xsl:variable name="RESOURCE_ID"
+                select="key('stereotypeKey','resource')/@xmi.id"/>
+  <xsl:variable name="TOPIC_ID"
+                select="key('stereotypeKey','topic')/@xmi.id"/>
+  <xsl:variable name="SUBJECT_ID"
+                select="key('stereotypeKey','subject')/@xmi.id"/>
+  <xsl:variable name="BASENAME_ID"
+                select="key('stereotypeKey','baseName')/@xmi.id"/>
+  <xsl:variable name="SCOPE_ID"
+                select="key('stereotypeKey','scope')/@xmi.id"/>
+  <xsl:variable name="VARIANT_ID"
+                select="key('stereotypeKey','variant')/@xmi.id"/>
+  <xsl:template match="/">
+    <xtm:topicMap>
+      <xsl:apply-templates mode="topics"/>
+      <xsl:apply-templates mode="associations"/>
+    </xtm:topicMap>
+  </xsl:template>
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =-->
+  <!-- UML Classes to TOPICS  Translation  -->
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =-->
+  
+  <xsl:template match="&ELEM;/&CLASS;" mode="topics">
+    <!-- Topics are modeled as classes whose    -->
+    <!-- stereotype is either empty or 'topic'  -->
+    <xsl:if test="not(&STEREOTYPE;/@xmi.idref) or 
+                        &STEREOTYPE;/@xmi.idref = $TOPIC_ID">
+      <xsl:variable name="topicId">
+        <xsl:call-template name="getTopicId">
+          <xsl:with-param name="class" select="."/>
+          <xsl:with-param name="prefix" select="''"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xtm:topic id="{$topicId}">
+        <!--This for-each is solely to change context to the optional -->
+        <!-- Core.Attribute attribute named 'subjectIdentityid' -->
+        <xsl:for-each select="&ATTR;[&NAME; = 'subjectIdentity']">
+          <xtm:subjectIdentity>
+            <xtm:subjectIdicatorRef xlink:href="{&EXPRBODY;}"/>
+          </xtm:subjectIdentity>
+        </xsl:for-each>
+        <xtm:baseName>
+          <xtm:baseNameString>
+            <xsl:value-of select="&NAME;"/>
+          </xtm:baseNameString>
+        </xtm:baseName>
+        <xsl:apply-templates select="." mode="getAlternateBaseNames"/>
+        <xsl:apply-templates select="." mode="getVariants"/>
+        <xsl:apply-templates select="." mode="getInstanceOf">
+          <xsl:with-param name="classId" select="@xmi.id"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates select="." mode="getOccurances"/>
+      </xtm:topic>
+    </xsl:if>
+  </xsl:template>
+  
+  <!-- Return the topic id of a topic class which is its id -->
+  <!-- attribute value or its name -->
+  <xsl:template name="getTopicId">
+    <xsl:param name="class"/>
+    <xsl:param name="prefix" select="'#'"/>
+    <xsl:for-each select="$class">
+      <xsl:choose>
+        <xsl:when test="&ATTR;/&NAME; = 'id' ">
+          <xsl:value-of select="&ATTR;[&NAME; = 'id']/&EXPRBODY;"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat($prefix,&NAME;)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <!-- Return the subject identity of a subject class which -->
+  <!-- is its subjectIdentity attribute value or its name -->
+  <xsl:template name="getSubjectIdentity">
+    <xsl:param name="class"/>
+    <xsl:for-each select="$class">
+      <xsl:choose>
+        <xsl:when test="&ATTR;/&NAME; = 'subjectIdentity' ">
+          <xsl:value-of select="&ATTR;[&NAME; =
+                                'subjectIdentity']&EXPRBODY;"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat('#',&NAME;)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:template>
+   
+  <!-- Return the resource identity of a resource class which -->
+  <!-- is either its resourceName attribute or its name -->
+  <xsl:template name="getResourceIdentity">
+    <xsl:param name="class"/>
+    <xsl:for-each select="$class">
+      <xsl:choose>
+        <xsl:when test="&ATTR;/&NAME; = 'resourceName' ">
+          <xsl:value-of select="&ATTR;[&NAME; =
+                                 'resourceName']/&EXPRBODY;"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="concat('#',&NAME;)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:template>
+<!-- Alternate base names are found by traversing UML -->
+  <!-- generalization relationships and looking for baseName -->
+  <!-- sterotypes -->
+  
+  <xsl:template match="&ELEM;/&CLASS;" mode="getAlternateBaseNames">
+    <xsl:variable name="xmiId" select="@xmi.id"/>
+    <xsl:for-each select="../&FC;.Generalization
+                          [&SUPERTYPE;/&CLASS;/@xmi.idref = $xmiId]">
+      <xsl:variable name="subtypeXmiId"
+                    select="&FC;.Generalization.subtype/&CLASS;/@xmi.idref"/>
+      <xsl:variable name="class" select="key('classKey',$subtypeXmiId)"/>
+      <xsl:if test="$class/&STEREOTYPE;/@xmi.idref = $BASENAME_ID">
+        <xsl:variable name="name" select="$class/&NAME;"/>
+        <xtm:baseName>
+          <xsl:call-template name="getScope">
+            <xsl:with-param name="class" select="$class"/>
+          </xsl:call-template>
+          <xtm:baseNameString>
+            <xsl:value-of select="substring-after($name,'::')"/>
+          </xtm:baseNameString>
+        </xtm:baseName>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:template>
+   
+  <!-- Variants are found by traversing UML -->
+  <!-- generalization relationships and looking for baseName -->
+  <!-- sterotypes -->
+   
+  <xsl:template match="&ELEM;/&CLASS;" mode="getVariants">
+    <xsl:variable name="xmiId" select="@xmi.id"/>
+    <xsl:for-each select="../&FC;.Generalization
+                           [&SUPERTYPE;/&CLASS;/@xmi.idref = $xmiId]">
+      <xsl:variable name="subtypeXmiId"
+             select="&FC;.Generalization.subtype/&CLASS;/@xmi.idref"/>
+      <xsl:variable name="variantClass"
+                    select="key('classKey',$subtypeXmiId)"/>
+      <xsl:if test="$variantClass/&STEREOTYPE;/@xmi.idref = $VARIANT_ID">
+        <xsl:variable name="name" select="$variantClass/&NAME;"/>
+        <xtm:variant>
+          <xtm:variantName>
+            <xsl:call-template name="resourceRep">
+              <xsl:with-param name="class" select="$variantClass"/>
+            </xsl:call-template>
+          </xtm:variantName>
+          <xtm:parameters>
+            <xsl:call-template name="getVariantParams">
+              <xsl:with-param name="class" select="$variantClass"/>
+            </xsl:call-template>
+          </xtm:parameters>
+          <!-- Change context to this variant to get nested variants, -->
+          <!-- if any. -->
+          <xsl:apply-templates select="$variantClass" mode="getVariants"/>
+        </xtm:variant>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:template>
+   
+  <!-- Gets a variant's parameters from   -->
+  <!-- the attibutes of the variant class -->
+  <xsl:template name="getVariantParams">
+    <xsl:param name="class"/>
+    <xsl:if test="not($class/&ATTR;)">
+      <xsl:message terminate="{$termOnErr}">
+      A variant must have at least one parameter.
+      </xsl:message>
+    </xsl:if>
+    <xsl:for-each select="$class/&ATTR;">
+      <!-- A parameter is either modeld as a subject indicator  --> 
+      <!-- or topic ref                                         -->
+      <xsl:choose>
+        <xsl:when test="&STEREOTYPE;/@xmi.idref = $SUBJECT_ID">
+            <xtm:subjectIdicatorRef xlink:href="{&EXPRBODY;}"/>
+        </xsl:when>
+        <xsl:otherwise>
+            <xtm:topicRef  xlink:href="{&EXPRBODY;}"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:template>
+<!-- Topic map occurances are modeled as associations to -->
+  <!-- classes containing resource references or data -->
+  <xsl:template match="&ELEM;/&CLASS;" mode="getOccurances">
+    <xsl:variable name="xmiId" select="@xmi.id"/>
+    <!--Search over the associations this class participates-->
+    <xsl:for-each 
+            select="../&ASSOC;
+                        [&CONN;/*/&ENDTYPE;/&CLASS;/@xmi.idref = $xmiId]">
+       <!-- Test for the presence of the occurance stereotype -->                     
+      <xsl:if test="&STEREOTYPE;/@xmi.idref = $OCCURANCE_ID">
+        <!--Get the id of the resource by looking at the other end -->
+        <!-- of the occurance association -->
+        <xsl:variable name="resourceId" 
+                      select="&CONN;/*/&ENDTYPE;/&CLASS;
+                                [@xmi.idref != $xmiId]/@xmi.idref"/>
+        <!-- Get the class representing the resource -->
+        <xsl:variable name="resourceClass" 
+                      select="key('classKey',$resourceId)"/>
+        <xtm:occurance>
+          <xsl:apply-templates select="." mode="getInstanceOf">
+            <xsl:with-param name="classId" select="$resourceId"/>
+          </xsl:apply-templates>
+          <!--TODO: Can't model this yet!
+            <xsl:call-template name="getScope">
+              <xsl:with-param name="class"/>
+            </xsl:call-template>
+          -->
+          <!-- We either have a resource ref or resource data. -->
+          <!-- If the class has a  resourceData attribute it   -->
+          <!-- is the later.                                   -->
+          <xsl:call-template name="resourceRep">
+            <xsl:with-param name="class" select="$resourceClass"/>
+          </xsl:call-template>
+        </xtm:occurance>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:template>
+   
+  <!-- This template determines how the resource is represented -->
+  <xsl:template name="resourceRep">
+      <xsl:param name="class" />
+      <xsl:variable name="resourceData">
+        <!--for-each to change context -->
+        <xsl:for-each select="$class/&ATTR;[&NAME; = 'resourceData']">
+          <xsl:choose>
+            <!--The resource data was encoded in the UML attr -->
+            <!--documentation                                 --> 
+            <xsl:when test="&TAGGEDVALUE;">
+              <xsl:value-of select="&TAGGEDVALUE;"/>
+            </xsl:when>
+            <!--The resource data was encoded in the UML attr value -->
+            <xsl:otherwise>
+              <xsl:value-of select="&EXPRBODY;"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each>
+      </xsl:variable>
+      <!-- if we found some resource data then use it. -->
+      <!-- Otherwise assume the user meant this to be a reference -->
+      <xsl:choose>
+        <xsl:when test="string($resourceData)">
+          <xtm:resourceData>
+            <xsl:value-of select="$resourceData"/>
+          </xtm:resourceData>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:variable name="resource">
+            <xsl:call-template name="getResourceIdentity">
+              <xsl:with-param name="class" select="$class"/>
+            </xsl:call-template>
+          </xsl:variable>
+          <xtm:resourceRef xlink:href="{$resource}"/>
+        </xsl:otherwise>
+      </xsl:choose>
+  </xsl:template>
+  <!-- This template finds if a topic class has any instanceOf -->
+  <!-- associations. -->
+  <xsl:template match="&ELEM;/&CLASS;" mode="getInstanceOf">
+    <xsl:param name="classId"/>
+    <!-- We loop of dependency relations and determine  -->
+    <!-- how the instance is represented-->
+    <xsl:for-each 
+            select="&DEPENDENCY;[&CLIENT;/&CLASS;/@xmi.idref = $classId]">
+      <xtm:instanceOf>
+        <xsl:variable name="instanceClass"
+             select="key('classKey',&SUPPLIER;/&CLASS;/@xmi.idref)"/>
+        <!-- Figure out if instance is modeled as a subject or a topic -->
+        <xsl:variable name="sterotypeId"
+                      select="$instanceClass/&STEREOTYPE;/@xmi.idref"/>
+        <xsl:choose>
+          <!-- This is the case of a subject indicator -->
+          <xsl:when test="$sterotypeId = $SUBJECT_ID">
+            <xsl:variable name="subjectIdentity">
+              <xsl:call-template name="getSubjectIdentity">
+                <xsl:with-param name="class" select="$instanceClass"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:if test="not(normalize-space($subjectIdentity))">
+              <xsl:message terminate="{$termOnErr}">
+              Subject with no identity!
+              </xsl:message>
+            </xsl:if>
+            <xtm:subjectIdicatorRef xlink:href="{$subjectIdentity}"/>
+          </xsl:when>
+          <!-- Otheriwse the instance is represented by a topic -->
+          <xsl:when test="not($sterotypeId) or $sterotypeId = $TOPIC_ID">
+            <xsl:variable name="topicId">
+              <xsl:call-template name="getTopicId">
+                <xsl:with-param name="class" select="$instanceClass"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:if test="not(normalize-space($topicId))">
+              <xsl:message terminate="{$termOnErr}">
+              Topic with no id!
+              </xsl:message>
+            </xsl:if>
+            <topicRef xlink:href="{$topicId}"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:message terminate="{$termOnErr}">
+              <xsl:text>instanceOf must point to a topic or a subject. </xsl:text>
+              <xsl:value-of select="$instanceClass/&NAME;"/>
+              <xsl:text> is a </xsl:text>
+              <xsl:value-of
+                   select="key('stereotypeKey',$sterotypeId)/&NAME;"/>
+              <xsl:text>.&#xa;</xsl:text>
+            </xsl:message>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xtm:instanceOf>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <xsl:template name="getScope">
+    <xsl:param name="class"/>
+    <xsl:variable name="classesAssociations"
+                  select="/*/XMI.content/*/&ELEM;
+                          /&ASSOC;
+                          [&CONN;/*/
+                          &FC;.AssociationEnd.type/
+                          &CLASS;/@xmi.idref = $class/@xmi.id]"/>
+    <xsl:variable name="scopeAssociations" 
+                  select="$classesAssociations[
+                          &FC;.ModelElement.stereotype/
+                          &FX;.Stereotype/
+                          @xmi.idref = $SCOPE_ID]"/>
+    <xsl:if test="$scopeAssociations">
+      <xtm:scope>
+        <xsl:for-each select="$scopeAssociations">
+          <xsl:variable name="targetClassId"
+               select="&CONN;/*/&ENDTYPE;/&CLASS;
+                              [@xmi.idref != $class/@xmi.id]/@xmi.idref"/>
+          <xsl:variable name="targetClass" 
+                        select="key('classKey',$targetClassId)"/>
+          <xsl:call-template name="getScopeRef">
+            <xsl:with-param name="class" select="$targetClass"/>
+          </xsl:call-template>
+        </xsl:for-each>
+      </xtm:scope>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template name="getScopeRef">
+    <xsl:param name="class"/>
+    <xsl:variable name="stereotypeId" 
+                  select="$class/&FC;.ModelElement.stereotype/
+                          &FX;.Stereotype/
+                          @xmi.idref"/>
+    <xsl:choose>
+      <xsl:when test="not($stereotypeId) or $stereotypeId = $TOPIC_ID">
+        <xsl:variable name="topidId">
+          <xsl:call-template name="getTopicId">
+            <xsl:with-param name="class" select="$class"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xtm:topicRef xlink:href="{$topidId}"/>
+      </xsl:when>
+      <xsl:when test="$stereotypeId = $SUBJECT_ID">
+        <xsl:variable name="subjectId">
+          <xsl:call-template name="getSubjectIdentity">
+            <xsl:with-param name="class" select="$class"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xtm:subjectIndicatorRef xlink:href="{$subjectId}"/>
+      </xsl:when>
+      <xsl:when test="$stereotypeId = $RESOURCE_ID">
+        <xsl:variable name="resourceId">
+          <xsl:call-template name="getResourceIdentity">
+            <xsl:with-param name="class" select="$class"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xtm:resourceRef xlink:href="{$resourceId}"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:message terminate="{$termOnErr}">
+        A Scope must be either a topicRef, subjectRef or resourceRef!
+        </xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="text(  )" mode="topics"/>
+  
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =-->
+  <!-- UML ASSOCIATION TO TOPIC ASSOCIATIONS -->
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =-->
+  <xsl:template match="&ASSOC;" mode="associations">
+    <!-- Only named UML associations are topic map associations -->
+    <xsl:if test="normalize-space(&NAME;)">
+      <xtm:asociation id="{&NAME;}">
+        <xtm:instanceOf>
+          <topicRef
+            xlink:href="{key('stereotypeKey',
+                             &STEREOTYPE;/@xmi.idref)/&NAME;}"/>
+        </xtm:instanceOf>
+        <xsl:for-each select="&CONNEND;">
+          <xtm:member>
+            <xtm:roleSpec>
+              <xtm:topicRef xlink:href="{&NAME;}"/>
+            </xtm:roleSpec>
+            <xsl:variable name="topicId">
+              <xsl:call-template name="getTopicId">
+                <xsl:with-param name="class"
+                        select="key('classKey',
+                                    &ENDTYPE;/&CLASS;/@xmi.idref)"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xtm:topicRef xlink:href="{$topicId}"/>
+          </xtm:member>
+        </xsl:for-each>
+      </xtm:asociation>
+    </xsl:if>
+  </xsl:template>
+   
+  <xsl:template match="&ELEM;/&FC;.Generalization"
+                mode="associations">
+   
+    <xsl:variable name="subClassId"
+                  select="&SUBTYPE;/&CLASS;/@xmi.idref"/>
+    <xsl:variable name="subClass"
+                  select="key('classKey',$subClassId)"/>
+    <xsl:variable name="superClassId"
+                  select="&SUPERTYPE;/&CLASS;/@xmi.idref"/>
+    <xsl:variable name="superClass"
+                  select="key('classKey',$superClassId)"/>
+    
+    <!-- If a generalization relation exists from a topic to a -->
+    <!-- topic we use this as an indication of a canonical     -->    
+    <!-- superclass-subclass relation, Ideally we would use an --> 
+    <!-- absence of a stereotype on the generalization but the -->
+    <!-- version of XMI I am using is not storing stereotype   -->
+    <!-- info for generalizations                              -->
+    <xsl:if test="(not($subClass/&STEREOTYPE;/@xmi.idref) or 
+                        $subClass/&STEREOTYPE;/@xmi.idref = $TOPIC_ID) and
+                        (not($superClass/&STEREOTYPE;/@xmi.idref) or 
+                        $superClass/&STEREOTYPE;/@xmi.idref = $TOPIC_ID)">
+                        
+      <xtm:asociation>
+        <xsl:variable name="id">
+          <xsl:choose>
+            <xsl:when test="normalize-space(&NAME;)">
+              <xsl:value-of select="&NAME;"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@xmi.id"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:attribute name="id">
+          <xsl:value-of select="$id"/>
+        </xsl:attribute>
+        
+        <xtm:instanceOf>
+          <subjectIndicatorRef 
+             xlink:href="&TM.ORG;#psi-superclass-subclass"/>
+        </xtm:instanceOf>
+        
+        <xtm:member>
+        
+          <xtm:roleSpec>
+            <xtm:subjectIndicatorRef 
+                                xlink:href="&TM.ORG;#psi-superclass"/>
+          </xtm:roleSpec>
+          
+          <xsl:variable name="superClassTopicId">
+            <xsl:call-template name="getTopicId">
+              <xsl:with-param name="class" select="$superClass"/>
+            </xsl:call-template>
+          </xsl:variable>
+          <xtm:topicRef xlink:href="{$superClassTopicId}"/>
+          
+        </xtm:member>
+        
+        <xtm:member>
+          <xtm:roleSpec>
+            <xtm:subjectIndicatorRef xlink:href="&TM.ORG;#psi-subclass"/>
+          </xtm:roleSpec>
+          
+          <xsl:variable name="subClassTopicId">
+            <xsl:call-template name="getTopicId">
+              <xsl:with-param name="class" select="$subClass"/>
+            </xsl:call-template>
+          </xsl:variable>
+   
+          <xtm:topicRef xlink:href="{$subClassTopicId}"/>
+        </xtm:member>
+        
+      </xtm:asociation>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template match="text()" mode="associations"/>
+  
+</xsl:stylesheet>
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =-->
+  <!-- UML ASSOCIATION TO TOPIC ASSOCIATIONS -->
+  <!--=  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =-->
+  <xsl:template match="&ASSOC;" mode="associations">
+    <!-- Only named UML associations are topic map associations -->
+    <xsl:if test="normalize-space(&NAME;)">
+      <xtm:asociation id="{&NAME;}">
+        <xtm:instanceOf>
+          <topicRef
+            xlink:href="{key('stereotypeKey',
+                             &STEREOTYPE;/@xmi.idref)/&NAME;}"/>
+        </xtm:instanceOf>
+        <xsl:for-each select="&CONNEND;">
+          <xtm:member>
+            <xtm:roleSpec>
+              <xtm:topicRef xlink:href="{&NAME;}"/>
+            </xtm:roleSpec>
+            <xsl:variable name="topicId">
+              <xsl:call-template name="getTopicId">
+                <xsl:with-param name="class"
+                        select="key('classKey',
+                                    &ENDTYPE;/&CLASS;/@xmi.idref)"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xtm:topicRef xlink:href="{$topicId}"/>
+          </xtm:member>
+        </xsl:for-each>
+      </xtm:asociation>
+    </xsl:if>
+  </xsl:template>
+   
+  <xsl:template match="&ELEM;/&FC;.Generalization"
+                mode="associations">
+   
+    <xsl:variable name="subClassId"
+                  select="&SUBTYPE;/&CLASS;/@xmi.idref"/>
+    <xsl:variable name="subClass"
+                  select="key('classKey',$subClassId)"/>
+    <xsl:variable name="superClassId"
+                  select="&SUPERTYPE;/&CLASS;/@xmi.idref"/>
+    <xsl:variable name="superClass"
+                  select="key('classKey',$superClassId)"/>
+    <xsl:if test="(not($subClass/&STEREOTYPE;/@xmi.idref) or 
+                   $subClass/&STEREOTYPE;/@xmi.idref = $TOPIC_ID) and
+                        (not($superClass/&STEREOTYPE;/@xmi.idref) or 
+                        $superClass/&STEREOTYPE;/@xmi.idref = $TOPIC_ID)">
+                        
+      <xtm:asociation>
+        <xsl:variable name="id">
+          <xsl:choose>
+            <xsl:when test="normalize-space(&NAME;)">
+              <xsl:value-of select="&NAME;"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@xmi.id"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:attribute name="id">
+          <xsl:value-of select="$id"/>
+        </xsl:attribute>
+        
+        <xtm:instanceOf>
+          <subjectIndicatorRef 
+             xlink:href="&TM.ORG;#psi-superclass-subclass"/>
+        </xtm:instanceOf>
+        
+        <xtm:member>
+        
+          <xtm:roleSpec>
+            <xtm:subjectIndicatorRef xlink:href="&TM.ORG;#psi-superclass"/>
+          </xtm:roleSpec>
+          
+          <xsl:variable name="superClassTopicId">
+            <xsl:call-template name="getTopicId">
+              <xsl:with-param name="class" select="$superClass"/>
+            </xsl:call-template>
+          </xsl:variable>
+          <xtm:topicRef xlink:href="{$superClassTopicId}"/>
+          
+        </xtm:member>
+        
+        <xtm:member>
+          <xtm:roleSpec>
+            <xtm:subjectIndicatorRef xlink:href="&TM.ORG;#psi-subclass"/>
+          </xtm:roleSpec>
+          
+          <xsl:variable name="subClassTopicId">
+            <xsl:call-template name="getTopicId">
+              <xsl:with-param name="class" select="$subClass"/>
+            </xsl:call-template>
+          </xsl:variable>
+   
+          <xtm:topicRef xlink:href="{$subClassTopicId}"/>
+        </xtm:member>
+        
+      </xtm:asociation>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template match="text(  )" mode="associations"/>
+  
+</xsl:stylesheet>
+
+<xtm:topicMap xmlns:xtm="http://www.topicmaps.org/xtm/1.0" xmlns:xlink="http://www.
+w3.org/1999/xlink">
+   <xtm:topic id="EN">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef 
+             xlink:href="http://www.topicmaps.org/xtm/1.0/language.xtm#en"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>EN</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="FR">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef 
+             xlink:href="http://www.topicmaps.org/xtm/1.0/language.xtm#fr"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>FR</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="myTomato">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef 
+             xlink:href="http://www.fed.gov/usda/doc/tomato.htm#gradeA"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>tomato</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:baseName>
+         <xtm:scope>
+            <xtm:topicRef xlink:href="#EN"/>
+         </xtm:scope>
+         <xtm:baseNameString>tomato</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:baseName>
+         <xtm:scope>
+            <xtm:topicRef xlink:href="#FR"/>
+         </xtm:scope>
+         <xtm:baseNameString>tomate</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:variant>
+         <xtm:variantName>
+            <xtm:resourceData>TMT</xtm:resourceData>
+         </xtm:variantName>
+         <xtm:parameters>
+            <xtm:topicRef xlink:href="cell_phone"/>
+            <xtm:topicRef xlink:href="TMT"/>
+         </xtm:parameters>
+      </xtm:variant>
+      <xtm:occurance>
+         <xtm:resourceRef xlink:href="#tomato.gif"/>
+      </xtm:occurance>
+   </xtm:topic>
+   <xtm:topic id="myConfite">
+      <xtm:baseName>
+         <xtm:baseNameString>tomate confite farcie aux douze saveurs
+         </xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:instanceOf>
+         <topicRef xlink:href="#desert"/>
+      </xtm:instanceOf>
+   </xtm:topic>
+   
+<!-- Elided -->
+   
+   <xtm:asociation id="tomato_confite_association">
+      <xtm:instanceOf>
+         <topicRef xlink:href="ingredient_of"/>
+      </xtm:instanceOf>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="anIngredient"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myTomato"/>
+      </xtm:member>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="aDish"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myConfite"/>
+      </xtm:member>
+   </xtm:asociation>
+   <xtm:asociation id="caramels_confite">
+      <xtm:instanceOf>
+         <topicRef xlink:href="ingredient_of"/>
+      </xtm:instanceOf>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="anIngredient"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myCarmel"/>
+      </xtm:member>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:topicRef xlink:href="aDish"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="myConfite"/>
+      </xtm:member>
+   </xtm:asociation>
+<!-- Elided -->
+</xtm:topicMap>
+4) Generating Web Sites from XTM Topic 
+Maps
+
+Sorting algorithms
+<topic id="sort">
+     ...
+</topic>
+<association>
+     <instanceOf>
+          <topicRef xlink:href="#_class-subclass"/>
+     </instanceOf>
+     <member>
+          <roleSpec>
+               <topicRef xlink:href="#_superclass"/>
+          </roleSpec>
+          <topicRef xlink:href="#sort"/>
+     </member>
+     <member>
+          <roleSpec>
+               <topicRef xlink:href="#_subclass"/>
+          </roleSpec>
+          <topicRef xlink:href="#simplesort"/>
+          <topicRef xlink:href="#in-place sort"/>
+          <topicRef xlink:href="#heapsort"/>
+          <topicRef xlink:href="#adaptivesort"/>
+          <topicRef xlink:href="#distributionsort"/>
+          <topicRef xlink:href="#mergesort"/>
+     </member>
+</association>
+
+<association>
+     <instanceOf>
+          <topicRef xlink:href="#_class-subclass"/>
+     </instanceOf>
+     <member>
+          <roleSpec>
+               <topicRef xlink:href="#_superclass"/>
+          </roleSpec>
+          <topicRef xlink:href="#in-place sort"/>
+     </member>
+     <member>
+          <roleSpec>
+               <topicRef xlink:href="#_subclass"/>
+          </roleSpec>
+          <topicRef xlink:href="#quicksort"/>
+          <topicRef xlink:href="#insertionsort"/>
+          <topicRef xlink:href="#selsort"/>
+          <topicRef xlink:href="#dimincrsort"/>
+     </member>
+</association>
+<topic id="insertionsort">
+     <subjectIdentity>
+          <subjectIndicatorRef 
+              xlink:href="http://www.nist.gov/dads/HTML/insertsrt.html"/>
+     </subjectIdentity>
+     <baseName>
+          <baseNameString>insertion sort</baseNameString>
+     </baseName>
+     <baseName>
+          <scope>
+               <topicRef xlink:href="#also-known-as"/>
+          </scope>
+          <baseNameString>linear insertion sort</baseNameString>
+     </baseName>
+     <occurrence>
+          <instanceOf>
+               <topicRef xlink:href="#description"/>
+          </instanceOf>
+          <scope>
+               <topicRef xlink:href="#nist"/>
+          </scope>
+          <resourceData>Sort by repeatedly taking the next item and inserting it 
+into
+          the final data structure in its proper order with respect to items 
+already
+          inserted. </resourceData>
+     </occurrence>
+     <occurrence>
+          <instanceOf>
+               <topicRef xlink:href="#demo"/>
+          </instanceOf>
+          <resourceRef xlink:href=
+          "http://www.cosc.canterbury.ac.nz/people/mukundan/dsal/ISort.html"/>
+     </occurrence>
+     <occurrence>
+          <instanceOf>
+               <topicRef xlink:href="#code"/>
+          </instanceOf>
+          <scope>
+               <topicRef xlink:href="#fortran"/>
+          </scope>
+          <resourceRef 
+          xlink:href="http://gams.nist.gov/serve.cgi/Module/TOMS/505/8547"/>
+     </occurrence>
+     <occurrence>
+          <instanceOf>
+               <topicRef xlink:href="#code"/>
+          </instanceOf>
+          <scope>
+               <topicRef xlink:href="#java"/>
+          </scope>
+          <resourceRef xlink:href=
+          "http://www.cs.ubc.ca/spider/harrison/Java/InsertionSortAlgorithm.java"/>
+     </occurrence>
+</topic>
+Programming languages
+<topic id="java">
+     <subjectIdentity>
+          <subjectIndicatorRef 
+          xlink:href="http://foldoc.doc.ic.ac.uk/foldoc/foldoc.cgi?query=java"/>
+     </subjectIdentity>
+     <instanceOf>
+          <topicRef xlink:href="#plang"/>
+     </instanceOf>
+     <baseName>
+          <baseNameString>Java</baseNameString>
+     </baseName>
+     <occurrence>
+          <instanceOf>
+               <topicRef xlink:href="#definition"/>
+          </instanceOf>
+          <scope>
+               <topicRef xlink:href="#cnet"/>
+          </scope>
+          <resourceData>Sun Microsystems' Java is a programming language for adding 
+animation and other action to Web sites. The small applications (called applets) 
+that Java creates can play back on any graphical system that's Web-ready, but your 
+Web browser has to be Java-capable for you to see it. According to Sun's 
+description, Java is a "simple, object-oriented, distributed, interpreted, robust, 
+secure, architecture-neutral, portable, high-performance, multithreaded, dynamic, 
+buzzword-compliant, general-purpose programming language." </resourceData>
+     </occurrence>
+</topic>
+ 
+Root topic
+<topic id="default">
+     <subjectIdentity>
+          <subjectIndicatorRef xlink:href="#map"/>
+     </subjectIdentity>
+     <baseName>
+          <baseNameString>Sort algorithms home</baseNameString>
+     </baseName>
+     <occurrence>
+          <instanceOf>
+               <topicRef xlink:href="#definition"/>
+          </instanceOf>
+          <resourceData><![CDATA[ This web site covers the subject of 
+          algorithms and specifically sorting algorithms.<br><br>
+          It was created for the purposes of a CTW recipe for the 
+          O'Reilly XSLT Cookbook.]]> </resourceData>
+     </occurrence>
+</topic>
+Page elements and layout
+<xsl:variable name="root"
+   select="//topic[subjectIdentity/subjectIndicatorRef/@xlink:href
+                                          = concat('#',/topicMap/@id)]"/>
+<xsl:key
+  name = "subjectIndicator" 
+  match = "topic" 
+  use = "subjectIdentity/subjectIndicatorRef/@xlink:href" />
+   
+<xsl:variable name="root"
+             select="key('subjectIndicator',concat('#',/topicMap/@id))"/>
+<xsl:template match="/">
+     <xsl:call-template name="root-page">
+          <xsl:with-param name="this" select="$root"/>
+     </xsl:call-template>
+     <xsl:call-template name="algorithm-page">
+          <xsl:with-param name="this" select="key('topicByID','#sort')"/>
+     </xsl:call-template>
+     <xsl:for-each select="key('instanceOf','#plang')">
+          <xsl:call-template name="plang-page"/>
+     </xsl:for-each>
+</xsl:template>
+<xsl:key
+  name = "instanceOf" 
+  match = "topic" 
+  use = "instanceOf/topicRef/@xlink:href" />
+<xsl:key
+  name = "instanceOf" 
+  match = "topic" 
+  use = "instanceOf/topicRef/@xlink:href" />
+<xsl:template name="page">
+  <xsl:param name="this"/>
+  <xsl:param name="content"/>
+  <redirect:write select="concat($out-dir,$this/@id,'.html')">
+  <HTML>
+    <HEADER>
+      <TITLE>
+        <xsl:apply-templates select="$this" mode="label"/>
+      </TITLE>
+    </HEADER>
+    <BODY>
+    <table width="1000" height="100%" cellspacing="0" cellpadding="10">
+    <tr>
+      <td width="250" height="20" bgcolor="#ffddbb" align="center">
+        <xsl:apply-templates select="$root" mode="link"/>
+      </td>
+      <td width="750" height="20" valign="top" bgcolor="#eeeeee">
+        <table cellspacing="10">
+          <tr>
+            <xsl:for-each select="key('instanceOf','#plang')">
+               <td background="grey">
+                <xsl:apply-templates select="." mode="link"/>
+              </td>  
+            </xsl:for-each>
+          </tr>
+        </table>  
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" bgcolor="#eeeeee">
+        <xsl:call-template name="sitemap">
+          <xsl:with-param name="classRef">#sort</xsl:with-param>
+          <xsl:with-param name="current" select="$this/@id"/>
+        </xsl:call-template>
+      </td>
+      <td valign="top" bgcolor="#ffeedd" >
+       <xsl:copy-of select="$content"/>
+      </td>
+    </tr></table>
+    </BODY>
+  </HTML>
+  </redirect:write>
+</xsl:template>
+<xsl:template match="topic" mode="label">
+     <xsl:value-of select="baseName[not(scope)]/baseNameString"/>
+</xsl:template>
+<xsl:template match="topic" mode="link">
+  <a href="{@id}.html">
+    <xsl:value-of select="baseName[not(scope)]/baseNameString"/>
+  </a>
+</xsl:template>
+<xsl:template match="topic" mode="indicator">
+  <a href="{subjectIdentity/subjectIndicatorRef/@xlink:href}">
+    <xsl:value-of select="baseName[not(scope)]/baseNameString"/>
+  </a>
+</xsl:template>
+<xsl:template name="sitemap">
+  <xsl:param name="classRef"/>
+  <xsl:param name="current"/>
+  <xsl:variable name="topic" select="key('topicByID',$classRef)"/>
+  <xsl:choose>
+    <xsl:when test="$topic/@id=$current">
+      <span class="A">
+       <xsl:apply-templates select="$topic" mode="label"/>
+      </span>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:apply-templates select="$topic" mode="link"/>
+    </xsl:otherwise>
+  </xsl:choose>
+  <xsl:variable name="aref" select="key('classAssoc',$classRef)"/>
+  <xsl:if test="$aref">
+    <ul>
+      <xsl:for-each 
+           select="$aref/member
+                    [roleSpec/topicRef/@xlink:href=
+                     '#_subclass']/topicRef">
+        <li>
+        <xsl:call-template name="sitemap">
+          <xsl:with-param name="classRef" select="@xlink:href"/>
+          <xsl:with-param name="current" select="$current"/>
+        </xsl:call-template>
+        </li>
+      </xsl:for-each>
+    </ul>
+  </xsl:if>
+</xsl:template>
+<xsl:key
+  name = "classAssoc" 
+  match = "association[instanceOf/topicRef/@xlink:href=
+                       '#_class-subclass']" 
+  use = "member[roleSpec/topicRef/@xlink:href=
+                '#_superclass']/topicRef/@xlink:href" />
+<xsl:key
+  name = "subClassAssoc" 
+  match = "association[instanceOf/topicRef/@xlink:href=
+                        '#_class-subclass']" 
+  use = "member[roleSpec/topicRef/@xlink:href=
+                '#_subclass']/topicRef/@xlink:href" />
+<xsl:template name="root-page">
+  <xsl:param name="this"/>
+  <xsl:call-template name="page">
+    <xsl:with-param name="this" select="$this"/>
+    <xsl:with-param name="content">
+      <font size="+1">
+        <xsl:apply-templates 
+             select="$this/occurrence
+                       [instanceOf/topicRef/@xlink:href='#description']"/>
+      </font>
+    </xsl:with-param>
+  </xsl:call-template>
+</xsl:template>
+<xsl:template name="plang-page">
+  <xsl:param name="this" select="."/>
+  <xsl:call-template name="page">
+    <xsl:with-param name="this" select="$this"/>
+    <xsl:with-param name="content">
+      <font size="+2">
+        <xsl:apply-templates select="$this" mode="label"/>, a
+        <xsl:apply-templates mode="label"
+       select="key('topicByID',$this/instanceOf/topicRef/@xlink:href)" />.
+      </font>
+      <br/><br/>
+      <xsl:apply-templates select="$this/subjectIdentity"/>
+      <xsl:apply-templates
+       select="$this/occurrence
+                      [instanceOf/topicRef/@xlink:href='#description']"/>
+      <xsl:variable name="codes" 
+         select="key('plang-codes',concat('#',$this/@id))"/>
+      <xsl:if test="$codes">
+        <span>Sorting algorithms implemented in 
+          <xsl:apply-templates select="$this" mode="label"/>:</span>
+        <ul>
+          <xsl:for-each select="$codes">
+            <li>
+              <a href="{resourceRef/@xlink:href}">
+                 <xsl:value-of select="resourceRef/@xlink:href"/>
+              </a>
+              [<xsl:apply-templates select=".." mode="link"/>]<br/>
+            </li>
+          </xsl:for-each>
+        </ul>
+        <br/><br/>
+      </xsl:if>
+    </xsl:with-param>
+  </xsl:call-template>
+</xsl:template>
+<xsl:key 
+ name="plang-codes" 
+ match="occurrence" 
+ use="scope/topicRef/@xlink:href"/>
+<xsl:template name="algorithm-page">
+  <xsl:param name="this"/>
+  <xsl:call-template name="page">
+    <xsl:with-param name="this" select="$this"/>
+    <xsl:with-param name="content">
+      <font size="+2"><xsl:apply-templates select="$this" mode="label"/>
+        <xsl:if test="$this/baseName
+                           [scope/topicRef/@xlink:href='#also-known-as']">
+          [<xsl:value-of select="$this/baseName
+            [scope/topicRef/@xlink:href='#also-known-as']
+           /baseNameString"/>]
+        </xsl:if>
+      </font>
+      <br/><br/>
+      <xsl:apply-templates select="$this/subjectIdentity"/>
+      <xsl:variable name="superclasses"
+        select="key('subClassAssoc',concat('#',$this/@id))
+        member[roleSpec/topicRef/@xlink:href='#_superclass']/topicRef"/>
+      <xsl:if test="$superclasses">
+        Inherits from 
+        <xsl:for-each select="$superclasses">
+          <xsl:apply-templates 
+            select="key('topicByID',@xlink:href)" mode="link"/>
+            <xsl:if test="position(  ) != last(  )">, </xsl:if>
+        </xsl:for-each>
+        <br/><br/>
+      </xsl:if>
+      <xsl:apply-templates
+        select="$this/occurrence
+                       [instanceOf/topicRef/@xlink:href='#description']"/>
+      <xsl:variable name="demos" 
+         select="$this/occurrence
+                       [instanceOf/topicRef/@xlink:href='#demo']"/>
+      <xsl:if test="$demos">
+        <span>Demonstrations: </span>
+        <ul>
+          <xsl:for-each select="$demos">
+            <li>
+              <a href="{resourceRef/@xlink:href}"><
+               xsl:value-of select="resourceRef/@xlink:href"/>
+              </a><br/>
+            </li>
+          </xsl:for-each>
+        </ul>
+        <br/>
+      </xsl:if>
+      <xsl:variable name="codes" 
+          select="$this/occurrence[instanceOf/topicRef/@xlink:href='#code']"/>
+      <xsl:if test="$codes">
+        <span>Implementations and sample code: </span>
+        <ul>
+          <xsl:for-each select="$codes">
+            <li>
+              <a href="{resourceRef/@xlink:href}">
+                <xsl:value-of select="resourceRef/@xlink:href"/>
+              </a>
+              [<xsl:apply-templates mode="link"
+               select="key('topicByID',scope/topicRef/@xlink:href)"/>]
+            </li>
+          </xsl:for-each>
+        </ul>
+        <br/>
+      </xsl:if>
+      <xsl:variable name="subclasses" 
+          select="key('classAssoc',
+                      concat('#',$this/@id))/member
+                                           [roleSpec/topicRef/@xlink:href=
+                                            '#_subclass']/topicRef"/>
+      <xsl:if test="$subclasses">
+        See also 
+        <xsl:value-of select="$this/baseName[not(scope)]/baseNameString"/>
+        variants: 
+        <xsl:for-each select="$subclasses">
+          <xsl:apply-templates 
+               select="key('topicByID',@xlink:href)" mode="link"/>
+          <xsl:if test="position(  ) != last(  )">, </xsl:if>
+        </xsl:for-each>
+      </xsl:if>
+    </xsl:with-param>
+  </xsl:call-template>
+  <xsl:variable name="aref"
+                select="key('classAssoc',concat('#',$this/@id))"/>
+  <xsl:for-each
+    select="$aref/member
+             [roleSpec/topicRef/@xlink:href='#_subclass']/topicRef">
+    <xsl:call-template name="algorithm-page">
+      <xsl:with-param name="this" select="key('topicByID',@xlink:href)"/>
+    </xsl:call-template>
+  </xsl:for-each>
+</xsl:template>
+     
+     
+     
+     
+5) Serving SOAP Documentation from WSDL
+#!c:/perl/bin/perl 
+print "Content-type: text/html\n\n" ;
+system "saxon StockServices.wsdl wsdlServiceList.xslt" ;
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet 
+     version="1.0"
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    exclude-result-prefixes="wsdl soap http mime">
+   
+  <xsl:output method="html"/>
+  
+  <xsl:template match="/">
+      <html>
+      <head>
+        <title>Available Services at ACME Web Services, Inc.</title>
+        <xsl:comment>WSDL Documentation: Generated by wsdlServiceList.xslt
+        </xsl:comment>
+      </head>
+      <body>
+        <xsl:apply-templates/> 
+      </body>
+    </html>
+   
+  </xsl:template>
+   
+  <xsl:template match="wsdl:definitions">
+    <h1>Available Services at ACME Web Services, Inc.</h1>
+    <br/>
+    <form name="QueryServiceForm" method="post" action="QueryService.pl">
+    <table>
+      <tbody>
+        <tr>
+          <td>Services</td>
+          <td>
+            <select name="service">
+              <option value="ALL">ALL</option>
+              <xsl:apply-templates select="wsdl:service"/>
+            </select>   
+          </td>
+        </tr>
+         <tr>
+          <td>Ports</td>
+          <td>
+            <select name="port">
+              <option value="ALL">ALL</option>
+              <xsl:apply-templates select="wsdl:service/wsdl:port"/>
+            </select>   
+          </td>
+        </tr>
+         <tr>
+          <td>Bindings</td>
+          <td>
+            <select name="binding">
+              <option value="ALL">ALL</option>
+              <xsl:apply-templates select="wsdl:binding"/>
+            </select>   
+          </td>
+        </tr>
+         <tr>
+          <td>Port Types</td>
+          <td>
+            <select name="portType">
+              <option value="ALL">ALL</option>
+              <xsl:apply-templates select="wsdl:portType"/>
+            </select>   
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br/>
+    <button type="submit" name="submit">Query Services</button> 
+    </form>
+  </xsl:template>
+   
+<xsl:template match="wsdl:service | wsdl:port | wsdl:binding | wsdl:portType">
+  <option value="{@name}"><xsl:value-of select="@name"/></option>
+</xsl:template>      
+   
+</xsl:stylesheet>
+#!/perl/bin/perl
+   
+use warnings;
+   
+use strict;
+use CGI qw(:standard);
+   
+my $query = new CGI ;
+   
+my $service = $query->param('service');
+my $port = $query->param('port');
+my $binding = $query->param('binding');
+my $portType = $query->param('portType');
+   
+print $query->header('text/html');
+   
+system "saxon StockServices.wsdl QueryService.xslt service=$service port=$port
+binding=$binding portType=$portType"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xslt [
+  <!ENTITY TNSPREFIX "'acme:'">
+]>
+<xsl:stylesheet 
+     version="1.0"
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+     xmlns:xsd="http://www.w3.org/2000/10/XMLSchema"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
+   
+<!--Query parameters -->
+<xsl:param name="service" select="'ALL'"/>
+<xsl:param name="port" select="'ALL'"/>
+<xsl:param name="binding" select="'ALL'"/>
+<xsl:param name="portType" select="'ALL'"/>
+   
+<!-- A technique (or a hack) to make variables empty   -->
+<!-- if the corrsponding parameter is ALL or otherwise -->
+<!-- the concatenation of &TNSPREFIX and the paramter  -->
+<!-- For example, number($service = 'ALL') * 99999 + 1 -->
+<!-- will be 1 if $service is not equal to 'ALL' but   -->
+<!-- 100000 if it is and hence beyond the lenght of the--> 
+<!-- string which causes substring to return empty     -->
+<!-- This is all to simplify cross-referencing.        -->
+<xsl:variable name="serviceRef" 
+              select="substring(concat(&TNSPREFIX;,$service),
+                                number($service = 'ALL') * 99999 + 1)"/>
+<xsl:variable name="portRef"
+              select="substring(concat(&TNSPREFIX;,$port),
+                                number($port = 'ALL') * 99999 + 1)"/>
+<xsl:variable name="bindingRef"
+              select="substring(concat(&TNSPREFIX;,$binding),
+                                number($binding = 'ALL') * 99999 + 1)"/>
+<xsl:variable name="portTypeRef"
+              select="substring(concat(&TNSPREFIX;,$portType),
+                                number($portType = 'ALL') * 99999 + 1)"/>
+   
+<!-- These keys simplify and speed up querying -->              
+<xsl:key name="bindings_key" 
+         match="wsdl:binding" use="concat(&TNSPREFIX;,@name)"/>
+<xsl:key name="portType_key"
+         match="wsdl:portType" use="concat(&TNSPREFIX;,@name)"/>
+   
+<xsl:output method="html"/>
+   
+  <xsl:template match="/">
+      <html>
+      <head>
+        <title>ACME Web Services, Inc. Query Result</title>
+        <xsl:comment>WSDL Documentation: Generated by wsdlServiceList.xslt
+        </xsl:comment>
+      </head>
+      <body>
+        <xsl:apply-templates select="wsdl:definitions"/> 
+      </body>
+    </html>
+</xsl:template>
+<xsl:template match="wsdl:definitions">
+   <xsl:variable name="result">
+        <!-- Query services that match the query parameters             -->
+        <!-- The portType match is the only complicated part            -->
+        <!-- We need to traverse form the service's port, to the binding-->
+        <!-- and then to the binding's type to do the match. Hence      -->
+        <!-- the nested key(  ) calls                                     -->
+        <xsl:apply-templates 
+             select="wsdl:service[
+                    (not($serviceRef)  or @name = $service) and
+                    (not($portRef)     or wsdl:port/@name = $port) and
+                    (not($bindingRef)  or wsdl:port/@binding = $bindingRef) 
+                    and
+                    (not($portTypeRef) or key('portType_key',
+                                               key('bindings_key',
+                                                 wsdl:port/@binding)/@type)
+                                                    /@name = $portType)]"/>
+  </xsl:variable>
+  <xsl:choose>
+    <xsl:when test="normalize-space($result)">
+      <xsl:copy-of select="$result"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <p><b>No Matching Services Found</b></p>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+<xsl:template match="wsdl:service" mode="display">
+<h1><xsl:value-of select="@name"/></h1>
+<p><xsl:value-of select="wsdl:documentation"/></p>
+<table border="1" cellpadding="5" cellspacing="0"  width="600">
+  <tbody>
+    <xsl:apply-templates 
+         select="wsdl:port[(not($portRef) or @name = $port) and
+                           (not($bindingRef) or @binding = $bindingRef)]" 
+         mode="display"/>
+  </tbody>
+</table>
+</xsl:template>
+<xsl:template match="wsdl:port" mode="display">
+    <tr>
+      <td style="font-weight:bold" colspan="2" align="center">Port</td>
+    </tr>
+    <tr>
+      <td colspan="2"><h3><xsl:value-of select="@name"/></h3></td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold" width="50">Binding</td>
+      <td><xsl:value-of select="substring-after(@binding,':')"/></td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold" width="50">Address</td>
+      <td><xsl:value-of select="soap:address/@location"/></td>
+    </tr>
+    <tr>
+      <th colspan="2" align="center">Operations</th>
+    </tr>
+    <xsl:apply-templates select="key('bindings_key',@binding)" mode="display"/>
+</xsl:template>
+   
+<xsl:template match="wsdl:binding" mode="display">
+  <xsl:apply-templates select="key('portType_key',@type)" mode="display">
+    <xsl:with-param name="operation" select="wsdl:operation/@name"/>
+  </xsl:apply-templates>
+</xsl:template>
+   
+<xsl:template match="wsdl:portType" mode="display">
+  <xsl:param name="operation"/>
+  <xsl:for-each select="wsdl:operation[@name = $operation]">
+    <tr>
+      <td colspan="2"><h3><xsl:value-of select="@name"/></h3></td>
+    </tr>
+    <xsl:if test="wsdl:input">
+      <tr>
+        <td style="font-weight:bold" width="50">Input</td>
+        <td><xsl:value-of select="substring-after(wsdl:input/@message,':')"/></td>
+      </tr>
+      <xsl:variable name="msgName" 
+          select="substring-after(wsdl:input/@message,':')"/>
+      <xsl:apply-templates 
+          select="/*/wsdl:message[@name = $msgName]" mode="display"/>
+    </xsl:if>
+    <xsl:if test="wsdl:output">
+      <tr>
+        <td style="font-weight:bold" width="50">Output</td>
+        <td><xsl:value-of select="substring-after(wsdl:output/@message,':')"/></td>
+      </tr>
+      <xsl:variable name="msgName" 
+          select="substring-after(wsdl:output/@message,':')"/>
+      <xsl:apply-templates 
+          select="/*/wsdl:message[@name = $msgName]" mode="display"/>
+   </xsl:if>
+  </xsl:for-each>
+</xsl:template>
+   
+<xsl:template match="wsdl:message" mode="display">
+  <xsl:variable name="dataType" 
+      select="substring-after(wsdl:part[@name='body']/@element,':')"/>
+  <tr>
+    <td colspan="2">
+      <xsl:apply-templates  
+          select="/*/wsdl:types/*/*[@name=$dataType]" mode="display">
+        <xsl:with-param name="initial-newline" select="false(  )"/>
+      </xsl:apply-templates>
+    </td>
+  </tr>
+</xsl:template>
+<xsl:template match="*" mode="display">
+  <xsl:param name="initial-newline" select="true(  )"/>
+  
+  <xsl:if test="$initial-newline">
+    <xsl:call-template name="newline"/>
+  </xsl:if>
+  <!-- open tag -->
+  <a>&lt;</a>
+  <a><xsl:value-of select="name(.)" /> </a>
+  
+  <!-- Output attributes -->
+  <xsl:for-each select="@*">
+    <a><xsl:text> </xsl:text><xsl:value-of select="name(.)" />  </a>
+    <a>=&quot;</a>
+    <xsl:value-of select="." />
+    <a>&quot;</a>
+  </xsl:for-each>
+  
+  <xsl:choose>
+       <xsl:when test="child::node(  )">
+        <!-- close start tag -->
+        <a>&gt;</a>
+        <xsl:apply-templates  mode="display"/>
+        <xsl:call-template name="newline"/>
+        <!-- closing tag -->
+        <a>&lt;</a>
+        <a>/<xsl:value-of select="name(.)" /></a>
+       </xsl:when>
+       <xsl:otherwise>
+            <a>/</a>
+       </xsl:otherwise>
+  </xsl:choose>
+  <a>&gt;</a>
+</xsl:template>
+   
+<!-- Add a newline and then indent based on depth within the schema -->
+<xsl:template name="newline">
+     <br/>
+     <xsl:for-each select="ancestor::xsd:*[not(self::xsd:schema)]">
+          <xsl:text>&#160;&#160;&#160;&#160;</xsl:text>
+     </xsl:for-each>
+</xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+<definitions name="StockServices" targetNamespace="http://acme.com/services.wsdl" 
+xmlns:acme="http://acme.com/services.wsdl" xmlns:xsd1="http://acme.com/stockquote.
+xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.
+xmlsoap.org/wsdl/">
+  <types>
+    <schema targetNamespace="http://acme.com/services.xsd" 
+      xmlns="http://www.w3.org/2000/10/XMLSchema">
+      <element name="Ticker">
+        <complexType>
+          <all>
+            <element name="tickerSymbol" type="string"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="TradePrice">
+        <complexType>
+          <all>
+            <element name="price" type="float"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="CompanyName">
+        <complexType>
+          <all>
+            <element name="company" type="string"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="ServicesInfo">
+        <complexType>
+          <sequence>
+            <element name="Services">
+              <complexType>
+                <sequence>
+                  <element name="Service" type="string" minOccurs="0" 
+                           maxOccurs="unbounded"/>
+                </sequence>
+              </complexType>
+            </element>
+            <element name="Ports">
+              <complexType>
+                <sequence>
+                  <element name="Port" type="string" minOccurs="0" 
+                           maxOccurs="unbounded"/>
+                </sequence>
+              </complexType>
+            </element>
+            <element name="Bindings">
+              <complexType>
+                <sequence>
+                  <element name="Binding" type="string" minOccurs="0" 
+                           maxOccurs="unbounded"/>
+                </sequence>
+              </complexType>
+            </element>
+            <element name="PortTypes">
+              <complexType>
+                <sequence>
+                  <element name="Port" type="string" minOccurs="0" 
+                           maxOccurs="unbounded"/>
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ServicesQuery">
+        <complexType>
+          <all>
+            <element name="Service" type="string"/>
+            <element name="Port" type="string"/>
+            <element name="Binding" type="string"/>
+            <element name="PortType" type="string"/>
+          </all>
+        </complexType>
+      </element>
+      <element name="ServicesResponse">
+        <complexType>
+          <sequence>
+            <any/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="GetLastTradePriceInput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+  <message name="GetLastTradePriceOutput">
+    <part name="body" element="xsd1:TradePrice"/>
+  </message>
+  <message name="GetCompanyInput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+  <message name="GetCompanyOutput">
+    <part name="body" element="xsd1:CompanyName"/>
+  </message>
+  <message name="GetTickerInput">
+    <part name="body" element="xsd1:CompanyName"/>
+  </message>
+  <message name="GetTickerOutput">
+    <part name="body" element="xsd1:Ticker"/>
+  </message>
+  <message name="GetServicesInput"/>
+  <message name="GetServicesOutput">
+    <part name="body" element="xsd1:ServicesInfo"/>
+  </message>
+  <message name="QueryServicesInput">
+    <part name="body" element="xsd1:ServicesQuery"/>
+  </message>
+  <message name="QueryServicesOutput">
+    <part name="body" element="xsd1:ServicesRespose"/>
+  </message>
+  <portType name="StockPortType">
+    <operation name="GetLastTradePrice">
+      <input message="acme:GetLastTradePriceInput"/>
+      <output message="acme:GetLastTradePriceOutput"/>
+    </operation>
+    <operation name="GetTickerFromCompany">
+      <input message="acme:GetTickerInput"/>
+      <output message="acme:GetCompanyOutput"/>
+    </operation>
+    <operation name="GetCompanyFromTicker">
+      <input message="acme:GetCompanyInput"/>
+      <output message="acme:GetTickerOutput"/>
+    </operation>
+  </portType>
+  <portType name="ServicePortType">
+    <operation name="GetServices">
+      <input message="acme:GetServicesInput"/>
+      <output message="acme:GetServicesOutput"/>
+    </operation>
+    <operation name="QueryServices">
+      <input message="acme:QueryServicesInput"/>
+      <output message="acme:QueryServicesOutput"/>
+    </operation>
+  </portType>
+  <binding name="StockQuoteSoapBinding" type="acme:StockPortType">
+    <soap:binding style="document" 
+transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetLastTradePrice">
+      <soap:operation soapAction="http://acme.com/GetLastTradePrice"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="StockTickerSoapBinding" type="acme:StockPortType">
+    <soap:binding style="document" 
+transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetTickerFromCompany">
+      <soap:operation soapAction="http://acme.com/GetTickerSymbol"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="StockNameSoapBinding" type="acme:StockPortType">
+    <soap:binding style="document" 
+transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetCompanyFromTicker">
+      <soap:operation soapAction="http://acme.com/GetCompanyName"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="ServiceListSoapBinding" type="acme:ServicePortType">
+    <soap:binding style="document" 
+transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetServices">
+      <soap:operation soapAction="http://acme.com/GetServices"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="StockInfoService">
+    <documentation>Provides information about stocks.</documentation>
+    <port name="StockQuotePort" binding="acme:StockQuoteSoapBinding">
+      <soap:address location="http://acme.com/stockquote"/>
+    </port>
+    <port name="StockTickerToNamePort" binding="acme:StockTickerSoapBinding">
+      <soap:address location="http://acme.com/tickertoname"/>
+    </port>
+    <port name="StockNameToTickerPort" binding="acme:StockNameSoapBinding">
+      <soap:address location="http://acme.com/nametoticker"/>
+    </port>
+  </service>
+  <service name="ServiceInfoService">
+    <documentation>Provides information about avaialable services.</documentation>
+    <port name="ServiceListPort" binding="acme:ServiceListSoapBinding">
+      <soap:address location="http://acme.com/stockquote"/>
+    </port>
+    <port name="ServiceQueryPort" binding="acme:ServiceQuerySoapBinding">
+      <soap:address location="http://acme.com/tickertoname"/>
+    </port>
+  </service>
+   
+</definitions>
+
+ 
+ 
+ 
+ 
+2		Vertical XSLT Application Recipes
+1) Converting Visio VDX Documents to SVG		3 of 49
+2
+	3
+DRAFT	O'Reilly & Associates	1/17/2006

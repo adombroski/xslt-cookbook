@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE svg
+  PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns:tree="http://www.ora.com/XSLTCookbook/ns/tree" height="500" width="500">
+   <g transform="scale(13.88888888888889)">
+      <g>
+         <rect x="16.75" y="0" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         <line x1="17.75" y1="1" x2="17.75" y2="1.5" style="stroke: black; stroke-width:0.1;"/>
+         <line x1="12.607142857142858" y1="1.5" x2="31.89285714285714" y2="1.5" style="stroke: black; stroke-width:0.1;"/>
+         <line x1="12.607142857142858" y1="1.5" x2="12.607142857142858" y2="2" style="stroke: black; stroke-width:0.1;"/>
+         <line x1="26.75" y1="1.5" x2="26.75" y2="2" style="stroke: black; stroke-width:0.1;"/>
+         <line x1="31.89285714285714" y1="1.5" x2="31.89285714285714" y2="2" style="stroke: black; stroke-width:0.1;"/>
+         <g>
+            <rect x="11.607142857142858" y="2" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            <line x1="12.607142857142858" y1="3" x2="12.607142857142858" y2="3.5" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="6.178571428571429" y1="3.5" x2="24.17857142857143" y2="3.5" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="6.178571428571429" y1="3.5" x2="6.178571428571429" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="13.892857142857144" y1="3.5" x2="13.892857142857144" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="16.464285714285715" y1="3.5" x2="16.464285714285715" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="19.035714285714285" y1="3.5" x2="19.035714285714285" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="21.607142857142858" y1="3.5" x2="21.607142857142858" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="24.17857142857143" y1="3.5" x2="24.17857142857143" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <g>
+               <rect x="5.178571428571429" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+               <line x1="6.178571428571429" y1="5" x2="6.178571428571429" y2="5.5" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="1.0357142857142858" y1="5.5" x2="11.321428571428573" y2="5.5" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="1.0357142857142858" y1="5.5" x2="1.0357142857142858" y2="6" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="3.6071428571428577" y1="5.5" x2="3.6071428571428577" y2="6" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="6.178571428571429" y1="5.5" x2="6.178571428571429" y2="6" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="8.750000000000002" y1="5.5" x2="8.750000000000002" y2="6" style="stroke: black; stroke-width:0.1;"/>
+               <line x1="11.321428571428573" y1="5.5" x2="11.321428571428573" y2="6" style="stroke: black; stroke-width:0.1;"/>
+               <g>
+                  <rect x="0.03571428571428581" y="6" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+               </g>
+               <g>
+                  <rect x="2.6071428571428577" y="6" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+               </g>
+               <g>
+                  <rect x="5.178571428571429" y="6" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+               </g>
+               <g>
+                  <rect x="7.750000000000002" y="6" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+               </g>
+               <g>
+                  <rect x="10.321428571428573" y="6" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+               </g>
+            </g>
+            <g>
+               <rect x="12.892857142857144" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+            <g>
+               <rect x="15.464285714285715" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+            <g>
+               <rect x="18.035714285714285" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+            <g>
+               <rect x="20.607142857142858" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+            <g>
+               <rect x="23.17857142857143" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+         </g>
+         <g>
+            <rect x="25.75" y="2" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+         <g>
+            <rect x="30.89285714285714" y="2" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            <line x1="31.89285714285714" y1="3" x2="31.89285714285714" y2="3.5" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="29.32142857142857" y1="3.5" x2="34.46428571428571" y2="3.5" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="29.32142857142857" y1="3.5" x2="29.32142857142857" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="31.89285714285714" y1="3.5" x2="31.89285714285714" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <line x1="34.46428571428571" y1="3.5" x2="34.46428571428571" y2="4" style="stroke: black; stroke-width:0.1;"/>
+            <g>
+               <rect x="28.32142857142857" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+            <g>
+               <rect x="30.89285714285714" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+            <g>
+               <rect x="33.46428571428571" y="4" width="2" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+         </g>
+      </g>
+   </g>
+</svg>

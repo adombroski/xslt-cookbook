@@ -1,0 +1,343 @@
+Platform: NT
+Output: MBCS
+Rose Version: 6.5.9232.10
+********Object Flows Not supported ***********
+Global Symbol Entered; Model: 'AnswerinMachine' with id G.1 at index  0
+Scoped Symbol Entered; Category: 'Logical View' with id S.10000 at index  0
+Scoped Symbol Entered; Class: 'AnsweringMachine' with id S.10001 at index  1
+Stereotype Entered: Class StateMachine with id 'G.2' at index  0
+Scoped Symbol Entered; StateMachine: 'State/Activity Model' with id S.10002 at index  2
+Global Symbol Entered; State: 'Connected{3D677D4F000F}' with id G.3 at index  1
+Global Symbol Entered; Transition: '{3D677DF10232}' with id G.4 at index  2
+Global Symbol Entered; Event: 'NEXT_MSG' with id G.5 at index  3
+Global Symbol Entered; Transition: '{3D677E2C035B}' with id G.6 at index  4
+Enter Global Symbol: Event NEXT_MSG is already present
+Global Symbol Entered; Transition: '{3D678095000F}' with id G.7 at index  5
+Global Symbol Entered; Event: 'END' with id G.8 at index  6
+Global Symbol Entered; State: 'Start{3D677D63033C}' with id G.9 at index  7
+Global Symbol Entered; Transition: '{3D677D7103B9}' with id G.10 at index  8
+Global Symbol Entered; Event: 'CONNECT' with id G.11 at index  9
+Global Symbol Entered; State: 'GoodBye{3D677DAC00FA}' with id G.12 at index  10
+Global Symbol Entered; State: 'HandlingMsg{3D677DEC029F}' with id G.13 at index  11
+Global Symbol Entered; Transition: '{3D677F930261}' with id G.14 at index  12
+Global Symbol Entered; Event: 'DEL' with id G.15 at index  13
+Global Symbol Entered; Transition: '{3D677FC20177}' with id G.16 at index  14
+Enter Global Symbol: Event NEXT_MSG is already present
+Global Symbol Entered; Transition: '{3D67805400DA}' with id G.17 at index  15
+Enter Global Symbol: Event NEXT_MSG is already present
+Global Symbol Entered; Transition: '{3D6780CD005D}' with id G.18 at index  16
+Enter Global Symbol: Event END is already present
+Scoped Symbol Entered; Operation: 'doCmd' with id S.10003 at index  3
+Stereotype Entered: Operation delegate with id 'G.19' at index  1
+Scoped Symbol Entered; Operation: 'moreMsgs' with id S.10004 at index  4
+Stereotype Entered: Operation action with id 'G.20' at index  2
+Scoped Symbol Entered; Operation: 'playRemaining' with id S.10005 at index  5
+Enter Stereotype: action Operation is already present
+Scoped Symbol Entered; Operation: 'playCurrentMsg' with id S.10006 at index  6
+Enter Stereotype: action Operation is already present
+Scoped Symbol Entered; Operation: 'advanceAndPlayMsg' with id S.10007 at index  7
+Enter Stereotype: action Operation is already present
+Scoped Symbol Entered; Operation: 'deleteMsg' with id S.10008 at index  8
+Enter Stereotype: action Operation is already present
+Scoped Symbol Entered; Operation: 'sayGoodBye' with id S.10009 at index  9
+Enter Stereotype: action Operation is already present
+Scoped Symbol Entered; Operation: 'errorMsg' with id S.10010 at index  10
+Stereotype Entered: Operation default with id 'G.21' at index  3
+Scoped Symbol Entered; Class: 'AnsweringMachineState' with id S.10011 at index  11
+Stereotype Entered: Class state with id 'G.22' at index  4
+Scoped Symbol Entered; Operation: 'doCmd' with id S.10012 at index  12
+Stereotype Entered: Operation pure with id 'G.23' at index  5
+Scoped Symbol Entered; Class: 'Connected' with id S.10013 at index  13
+Scoped Symbol Entered; Operation: 'doCmd' with id S.10014 at index  14
+Scoped Symbol Entered; Class: 'HandlingMsg' with id S.10015 at index  15
+Scoped Symbol Entered; Operation: 'doCmd' with id S.10016 at index  16
+Scoped Symbol Entered; Class: 'Start' with id S.10017 at index  17
+Scoped Symbol Entered; Operation: 'doCmd' with id S.10018 at index  18
+Scoped Symbol Entered; Class: 'GoodBye' with id S.10019 at index  19
+Scoped Symbol Entered; Operation: 'doCmd' with id S.10020 at index  20
+Global Symbol Entered; Association: '{AnsweringMachineState-AnsweringMachine}{3D6781D40128}' with id G.24 at index  17
+Global Symbol Entered; Role: '{3D6781D5001F}' with id G.25 at index  18
+Global Symbol Entered; Role: '{3D6781D50020}' with id G.26 at index  19
+Scoped Symbol Entered; Subsystem: 'Component View' with id S.10021 at index  21
+Scoped Symbol Entered; Category: 'Use Case View' with id S.10022 at index  22
+Create Model: AnswerinMachine
+Create UMLClass: AnsweringMachine
+Stereotype Ref created for stereotype 'StateMachine' of Class: AnsweringMachine
+Create State Machine: ::AnsweringMachine::State/Activity Model
+Create UMLSimpleState: Connected @ G.3
+Create entry action seq @ G.28
+Create exit action seq @ G.29
+Creating transition #G.4
+  Source set for transition: G.3
+  Target set for transition: G.13
+Global Symbol Entered; Event: 'NEXT_MSG{3D677DF10233}' with id G.30 at index  20
+Create Trigger Event: NEXT_MSG
+Global Symbol Entered; StateMachineSignal: 'NEXT_MSG' with id G.31 at index  21
+Create Signal: NEXT_MSG
+Create uninterpreted action: cntx.playCurrentMsg
+Create effect action sequence1 for transition @ G.33
+Create Guard @ G.34:  cntx.moreMsgs
+Creating transition #G.6
+  Source set for transition: G.3
+  Target set for transition: G.3
+Global Symbol Entered; Event: 'NEXT_MSG{3D677E2C035C}' with id G.35 at index  22
+Create Trigger Event: NEXT_MSG
+Use existing Signal: NEXT_MSG
+Create uninterpreted action: cntx.playRemaining
+Create effect action sequence1 for transition @ G.37
+Create Guard @ G.38:  !cntx.moreMsgs
+Creating transition #G.7
+  Source set for transition: G.3
+  Target set for transition: G.12
+Global Symbol Entered; Event: 'END{3D6780950010}' with id G.39 at index  23
+Create Trigger Event: END
+Global Symbol Entered; StateMachineSignal: 'END' with id G.40 at index  24
+Create Signal: END
+Create uninterpreted action: cntx.sayGoodBye
+Create effect action sequence1 for transition @ G.42
+Create UMLPseudoState: Start @ G.9
+---> Pseudostate kind is initial
+Creating transition #G.10
+  Source set for transition: G.9
+  Target set for transition: G.3
+Global Symbol Entered; Event: 'CONNECT{3D677D7103BA}' with id G.43 at index  25
+Create Trigger Event: CONNECT
+Global Symbol Entered; StateMachineSignal: 'CONNECT' with id G.44 at index  26
+Create Signal: CONNECT
+Create uninterpreted action: cntx.playRemaining
+Create effect action sequence1 for transition @ G.46
+Create UMLPseudoState: GoodBye @ G.12
+---> Pseudostate kind is final
+Create UMLSimpleState: HandlingMsg @ G.13
+Create entry action seq @ G.47
+Create exit action seq @ G.48
+Creating transition #G.14
+  Source set for transition: G.13
+  Target set for transition: G.3
+Global Symbol Entered; Event: 'DEL{3D677F930262}' with id G.49 at index  27
+Create Trigger Event: DEL
+Global Symbol Entered; StateMachineSignal: 'DEL' with id G.50 at index  28
+Create Signal: DEL
+Create uninterpreted action: cntx.deleteMsg
+Create effect action sequence1 for transition @ G.52
+Creating transition #G.16
+  Source set for transition: G.13
+  Target set for transition: G.13
+Global Symbol Entered; Event: 'NEXT_MSG{3D677FC20178}' with id G.53 at index  29
+Create Trigger Event: NEXT_MSG
+Use existing Signal: NEXT_MSG
+Create uninterpreted action: cntx.advanceAndPlayMsg
+Create effect action sequence1 for transition @ G.55
+Create Guard @ G.56:  cntx.moreMsgs
+Creating transition #G.17
+  Source set for transition: G.13
+  Target set for transition: G.3
+Global Symbol Entered; Event: 'NEXT_MSG{3D67805400DB}' with id G.57 at index  30
+Create Trigger Event: NEXT_MSG
+Use existing Signal: NEXT_MSG
+Create uninterpreted action: cntx.playRemaining
+Create effect action sequence1 for transition @ G.59
+Create Guard @ G.60:  !cntx.moreMsgs
+Creating transition #G.18
+  Source set for transition: G.13
+  Target set for transition: G.12
+Global Symbol Entered; Event: 'END{3D6780CD005E}' with id G.61 at index  31
+Create Trigger Event: END
+Use existing Signal: END
+Create uninterpreted action: cntx.sayGoodBye
+Create effect action sequence1 for transition @ G.63
+Add incoming refs for outgoing transitions from G.3
+Trans @ G.4 added as incoming to G.13
+Trans @ G.6 added as incoming to G.3
+Trans @ G.7 added as incoming to G.12
+Add incoming refs for outgoing transitions from G.9
+Trans @ G.10 added as incoming to G.3
+Add incoming refs for outgoing transitions from G.12
+Add incoming refs for outgoing transitions from G.13
+Trans @ G.14 added as incoming to G.3
+Trans @ G.16 added as incoming to G.13
+Trans @ G.17 added as incoming to G.3
+Trans @ G.18 added as incoming to G.12
+Create AssociationRef for Class: AnsweringMachine
+Switch Roles: Role1Type = Logical View::AnsweringMachineState Role2Type = Logical View::AnsweringMachine
+Add Association End ref(G.26) Role: {3D6781D50020}
+Stereotype Ref created for stereotype 'delegate' of Operation: doCmd
+Global Symbol Entered; Basic Type: 'Command' with id G.65 at index  32
+Global Symbol Entered; Basic Type: 'void' with id G.67 at index  33
+Stereotype Ref created for stereotype 'action' of Operation: moreMsgs
+Global Symbol Entered; Basic Type: 'bool' with id G.69 at index  34
+Stereotype Ref created for stereotype 'action' of Operation: playRemaining
+Stereotype Ref created for stereotype 'action' of Operation: playCurrentMsg
+Stereotype Ref created for stereotype 'action' of Operation: advanceAndPlayMsg
+Stereotype Ref created for stereotype 'action' of Operation: deleteMsg
+Stereotype Ref created for stereotype 'action' of Operation: sayGoodBye
+Stereotype Ref created for stereotype 'default' of Operation: errorMsg
+Create UMLClass: AnsweringMachineState
+Stereotype Ref created for stereotype 'state' of Class: AnsweringMachineState
+Create AssociationRef for Class: AnsweringMachineState
+Add Association End ref(G.25) Role: {3D6781D5001F}
+Stereotype Ref created for stereotype 'pure' of Operation: doCmd
+Create UMLClass: Connected
+Create UMLClass: HandlingMsg
+Create UMLClass: Start
+Create UMLClass: GoodBye
+Process Association: {AnsweringMachineState-AnsweringMachine}{3D6781D40128}
+Role: 
+  Association End: AnsweringMachineState
+  Association end: G.25 added to association G.24
+  Class/UseCase/Interface: AnsweringMachineState
+Role: 
+  Association End: AnsweringMachine
+  Association end: G.26 added to association G.24
+  Class/UseCase/Interface: AnsweringMachine
+Process Association: {AnsweringMachineState-AnsweringMachine}{3D6781D40128}
+>>>>Already Defined -- Quit
+CreateClassGeneralizations for pkg: Logical View
+CreateAClassGeneralization for class: Logical View::Connected
+Global Symbol Entered; Generalization: '{Connected->AnsweringMachineState}{3D6782A402EE}' with id G.91 at index  35
+CreateAClassGeneralization for class: Logical View::HandlingMsg
+Global Symbol Entered; Generalization: '{HandlingMsg->AnsweringMachineState}{3D6782EF0119}' with id G.92 at index  36
+CreateAClassGeneralization for class: Logical View::Start
+Global Symbol Entered; Generalization: '{Start->AnsweringMachineState}{3D67B2FD004E}' with id G.93 at index  37
+CreateAClassGeneralization for class: Logical View::GoodBye
+Global Symbol Entered; Generalization: '{GoodBye->AnsweringMachineState}{3D67B31B02AF}' with id G.94 at index  38
+CreateClassGeneralizations for pkg: Use Case View
+Create UMLStereotype: StateMachine with id G.2
+Create UMLStereotype: delegate with id G.19
+Create UMLStereotype: action with id G.20
+Create UMLStereotype: default with id G.21
+Create UMLStereotype: state with id G.22
+Create UMLStereotype: pure with id G.23
+Create Package diagrams for /AnswerinMachine
+GenerateClassDiagrams -- category: Logical View
+New UISModelElement created @ G.95, extends G.1
+Scoped Symbol Entered; ClassDiagram: 'Main' with id S.10023 at index  23
+Generate Class Diagram: Logical View::Main
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.96
+** Class model id is S.10011
+AddPresentationForNoteView ignores label: 'AnsweringMachineState'
+AddPresentationForNoteView ignores label: '
+<<pure>> doCmd()'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<state>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.97
+** Class model id is S.10001
+AddPresentationForNoteView ignores label: 'AnsweringMachine'
+AddPresentationForNoteView ignores label: '
+<<delegate>> doCmd()
+<<action>> moreMsgs()
+<<action>> playRemaining()
+<<action>> playCurrentMsg()
+<<action>> advanceAndPlayMsg()
+<<action>> deleteMsg()
+<<action>> sayGoodBye()
+<<default>> errorMsg()'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<StateMachine>>'
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.98
+**Association model id = G.24
+Create UMLPresentation for Role # G.99
+Role Presentation: G.99, refers to G.25
+Create UMLPresentation for Role # G.100
+Role Presentation: G.100, refers to G.26
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.101
+** Class model id is S.10013
+AddPresentationForNoteView ignores label: 'Connected'
+AddPresentationForNoteView ignores label: '
+doCmd()'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.102
+** Class model id is S.10015
+AddPresentationForNoteView ignores label: 'HandlingMsg'
+AddPresentationForNoteView ignores label: '
+doCmd()'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView fails--unknown noteview type
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.103
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.104
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.105
+** Class model id is S.10017
+AddPresentationForNoteView ignores label: 'Start'
+AddPresentationForNoteView ignores label: '
+doCmd()'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.106
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.107
+** Class model id is S.10019
+AddPresentationForNoteView ignores label: 'GoodBye'
+AddPresentationForNoteView ignores label: '
+doCmd()'
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.108
+GenerateScenarioDiagram -- category: Logical View
+GenerateStateActivityDiagram -- category: Logical View
+GenerateStateActivityDiagram -- class: AnsweringMachine
+GenerateStateActivityDiagram -- operation: doCmd
+GenerateStateActivityDiagram -- operation: moreMsgs
+GenerateStateActivityDiagram -- operation: playRemaining
+GenerateStateActivityDiagram -- operation: playCurrentMsg
+GenerateStateActivityDiagram -- operation: advanceAndPlayMsg
+GenerateStateActivityDiagram -- operation: deleteMsg
+GenerateStateActivityDiagram -- operation: sayGoodBye
+GenerateStateActivityDiagram -- operation: errorMsg
+New UISModelElement created @ G.109, extends S.10002
+Scoped Symbol Entered; StateDiagram: 'NewDiagram' with id S.10024 at index  24
+Generate State/Activity Diagram: Logical View::AnsweringMachine::State/Activity Model::NewDiagram
+Process itemview of type: StateView, for item of type: State
+AddPresentationForNoteView ignores label: 'Connected'
+Process itemview of type: StateView, for item of type: State
+AddPresentationForNoteView ignores label: 'Start'
+Process itemview of type: StateView, for item of type: State
+AddPresentationForNoteView ignores label: 'GoodBye'
+Process itemview of type: StateView, for item of type: State
+AddPresentationForNoteView ignores label: 'HandlingMsg'
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.114 for trans @ G.6
+Rose shortcoming forces dropping of label: NEXT_MSG[ !cntx.moreMsgs ] / cntx.playRemaining
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.115 for trans @ G.16
+Rose shortcoming forces dropping of label: NEXT_MSG[ cntx.moreMsgs ] / cntx.advanceAndPlayMsg
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.116 for trans @ G.4
+Rose shortcoming forces dropping of label: NEXT_MSG[ cntx.moreMsgs ] / cntx.playCurrentMsg
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.117 for trans @ G.7
+Rose shortcoming forces dropping of label: END / cntx.sayGoodBye
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.118 for trans @ G.10
+Rose shortcoming forces dropping of label: CONNECT / cntx.playRemaining
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.119 for trans @ G.14
+Rose shortcoming forces dropping of label: DEL / cntx.deleteMsg
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.120 for trans @ G.17
+Rose shortcoming forces dropping of label: NEXT_MSG[ !cntx.moreMsgs ] / cntx.playRemaining
+Process itemview of type: NoteView, for item of type: Transition
+Added Transition Presentation @ G.121 for trans @ G.18
+Rose shortcoming forces dropping of label: END / cntx.sayGoodBye
+GenerateStateActivityDiagram -- class: AnsweringMachineState
+GenerateStateActivityDiagram -- operation: doCmd
+GenerateStateActivityDiagram -- class: Connected
+GenerateStateActivityDiagram -- operation: doCmd
+GenerateStateActivityDiagram -- class: HandlingMsg
+GenerateStateActivityDiagram -- operation: doCmd
+GenerateStateActivityDiagram -- class: Start
+GenerateStateActivityDiagram -- operation: doCmd
+GenerateStateActivityDiagram -- class: GoodBye
+GenerateStateActivityDiagram -- operation: doCmd
+Using existing UISModelElement @ G.95, extends G.1
+Scoped Symbol Entered; ModuleDiagram: 'Main' with id S.10025 at index  25
+Generate Module Diagram: Main

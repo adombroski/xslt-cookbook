@@ -1,0 +1,877 @@
+Chapter 2
+Strings
+
+1)Testing if a String Ends with another String
+Solution
+XSLT 1.0
+substring($value, (string-length($value) - string-length($substr)) + 1) = $substr
+XSLT 2.0
+ends-with($value, $substr)
+Finding the Position of a Substring
+Solution
+XSLT 1.0
+<xsl:template name="string-index-of">
+     <xsl:param name="input"/>
+     <xsl:param name="substr"/>
+<xsl:choose>
+     <xsl:when test="contains($input, $substr)">
+          <xsl:value-of select="string-length(substring-before($input, 
+$substr))+1"/>
+     </xsl:when>
+     <xsl:otherwise>0</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+XSLT 2.0
+<xsl:function name="ckbk:string-index-of">
+  <xsl:param name="input"/>
+  <xsl:param name="substr"/>
+  <xsl:sequence select="if (contains($input, $substr)) 
+                        then string-length(substring-before($input, $substr))+1 
+                        else 0"/>
+</xsl:function>
+
+2) Removing Specific Characters from a String
+Solution
+XSLT 1.0
+translate($input," &#x9;&#xa;&xd;", "")
+XSLT 2.0
+(: \s matches all whitespace characters :)
+replace($input,"\s","")
+Discussion
+translate($string, 
+          translate($string,'0123456789',''),'')
+translate(normalize-space(translate($input,"C "," C")),"C "," C")
+<xsl:template match="/">
+  <xsl:variable name="input" 
+       select=" '---this --is-- the way we normalize non-whitespace---' "/>
+ <xsl:value-of 
+      select="translate(normalize-space(
+                                 translate($input,'- ',' -')),'- ',' -')"/>
+</xsl:template>
+XSLT 2.0
+<xsl:template match="/">
+ <xsl:variable name="input" 
+      select=" '---this --is-- the way we normalize non-whitespace---' "/>
+<xsl:value-of select="replace(replace($input,'-+','-'),'^-|-$','')"/>
+</xsl:template>
+
+3)Finding Substrings from the End of a String
+
+Solution
+XSLT 1.0
+<xsl:template name="substring-before-last">
+  <xsl:param name="input" />
+  <xsl:param name="substr" />
+  <xsl:if test="$substr and contains($input, $substr)">
+    <xsl:variable name="temp" select="substring-after($input, $substr)" />
+    <xsl:value-of select="substring-before($input, $substr)" />
+    <xsl:if test="contains($temp, $substr)">
+      <xsl:value-of select="$substr" />
+      <xsl:call-template name="substring-before-last">
+        <xsl:with-param name="input" select="$temp" />
+        <xsl:with-param name="substr" select="$substr" />
+      </xsl:call-template>
+    </xsl:if>
+  </xsl:if>
+</xsl:template>
+   
+<xsl:template name="substring-after-last">
+<xsl:param name="input"/>
+<xsl:param name="substr"/>
+   
+<!-- Extract the string which comes after the first occurence -->
+<xsl:variable name="temp" select="substring-after($input,$substr)"/>
+   
+<xsl:choose>
+     <!-- If it still contains the search string the recursively process -->
+     <xsl:when test="$substr and contains($temp,$substr)">
+          <xsl:call-template name="substring-after-last">
+               <xsl:with-param name="input" select="$temp"/>
+               <xsl:with-param name="substr" select="$substr"/>
+          </xsl:call-template>
+     </xsl:when>
+     <xsl:otherwise>
+          <xsl:value-of select="$temp"/>
+     </xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+XSLT 2.0
+
+<xsl:function name="ckbk:substring-before-last">
+	<xsl:param name="input" as="xs:string"/>
+	<xsl:param name="substr" as="xs:string"/>
+	<xsl:sequence 
+       select="if ($substr) 
+               then 
+                  if (contains($input, $substr)) then 
+                  string-join(tokenize($input, $substr)
+                    [position() ne last()],$substr) 
+                  else ''
+               else $input"/>
+</xsl:function>
+
+<xsl:function name="ckbk:substring-after-last">
+	<xsl:param name="input" as="xs:string"/>
+	<xsl:param name="substr" as="xs:string"/>
+	<xsl:sequence 
+    select="if ($substr) 
+            then
+               if (contains($input, $substr))
+               then tokenize($input, $substr)[last()] 
+               else '' 
+            else $input"/>
+</xsl:function>
+<xsl:function name="ckbk:substring-before-last">
+	<xsl:param name="input" as="xs:string"/>
+	<xsl:param name="substr" as="xs:string"/>
+	<xsl:param name="mask-regex" as="xs:boolean"/>
+	<xsl:variable name="matchstr" 
+		       select="if ($mask-regex) 
+                          then replace($substr,'([.+?*^$])','\$1')
+                          else $substr"/>
+
+	<xsl:sequence select="ckbk:substring-before-last($input,$matchstr)"/>
+</xsl:function>
+
+<xsl:function name="ckbk:substring-after-last">
+	<xsl:param name="input" as="xs:string"/>
+	<xsl:param name="substr" as="xs:string"/>
+	<xsl:param name="mask-regex" as="xs:boolean"/>
+	<xsl:variable name="matchstr" 
+		       select="if ($mask-regex) 
+                          then replace($substr,'([.+?*^$])','\$1')
+                          else $substr"/>
+
+	<xsl:sequence select="ckbk:substring-after-last($input,$matchstr)"/>
+</xsl:function>
+Discussion
+<xsl:template name="str:substring-before-last"> 
+   
+  <xsl:param name="input"/>
+  <xsl:param name="substr"/>
+  
+  <xsl:variable name="mid" select="ceiling(string-length($input) div 2)"/>
+  <xsl:variable name="temp1" select="substring($input,1, $mid)"/>
+  <xsl:variable name="temp2" select="substring($input,$mid +1)"/>
+  <xsl:choose>
+    <xsl:when test="$temp2 and contains($temp2,$substr)">
+      <!-- search string is in second half so just append first half -->
+      <!-- and recurse on second -->
+      <xsl:value-of select="$temp1"/>
+      <xsl:call-template name="str:substring-before-last">
+        <xsl:with-param name="input" select="$temp2"/>
+        <xsl:with-param name="substr" select="$substr"/>
+      </xsl:call-template>
+    </xsl:when>
+    <!--search string is in boundary so a simple  substring-before -->
+    <!-- will do the trick-->
+    <xsl:when test="contains(substring($input,
+                                       $mid - string-length($substr) +1),
+                                       $substr)">
+      <xsl:value-of select="substring-before($input,$substr)"/>
+    </xsl:when>
+    <!--search string is in first half so throw away second half-->
+    <xsl:when test="contains($temp1,$substr)">
+      <xsl:call-template name="str:substring-before-last">
+      <xsl:with-param name="input" select="$temp1"/>
+      <xsl:with-param name="substr" select="$substr"/>
+      </xsl:call-template>
+    </xsl:when>
+    <!-- No occurences of search string so we are done -->
+    <xsl:otherwise/>
+  </xsl:choose>
+  
+</xsl:template>
+
+4) Duplicating a String N Times
+Solution
+XSLT 1.0
+<xsl:template name="dup">
+     <xsl:param name="input"/>
+     <xsl:param name="count" select="2"/>
+     <xsl:choose>
+          <xsl:when test="not($count) or not($input)"/>
+          <xsl:when test="$count = 1">
+               <xsl:value-of select="$input"/>
+          </xsl:when>
+          <xsl:otherwise>
+               <!-- If $count is odd append an extra copy of input -->
+               <xsl:if test="$count mod 2">
+                    <xsl:value-of select="$input"/>
+               </xsl:if>
+               <!-- Recursively apply template after doubling input and 
+               halving count -->
+               <xsl:call-template name="dup">
+                    <xsl:with-param name="input" 
+                         select="concat($input,$input)"/>
+                    <xsl:with-param name="count" 
+                         select="floor($count div 2)"/>
+               </xsl:call-template>     
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+XSLT 2.0
+<xsl:function name="ckbk:dup">
+    <xsl:param name="input" as="xs:string"/>
+    <xsl:sequence select="ckbk:dup($input,2)"/>
+  </xsl:function>
+
+  <xsl:function name="ckbk:dup">
+    <xsl:param name="input" as="xs:string"/>
+    <xsl:param name="count" as="xs:integer"/>
+    <xsl:sequence select="string-join(for $i in 1 to $count return $input,'')"/>
+  </xsl:function>
+Discussion
+XSLT 1.0
+<xsl:template name="slow-dup">
+     <xsl:param name="input"/>
+     <xsl:param name="count" select="1"/>
+     <xsl:param name="work" select="$input"/>
+     <xsl:choose>
+          <xsl:when test="not($count) or not($input)"/>
+          <xsl:when test="$count=1">
+               <xsl:value-of select="$work"/>
+          </xsl:when>
+          <xsl:otherwise>
+               <xsl:call-template name="slow-dup">
+                    <xsl:with-param name="input" select="$input"/>
+                    <xsl:with-param name="count" select="$count - 1"/>
+                    <xsl:with-param name="work"
+                         select="concat($work,$input)"/>
+               </xsl:call-template>               
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+<xsl:template name="dup">
+  <xsl:param name="input"/>
+  <xsl:param name="count" select="1"/>
+  <xsl:choose>
+    <xsl:when test="not($count) or not($input)" />
+    <xsl:otherwise>
+      <xsl:variable name="string" 
+                      select="concat($input, $input, $input, $input, 
+                                     $input, $input, $input, $input,
+                                     $input, $input)"/>
+      <xsl:choose>
+        <xsl:when test="string-length($string) >= 
+                         $count * string-length($input)">
+          <xsl:value-of select="substring($string, 1, 
+                              $count * string-length($input))" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:call-template name="dup">
+            <xsl:with-param name="input" select="$string" />
+            <xsl:with-param name="count" select="$count div 10" />
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+5) Reversing a String
+Solution
+XSLT 1.0
+<xsl:template name="reverse">
+     <xsl:param name="input"/>
+     <xsl:variable name="len" select="string-length($input)"/>
+     <xsl:choose>
+          <!-- Strings of length less than 2 are trivial to reverse -->
+          <xsl:when test="$len &lt; 2">
+               <xsl:value-of select="$input"/>
+          </xsl:when>
+          <!-- Strings of length 2 are also trivial to reverse -->
+          <xsl:when test="$len = 2">
+               <xsl:value-of select="substring($input,2,1)"/>
+               <xsl:value-of select="substring($input,1,1)"/>
+          </xsl:when>
+          <xsl:otherwise>
+               <!-- Swap the recursive application of this template to 
+               the first half and second half of input -->
+               <xsl:variable name="mid" select="floor($len div 2)"/>
+               <xsl:call-template name="reverse">
+                    <xsl:with-param name="input"
+                         select="substring($input,$mid+1,$mid+1)"/>
+               </xsl:call-template>
+               <xsl:call-template name="reverse">
+                    <xsl:with-param name="input"
+                         select="substring($input,1,$mid)"/>
+               </xsl:call-template>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+XSLT 2.0
+<xsl:function name="ckbk:reverse">
+    <xsl:param name="input" as="xs:string"/>
+    <xsl:sequence select="codepoints-to-string(
+                           reverse(string-to-codepoints($input)))"/>
+  </xsl:function>
+Discussion
+XSLT 1.0
+1.	The algorithm shown in the solution is not the most obvious, but it is efficient. In 
+fact, this reverse("abcdef") (input)
+2.	reverse(def)+reverse("abc")
+3.	reverse("ef") + "d" + reverse("bc") + "a" 
+4.	"f" + "e" + "d" + "c" + "b" + "a" 
+5.	fedcba (result)
+Example 2-1. A very poor implementation of reverse 
+<xsl:template name="reverse">   
+     <xsl:param name="input"/>
+     <xsl:variable name="len" select="string-length($input)"/>
+     <xsl:choose>
+          <!-- Strings of length less than 2 are trivial to reverse -->
+          <xsl:when test="$len &lt; 2">
+               <xsl:value-of select="$input"/>
+          </xsl:when>
+          <!-- Strings of length 2 are also trivial to reverse -->
+          <xsl:when test="$len = 2">
+               <xsl:value-of select="substring($input,2,1)"/>
+               <xsl:value-of select="substring($input,1,1)"/>
+          </xsl:when>
+          <xsl:otherwise>
+               <!-- Concatenate the last + reverse(middle) + first -->
+               <xsl:value-of select="substring($input,$len,1)"/>
+               <xsl:call-template name="reverse">
+                    <xsl:with-param name="input"
+                         select="substring($input,2,$len - 2)"/> 
+               </xsl:call-template>
+               <xsl:value-of select="substring($input,1,1)"/>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+Example 2-2. An inefficient tail recursive implementation 
+<xsl:template name="reverse">   
+     <xsl:param name="input"/>
+     <xsl:variable name="len" select="string-length($input)"/>
+     <xsl:choose>
+          <!-- Strings of length less than 2 are trivial to reverse -->
+          <xsl:when test="$len &lt; 2">
+               <xsl:value-of select="$input"/>
+          </xsl:when>
+          <!-- Strings of length 2 are also trivial to reverse -->
+          <xsl:when test="$len = 2">
+               <xsl:value-of select="substring($input,2,1)"/>
+               <xsl:value-of select="substring($input,1,1)"/>
+          </xsl:when>
+          <!-- Concatenate the last + reverse(rest) -->
+          <xsl:otherwise>
+            <xsl:value-of select="substring($input,$len,1)"/>
+              <xsl:call-template name="reverse">
+               <xsl:with-param name="input" select="substring($input,1,$len - 1)"/> 
+              </xsl:call-template>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+Example 2-3. An efficient (but not ideal) implementation 
+<xsl:template name="reverse">
+     <xsl:param name="input"/>
+   
+     <xsl:variable name="len" select="string-length($input)"/>
+     <xsl:choose>
+          <xsl:when test="$len &lt; 2">
+               <xsl:value-of select="$input"/>
+          </xsl:when>
+          <xsl:otherwise>
+               <xsl:variable name="mid" select="floor($len div 2)"/>
+               <xsl:call-template name="reverse">
+                    <xsl:with-param name="input"
+                         select="substring($input,$mid+1,$mid+1)"/>
+               </xsl:call-template>
+               <xsl:call-template name="reverse">
+                    <xsl:with-param name="input"
+                         select="substring($input,1,$mid)"/>
+               </xsl:call-template>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+XSLT 2.0
+Replacing Text
+Problem
+Solution
+XSLT 1.0
+<xsl:template name="search-and-replace">
+     <xsl:param name="input"/>
+     <xsl:param name="search-string"/>
+     <xsl:param name="replace-string"/>
+     <xsl:choose>
+          <!-- See if the input contains the search string -->
+          <xsl:when test="$search-string and 
+                           contains($input,$search-string)">
+          <!-- If so, then concatenate the substring before the search
+          string to the replacement string and to the result of
+          recursively applying this template to the remaining substring.
+          -->
+               <xsl:value-of 
+                    select="substring-before($input,$search-string)"/>
+               <xsl:value-of select="$replace-string"/>
+               <xsl:call-template name="search-and-replace">
+                    <xsl:with-param name="input"
+                    select="substring-after($input,$search-string)"/>
+                    <xsl:with-param name="search-string" 
+                    select="$search-string"/>
+                    <xsl:with-param name="replace-string" 
+                        select="$replace-string"/>
+               </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+               <!-- There are no more occurences of the search string so 
+               just return the current input string -->
+               <xsl:value-of select="$input"/>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+<xsl:template name="search-and-replace-whole-words-only">
+  <xsl:param name="input"/>
+  <xsl:param name="search-string"/>
+  <xsl:param name="replace-string"/>
+  <xsl:variable name="punc" 
+    select="concat('.,;:()[  ]!?$@&amp;&quot;',&quot;&apos;&quot;)"/>
+     <xsl:choose>
+       <!-- See if the input contains the search string -->
+       <xsl:when test="contains($input,$search-string)">
+       <!-- If so, then test that the before and after characters are word 
+       delimiters. -->
+         <xsl:variable name="before" 
+          select="substring-before($input,$search-string)"/>
+         <xsl:variable name="before-char" 
+          select="substring(concat(' ',$before),string-length($before) +1, 1)"/>
+         <xsl:variable name="after" 
+          select="substring-after($input,$search-string)"/>
+         <xsl:variable name="after-char" 
+          select="substring($after,1,1)"/>
+         <xsl:value-of select="$before"/>
+         <xsl:choose>
+          <xsl:when test="(not(normalize-space($before-char)) or 
+                    contains($punc,$before-char)) and 
+               (not(normalize-space($after-char)) or 
+                    contains($punc,$after-char))"> 
+            <xsl:value-of select="$replace-string"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$search-string"/>
+          </xsl:otherwise>
+         </xsl:choose>
+         <xsl:call-template name="search-and-replace-whole-words-only">
+          <xsl:with-param name="input" select="$after"/>
+          <xsl:with-param name="search-string" select="$search-string"/>
+          <xsl:with-param name="replace-string" select="$replace-string"/>
+         </xsl:call-template>
+       </xsl:when>
+    <xsl:otherwise>
+       <!-- There are no more occurences of the search string so 
+          just return the current input string -->
+       <xsl:value-of select="$input"/>
+     </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+XSLT 2.0
+<xsl:function name="ckbk:search-and-replace-whole-words-only">
+	<xsl:param name="input" as="xs:string"/>
+	<xsl:param name="search-string" as="xs:string"/>
+	<xsl:param name="replace-string" as="xs:string"/>
+	<xsl:sequence select="replace($input, concat('(^|\W)',$search-string,'(\W|$)'), 
+concat('$1',$replace-string,'$2'))"/>
+</xsl:function>
+Discussion
+Example 2-4. Using a temp string in a failed attempt to improve search and replace 
+<xsl:template name="search-and-replace">
+     <xsl:param name="input"/>
+     <xsl:param name="search-string"/>
+     <xsl:param name="replace-string"/>
+     <!-- Find the substring before the search string and store it in a 
+     variable -->
+     <xsl:variable name="temp" 
+          select="substring-before($input,$search-string)"/>
+     <xsl:choose>
+          <!-- If $temp is not empty or the input starts with the search 
+          string then we know we have to do a replace. This eliminates the 
+          need to use contains(). -->
+          <xsl:when test="$temp or starts-with($input,$search-string)">
+               <xsl:value-of select="concat($temp,$replace-string)"/>
+               <xsl:call-template name="search-and-replace">
+                    <!-- We eliminate the need to call substring-after
+                    by using the length of temp and the search string 
+                    to extract the remaining string in the recursive 
+                    call. -->
+                    <xsl:with-param name="input"
+                    select="substring($input,string-length($temp)+
+                         string-length($search-string)+1)"/>
+                    <xsl:with-param name="search-string" 
+                         select="$search-string"/>
+                    <xsl:with-param name="replace-string" 
+                         select="$replace-string"/>
+               </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+               <xsl:value-of select="$input"/>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+Example 2-5. Using a temp integer in a failed attempt to improve search and replace 
+ <xsl:template name="search-and-replace">
+     <xsl:param name="input"/>
+     <xsl:param name="search-string"/>
+     <xsl:param name="replace-string"/>
+     <!-- Find the length of the sub-string before the search string and 
+     store it in a variable -->
+     <xsl:variable name="temp" 
+     select="string-length(substring-before($input,$search-string))"/>
+     <xsl:choose>
+     <!-- If $temp is not 0 or the input starts with the search 
+     string then we know we have to do a replace. This eliminates the 
+     need to use contains(). -->
+          <xsl:when test="$temp or starts-with($input,$search-string)">
+               <xsl:value-of select="substring($input,1,$temp)"/>
+               <xsl:value-of select="$replace-string"/>
+                    <!-- We eliminate the need to call substring-after
+                    by using  temp and the length of the search string 
+                    to extract the remaining string in the recursive 
+                    call. -->
+               <xsl:call-template name="search-and-replace">
+                    <xsl:with-param name="input"
+                         select="substring($input,$temp + 
+                              string-length($search-string)+1)"/>
+                    <xsl:with-param name="search-string"
+                         select="$search-string"/>
+                    <xsl:with-param name="replace-string"
+                         select="$replace-string"/>
+               </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+               <xsl:value-of select="$input"/>
+          </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+Converting Case
+Solution
+XSLT 1.0
+translate($input,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')
+translate($input, 'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+XSLT 2.0
+upper-case($input)
+lower-case($input)
+Discussion
+<?xml version="1.0" encoding="UTF-8"?>   
+<!DOCTYPE stylesheet [
+     <!ENTITY UPPERCASE "ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+     <!ENTITY LOWERCASE "abcdefghijklmnopqrstuvwxyz">
+     <!ENTITY UPPER_TO_LOWER " '&UPPERCASE;' , '&LOWERCASE;' ">
+     <!ENTITY LOWER_TO_UPPER " '&LOWERCASE;' , '&UPPERCASE;' ">
+]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+     <xsl:template match="/">
+     <xsl:variable name="test"
+          select=" 'The rain in Spain falls mainly in the plain' "/>
+     <output>
+          <lowercase>
+               <xsl:value-of
+                    select="translate($test,&UPPER_TO_LOWER;)"/>
+          </lowercase>
+          <uppercase>
+               <xsl:value-of
+                    select="translate($test,&LOWER_TO_UPPER;)"/>
+          </uppercase>
+     </output>
+     </xsl:template>
+   
+</xsl:stylesheet>
+Example 2-6. Standard.ent 
+<!ENTITY UPPERCASE "ABCDEFGHIJKLMNOPQRSTUVWXYZ">   
+<!ENTITY LOWERCASE "abcdefghijklmnopqrstuvwxyz">
+<!ENTITY UPPER_TO_LOWER " '&UPPERCASE;' , '&LOWERCASE;' ">
+<!ENTITY LOWER_TO_UPPER " '&LOWERCASE;' , '&UPPERCASE;' ">
+<!-- others... -->
+Example 2-7. A stylesheet using standard.ent 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE stylesheet [
+     <!ENTITY % standard SYSTEM "standard.ent">
+     %standard;
+]>
+<xsl:stylesheet version="1.0" 
+<!-- ... -->
+</xsl:stylesheet>
+Tokenizing a String
+Solution
+XSLT 1.0
+<xsl:template name="tokenize">
+  <xsl:param name="string" select="''" />
+  <xsl:param name="delimiters" select="' &#x9;&#xA;'" />
+  <xsl:choose>
+     <!-- Nothing to do if empty string -->
+    <xsl:when test="not($string)" />
+   
+     <!-- No delimiters signals character level tokenization. -->
+    <xsl:when test="not($delimiters)">
+      <xsl:call-template name="_tokenize-characters">
+        <xsl:with-param name="string" select="$string" />
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:call-template name="_tokenize-delimiters">
+        <xsl:with-param name="string" select="$string" />
+        <xsl:with-param name="delimiters" select="$delimiters" />
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<xsl:template name="_tokenize-characters">
+  <xsl:param name="string" />
+  <xsl:if test="$string">
+    <token><xsl:value-of select="substring($string, 1, 1)" /></token>
+    <xsl:call-template name="_tokenize-characters">
+      <xsl:with-param name="string" select="substring($string, 2)" />
+    </xsl:call-template>
+  </xsl:if>
+</xsl:template>
+   
+<xsl:template name="_tokenize-delimiters">
+  <xsl:param name="string" />
+  <xsl:param name="delimiters" />
+  <xsl:param name="last-delimit"/> 
+  <!-- Extract a delimiter -->
+  <xsl:variable name="delimiter" select="substring($delimiters, 1, 1)" />
+  <xsl:choose>
+     <!-- If the delimiter is empty we have a token -->
+    <xsl:when test="not($delimiter)">
+      <token><xsl:value-of select="$string"/></token>
+    </xsl:when>
+     <!-- If the string contains at least one delimiter we must split it -->
+    <xsl:when test="contains($string, $delimiter)">
+      <!-- If it starts with the delimiter we don't need to handle the -->
+       <!-- before part -->
+      <xsl:if test="not(starts-with($string, $delimiter))">
+         <!-- Handle the part that comes before the current delimiter -->
+         <!-- with the next delimiter. If ther is no next the first test -->
+         <!-- in this template will detect the token -->
+        <xsl:call-template name="_tokenize-delimiters">
+          <xsl:with-param name="string" 
+                          select="substring-before($string, $delimiter)" />
+          <xsl:with-param name="delimiters" 
+                          select="substring($delimiters, 2)" />
+        </xsl:call-template>
+      </xsl:if>
+       <!-- Handle the part that comes after the delimiter using the -->
+       <!-- current delimiter -->
+      <xsl:call-template name="_tokenize-delimiters">
+        <xsl:with-param name="string" 
+                        select="substring-after($string, $delimiter)" />
+        <xsl:with-param name="delimiters" select="$delimiters" />
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+       <!-- No occurences of current delimiter so move on to next -->
+      <xsl:call-template name="_tokenize-delimiters">
+        <xsl:with-param name="string" 
+                        select="$string" />
+        <xsl:with-param name="delimiters" 
+                        select="substring($delimiters, 2)" />
+      </xsl:call-template>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+</xsl:stylesheet>
+XSLT 2.0
+Discussion
+<xsl:template name="_tokenize-characters">
+  <xsl:param name="string" />
+  <xsl:param name="len" select="string-length($string)"/>
+  <xsl:choose>
+       <xsl:when test="$len = 1">
+       <token><xsl:value-of select="$string"/></token>
+       </xsl:when>
+       <xsl:otherwise>
+      <xsl:call-template name="_tokenize-characters">
+        <xsl:with-param name="string" 
+                       select="substring($string, 1, floor($len div 2))" />
+        <xsl:with-param name="len" select="floor($len div 2)"/>
+      </xsl:call-template>
+      <xsl:call-template name="_tokenize-characters">
+        <xsl:with-param name="string" 
+                      select="substring($string, floor($len div 2) + 1)" />
+        <xsl:with-param name="len" select="ceiling($len div 2)"/>
+      </xsl:call-template>
+       </xsl:otherwise>
+     </xsl:choose>
+</xsl:template>
+See Also
+Making Do Without Regular Expressions
+Problem
+Solution
+Table 2-1. Regular-expression matches 
+$string =~ /^C*$/
+translate($string,'C','') = ''
+$string =~ /^C+$/
+$string and 
+translate($string,'C', '') = ''
+$string =~ /C+/
+contains($string,'C')
+$string =~ /C{2,4}/
+contains($string,'CC') and 
+not(contains($string,'CCCCC'))
+$string =~ /^abc/
+starts-with($string,'abc')
+$string =~ /abc$/
+substring($string, string-
+length($string) - string-
+length('abc') + 1) = 'abc'
+$string =~ /abc/
+contains($string,'abc')
+$string =~ /^[^C]*$/
+translate($string,'C','') = 
+$string
+$string =~ /^\s+$/
+not(normalize-space($string))
+$string =~ /\s/
+translate(normalize-
+space($string),' ','') != 
+$string
+$string =~ /^\S+$/
+translate(normalize-
+space($string),' ','') = 
+$string
+Discussion
+string-length(translate($string, 
+          translate($string,'0123456789',''),''))
+string-length($string) - 
+string-length(translate($string,'0123456789',''))
+Exploiting Regular Expressions
+Problem
+Solution
+Matching Text Patterns
+<!-- -->
+
+<!-- A date in the form May 3, 1964 -->  
+<xsl:template match="birthday[matches(.,'^[A-Z][a-z]+\s[0-9]+,\s[0-9]+$')]">
+   <!-- ... -->
+</xsl:template>
+
+<!-- A date in the form 1964-05-03 -->
+<xsl:template match="birthday[matches(.,'^[0-9]+-[0-9]+-[0-9]+$')]">
+   <!-- ... -->
+</xsl:template>
+ 
+<!-- A date in the form 3 May 1964 -->
+<xsl:template match="birthday[matches(.,'^[0-9]+\s[A-Z][a-z]+\s[0-9]+$')]">
+   <!-- ... -->
+</xsl:template>
+
+<xsl:choose>
+   <xsl:when test="matches($date,'^[A-Z][a-z]+\s[0-9]+,\s[0-9]+$')">
+   </xsl:when>
+   <xsl:when test="matches($date,'^[0-9]+-[0-9]+-[0-9]+$')">
+   </xsl:when>
+   <xsl:when test="matches($date,'^[0-9]+\s[A-Z][a-z]+\s[0-9]+$')">
+   </xsl:when>
+</xsl:choose>
+Tokenizing stylized text
+(: Break an ISO date (YYYY-MM-DD) into a sequence consisting of year, month, day :)
+tokenize($date, '-') 
+
+(: Break an ISO dateTime (YYYY-MM-DDThh:mm:ss) into a sequence consisting of year, 
+month, day, hour, min, sec :)
+tokenize($date, '-|T|:') 
+
+(: Break a sentence into words :)
+tokenize($text, '\W+') 
+ 
+Replacing and Augmenting Text
+(: Replace the day of the month in an ISO date with 01 :)
+replace($date,'\d\d$','01')
+
+(: Strip away all but the year in an ISO date :)
+replace($date,'-\d\d-\d\d$','')
+
+(: Insert a space after punctuation characters that are not followed by a space :)
+replace($text, '([,;:])\S', '$1 ')  
+Parsing Text to Covert to XML
+Discussion
+Using the EXSLT String Extensions
+Problem
+Solution
+node-set str:tokenize(string input, string delimiters?)
+The str:tokenize function  splits up a string and returns a node set of token 
+elements, each containing one token from the string. 
+The first argument is the string to be tokenized. The second argument is a string 
+consisting of a number of characters. Each character in this string is taken as a 
+delimiting character. The string given by the first argument is split at any occurrence 
+of any character. 
+If the second argument is omitted, the default is the string 
+&#x9;&#xA;&#xD;&#x20; (i.e., whitespace characters). 
+If the second argument is an empty string, the function returns a set of token 
+elements, each of which holds a single character. 
+node-set str:replace(string, object search, object replace)
+The str:replace function    replaces any occurrences of search strings within a 
+string with replacement nodes to create a node set. 
+The first argument gives the string within which strings are to be replaced. 
+The second argument is an object that specifies a search string list. If the second 
+argument is a node set, then the search string list shows the result of converting each 
+node in the node set to a string with the string() function, listed in document 
+order. If the second argument is not a node set, then the second argument is 
+converted to a string with the string() function, and the search string list consists 
+of this string only. 
+The third argument is an object that specifies a replacement node list. If the third 
+argument is a node set, then the replacement node list consists of the nodes in the 
+node set in document order. If the third argument is not a node set, then the 
+replacement node list consists of a single text node whose string value is the same as 
+the result of converting the third argument to a string with the string() function. 
+string str:padding(number, string?)
+The str:padding  function creates a padding string of a certain length. 
+The first argument gives the length of the padding string to be created. 
+The second argument gives a string necessary to create the padding. This string is 
+repeated as many times as is necessary to create a string of the length specified by 
+the first argument; if the string is more than a character long, it may have to be 
+truncated to produce the required length. If no second argument is specified, it 
+defaults to a space (" "). If the second argument is an empty string, str:padding 
+returns an empty string. 
+string str:align(string, string, string?)
+The str:align  function aligns a string within another string. 
+The first argument gives the target string to be aligned. The second argument gives 
+the padding string within which it will be aligned. 
+If the target string is shorter than the padding string, then a range of characters in the 
+padding string are replaced with those in the target string. Which characters are 
+replaced depends on the value of the third argument, which gives the type of 
+alignment. It can be left, right, or center. If no third argument is given or if it 
+is not one of these values, then it defaults to left alignment. 
+With left alignment, the range of characters replaced by the target string begins with 
+the first character in the padding string. With right alignment, the range of characters 
+replaced by the target string ends with the last character in the padding string. With 
+center alignment, the range of characters replaced by the target string is in the middle 
+of the padding string so that either the number of unreplaced characters on either side 
+of the range is the same or there is one less on the left than on the right. 
+If the target string is longer than the padding string, then it is truncated to be the 
+same length as the padding string and returned. 
+string str:encode-uri(string)
+The str:encode-uri   function returns an encoded URI. The str:encode-
+uri method does not encode the following characters: ":", "/", ";", and "?". 
+A URI-encoded string converts unsafe and reserved characters with "%", 
+immediately followed by two hexadecimal digits (0-9, A-F) giving the ISO Latin 1 
+code for that character. 
+string str:decode-uri(string)
+The str:decode-uri function decodes a string that has been URI-encoded. See 
+str:encode-uri for an explanation. 
+string str:concat(node-set)
+The str:concat function takes a node set and returns the concatenation of the 
+string values of the nodes in that set. If the node set is empty, it returns an empty 
+string. 
+node-set str:split(string, string?)
+The str:split  function splits up a string and returns a node set of token 
+elements, each containing one token from the string. The first argument is the string 
+to be split. The second is a pattern string. The string given by the first argument is 
+split at any occurrence of this pattern. 
+If the second argument is omitted, the default is the string &#x20; (i.e., a space). 
+If the second argument is an empty string, the function returns a set of token 
+elements, each of which holds a single character. 
+
+ 
+ 
+ 
+ 
+2		Strings
+Finding Substrings from the End of a String		3 of 19
+2
+	3
+DRAFT	O'Reilly & Associates	1/16/2006

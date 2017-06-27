@@ -1,0 +1,1572 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<!DOCTYPE XMI SYSTEM 'uml.dtd' [
+<!ELEMENT uisToolName (#PCDATA)>
+<!ELEMENT uisDiagramName (#PCDATA)>
+<!ELEMENT uisDiagramStyle (#PCDATA)>
+<!ELEMENT uisDiagramPresentation (Foundation.Auxiliary_Elements.Presentation*)>
+<!ELEMENT UISDiagram (uisDiagramName, uisToolName, uisDiagramStyle, uisDiagramPresentation*)>
+<!ATTLIST UISDiagram xmi.id ID #REQUIRED>
+<!ELEMENT uisOwnedDiagram (UISDiagram*)>
+<!ELEMENT UISModelElement (uisOwnedDiagram*)>
+<!ATTLIST UISModelElement xmi.id ID #REQUIRED>
+<!ENTITY bs "&#38;#08;">
+<!ENTITY vt "&#38;#11;">
+<!ENTITY ff "&#38;#12;">
+]>
+<XMI xmi.version = '1.0'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Unisys.IntegratePlus.2</XMI.exporter>
+      <XMI.exporterVersion>4.0.3</XMI.exporterVersion>
+    </XMI.documentation>
+    <XMI.metamodel xmi.name = 'UML' xmi.version = '1.1'/>
+  </XMI.header>
+  <XMI.content>
+    <Model_Management.Model xmi.id = 'G.1'>
+      <Foundation.Core.ModelElement.name>algorithms</Foundation.Core.ModelElement.name>
+      <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+      <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+      <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+      <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+      <XMI.extension xmi.extender = 'Unisys.IntegratePlus.2'>
+        <XMI.reference xmi.idref = 'G.59'/>
+      </XMI.extension>
+      <Foundation.Core.Namespace.ownedElement>
+        <Model_Management.Package xmi.id = 'S.10001'>
+          <Foundation.Core.ModelElement.name>Algorithms</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <XMI.extension xmi.extender = 'Unisys.IntegratePlus.2'>
+            <XMI.reference xmi.idref = 'G.28'/>
+          </XMI.extension>
+          <Foundation.Core.ModelElement.namespace>
+            <Model_Management.Model xmi.idref = 'G.1'/> <!-- algorithms -->
+          </Foundation.Core.ModelElement.namespace>
+          <Foundation.Core.Namespace.ownedElement>
+            <Foundation.Core.Class xmi.id = 'S.10002'>
+              <Foundation.Core.ModelElement.name>algorithm</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.provision>
+                <Foundation.Core.Dependency xmi.idref = 'G.20'/> <!-- {sort?algorithm}{3D6D7641000F} -->
+              </Foundation.Core.ModelElement.provision>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10003'>
+                  <Foundation.Core.ModelElement.name>subjectIdentity</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>&amp;NIST;/algorithm.html</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10004'>
+              <Foundation.Core.ModelElement.name>sort</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.requirement>
+                <Foundation.Core.Dependency xmi.idref = 'G.20'/> <!-- {sort?algorithm}{3D6D7641000F} -->
+              </Foundation.Core.ModelElement.requirement>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.GeneralizableElement.specialization>
+                <Foundation.Core.Generalization xmi.idref = 'G.25'/> <!-- {in-place sort-&gt;sort}{3D6D7849000F} -->
+              </Foundation.Core.GeneralizableElement.specialization>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10005'>
+                  <Foundation.Core.ModelElement.name>subjectIdentity</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>&amp;NIST;/sort.html</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10006'>
+              <Foundation.Core.ModelElement.name>quicksort</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.requirement>
+                <Foundation.Core.Dependency xmi.idref = 'G.22'/> <!-- {quicksort?in-place sort}{3D6D77F1002E} -->
+              </Foundation.Core.ModelElement.requirement>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.GeneralizableElement.specialization>
+                <Foundation.Core.Generalization xmi.idref = 'G.26'/> <!-- {qsort-&gt;quicksort}{3D70EC2E0119} -->
+              </Foundation.Core.GeneralizableElement.specialization>
+              <Foundation.Core.Classifier.associationEnd>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.10'/> <!-- {3D6D7A210129} -->
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.13'/> <!-- {3D6D7BF700DB} -->
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.19'/> <!-- {3D6D7E1C02A0} -->
+              </Foundation.Core.Classifier.associationEnd>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10007'>
+                  <Foundation.Core.ModelElement.name>subjectIdentity</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>&amp;NIST;/quicksort.html</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10008'>
+              <Foundation.Core.ModelElement.name>in-place sort</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.provision>
+                <Foundation.Core.Dependency xmi.idref = 'G.22'/> <!-- {quicksort?in-place sort}{3D6D77F1002E} -->
+                <Foundation.Core.Dependency xmi.idref = 'G.23'/> <!-- {insertion sort?in-place sort}{3D6D796C0196} -->
+              </Foundation.Core.ModelElement.provision>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.GeneralizableElement.generalization>
+                <Foundation.Core.Generalization xmi.idref = 'G.25'/> <!-- {in-place sort-&gt;sort}{3D6D7849000F} -->
+              </Foundation.Core.GeneralizableElement.generalization>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10009'>
+                  <Foundation.Core.ModelElement.name>subjectIdentity</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>&amp;NIST;/inplacesort.html</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10010'>
+              <Foundation.Core.ModelElement.name>insertion sort</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.requirement>
+                <Foundation.Core.Dependency xmi.idref = 'G.23'/> <!-- {insertion sort?in-place sort}{3D6D796C0196} -->
+              </Foundation.Core.ModelElement.requirement>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.2'/> <!-- topic -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.Classifier.associationEnd>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.16'/> <!-- {3D6D7D990149} -->
+              </Foundation.Core.Classifier.associationEnd>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10011'>
+                  <Foundation.Core.ModelElement.name>subjectIdentity</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>&amp;NIST;/insertsrt.html</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10012'>
+              <Foundation.Core.ModelElement.name>quick sort demo</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.3'/> <!-- resource -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.Classifier.associationEnd>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.9'/> <!-- {3D6D7A210128} -->
+              </Foundation.Core.Classifier.associationEnd>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10013'>
+                  <Foundation.Core.ModelElement.name>resourceName</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>&amp;DSAL;/QSort.html</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10014'>
+              <Foundation.Core.ModelElement.name>quick sort specification</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.Classifier.associationEnd>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.12'/> <!-- {3D6D7BF700DA} -->
+              </Foundation.Core.Classifier.associationEnd>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10015'>
+                  <Foundation.Core.ModelElement.name>resourceName</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/quick/quicken.htm</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10016'>
+              <Foundation.Core.ModelElement.name>insertion sort definition</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.3'/> <!-- resource -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.Classifier.associationEnd>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.15'/> <!-- {3D6D7D990148} -->
+              </Foundation.Core.Classifier.associationEnd>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>documentation</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>
+</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10017'>
+                  <Foundation.Core.ModelElement.name>resourceData</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                  <Foundation.Core.ModelElement.taggedValue>
+                    <Foundation.Extension_Mechanisms.TaggedValue>
+                      <Foundation.Extension_Mechanisms.TaggedValue.tag>documentation</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                      <Foundation.Extension_Mechanisms.TaggedValue.value>Definition: Sort by repeatedly taking the next item and inserting it into the final data structure in its proper order with respect to items already inserted. Run time is O(n2) because of moves. 
+</Foundation.Extension_Mechanisms.TaggedValue.value>
+                    </Foundation.Extension_Mechanisms.TaggedValue>
+                  </Foundation.Core.ModelElement.taggedValue>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10018'>
+              <Foundation.Core.ModelElement.name>quick sort definition</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.3'/> <!-- resource -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.Classifier.associationEnd>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.18'/> <!-- {3D6D7E1C029F} -->
+              </Foundation.Core.Classifier.associationEnd>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10019'>
+                  <Foundation.Core.ModelElement.name>resourceData</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body></Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                  <Foundation.Core.ModelElement.taggedValue>
+                    <Foundation.Extension_Mechanisms.TaggedValue>
+                      <Foundation.Extension_Mechanisms.TaggedValue.tag>documentation</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                      <Foundation.Extension_Mechanisms.TaggedValue.value>Definition: An in-place sort algorithm that uses the divide and conquer paradigm. It picks an element from the array (the pivot), partitions the remaining elements into those greater than and less than this pivot, and recursively sorts the partitions. There are many variants of the basic scheme above: to select the pivot, to partition the array, to stop the recursion on small partitions, etc.</Foundation.Extension_Mechanisms.TaggedValue.value>
+                    </Foundation.Extension_Mechanisms.TaggedValue>
+                  </Foundation.Core.ModelElement.taggedValue>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10020'>
+              <Foundation.Core.ModelElement.name>qsort</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.4'/> <!-- variant -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.GeneralizableElement.generalization>
+                <Foundation.Core.Generalization xmi.idref = 'G.26'/> <!-- {qsort-&gt;quicksort}{3D70EC2E0119} -->
+              </Foundation.Core.GeneralizableElement.generalization>
+              <Foundation.Core.GeneralizableElement.specialization>
+                <Foundation.Core.Generalization xmi.idref = 'G.27'/> <!-- {test-&gt;qsort}{3D70F6560399} -->
+              </Foundation.Core.GeneralizableElement.specialization>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10021'>
+                  <Foundation.Core.ModelElement.name>language</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>CLang</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.ModelElement.stereotype>
+                    <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.5'/> <!-- topic -->
+                  </Foundation.Core.ModelElement.stereotype>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10022'>
+              <Foundation.Core.ModelElement.name>C Programming Language</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10023'>
+                  <Foundation.Core.ModelElement.name>id</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>CLang</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Class xmi.id = 'S.10024'>
+              <Foundation.Core.ModelElement.name>test</Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'true'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.Class.isActive xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.4'/> <!-- variant -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.ModelElement.namespace>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Core.ModelElement.namespace>
+              <Foundation.Core.GeneralizableElement.generalization>
+                <Foundation.Core.Generalization xmi.idref = 'G.27'/> <!-- {test-&gt;qsort}{3D70F6560399} -->
+              </Foundation.Core.GeneralizableElement.generalization>
+              <Foundation.Core.ModelElement.taggedValue>
+                <Foundation.Extension_Mechanisms.TaggedValue>
+                  <Foundation.Extension_Mechanisms.TaggedValue.tag>persistence</Foundation.Extension_Mechanisms.TaggedValue.tag>
+                  <Foundation.Extension_Mechanisms.TaggedValue.value>transient</Foundation.Extension_Mechanisms.TaggedValue.value>
+                </Foundation.Extension_Mechanisms.TaggedValue>
+              </Foundation.Core.ModelElement.taggedValue>
+              <Foundation.Core.Classifier.feature>
+                <Foundation.Core.Attribute xmi.id = 'S.10025'>
+                  <Foundation.Core.ModelElement.name>foo</Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+                  <Foundation.Core.Feature.ownerScope xmi.value = 'instance'/>
+                  <Foundation.Core.StructuralFeature.multiplicity>1..1</Foundation.Core.StructuralFeature.multiplicity>
+                  <Foundation.Core.StructuralFeature.changeable xmi.value = 'none'/>
+                  <Foundation.Core.StructuralFeature.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.Attribute.initialValue>
+                     <Foundation.Data_Types.Expression>
+                      <Foundation.Data_Types.Expression.language></Foundation.Data_Types.Expression.language>
+                      <Foundation.Data_Types.Expression.body>bar</Foundation.Data_Types.Expression.body>
+                     </Foundation.Data_Types.Expression>
+                  </Foundation.Core.Attribute.initialValue>
+                  <Foundation.Core.ModelElement.stereotype>
+                    <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.6'/> <!-- subject -->
+                  </Foundation.Core.ModelElement.stereotype>
+                  <Foundation.Core.StructuralFeature.type>
+                    <Foundation.Core.DataType xmi.idref = 'G.24'/> <!-- &lt;undefined&gt; -->
+                  </Foundation.Core.StructuralFeature.type>
+                </Foundation.Core.Attribute>
+              </Foundation.Core.Classifier.feature>
+            </Foundation.Core.Class>
+            <Foundation.Core.Association xmi.id = 'G.7'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.8'/> <!-- occurance -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.Association.connection>
+                <Foundation.Core.AssociationEnd xmi.id = 'G.9'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+                  <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+                  <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.AssociationEnd.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10012'/> <!-- quick sort demo -->
+                  </Foundation.Core.AssociationEnd.type>
+                </Foundation.Core.AssociationEnd>
+                <Foundation.Core.AssociationEnd xmi.id = 'G.10'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+                  <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.AssociationEnd.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10006'/> <!-- quicksort -->
+                  </Foundation.Core.AssociationEnd.type>
+                </Foundation.Core.AssociationEnd>
+              </Foundation.Core.Association.connection>
+            </Foundation.Core.Association>
+            <Foundation.Core.Association xmi.id = 'G.11'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.8'/> <!-- occurance -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.Association.connection>
+                <Foundation.Core.AssociationEnd xmi.id = 'G.12'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+                  <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+                  <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.AssociationEnd.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10014'/> <!-- quick sort specification -->
+                  </Foundation.Core.AssociationEnd.type>
+                </Foundation.Core.AssociationEnd>
+                <Foundation.Core.AssociationEnd xmi.id = 'G.13'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+                  <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.AssociationEnd.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10006'/> <!-- quicksort -->
+                  </Foundation.Core.AssociationEnd.type>
+                </Foundation.Core.AssociationEnd>
+              </Foundation.Core.Association.connection>
+            </Foundation.Core.Association>
+            <Foundation.Core.Association xmi.id = 'G.17'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.8'/> <!-- occurance -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.Association.connection>
+                <Foundation.Core.AssociationEnd xmi.id = 'G.18'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+                  <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+                  <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.AssociationEnd.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10018'/> <!-- quick sort definition -->
+                  </Foundation.Core.AssociationEnd.type>
+                </Foundation.Core.AssociationEnd>
+                <Foundation.Core.AssociationEnd xmi.id = 'G.19'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+                  <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.AssociationEnd.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10006'/> <!-- quicksort -->
+                  </Foundation.Core.AssociationEnd.type>
+                </Foundation.Core.AssociationEnd>
+              </Foundation.Core.Association.connection>
+            </Foundation.Core.Association>
+            <Foundation.Core.Association xmi.id = 'G.14'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+              <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+              <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+              <Foundation.Core.ModelElement.stereotype>
+                <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.8'/> <!-- occurance -->
+              </Foundation.Core.ModelElement.stereotype>
+              <Foundation.Core.Association.connection>
+                <Foundation.Core.AssociationEnd xmi.id = 'G.15'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'true'/>
+                  <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+                  <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.AssociationEnd.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10016'/> <!-- insertion sort definition -->
+                  </Foundation.Core.AssociationEnd.type>
+                </Foundation.Core.AssociationEnd>
+                <Foundation.Core.AssociationEnd xmi.id = 'G.16'>
+                  <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+                  <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+                  <Foundation.Core.AssociationEnd.isNavigable xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.isOrdered xmi.value = 'false'/>
+                  <Foundation.Core.AssociationEnd.aggregation xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.multiplicity>0..*</Foundation.Core.AssociationEnd.multiplicity>
+                  <Foundation.Core.AssociationEnd.changeable xmi.value = 'none'/>
+                  <Foundation.Core.AssociationEnd.targetScope xmi.value = 'instance'/>
+                  <Foundation.Core.AssociationEnd.type>
+                    <Foundation.Core.Class xmi.idref = 'S.10010'/> <!-- insertion sort -->
+                  </Foundation.Core.AssociationEnd.type>
+                </Foundation.Core.AssociationEnd>
+              </Foundation.Core.Association.connection>
+            </Foundation.Core.Association>
+            <Foundation.Core.Generalization xmi.id = 'G.25'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+              <Foundation.Core.Generalization.subtype>
+                <Foundation.Core.Class xmi.idref = 'S.10008'/> <!-- in-place sort -->
+              </Foundation.Core.Generalization.subtype>
+              <Foundation.Core.Generalization.supertype>
+                <Foundation.Core.Class xmi.idref = 'S.10004'/> <!-- sort -->
+              </Foundation.Core.Generalization.supertype>
+            </Foundation.Core.Generalization>
+            <Foundation.Core.Generalization xmi.id = 'G.26'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+              <Foundation.Core.Generalization.subtype>
+                <Foundation.Core.Class xmi.idref = 'S.10020'/> <!-- qsort -->
+              </Foundation.Core.Generalization.subtype>
+              <Foundation.Core.Generalization.supertype>
+                <Foundation.Core.Class xmi.idref = 'S.10006'/> <!-- quicksort -->
+              </Foundation.Core.Generalization.supertype>
+            </Foundation.Core.Generalization>
+            <Foundation.Core.Generalization xmi.id = 'G.27'>
+              <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+              <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+              <Foundation.Core.Generalization.discriminator></Foundation.Core.Generalization.discriminator>
+              <Foundation.Core.Generalization.subtype>
+                <Foundation.Core.Class xmi.idref = 'S.10024'/> <!-- test -->
+              </Foundation.Core.Generalization.subtype>
+              <Foundation.Core.Generalization.supertype>
+                <Foundation.Core.Class xmi.idref = 'S.10020'/> <!-- qsort -->
+              </Foundation.Core.Generalization.supertype>
+            </Foundation.Core.Generalization>
+          </Foundation.Core.Namespace.ownedElement>
+        </Model_Management.Package>  <!-- End Package S.10001-->
+        <Foundation.Core.DataType xmi.id = 'G.24'>
+          <Foundation.Core.ModelElement.name>&lt;undefined&gt;</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+        </Foundation.Core.DataType>
+        <Foundation.Core.Dependency xmi.id = 'G.20'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Dependency.description></Foundation.Core.Dependency.description>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.21'/> <!-- instanceOf -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Dependency.client>
+            <Foundation.Core.Class xmi.idref = 'S.10004'/> <!-- sort -->
+          </Foundation.Core.Dependency.client>
+          <Foundation.Core.Dependency.supplier>
+            <Foundation.Core.Class xmi.idref = 'S.10002'/> <!-- algorithm -->
+          </Foundation.Core.Dependency.supplier>
+        </Foundation.Core.Dependency>
+        <Foundation.Core.Dependency xmi.id = 'G.22'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Dependency.description></Foundation.Core.Dependency.description>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.21'/> <!-- instanceOf -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Dependency.client>
+            <Foundation.Core.Class xmi.idref = 'S.10006'/> <!-- quicksort -->
+          </Foundation.Core.Dependency.client>
+          <Foundation.Core.Dependency.supplier>
+            <Foundation.Core.Class xmi.idref = 'S.10008'/> <!-- in-place sort -->
+          </Foundation.Core.Dependency.supplier>
+        </Foundation.Core.Dependency>
+        <Foundation.Core.Dependency xmi.id = 'G.23'>
+          <Foundation.Core.ModelElement.name></Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'public'/>
+          <Foundation.Core.Dependency.description></Foundation.Core.Dependency.description>
+          <Foundation.Core.ModelElement.stereotype>
+            <Foundation.Extension_Mechanisms.Stereotype xmi.idref = 'G.21'/> <!-- instanceOf -->
+          </Foundation.Core.ModelElement.stereotype>
+          <Foundation.Core.Dependency.client>
+            <Foundation.Core.Class xmi.idref = 'S.10010'/> <!-- insertion sort -->
+          </Foundation.Core.Dependency.client>
+          <Foundation.Core.Dependency.supplier>
+            <Foundation.Core.Class xmi.idref = 'S.10008'/> <!-- in-place sort -->
+          </Foundation.Core.Dependency.supplier>
+        </Foundation.Core.Dependency>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.2'>
+          <Foundation.Core.ModelElement.name>topic</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10002'/> <!-- algorithm -->
+            <Foundation.Core.Class xmi.idref = 'S.10004'/> <!-- sort -->
+            <Foundation.Core.Class xmi.idref = 'S.10006'/> <!-- quicksort -->
+            <Foundation.Core.Class xmi.idref = 'S.10010'/> <!-- insertion sort -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.3'>
+          <Foundation.Core.ModelElement.name>resource</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10012'/> <!-- quick sort demo -->
+            <Foundation.Core.Class xmi.idref = 'S.10016'/> <!-- insertion sort definition -->
+            <Foundation.Core.Class xmi.idref = 'S.10018'/> <!-- quick sort definition -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.4'>
+          <Foundation.Core.ModelElement.name>variant</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Class</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Class xmi.idref = 'S.10020'/> <!-- qsort -->
+            <Foundation.Core.Class xmi.idref = 'S.10024'/> <!-- test -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.5'>
+          <Foundation.Core.ModelElement.name>topic</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Attribute</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Attribute xmi.idref = 'S.10021'/> <!-- language -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.6'>
+          <Foundation.Core.ModelElement.name>subject</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Attribute</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Attribute xmi.idref = 'S.10025'/> <!-- foo -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.8'>
+          <Foundation.Core.ModelElement.name>occurance</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Association</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Association xmi.idref = 'G.7'/> <!-- {quick sort demo-quicksort}{3D6D7A2002AF} -->
+            <Foundation.Core.Association xmi.idref = 'G.11'/> <!-- {quick sort specification-quicksort}{3D6D7BF60203} -->
+            <Foundation.Core.Association xmi.idref = 'G.14'/> <!-- {insertion sort definition-insertion sort}{3D6D7D980280} -->
+            <Foundation.Core.Association xmi.idref = 'G.17'/> <!-- {quick sort definition-quicksort}{3D6D7E1C007D} -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+        <Foundation.Extension_Mechanisms.Stereotype xmi.id = 'G.21'>
+          <Foundation.Core.ModelElement.name>instanceOf</Foundation.Core.ModelElement.name>
+          <Foundation.Core.ModelElement.visibility xmi.value = 'private'/>
+          <Foundation.Core.GeneralizableElement.isRoot xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isLeaf xmi.value = 'false'/>
+          <Foundation.Core.GeneralizableElement.isAbstract xmi.value = 'false'/>
+          <Foundation.Extension_Mechanisms.Stereotype.icon>
+            <Foundation.Data_Types.Geometry>
+              <Foundation.Data_Types.Geometry.body>
+              </Foundation.Data_Types.Geometry.body>
+            </Foundation.Data_Types.Geometry>
+          </Foundation.Extension_Mechanisms.Stereotype.icon>
+          <Foundation.Extension_Mechanisms.Stereotype.baseClass>Dependency</Foundation.Extension_Mechanisms.Stereotype.baseClass>
+          <Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+            <Foundation.Core.Dependency xmi.idref = 'G.20'/> <!-- {sort?algorithm}{3D6D7641000F} -->
+            <Foundation.Core.Dependency xmi.idref = 'G.22'/> <!-- {quicksort?in-place sort}{3D6D77F1002E} -->
+            <Foundation.Core.Dependency xmi.idref = 'G.23'/> <!-- {insertion sort?in-place sort}{3D6D796C0196} -->
+          </Foundation.Extension_Mechanisms.Stereotype.extendedElement>
+        </Foundation.Extension_Mechanisms.Stereotype>
+      </Foundation.Core.Namespace.ownedElement>
+    </Model_Management.Model>  <!-- End Model G.1 -->
+  </XMI.content>
+  <XMI.extensions xmi.extender = 'Unisys.IntegratePlus.2'>
+    <UISModelElement xmi.id = 'G.28'>
+      <uisOwnedDiagram>
+        <UISDiagram xmi.id = 'S.10028'>
+          <uisDiagramName>Sorting</uisDiagramName>
+          <uisToolName>Rational Rose 98</uisToolName>
+          <uisDiagramStyle>ClassDiagram</uisDiagramStyle>
+          <uisDiagramPresentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.29'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2432, 528, 780, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10002'/> <!-- algorithm -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.30'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1344, 528, 684, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10004'/> <!-- sort -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.31'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1863, 528, 409, 54,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    ClassDependency
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Dependency xmi.idref = 'G.20'/> <!-- {sort?algorithm}{3D6D7641000F} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.32'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1344, 1056, 812, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10008'/> <!-- in-place sort -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.33'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1344, 805, 54, 367,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.25'/> <!-- {in-place sort-&gt;sort}{3D6D7849000F} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.34'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2448, 2048, 508, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10016'/> <!-- insertion sort definition -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.35'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2000, 1552, 762, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10010'/> <!-- insertion sort -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.36'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1653, 1289, 427, 335,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    ClassDependency
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Dependency xmi.idref = 'G.23'/> <!-- {insertion sort?in-place sort}{3D6D796C0196} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.37'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2223, 1799, 283, 307,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.14'/> <!-- {insertion sort definition-insertion sort}{3D6D7D980280} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.38'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2280, 1862, 169, 181,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.15'/> <!-- {3D6D7D990148} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.39'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2166, 1736, 168, 180,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.16'/> <!-- {3D6D7D990149} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.40'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2368, 2448, 740, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10012'/> <!-- quick sort demo -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.41'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     864, 2752, 1714, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10014'/> <!-- quick sort specification -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.42'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     272, 2032, 444, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10018'/> <!-- quick sort definition -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.43'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     624, 1552, 780, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10006'/> <!-- quicksort -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.44'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1004, 1289, 464, 335,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    ClassDependency
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Dependency xmi.idref = 'G.22'/> <!-- {quicksort?in-place sort}{3D6D77F1002E} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.45'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1496, 1999, 1325, 707,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.7'/> <!-- {quick sort demo-quicksort}{3D6D7A2002AF} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.46'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1813, 2162, 691, 381,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.9'/> <!-- {3D6D7A210128} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.47'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1178, 1836, 688, 380,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.10'/> <!-- {3D6D7A210129} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.48'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     745, 2165, 251, 1039,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.11'/> <!-- {quick sort specification-quicksort}{3D6D7BF60203} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.49'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     795, 2411, 152, 547,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.12'/> <!-- {3D6D7BF700DA} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.50'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     696, 1919, 153, 546,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.13'/> <!-- {3D6D7BF700DB} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.51'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     445, 1791, 227, 291,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Association:Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Association xmi.idref = 'G.17'/> <!-- {quick sort definition-quicksort}{3D6D7E1C007D} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.52'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     403, 1850, 142, 173,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.18'/> <!-- {3D6D7E1C029F} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.53'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     489, 1732, 139, 172,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Role
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.AssociationEnd xmi.idref = 'G.19'/> <!-- {3D6D7E1C02A0} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.54'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1216, 2176, 598, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10020'/> <!-- qsort -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.55'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     919, 1863, 415, 435,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.26'/> <!-- {qsort-&gt;quicksort}{3D70EC2E0119} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.56'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     2336, 2880, 550, 186,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10022'/> <!-- C Programming Language -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.57'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1648, 2512, 474, 242,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Font.Blue= 0,Font.Green= 0,Font.Red= 0,Font.FaceName=Arial,Font.Size= 10,Font.Bold=0,Font.Italic=0,Font.Strikethrough=0,Font.Underline=0,LineColor.Blue= 51,LineColor.Green= 0,LineColor.Red= 153,FillColor.Blue= 204,FillColor.Green= 255,FillColor.Red= 255,FillColor.Transparent=1,AutomaticResize=1,ShowAllAttributes=1,ShowAllOperations=1,ShowOperationSignature=0,SuppressAttributes=0,SuppressOperations=0,
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Class xmi.idref = 'S.10024'/> <!-- test -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.58'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     1431, 2343, 173, 147,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Inheritance
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Foundation.Core.Generalization xmi.idref = 'G.27'/> <!-- {test-&gt;qsort}{3D70F6560399} -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+          </uisDiagramPresentation>
+        </UISDiagram>
+      </uisOwnedDiagram>
+    </UISModelElement>
+    <UISModelElement xmi.id = 'G.59'>
+      <uisOwnedDiagram>
+        <UISDiagram xmi.id = 'S.10029'>
+          <uisDiagramName>Main</uisDiagramName>
+          <uisToolName>Rational Rose 98</uisToolName>
+          <uisDiagramStyle>ClassDiagram</uisDiagramStyle>
+          <uisDiagramPresentation>
+            <Foundation.Auxiliary_Elements.Presentation xmi.id='G.60'>
+              <Foundation.Auxiliary_Elements.Presentation.geometry>
+                <Foundation.Data_Types.Geometry>
+                  <Foundation.Data_Types.Geometry.body>
+                     976, 928, 300, 180,
+                  </Foundation.Data_Types.Geometry.body>
+                </Foundation.Data_Types.Geometry>
+              </Foundation.Auxiliary_Elements.Presentation.geometry>
+              <Foundation.Auxiliary_Elements.Presentation.style>
+                <Foundation.Data_Types.GraphicMarker>
+                  <Foundation.Data_Types.GraphicMarker.body>
+                    Category
+                  </Foundation.Data_Types.GraphicMarker.body>
+                </Foundation.Data_Types.GraphicMarker>
+              </Foundation.Auxiliary_Elements.Presentation.style>
+              <Foundation.Auxiliary_Elements.Presentation.model>
+                <Model_Management.Package xmi.idref = 'S.10001'/> <!-- Algorithms -->
+              </Foundation.Auxiliary_Elements.Presentation.model>
+            </Foundation.Auxiliary_Elements.Presentation>
+          </uisDiagramPresentation>
+        </UISDiagram>
+        <UISDiagram xmi.id = 'S.10030'>
+          <uisDiagramName>Main</uisDiagramName>
+          <uisToolName>Rational Rose 98</uisToolName>
+          <uisDiagramStyle>ModuleDiagram</uisDiagramStyle>
+        </UISDiagram>
+      </uisOwnedDiagram>
+    </UISModelElement>
+  </XMI.extensions>
+</XMI>

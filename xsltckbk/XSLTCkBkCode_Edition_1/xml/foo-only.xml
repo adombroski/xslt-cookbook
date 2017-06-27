@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foo:someElement xmlns:foo="http://www.ora.com/XMLCookbook/namespaces/foo">
+  <foo:aChild>
+    <foo:aGrandChild/>
+    <foo:aGrandChild>
+    </foo:aGrandChild>
+  </foo:aChild>
+</foo:someElement>

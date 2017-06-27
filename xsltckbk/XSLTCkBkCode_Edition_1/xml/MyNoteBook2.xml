@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyNoteBook>
+  <friends>
+    <xi:include href="friends.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  </friends>
+  <coworkers>
+      <xi:include href="coworkers.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  </coworkers>
+  <projects>
+    <project>Replalce mapML with XSLT engine using Xalan C++</project>
+    <project>Figure out the meaning of life.</project>
+    <project>Figure out where the dryer is hinding all those missing socks</project>
+  </projects>  
+</MyNoteBook>

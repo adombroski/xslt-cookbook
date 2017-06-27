@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns:common="http://exslt.org/common" xmlns:tree="http://www.ora.com/XSLTCookbook/ns/tree" width="500" height="500">
+<Analogy tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<TargetDescription Domain="Biology" tree:WEIGHT="1" tree:MAXDEPTH="2"/>
+<SourceDescription Domain="General" tree:WEIGHT="1" tree:MAXDEPTH="2"/>
+<Map tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<ConceptSetMap tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<TargetConceptSet tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<ConceptDescription tree:WEIGHT="1" tree:MAXDEPTH="6">
+<Concept tree:WEIGHT="1" tree:MAXDEPTH="6"/>
+</ConceptDescription>
+<ConceptDescription tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<Concept ="" tree:MAXDEPTH="6" xmlns="http://www.ora.com/XSLTCookbook/ns/tree"/>
+</ConceptDescription>
+<ConceptDescription tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<Concept ="" tree:MAXDEPTH="6" xmlns="http://www.ora.com/XSLTCookbook/ns/tree"/>
+</ConceptDescription>
+<ConceptDescription tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<Concept ="" tree:MAXDEPTH="6" xmlns="http://www.ora.com/XSLTCookbook/ns/tree"/>
+</ConceptDescription>
+</TargetConceptSet>
+<SourceConceptSet tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<ConceptDescription ="" tree:MAXDEPTH="6" xmlns="http://www.ora.com/XSLTCookbook/ns/tree">
+<Concept ="" tree:MAXDEPTH="6"/>
+</ConceptDescription>
+<ConceptDescription tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<Concept ="" tree:MAXDEPTH="6" xmlns="http://www.ora.com/XSLTCookbook/ns/tree"/>
+</ConceptDescription>
+<ConceptDescription tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<Concept ="" tree:MAXDEPTH="6" xmlns="http://www.ora.com/XSLTCookbook/ns/tree"/>
+</ConceptDescription>
+<ConceptDescription tree:WEIGHT="NaN" tree:MAXDEPTH="6">
+<Concept ="" tree:MAXDEPTH="6" xmlns="http://www.ora.com/XSLTCookbook/ns/tree"/>
+</ConceptDescription>
+</SourceConceptSet>
+</ConceptSetMap>
+</Map>
+</Analogy>
+</svg>

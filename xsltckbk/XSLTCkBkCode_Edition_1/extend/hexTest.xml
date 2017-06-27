@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constants>
+  
+  <group name="Sizes">
+    <constant name="LMT" value="2" rep="hex"/>
+    <constant name="MKT" value="4" rep="hex"/>
+    <constant name="BUY" value="32" rep="hex"/>
+    <constant name="SELL" value="64" rep="hex"/>
+  </group>
+
+  <constant name="BUY_SIDE" value="0"/>
+  <constant name="SELL_SIDE" value="1"/>
+  <constant name="ALL_TYPES" value="102" rep="hex"/>
+  
+</constants>

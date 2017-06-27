@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<my:lookup-table xmlns:my="http://www.descriptix.com">
+	<entry short="NY" long="New York"/>
+	<entry short="NJ" long="New Jersey"/>
+	<entry short="CA" long="California"/>
+	<entry short="FL" long="Florida"/>
+	<entry short="GA" long="Georgia"/>
+	<entry short="PA" long="Pensylvania"/>
+	<entry short="WA" long="Washington"/>
+</my:lookup-table>

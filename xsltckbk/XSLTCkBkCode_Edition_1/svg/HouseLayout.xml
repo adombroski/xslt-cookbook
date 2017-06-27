@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="HouseLayout.xsl"?>
+<House>
+  <Location>
+    <Address>1234 Main St. </Address>
+    <City>Pleasantville </City>
+    <State>NJ</State>
+  </Location>
+  <Layout figure="HouseLayout.svg">
+    <Room id="bedroom1">
+      <Name>Bedroom</Name>
+      <Length>10</Length>
+      <Width>10</Width>
+      <Windows>2</Windows>
+      <Misc>View of junk yard</Misc>
+    </Room>
+    <Room id="bedroom2">
+      <Name>Bedroom</Name>
+      <Length>10</Length>
+      <Width>10</Width>
+      <Windows>1</Windows>
+      <Misc>Elvis slept here</Misc>
+    </Room>
+    <Room id="masterBedroom">
+      <Name>Master Bedroom</Name>
+      <Length>18</Length>
+      <Width>10</Width>
+      <Windows>3</Windows>
+      <Misc>Walk in Closet</Misc>
+    </Room>
+    <Room id="masterBath">
+      <Name>Master Bath</Name>
+      <Length>5</Length>
+      <Width>5</Width>
+      <Windows>1</Windows>
+      <Misc>Full Bath w/ bidet</Misc>
+    </Room>
+    <Room id="kitchen">
+      <Name>Kitchen</Name>
+      <Length>20</Length>
+      <Width>18</Width>
+      <Windows>2</Windows>
+      <Misc>New Cabinets</Misc>
+    </Room>
+    <Room id="livingRoom">
+      <Name>Living Room</Name>
+      <Length>18</Length>
+      <Width>18</Width>
+      <Windows>2</Windows>
+      <Misc>View of Rose Garden</Misc>
+    </Room>
+    <Room id="bath1">
+      <Name>Bathroom</Name>
+      <Length>6</Length>
+      <Width>5</Width>
+      <Windows>1</Windows>
+      <Misc>Heart Shapped Tub</Misc>
+    </Room>
+  </Layout>
+</House>

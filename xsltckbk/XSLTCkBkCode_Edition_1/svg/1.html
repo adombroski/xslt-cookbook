@@ -1,0 +1,90 @@
+<html xmlns:svg="http://www.w3.org/2000/svg">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>Interactive Bar Chart</title><object id="AdobeSVG" classid="clsid:78156a80-c6a1-4bbf-8e6a-3cd390eeb4e2"></object><?import namespace="svg" implementation="#AdobeSVG"><script>
+
+function on_change (ID,VALUE)
+{
+      //Get the svg doc
+	var svgDocument = document.all.item('figure').getSVGDocument();
+	
+	//The bars id is prefixed with the context value + _bar_ + ID
+	var barName = "interact_bar_" + ID ;
+	
+	var barObj = svgDocument.getElementById(barName);
+	if (barObj != null)
+	{
+	  barObj.setAttribute('y2', VALUE);
+	}
+	
+	return true;
+}
+
+</script></head>
+   <body>
+      <div align="center">
+         <svg:svg width="400" height="400" id="figure">
+            <svg:g xmlns:emath="http://www.exslt.org/math" transform="translate(50,25) translate(150,175) rotate(-180) translate(-150,-175)">
+               <svg:rect x="0" y="0" height="350" width="300" style="stroke: black;stroke-width:0.5;stroke-opacity:0.5;fill:none"></svg:rect>
+            </svg:g>
+            <svg:g xmlns:emath="http://www.exslt.org/math" transform="translate(50,25)                              translate(150,175)                              rotate(-180)                              translate(-150,-175)                              scale(1,14)">
+               <svg:line x1="27.272727272727273" y1="0" x2="27.272727272727273" y2="8.5" id="interact_bar_1" style="stroke-width: 5; stroke: red"></svg:line>
+               <svg:line x1="54.54545454545455" y1="0" x2="54.54545454545455" y2="22.0" id="interact_bar_2" style="stroke-width: 5; stroke: orange"></svg:line>
+               <svg:line x1="81.81818181818181" y1="0" x2="81.81818181818181" y2="13.9" id="interact_bar_3" style="stroke-width: 5; stroke: yellow"></svg:line>
+               <svg:line x1="109.0909090909091" y1="0" x2="109.0909090909091" y2="2.7" id="interact_bar_4" style="stroke-width: 5; stroke: green"></svg:line>
+               <svg:line x1="136.36363636363637" y1="0" x2="136.36363636363637" y2="13.0" id="interact_bar_5" style="stroke-width: 5; stroke: blue"></svg:line>
+               <svg:line x1="163.63636363636363" y1="0" x2="163.63636363636363" y2="5.0" id="interact_bar_6" style="stroke-width: 5; stroke: lime"></svg:line>
+               <svg:line x1="190.9090909090909" y1="0" x2="190.9090909090909" y2="4.0" id="interact_bar_7" style="stroke-width: 5; stroke: aqua"></svg:line>
+               <svg:line x1="218.1818181818182" y1="0" x2="218.1818181818182" y2="3.0" id="interact_bar_8" style="stroke-width: 5; stroke: teal"></svg:line>
+               <svg:line x1="245.45454545454547" y1="0" x2="245.45454545454547" y2="2.0" id="interact_bar_9" style="stroke-width: 5; stroke: brown"></svg:line>
+               <svg:line x1="272.72727272727275" y1="0" x2="272.72727272727275" y2="1.0" id="interact_bar_10" style="stroke-width: 5; stroke: black"></svg:line>
+            </svg:g>
+         </svg:svg>
+      </div>
+      <table border="1" cellspacing="1" cellpadding="1">
+         <tbody>
+            <tr>
+               <td>Bar 1</td>
+               <td><input type="text" value="1.0" onchange="on_change(10, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 2</td>
+               <td><input type="text" value="2.0" onchange="on_change(9, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 3</td>
+               <td><input type="text" value="3.0" onchange="on_change(8, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 4</td>
+               <td><input type="text" value="4.0" onchange="on_change(7, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 5</td>
+               <td><input type="text" value="5.0" onchange="on_change(6, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 6</td>
+               <td><input type="text" value="13.0" onchange="on_change(5, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 7</td>
+               <td><input type="text" value="2.7" onchange="on_change(4, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 8</td>
+               <td><input type="text" value="13.9" onchange="on_change(3, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 9</td>
+               <td><input type="text" value="22.0" onchange="on_change(2, this.value)"></td>
+            </tr>
+            <tr>
+               <td>Bar 10</td>
+               <td><input type="text" value="8.5" onchange="on_change(1, this.value)"></td>
+            </tr>
+         </tbody>
+      </table>
+   </body>
+</html>

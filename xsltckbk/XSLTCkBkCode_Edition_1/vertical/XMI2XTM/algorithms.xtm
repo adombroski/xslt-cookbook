@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xtm:topicMap xmlns:xtm="http://www.topicmaps.org/xtm/1.0" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <xtm:topic id="algorithm">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef xlink:href="&amp;NIST;/algorithm.html"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>algorithm</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="sort">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef xlink:href="&amp;NIST;/sort.html"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>sort</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:instanceOf>
+         <topicRef xlink:href="#algorithm"/>
+      </xtm:instanceOf>
+   </xtm:topic>
+   <xtm:topic id="quicksort">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef xlink:href="&amp;NIST;/quicksort.html"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>quicksort</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:variant>
+         <xtm:variantName>
+            <xtm:resourceRef xlink:href="#qsort"/>
+         </xtm:variantName>
+         <xtm:parameters>
+            <xtm:topicRef xlink:href="CLang"/>
+         </xtm:parameters>
+         <xtm:variant>
+            <xtm:variantName>
+               <xtm:resourceRef xlink:href="#test"/>
+            </xtm:variantName>
+            <xtm:parameters>
+               <xtm:subjectIdicatorRef xlink:href="bar"/>
+            </xtm:parameters>
+         </xtm:variant>
+      </xtm:variant>
+      <xtm:instanceOf>
+         <topicRef xlink:href="#in-place sort"/>
+      </xtm:instanceOf>
+      <xtm:occurance>
+         <xtm:resourceRef xlink:href="&amp;DSAL;/QSort.html"/>
+      </xtm:occurance>
+      <xtm:occurance>
+         <xtm:resourceRef xlink:href="http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/quick/quicken.htm"/>
+      </xtm:occurance>
+      <xtm:occurance>
+         <xtm:resourceData>Definition: An in-place sort algorithm that uses the divide and conquer paradigm. It picks an element from the array (the pivot), partitions the remaining elements into those greater than and less than this pivot, and recursively sorts the partitions. There are many variants of the basic scheme above: to select the pivot, to partition the array, to stop the recursion on small partitions, etc.</xtm:resourceData>
+      </xtm:occurance>
+   </xtm:topic>
+   <xtm:topic id="in-place sort">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef xlink:href="&amp;NIST;/inplacesort.html"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>in-place sort</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:topic id="insertion sort">
+      <xtm:subjectIdentity>
+         <xtm:subjectIdicatorRef xlink:href="&amp;NIST;/insertsrt.html"/>
+      </xtm:subjectIdentity>
+      <xtm:baseName>
+         <xtm:baseNameString>insertion sort</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:instanceOf>
+         <topicRef xlink:href="#in-place sort"/>
+      </xtm:instanceOf>
+      <xtm:occurance>
+         <xtm:resourceData>Definition: Sort by repeatedly taking the next item and inserting it into the final data structure in its proper order with respect to items already inserted. Run time is O(n2) because of moves. 
+</xtm:resourceData>
+      </xtm:occurance>
+   </xtm:topic>
+   <xtm:topic id="quick sort specification">
+      <xtm:baseName>
+         <xtm:baseNameString>quick sort specification</xtm:baseNameString>
+      </xtm:baseName>
+      <xtm:occurance>
+         <xtm:instanceOf>
+            <topicRef xlink:href="#in-place sort"/>
+         </xtm:instanceOf>
+         <xtm:resourceRef xlink:href="#quicksort"/>
+      </xtm:occurance>
+   </xtm:topic>
+   <xtm:topic id="CLang">
+      <xtm:baseName>
+         <xtm:baseNameString>C Programming Language</xtm:baseNameString>
+      </xtm:baseName>
+   </xtm:topic>
+   <xtm:asociation id="G.25">
+      <xtm:instanceOf>
+         <subjectIndicatorRef xlink:href="http://www.topicmaps.org/xtm/index.html#psi-superclass-subclass"/>
+      </xtm:instanceOf>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:subjectIndicatorRef xlink:href="http://www.topicmaps.org/xtm/index.html#psi-superclass"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="#sort"/>
+      </xtm:member>
+      <xtm:member>
+         <xtm:roleSpec>
+            <xtm:subjectIndicatorRef xlink:href="http://www.topicmaps.org/xtm/index.html#psi-subclass"/>
+         </xtm:roleSpec>
+         <xtm:topicRef xlink:href="#in-place sort"/>
+      </xtm:member>
+   </xtm:asociation>
+</xtm:topicMap>

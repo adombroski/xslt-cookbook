@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<review>
+	<author>
+		<name>Sal Mangano</name>
+		<email>smangano@somewhere.com</email>
+	</author>
+	<title>XSLT Cookbook</title>
+	<reviewer>
+		<name> <annonymous/> </name>
+		<email>smangano@somewhere.com</email>
+		<comment>
+		 Totatly awesome. Worth every cent! Must buy because I
+		 know the author peronally and he can sure use the 
+		 money.
+		</comment>
+	</reviewer>
+</review>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 10.0, SVG Export Plug-In . SVG Version: 3.0.0 Build 76)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"    "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_svg "http://www.w3.org/2000/svg">
+	<!ENTITY ns_xlink "http://www.w3.org/1999/xlink">
+]>
+<svg  xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 width="370.786" height="339.286" viewBox="0 0 370.786 339.286" overflow="visible" enable-background="new 0 0 370.786 339.286"
+	 xml:space="preserve">
+	<g id="Layer_1">
+		<g id="Layer_1_1_">
+			<path fill="none" stroke="#000000" d="M370.286,338.786H0.571V0.5h369.715V338.786z"/>
+			<path fill="none" stroke="#000000" d="M0.571,126.214h52"/>
+			<path fill="none" stroke="#000000" d="M59.571,138.214"/>
+			<path fill="none" stroke="#000000" d="M7.571,138.214"/>
+			<path fill="none" stroke="#000000" d="M274.286,126.214h95.43"/>
+			<path fill="none" stroke="#000000" d="M182.286,126.214h57.285"/>
+			<g>
+				<path fill="none" stroke="#000000" d="M86.571,126.214h52"/>
+				<path fill="none" stroke="#000000" d="M111.429,1.072v125.143"/>
+			</g>
+			<path fill="none" stroke="#000000" d="M217.713,0.5v125.714"/>
+			<path fill="none" stroke="#000000" d="M322.286,0.5v39.429"/>
+			<path fill="none" stroke="#000000" d="M369.143,40.357h-30.285"/>
+			<path fill="none" stroke="#000000" d="M0,173.929h136"/>
+			<path fill="none" stroke="#000000" d="M217.143,277.071v61.145"/>
+			<g>
+				<path fill="none" stroke="#000000" d="M217.143,173.643v49.714"/>
+				<path fill="none" stroke="#000000" d="M217,173.643h-42.288"/>
+			</g>
+			<path fill="none" stroke="#000000" d="M217,173.643h23"/>
+			<path fill="none" stroke="#000000" d="M277.286,173.643h92"/>
+			<path fill="none" stroke="#000000" d="M1.286,264.929h54"/>
+			<path fill="none" stroke="#000000" d="M55.286,264.929v53"/>
+			<g id="bedroom1">
+				<path fill="none" stroke="#FFFFFF" d="M105.286,121.929h-101v-117h101V121.929z"/>
+			</g>
+			<g id="bedroom2">
+				<path fill="none" stroke="#FFFFFF" d="M212.286,120.929h-97v-116h97V120.929z"/>
+			</g>
+			<g id="masterBath">
+				<path fill="none" stroke="#FFFFFF" d="M366.286,36.929h-38v-31h38V36.929z"/>
+			</g>
+			<path fill="none" stroke="#000000" d="M317.286,121.929"/>
+			<path fill="none" stroke="#000000" d="M318.286,43.835"/>
+			<g id="masterBedRoom">
+				<path fill="none" stroke="#FFFFFF" d="M317.286,121.929h-94v-115h94v36.907"/>
+				<path fill="none" stroke="#FFFFFF" d="M318.286,43.835h48v78.169h-48"/>
+			</g>
+			<g id="kitchen">
+				<path fill="none" stroke="#FFFFFF" d="M363.286,333.929h-141v-154h141V333.929z"/>
+			</g>
+			<g id="livingRoom">
+				<path fill="none" stroke="#FFFFFF" d="M205.286,329.929h-141"/>
+				<path fill="none" stroke="#FFFFFF" d="M64.286,254.929h-53"/>
+				<path fill="none" stroke="#FFFFFF" d="M11.286,186.929h194"/>
+				<path fill="none" stroke="#FFFFFF" d="M205.286,186.929v143"/>
+				<path fill="none" stroke="#FFFFFF" d="M64.286,329.929v-75"/>
+				<path fill="none" stroke="#FFFFFF" d="M11.286,254.929v-68"/>
+			</g>
+			<g id="bath1">
+				<path fill="none" stroke="#FFFFFF" d="M49.286,334.929h-43v-62h43V334.929z"/>
+			</g>
+		</g>
+	</g>
+</svg>

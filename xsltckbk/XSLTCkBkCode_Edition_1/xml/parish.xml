@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parish>
+  <famalies>
+    <family name="Smith">
+      <member name="John"/>
+    </family>
+  </famalies>
+  <clubs>
+    <club name="chior">
+      <member name=""/>
+    </club>
+    <club name="300 Club">
+      <member/>
+    </club>
+  </clubs>
+</parish>

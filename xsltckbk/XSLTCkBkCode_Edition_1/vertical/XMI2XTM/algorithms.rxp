@@ -1,0 +1,355 @@
+Platform: NT
+Output: MBCS
+Rose Version: 6.5.9232.10
+********Object Flows Not supported ***********
+Global Symbol Entered; Model: 'algorithms' with id G.1 at index  0
+Scoped Symbol Entered; Category: 'Logical View' with id S.10000 at index  0
+Scoped Symbol Entered; Category: 'Algorithms' with id S.10001 at index  1
+Scoped Symbol Entered; Class: 'algorithm' with id S.10002 at index  2
+Stereotype Entered: Class topic with id 'G.2' at index  0
+Scoped Symbol Entered; Attribute: 'subjectIdentity' with id S.10003 at index  3
+Scoped Symbol Entered; Class: 'sort' with id S.10004 at index  4
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Attribute: 'subjectIdentity' with id S.10005 at index  5
+Scoped Symbol Entered; Class: 'quicksort' with id S.10006 at index  6
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Attribute: 'subjectIdentity' with id S.10007 at index  7
+Scoped Symbol Entered; Class: 'in-place sort' with id S.10008 at index  8
+Scoped Symbol Entered; Attribute: 'subjectIdentity' with id S.10009 at index  9
+Scoped Symbol Entered; Class: 'insertion sort' with id S.10010 at index  10
+Enter Stereotype: topic Class is already present
+Scoped Symbol Entered; Attribute: 'subjectIdentity' with id S.10011 at index  11
+Scoped Symbol Entered; Class: 'quick sort demo' with id S.10012 at index  12
+Stereotype Entered: Class resource with id 'G.3' at index  1
+Scoped Symbol Entered; Attribute: 'resourceName' with id S.10013 at index  13
+Scoped Symbol Entered; Class: 'quick sort specification' with id S.10014 at index  14
+Scoped Symbol Entered; Attribute: 'resourceName' with id S.10015 at index  15
+Scoped Symbol Entered; Class: 'insertion sort definition' with id S.10016 at index  16
+Enter Stereotype: resource Class is already present
+Scoped Symbol Entered; Attribute: 'resourceData' with id S.10017 at index  17
+Scoped Symbol Entered; Class: 'quick sort definition' with id S.10018 at index  18
+Enter Stereotype: resource Class is already present
+Scoped Symbol Entered; Attribute: 'resourceData' with id S.10019 at index  19
+Scoped Symbol Entered; Class: 'qsort' with id S.10020 at index  20
+Stereotype Entered: Class variant with id 'G.4' at index  2
+Scoped Symbol Entered; Attribute: 'language' with id S.10021 at index  21
+Stereotype Entered: Attribute topic with id 'G.5' at index  3
+Scoped Symbol Entered; Class: 'C Programming Language' with id S.10022 at index  22
+Scoped Symbol Entered; Attribute: 'id' with id S.10023 at index  23
+Scoped Symbol Entered; Class: 'test' with id S.10024 at index  24
+Enter Stereotype: variant Class is already present
+Scoped Symbol Entered; Attribute: 'foo' with id S.10025 at index  25
+Stereotype Entered: Attribute subject with id 'G.6' at index  4
+Global Symbol Entered; Association: '{quick sort demo-quicksort}{3D6D7A2002AF}' with id G.7 at index  1
+Stereotype Entered: Association occurance with id 'G.8' at index  5
+Global Symbol Entered; Role: '{3D6D7A210128}' with id G.9 at index  2
+Global Symbol Entered; Role: '{3D6D7A210129}' with id G.10 at index  3
+Global Symbol Entered; Association: '{quick sort specification-quicksort}{3D6D7BF60203}' with id G.11 at index  4
+Enter Stereotype: occurance Association is already present
+Global Symbol Entered; Role: '{3D6D7BF700DA}' with id G.12 at index  5
+Global Symbol Entered; Role: '{3D6D7BF700DB}' with id G.13 at index  6
+Global Symbol Entered; Association: '{insertion sort definition-insertion sort}{3D6D7D980280}' with id G.14 at index  7
+Enter Stereotype: occurance Association is already present
+Global Symbol Entered; Role: '{3D6D7D990148}' with id G.15 at index  8
+Global Symbol Entered; Role: '{3D6D7D990149}' with id G.16 at index  9
+Global Symbol Entered; Association: '{quick sort definition-quicksort}{3D6D7E1C007D}' with id G.17 at index  10
+Enter Stereotype: occurance Association is already present
+Global Symbol Entered; Role: '{3D6D7E1C029F}' with id G.18 at index  11
+Global Symbol Entered; Role: '{3D6D7E1C02A0}' with id G.19 at index  12
+Global Symbol Entered; Dependency: '{sort?algorithm}{3D6D7641000F}' with id G.20 at index  13
+Stereotype Entered: Dependency instanceOf with id 'G.21' at index  6
+Global Symbol Entered; Dependency: '{quicksort?in-place sort}{3D6D77F1002E}' with id G.22 at index  14
+Enter Stereotype: instanceOf Dependency is already present
+Global Symbol Entered; Dependency: '{insertion sort?in-place sort}{3D6D796C0196}' with id G.23 at index  15
+Enter Stereotype: instanceOf Dependency is already present
+Scoped Symbol Entered; Subsystem: 'Component View' with id S.10026 at index  26
+Scoped Symbol Entered; Category: 'Use Case View' with id S.10027 at index  27
+Create Model: algorithms
+Create UMLClass: algorithm
+Stereotype Ref created for stereotype 'topic' of Class: algorithm
+Global Symbol Entered; Basic Type: '<undefined>' with id G.24 at index  16
+Create UMLClass: sort
+Stereotype Ref created for stereotype 'topic' of Class: sort
+Create UMLClass: quicksort
+Stereotype Ref created for stereotype 'topic' of Class: quicksort
+Create AssociationRef for Class: quicksort
+Switch Roles: Role1Type = Logical View::Algorithms::quick sort demo Role2Type = Logical View::Algorithms::quicksort
+Add Association End ref(G.10) Role: {3D6D7A210129}
+Create AssociationRef for Class: quicksort
+Switch Roles: Role1Type = Logical View::Algorithms::quick sort specification Role2Type = Logical View::Algorithms::quicksort
+Add Association End ref(G.13) Role: {3D6D7BF700DB}
+Create AssociationRef for Class: quicksort
+Switch Roles: Role1Type = Logical View::Algorithms::quick sort definition Role2Type = Logical View::Algorithms::quicksort
+Add Association End ref(G.19) Role: {3D6D7E1C02A0}
+Create UMLClass: in-place sort
+Create UMLClass: insertion sort
+Stereotype Ref created for stereotype 'topic' of Class: insertion sort
+Create AssociationRef for Class: insertion sort
+Switch Roles: Role1Type = Logical View::Algorithms::insertion sort definition Role2Type = Logical View::Algorithms::insertion sort
+Add Association End ref(G.16) Role: {3D6D7D990149}
+Create UMLClass: quick sort demo
+Stereotype Ref created for stereotype 'resource' of Class: quick sort demo
+Create AssociationRef for Class: quick sort demo
+Add Association End ref(G.9) Role: {3D6D7A210128}
+Create UMLClass: quick sort specification
+Create AssociationRef for Class: quick sort specification
+Add Association End ref(G.12) Role: {3D6D7BF700DA}
+Create UMLClass: insertion sort definition
+Stereotype Ref created for stereotype 'resource' of Class: insertion sort definition
+Create AssociationRef for Class: insertion sort definition
+Add Association End ref(G.15) Role: {3D6D7D990148}
+Create UMLClass: quick sort definition
+Stereotype Ref created for stereotype 'resource' of Class: quick sort definition
+Create AssociationRef for Class: quick sort definition
+Add Association End ref(G.18) Role: {3D6D7E1C029F}
+Create UMLClass: qsort
+Stereotype Ref created for stereotype 'variant' of Class: qsort
+Stereotype Ref created for stereotype 'topic' of Attribute: language
+Create UMLClass: C Programming Language
+Create UMLClass: test
+Stereotype Ref created for stereotype 'variant' of Class: test
+Stereotype Ref created for stereotype 'subject' of Attribute: foo
+Process Association: {quick sort demo-quicksort}{3D6D7A2002AF}
+Stereotype Ref created for stereotype 'occurance' of Association: {quick sort demo-quicksort}{3D6D7A2002AF}
+Role: 
+  Association End: quick sort demo
+  Association end: G.9 added to association G.7
+  Class/UseCase/Interface: quick sort demo
+Role: 
+  Association End: quicksort
+  Association end: G.10 added to association G.7
+  Class/UseCase/Interface: quicksort
+Process Association: {quick sort specification-quicksort}{3D6D7BF60203}
+Stereotype Ref created for stereotype 'occurance' of Association: {quick sort specification-quicksort}{3D6D7BF60203}
+Role: 
+  Association End: quick sort specification
+  Association end: G.12 added to association G.11
+  Class/UseCase/Interface: quick sort specification
+Role: 
+  Association End: quicksort
+  Association end: G.13 added to association G.11
+  Class/UseCase/Interface: quicksort
+Process Association: {quick sort definition-quicksort}{3D6D7E1C007D}
+Stereotype Ref created for stereotype 'occurance' of Association: {quick sort definition-quicksort}{3D6D7E1C007D}
+Role: 
+  Association End: quick sort definition
+  Association end: G.18 added to association G.17
+  Class/UseCase/Interface: quick sort definition
+Role: 
+  Association End: quicksort
+  Association end: G.19 added to association G.17
+  Class/UseCase/Interface: quicksort
+Process Association: {insertion sort definition-insertion sort}{3D6D7D980280}
+Stereotype Ref created for stereotype 'occurance' of Association: {insertion sort definition-insertion sort}{3D6D7D980280}
+Role: 
+  Association End: insertion sort definition
+  Association end: G.15 added to association G.14
+  Class/UseCase/Interface: insertion sort definition
+Role: 
+  Association End: insertion sort
+  Association end: G.16 added to association G.14
+  Class/UseCase/Interface: insertion sort
+Process Association: {quick sort demo-quicksort}{3D6D7A2002AF}
+>>>>Already Defined -- Quit
+Process Association: {quick sort specification-quicksort}{3D6D7BF60203}
+>>>>Already Defined -- Quit
+Process Association: {insertion sort definition-insertion sort}{3D6D7D980280}
+>>>>Already Defined -- Quit
+Process Association: {quick sort definition-quicksort}{3D6D7E1C007D}
+>>>>Already Defined -- Quit
+CreateClassGeneralizations for pkg: Logical View
+CreateClassGeneralizations for pkg: Logical View::Algorithms
+CreateAClassGeneralization for class: Logical View::Algorithms::in-place sort
+Global Symbol Entered; Generalization: '{in-place sort->sort}{3D6D7849000F}' with id G.25 at index  17
+CreateAClassGeneralization for class: Logical View::Algorithms::qsort
+Global Symbol Entered; Generalization: '{qsort->quicksort}{3D70EC2E0119}' with id G.26 at index  18
+CreateAClassGeneralization for class: Logical View::Algorithms::test
+Global Symbol Entered; Generalization: '{test->qsort}{3D70F6560399}' with id G.27 at index  19
+CreateClassGeneralizations for pkg: Use Case View
+Create Class Dependency: {sort?algorithm}{3D6D7641000F} @G.20
+Stereotype Ref created for stereotype 'instanceOf' of Dependency: {sort?algorithm}{3D6D7641000F}
+Create Class Dependency: {quicksort?in-place sort}{3D6D77F1002E} @G.22
+Stereotype Ref created for stereotype 'instanceOf' of Dependency: {quicksort?in-place sort}{3D6D77F1002E}
+Create Class Dependency: {insertion sort?in-place sort}{3D6D796C0196} @G.23
+Stereotype Ref created for stereotype 'instanceOf' of Dependency: {insertion sort?in-place sort}{3D6D796C0196}
+Create UMLStereotype: topic with id G.2
+Create UMLStereotype: resource with id G.3
+Create UMLStereotype: variant with id G.4
+Create UMLStereotype: topic with id G.5
+Create UMLStereotype: subject with id G.6
+Create UMLStereotype: occurance with id G.8
+Create UMLStereotype: instanceOf with id G.21
+Create Package diagrams for Algorithms/Algorithms
+GenerateClassDiagrams -- category: Algorithms
+New UISModelElement created @ G.28, extends S.10001
+Scoped Symbol Entered; ClassDiagram: 'Sorting' with id S.10028 at index  28
+Generate Class Diagram: Logical View::Algorithms::Sorting
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.29
+** Class model id is S.10002
+AddPresentationForNoteView ignores label: 'algorithm'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.30
+** Class model id is S.10004
+AddPresentationForNoteView ignores label: 'sort'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: NoteView, for item of type: ClassDependency
+Create UMLPresentation for Class Dep # G.31
+AddPresentationForNoteView ignores label: ''
+Rose shortcoming forces dropping of label: <<instanceOf>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.32
+** Class model id is S.10008
+AddPresentationForNoteView ignores label: 'in-place sort'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.33
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.34
+** Class model id is S.10016
+AddPresentationForNoteView ignores label: 'insertion sort definition'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<resource>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.35
+** Class model id is S.10010
+AddPresentationForNoteView ignores label: 'insertion sort'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: NoteView, for item of type: ClassDependency
+Create UMLPresentation for Class Dep # G.36
+AddPresentationForNoteView ignores label: ''
+Rose shortcoming forces dropping of label: <<instanceOf>>
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.37
+**Association model id = G.14
+Create UMLPresentation for Role # G.38
+Role Presentation: G.38, refers to G.15
+Create UMLPresentation for Role # G.39
+Role Presentation: G.39, refers to G.16
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: 
+Rose shortcoming forces dropping of label: <<occurance>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.40
+** Class model id is S.10012
+AddPresentationForNoteView ignores label: 'quick sort demo'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<resource>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.41
+** Class model id is S.10014
+AddPresentationForNoteView ignores label: 'quick sort specification'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.42
+** Class model id is S.10018
+AddPresentationForNoteView ignores label: 'quick sort definition'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<resource>>'
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.43
+** Class model id is S.10006
+AddPresentationForNoteView ignores label: 'quicksort'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<topic>>'
+Process itemview of type: NoteView, for item of type: ClassDependency
+Create UMLPresentation for Class Dep # G.44
+AddPresentationForNoteView ignores label: ''
+Rose shortcoming forces dropping of label: <<instanceOf>>
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.45
+**Association model id = G.7
+Create UMLPresentation for Role # G.46
+Role Presentation: G.46, refers to G.9
+Create UMLPresentation for Role # G.47
+Role Presentation: G.47, refers to G.10
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: <<occurance>>
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.48
+**Association model id = G.11
+Create UMLPresentation for Role # G.49
+Role Presentation: G.49, refers to G.12
+Create UMLPresentation for Role # G.50
+Role Presentation: G.50, refers to G.13
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: <<occurance>>
+Process itemview of type: NoteView, for item of type: Association
+Create UMLPresentation for Assn # G.51
+**Association model id = G.17
+Create UMLPresentation for Role # G.52
+Role Presentation: G.52, refers to G.18
+Create UMLPresentation for Role # G.53
+Role Presentation: G.53, refers to G.19
+Process itemview of type: NoteView, for item of type: Role
+Process itemview of type: NoteView, for item of type: Role
+Rose shortcoming forces dropping of label: <<occurance>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.54
+** Class model id is S.10020
+AddPresentationForNoteView ignores label: 'qsort'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<variant>>'
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.55
+Rose shortcoming forces dropping of label: <<variant>>
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.56
+** Class model id is S.10022
+AddPresentationForNoteView ignores label: 'C Programming Language'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+Process itemview of type: ClassView, for item of type: Class
+Create UMLPresentation for Class # G.57
+** Class model id is S.10024
+AddPresentationForNoteView ignores label: 'test'
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: ''
+AddPresentationForNoteView ignores label: '<<variant>>'
+Process itemview of type: NoteView, for item of type: InheritRelation
+Create UMLPresentation for Inheritance # G.58
+Rose shortcoming forces dropping of label: <<variant>>
+GenerateScenarioDiagram -- category: Algorithms
+GenerateStateActivityDiagram -- category: Algorithms
+GenerateStateActivityDiagram -- class: algorithm
+GenerateStateActivityDiagram -- class: sort
+GenerateStateActivityDiagram -- class: quicksort
+GenerateStateActivityDiagram -- class: in-place sort
+GenerateStateActivityDiagram -- class: insertion sort
+GenerateStateActivityDiagram -- class: quick sort demo
+GenerateStateActivityDiagram -- class: quick sort specification
+GenerateStateActivityDiagram -- class: insertion sort definition
+GenerateStateActivityDiagram -- class: quick sort definition
+GenerateStateActivityDiagram -- class: qsort
+GenerateStateActivityDiagram -- class: C Programming Language
+GenerateStateActivityDiagram -- class: test
+Create Package diagrams for /algorithms
+GenerateClassDiagrams -- category: Logical View
+New UISModelElement created @ G.59, extends G.1
+Scoped Symbol Entered; ClassDiagram: 'Main' with id S.10029 at index  29
+Generate Class Diagram: Logical View::Main
+Process itemview of type: NoteView, for item of type: Category
+Create UMLPresentation for Cat # G.60
+AddPresentationForNoteView ignores label: 'Algorithms'
+GenerateScenarioDiagram -- category: Logical View
+GenerateStateActivityDiagram -- category: Logical View
+Using existing UISModelElement @ G.59, extends G.1
+Scoped Symbol Entered; ModuleDiagram: 'Main' with id S.10030 at index  30
+Generate Module Diagram: Main

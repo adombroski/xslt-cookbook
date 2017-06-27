@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text>
+The first argument gives the length of the padding string to be created. 
+The second argument gives a string to be used to create the padding. This string is repeated as many times as is necessary to create a string of the length specified by the first argument; if the string is more than a character long, it may have to be truncated to produce the required length. If no second argument is specified, it defaults to a space (' '). If the second argument is an empty string, str:padding returns an empty string.
+string str:align(string, string, string?)
+The str:align function aligns a string within another string. 
+The first argument gives the target string to be aligned. The second argument gives the padding string within which it is to be aligned. 
+If the target string is shorter than the padding string then a range of characters in the padding string are replaced with those in the target string. Which characters are replaced depends on the value of the third argument, which gives the type of alignment. It can be one of 'left', 'right' or 'center'. If no third argument is given or if it is not one of these values, then it defaults to left alignment. 
+With left alignment, the range of characters replaced by the target string begins with the first character in the padding string. With right alignment, the range of characters replaced by the target string ends with the last character in the padding string. With center alignment, the range of characters replaced by the target string is in the middle of the padding string, such that either the number of unreplaced characters on either side of the range is the same or there is one less on the left than there is on the right. 
+If the target string is longer than the padding string, then it is truncated to be the same length as the padding string and returned. 
+string str:encode-uri(string)
+The str:encode-uri function returns an encoded URI. The str:encode-uri method does not encode the following characters: ":", "/", ";", and "?". 
+A URI encoded string is one that converts unsafe and reserved characters with "%" immediately followed by two hexadecimal digits (0-9, A-F) giving the ISO Latin 1 code for that character.
+string str:decode-uri(string)
+The str:decode-uri function decodes a string that has been URI-encoded. See str:encode-uri for an explanation.
+string str:concat(node-set)
+The str:concat function takes a node set and returns the concatenation of the string values of the nodes in that node set. If the node set is empty, it returns an empty string. 
+node-set str:split(string, string?)
+The str:split function splits up a string and returns a node set of token elements, each containing one token from the string. The first argument is the string to be split. The second argument is a pattern string. The string given by the first argument is split at any occurrence of this pattern. 
+If the second argument is omitted, the default is the string '&#x20;' (i.e. a space).
+If the second argument is an empty string, the function returns a set of token elements, each of which holds a single character.
+Discussion
+Using the EXSLT string functions does not guarantee portability as there is no present XSLT implementation that supports all of them. In fact, according to the EXSLT web site, some functions have no current implementation. The EXSLT team makes up for this by providing native XSLT implementations, Java Script and/or Msxsl implementations where possible. 
+A good reason for using EXSLT is that the members of the EXSLT team are very active in the XSLT community and it is likely that many implementations will eventually support most of their extensions. It is also possible that some of their work will be incorporated into a future standard XSLT release.
+</text>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE svg
+  PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="1000" height="500">
+   <g transform="scale(34.48275862068966)">
+      <rect x="19.77777777777778" y="1" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1"/>
+      <line x1="20.27777777777778" y1="2" x2="13.833333333333334" y2="3"/>
+      <line x1="20.27777777777778" y1="2" x2="21.5" y2="3"/>
+      <line x1="20.27777777777778" y1="2" x2="25.5" y2="3"/>
+      <g THISX="14.333333333333334" MAXX="20" MAXY="8">
+         <rect x="13.333333333333334" y="3" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1"/>
+         <line x1="13.833333333333334" y1="4" x2="5.5" y2="5"/>
+         <line x1="13.833333333333334" y1="4" x2="11.5" y2="5"/>
+         <line x1="13.833333333333334" y1="4" x2="13.5" y2="5"/>
+         <line x1="13.833333333333334" y1="4" x2="15.5" y2="5"/>
+         <line x1="13.833333333333334" y1="4" x2="17.5" y2="5"/>
+         <line x1="13.833333333333334" y1="4" x2="19.5" y2="5"/>
+    
+         <g THISX="6" MAXX="10" MAXY="8">
+            <rect x="5" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1"/>
+            <line x1="5.5" y1="6" x2="1.5" y2="7"/>
+            <line x1="5.5" y1="6" x2="3.5" y2="7"/>
+            <line x1="5.5" y1="6" x2="5.5" y2="7"/>
+            <line x1="5.5" y1="6" x2="7.5" y2="7"/>
+            <line x1="5.5" y1="6" x2="9.5" y2="7"/>
+      
+            <g THISX="2" MAXX="2" MAXY="8">
+               <rect x="1" y="7" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+      
+            <g THISX="4" MAXX="4" MAXY="8">
+               <rect x="3" y="7" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+      
+            <g THISX="6" MAXX="6" MAXY="8">
+               <rect x="5" y="7" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+      
+            <g THISX="8" MAXX="8" MAXY="8">
+               <rect x="7" y="7" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+      
+            <g THISX="10" MAXX="10" MAXY="8">
+               <rect x="9" y="7" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+            </g>
+    
+         </g>
+    
+         <g THISX="12" MAXX="12" MAXY="6">
+            <rect x="11" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+    
+         <g THISX="14" MAXX="14" MAXY="6">
+            <rect x="13" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+    
+         <g THISX="16" MAXX="16" MAXY="6">
+            <rect x="15" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+    
+         <g THISX="18" MAXX="18" MAXY="6">
+            <rect x="17" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+    
+         <g THISX="20" MAXX="20" MAXY="6">
+            <rect x="19" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+  
+      </g>
+      <g THISX="22" MAXX="22" MAXY="4">
+         <rect x="21" y="3" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+      </g>
+      <g THISX="26" MAXX="28" MAXY="6">
+         <rect x="25" y="3" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1"/>
+         <line x1="25.5" y1="4" x2="23.5" y2="5"/>
+         <line x1="25.5" y1="4" x2="25.5" y2="5"/>
+         <line x1="25.5" y1="4" x2="27.5" y2="5"/>
+    
+         <g THISX="24" MAXX="24" MAXY="6">
+            <rect x="23" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+    
+         <g THISX="26" MAXX="26" MAXY="6">
+            <rect x="25" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+    
+         <g THISX="28" MAXX="28" MAXY="6">
+            <rect x="27" y="5" width="1" height="1" style="fill: none; stroke: black; stroke-width:0.1;"/>
+         </g>
+  
+      </g>
+   </g>
+</svg>

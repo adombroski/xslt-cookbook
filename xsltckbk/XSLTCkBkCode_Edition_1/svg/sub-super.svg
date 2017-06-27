@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN" "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
+<svg xmlns:m="http://www.w3.org/1998/Math/MathML" width="100pt" height="200pt">
+	<text x="1" y="1em" style="font-size: 20pt;">
+    x
+    =
+    
+    a<tspan style="baseline-shift: super; font-size: 50%;">2</tspan>
+    +
+    b<tspan style="baseline-shift: sub; font-size: 50%;">2</tspan>
+    +
+    c<tspan style="baseline-shift: sub; font-size: 50%;">2 
+		</tspan><tspan style="baseline-shift: super;font-size: 50%;" dx="-1em">10</tspan>
+	</text>
+</svg>

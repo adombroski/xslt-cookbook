@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<animals>
+  <mammals>
+    <animal common="hippo" species="Hippopotamus amphibius" family=" Hippopotamidae"/>
+    <animal common="arabian camel" species="Camelus dromedarius" family="Camelidae"/>
+  </mammals>
+  <insects>
+    <animal common="Lady Bug" species="Adalia bipunctata" family="Coccinellidae"/>
+    <animal common="Dung Bettle" species=" Onthophagus australis" family="Scarabaeidae"/>
+  </insects>
+  <amphibians>
+    <animal common="Green Sea Turtle" species="Chelonia mydas" family="Cheloniidae"/>
+    <animal common="Green Tree Frog" species=" Hyla cinerea" family="Hylidae "/>
+  </amphibians>
+</animals>

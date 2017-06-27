@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="MessageRepository">
+    <xs:annotation>
+      <xs:documentation>A repository describing messages exchanged by a client-server application.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Documentation" minOccurs="0"/>
+        <xs:element name="DataTypes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:choice maxOccurs="unbounded">
+                <xs:element ref="Structure"/>
+                <xs:element ref="XML"/>
+                <xs:element ref="Primitive"/>
+                <xs:element ref="Array"/>
+                <xs:element ref="Enumeration"/>
+              </xs:choice>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Messages">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="Message" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Processes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="Process" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Documentation" type="xs:anyType"/>
+  <xs:element name="Name" type="xs:Name"/>
+  <xs:element name="ProcessRef"/>
+  <xs:element name="DataTypeName" type="xs:Name"/>
+  <xs:element name="Size" type="xs:unsignedInt"/>
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name"/>
+        <xs:element ref="Documentation" minOccurs="0"/>
+        <xs:element name="MsgId" type="xs:integer"/>
+        <xs:element ref="DataTypeName"/>
+        <xs:element name="Senders">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="ProcessRef" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Receivers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="ProcessRef" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Process">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name"/>
+        <xs:element ref="Documentation" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Structure">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name"/>
+        <xs:element ref="Documentation" minOccurs="0"/>
+        <xs:element name="Members">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Member" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="Documentation" minOccurs="0"/>
+                    <xs:element ref="Name"/>
+                    <xs:element ref="DataTypeName"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="XML">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name"/>
+        <xs:element ref="Documentation" minOccurs="0"/>
+        <xs:element name="schema"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Primitive">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name"/>
+        <xs:element ref="Documentation" minOccurs="0"/>
+        <xs:element ref="Size"/>
+        <xs:element name="Category">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="signed integer"/>
+              <xs:enumeration value="unsigned integer"/>
+              <xs:enumeration value="enumeration"/>
+              <xs:enumeration value="real"/>
+              <xs:enumeration value="string"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Array">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name"/>
+        <xs:element ref="Documentation" minOccurs="0"/>
+        <xs:element ref="DataTypeName"/>
+        <xs:element ref="Size"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Enumeration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name"/>
+        <xs:element ref="Documentation" minOccurs="0"/>
+        <xs:element name="Enumerators">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Enumerator" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="Name"/>
+                    <xs:element name="Value" type="xs:integer"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

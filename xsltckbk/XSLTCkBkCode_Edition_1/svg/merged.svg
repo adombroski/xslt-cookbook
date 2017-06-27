@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE svg
+  PUBLIC "-//W3C//DTD SVG 1.0/EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="650" height="500">
+	
+   <g id="axis" transform="translate(0 500) scale(1 -1)">
+		
+      <line id="axis-y" x1="30" y1="20" x2="30" y2="450" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+		
+      <line id="axis-x" x1="30" y1="20" x2="460" y2="20" style="fill:none;stroke:rgb(0,0,0);stroke-width:2"/>
+	
+   </g>
+	
+   <g id="bars" transform="translate(60 479) scale(1 -0.39090909090909093)">
+      <rect x="30" y="0" width="50" style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:0" height="70"/>
+      <rect x="100" y="0" width="50" style="fill:rgb(0,255,0);stroke:rgb(0,0,0);stroke-width:0" height="880"/>
+      <rect x="170" y="0" width="50" style="fill:rgb(255,255,0);stroke:rgb(0,0,0);stroke-width:0" height="1000"/>
+      <rect x="240" y="0" width="50" style="fill:rgb(0,255,255);stroke:rgb(0,0,0);stroke-width:0" height="532"/>
+      <rect x="310" y="0" width="50" style="fill:rgb(0,0,255);stroke:rgb(0,0,0);stroke-width:0" height="100"/>
+   </g>
+	
+   <g id="scale" transform="translate(29 60)">
+      <text id="scale1" x="0px" y="320px" style="text-anchor:end;fill:rgb(0,0,0);font-size:10;font-family:Arial">275</text>
+      <text id="scale2" x="0px" y="215px" style="text-anchor:end;fill:rgb(0,0,0);font-size:10;font-family:Arial">550</text>
+      <text id="scale3" x="0px" y="107.5px" style="text-anchor:end;fill:rgb(0,0,0);font-size:10;font-family:Arial">825</text>
+      <text id="scale4" x="0px" y="0px" style="text-anchor:end;fill:rgb(0,0,0);font-size:10;font-family:Arial">1100</text>
+   </g>
+	
+   <g id="key">
+      <rect id="key1" x="430" y="80" width="25" height="15" style="fill:rgb(255,0,0);stroke:rgb(0,0,0);stroke-width:1"/>
+      <rect id="key2" x="430" y="100" width="25" height="15" style="fill:rgb(0,255,0);stroke:rgb(0,0,0);stroke-width:1"/>
+      <rect id="key3" x="430" y="120" width="25" height="15" style="fill:rgb(255,255,0);stroke:rgb(0,0,0);stroke-width:1"/>
+      <rect id="key5" x="430" y="140" width="25" height="15" style="fill:rgb(0,255,255);stroke:rgb(0,0,0);stroke-width:1"/>
+      <rect id="key4" x="430" y="160" width="25" height="15" style="fill:rgb(0,0,255);stroke:rgb(0,0,0);stroke-width:1"/>
+      <text id="key1-text" x="465px" y="92px" style="fill:rgb(0,0,0);font-size:18;font-family:Arial">Widget</text>
+      <text id="key2-text" x="465px" y="112px" style="fill:rgb(0,0,0);font-size:18;font-family:Arial">Foo Bar</text>
+      <text id="key3-text" x="465px" y="132px" style="fill:rgb(0,0,0);font-size:18;font-family:Arial">Grunt Master 9000</text>
+      <text id="key4-text" x="465px" y="152px" style="fill:rgb(0,0,0);font-size:18;font-family:Arial">Spam Slicer</text>
+      <text id="key5-text" x="465px" y="172px" style="fill:rgb(0,0,0);font-size:18;font-family:Arial">Wonder Bar</text>
+   </g>
+	
+   <g id="title">
+      <text x="325px" y="20px" style="text-anchor:middle;fill:rgb(0,0,0);font-size:24;font-family:Arial">Top 5 Product Sales (in $1000)</text>
+   </g>
+
+</svg>

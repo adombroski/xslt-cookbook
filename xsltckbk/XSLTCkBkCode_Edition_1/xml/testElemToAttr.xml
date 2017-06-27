@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testElemToAttr>
+  <test1>
+    <a>1</a>
+    <b>2</b>
+    <c>3</c>
+  </test1>
+  <test2>
+    <a>1</a>
+    <a>2</a>
+    <a>3</a>
+  </test2>
+  <test3 a="1">
+    <b>2</b>
+    <c>3</c>
+  </test3>
+  <test4>
+    <test4-1>foo</test4-1>
+    <test4-2>
+      <a>1</a>
+      <b>2</b>
+      <c>3</c>
+    </test4-2>
+  </test4>
+</testElemToAttr>

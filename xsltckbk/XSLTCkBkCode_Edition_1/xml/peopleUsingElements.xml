@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people which="MeAndMyFriends">
+  <person>
+    <firstname>Sal</firstname>
+    <lastname>Mangano</lastname>
+    <age>38</age>
+    <height>5.75</height>
+  </person>
+  <person>
+    <firstname nickname="Mike">Michael</firstname>
+    <lastname>Palmieri</lastname>
+    <age>28</age>
+    <height>5.10</height>
+  </person>
+  <person>
+    <firstname>Vito</firstname>
+    <lastname>Palmieri</lastname>
+    <age>38</age>
+    <height>6.0</height>
+  </person>
+  <person>
+    <firstname nickname="Vinny">Vincent</firstname>
+    <lastname>Mari</lastname>
+    <age>37</age>
+    <height>5.8</height>
+  </person>
+</people>

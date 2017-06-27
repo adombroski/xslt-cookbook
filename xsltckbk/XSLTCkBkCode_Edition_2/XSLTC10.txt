@@ -1,0 +1,1626 @@
+Chapter 10
+XML to HTML
+1) Using XSLT as a Styling Language
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="application/xml" href="chapter.xsl"?>
+<chapter label="8">
+  <chapterinfo>
+    <author>
+      <surname>Mangano</surname>
+      <firstname>Sal</firstname>
+    </author>
+    <copyright>
+      <year>2002</year>
+      <holder>O'Reilly</holder>
+    </copyright>
+  </chapterinfo>
+  <title>XML to HTML</title>
+  <epigraph>
+    <para>That was a surprise to me - that people were prepared to painstakingly 
+write HTML</para>
+    <attribution>Tim Berners-Lee</attribution>
+  </epigraph>
+  <sect1>
+    <title>Using XSLT as a Styling Language</title>
+    <sect2>
+      <title>Problem</title>
+      <para>You want to use XSLT to stylize a XML document for dissemination via 
+HTML.</para>
+    </sect2>
+    <sect2>
+      <title>Solution</title>
+      <para>Here we show an example for publishing a snippet of a DocBook document 
+in HTML using a XSLT stylesheet. The document source is a portion of this 
+chapter.</para>
+    </sect2>
+    <sect2>
+      <title>Discussion</title>
+      <para>DocBook is an example of a document centric DTD that enables you to 
+author and store document content in a presentation-neutral form that captures the 
+logical structure of the content. The beauty of authoring documents (especially 
+technical ones) in a this form is that one can use XSLT to transform a single 
+content specification into multiple delivery vehicles such as HTML, PDF, Microsoft 
+Help files and Unix man pages. Although we present this recipe in terms of DocBook, 
+the techniques are applicable to other public domain document schema or documents 
+of your own creation. </para>
+    </sect2>
+  </sect1>
+</chapter>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html"/>
+  
+  <xsl:template match="/">
+    <html>
+      <head>
+        <xsl:apply-templates mode="head"/>
+      </head>
+      <!-- You may want to use styles in a CSS style element rather -->
+      <!-- than hardcoding as I do here -->
+      <body style="margin-left:100;margin-right:100;margin-top:50;margin-
+bottom:50">
+        <xsl:apply-templates/> 
+        <xsl:apply-templates select="chapter/chapterinfo/*" mode="copyright"/> 
+      </body>
+    </html>
+  
+  </xsl:template>
+   
+  <!-- Head -->
+   
+  <xsl:template match="chapter" mode="head">
+    <xsl:apply-templates select="chapterinfo" mode="head" />
+    <xsl:apply-templates select="title" mode="head" />
+  </xsl:template>
+   
+  
+  <xsl:template match="chapter/title" mode="head">
+        <title><xsl:value-of select="."/></title>
+  </xsl:template>
+   
+  <xsl:template match="author" mode="head">
+        <meta name="author" content="{concat(firstname,' ', surname)}"/>
+  </xsl:template>
+   
+  <xsl:template match="copyright" mode="head">
+        <meta name="copyright" content="{concat(holder,' ',year)}"/>
+  </xsl:template>
+   
+  <xsl:template match="text(  )" mode="head"/>
+   
+<!-- Body -->
+  
+  <xsl:template match="chapter">
+    <div align="right" style="font-size : 48pt; font-family: Times serif; font-
+weight : bold; padding-bottom:10; color:red" ><xsl:value-of select="@label"/></div>
+    <xsl:apply-templates/>
+  </xsl:template>  
+   
+  <xsl:template match="chapter/title">
+    <div align="right" style="font-size : 24pt; font-family: Times serif; padding-
+bottom:150; color:red"><xsl:value-of select="."/></div>
+  </xsl:template>
+   
+  <xsl:template match="epigraph/para">
+    <div align="right" style="font-size : 10pt; font-family: Times serif; font-
+style : italic; padding-top:4; padding-bottom:4"><xsl:value-of select="."/></div>
+  </xsl:template>
+   
+  <xsl:template match="epigraph/attribution">
+    <div align="right" style="font-size : 10pt; font-family: Times serif; padding-
+top:4; padding-bottom:4"><xsl:value-of select="."/></div>
+  </xsl:template>
+  
+  
+  <xsl:template match="sect1">
+    <h1 style="font-size : 18pt; font-family: Times serif; font-weight : bold">
+      <xsl:value-of select="title"/>
+    </h1>
+    <xsl:apply-templates/>
+  </xsl:template>
+   
+  <xsl:template match="sect2">
+    <h2 style="font-size : 14pt; font-family: Times serif; font-weight : bold">
+    <xsl:value-of select="title"/>
+    </h2>
+     <xsl:apply-templates/>
+  </xsl:template>
+  
+  <xsl:template match="para">
+    <p style="font-size : 12pt; font-family: Times serif">
+      <xsl:value-of select="."/>
+    </p>
+  </xsl:template>
+   
+  <xsl:template match="text(  )"/>
+   
+<xsl:template match="copyright" mode="copyright">
+  <div style="font-size : 10pt; font-family: Times serif; padding-top : 100">
+    <xsl:text>Copyright </xsl:text>
+    <xsl:value-of select="holder"/>
+    <xsl:text> </xsl:text>
+    <xsl:value-of select="year"/>
+    <xsl:text>. All rights reserved.</xsl:text>
+  </div>
+</xsl:template>   
+   
+<xsl:template match="*" mode="copyright"/>
+   
+</xsl:stylesheet>
+<html>
+   <head>
+      <meta name="author" content="Sal Mangano">
+      <meta name="copyright" content="O'Reilly 2002">
+      <title>XML to HTML</title>
+   </head>
+   <body style="margin-left:100;margin-right:100;margin-top:50;margin-bottom:50">
+      <div align="right" style="font-size : 48pt; font-family: Times serif; font-
+weight : bold; padding-bottom:10; color:red">8</div>
+      <div align="right" style="font-size : 24pt; font-family: Times serif; 
+padding-bottom:150; color:red">XML to HTML</div>
+      <div align="right" style="font-size : 10pt; font-family: Times serif; font-
+style : italic; padding-top:4; padding-bottom:4">That was a surprise to me - that 
+people were prepared to painstakingly write HTML</div>
+      <div align="right" style="font-size : 10pt; font-family: Times serif; 
+padding-top:4; padding-bottom:4">Tim Berners-Lee</div>
+      <h1 style="font-size : 18pt; font-family: Times serif; font-weight : bold">
+Using XSLT as a Styling Language</h1>
+      <h2 style="font-size : 14pt; font-family: Times serif; font-weight : bold">
+Problem</h2>
+      <p style="font-size : 12pt; font-family: Times serif">You want to use XSLT to 
+stylize a XML document for dissemination via HTML.</p>
+      <h2 style="font-size : 14pt; font-family: Times serif; font-weight : bold">
+Solution</h2>
+      <p style="font-size : 12pt; font-family: Times serif">Here we show an example 
+for publishing a snippet of a DocBook document in HTML using a XSLT stylesheet. The 
+document source is a portion of this chapter.
+      </p>
+      <h2 style="font-size : 14pt; font-family: Times serif; font-weight : bold">
+Discussion</h2>
+      <p style="font-size : 12pt; font-family: Times serif">DocBook is an example 
+of a document centric DTD that enables you to author and store document content in 
+a presentation-neutral form that captures the logical structure of the content. The 
+beauty of authoring documents (especially technical ones) in a this form is that 
+one can use XSLT to transform a single content specification into multiple delivery 
+vehicles such as HTML, PDF, Microsoft Help files and Unix man pages. Although we 
+present this recipe in terms of DocBook, the techniques are applicable to other 
+public domain document schema or documents of your own creation.</p>
+      <div style="font-size : 10pt; font-family: Times serif; padding-top : 100">
+Copyright O'Reilly 2002. All rights reserved.</div>
+   </body>
+</html>
+Discussion
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html"/>
+  
+  <xsl:template match="/">
+    <html>
+      <head>
+        <xsl:apply-templates mode="head"/>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+      </head>
+      <body>
+        <xsl:apply-templates/> 
+        <xsl:apply-templates select="chapter/chapterinfo/*" mode="copyright"/> 
+      </body>
+    </html>
+  
+  </xsl:template>
+   
+  <!-- Head -->
+   
+  <xsl:template match="chapter" mode="head">
+    <xsl:apply-templates select="chapterinfo" mode="head" />
+    <xsl:apply-templates select="title" mode="head" />
+  </xsl:template>
+   
+  
+  <xsl:template match="chapter/title" mode="head">
+        <title><xsl:value-of select="."/></title>
+  </xsl:template>
+   
+  <xsl:template match="author" mode="head">
+        <meta name="author" content="{concat(firstname,' ', surname)}"/>
+  </xsl:template>
+   
+  <xsl:template match="copyright" mode="head">
+        <meta name="copyright" content="{concat(holder,' ',year)}"/>
+  </xsl:template>
+   
+  <xsl:template match="text(  )" mode="head"/>
+   
+<!-- Body -->
+  
+  <xsl:template match="chapter">
+    <div class="chapter"><xsl:value-of select="@label"/></div>
+    <xsl:apply-templates/>
+  </xsl:template>  
+   
+  <xsl:template match="chapter/title">
+    <div class="title"><xsl:value-of select="."/></div>
+  </xsl:template>
+   
+  <xsl:template match="epigraph/para">
+    <div class="epigraph"><xsl:value-of select="."/></div>
+  </xsl:template>
+   
+  <xsl:template match="epigraph/attribution">
+    <div class="epigraph-attribution"><xsl:value-of select="."/></div>
+  </xsl:template>
+  
+  
+  <xsl:template match="sect1">
+    <h1><xsl:value-of select="title"/></h1>
+    <xsl:apply-templates/>
+  </xsl:template>
+   
+  <xsl:template match="sect2">
+    <h2><xsl:value-of select="title"/></h2>
+     <xsl:apply-templates/>
+  </xsl:template>
+  
+  <xsl:template match="para">
+    <p class="para"><xsl:value-of select="."/></p>
+  </xsl:template>
+   
+  <xsl:template match="text()"/>
+   
+<xsl:template match="copyright" mode="copyright">
+  <div class="copyright">
+    <xsl:text>Copyright </xsl:text>
+    <xsl:value-of select="holder"/>
+    <xsl:text> </xsl:text>
+    <xsl:value-of select="year"/>
+    <xsl:text>. All rights reserved.</xsl:text>
+  </div>
+</xsl:template>   
+   
+<xsl:template match="*" mode="copyright"/>
+   
+</xsl:stylesheet>
+body
+{
+   margin-left:100;
+   margin-right:100;
+   margin-top:50;
+   margin-bottom:50;
+   font-family: Times serif;
+   font-size : 12pt; 
+   color:black; 
+}
+
+div.chapter
+{
+   text-align:right;
+   font-size : 48pt; 
+   font-weight: bold; 
+   padding-bottom:10; 
+   color:red;
+}
+
+div.title
+{
+   font-size : 24pt; 
+   font-family: Times serif; 
+   padding-bottom:150; 
+   color:red"
+}
+
+div.epigraph
+{   
+   font-style:: italic;
+} 
+
+div.epigraph, div.epigraph-attribution
+{
+   text-align: right; 
+   font-size : 10pt; 
+   padding-top: 4; 
+   padding-bottom: 4;
+}
+
+h1
+{
+   font-size : 18pt; 
+   font-weight : bold;
+} 
+
+h2
+{
+   font-size : 14pt; 
+   font-weight : bold";
+}  
+3) Creating Hyperlinked Documents
+<xsl:stylesheet version="1.0"   
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:saxon="http://icl.com/saxon" 
+ extension-element-prefixes="saxon">
+   
+<xsl:output method="html"/>
+   
+<xsl:template match="/">
+  <xsl:apply-templates select="*" mode="index"/>
+  <xsl:apply-templates select="*" mode="content"/>
+</xsl:template>
+   
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<!--                Create index.html  (mode = "index")                        -->
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<xsl:template match="salesBySalesperson" mode="index">
+  <saxon:output href="index.html">     
+    <html>
+     <head>
+       <title>Sales By Salesperson Index</title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+      <h1>Sales By Salesperson</h1>
+      <xsl:apply-templates mode="index"/>
+     </body>
+    </html>
+  </saxon:output>
+</xsl:template>
+   
+<xsl:template match="salesperson" mode="index">
+  <h2>
+    <a href="{concat(@name,'.html')}">
+      <xsl:value-of select="@name"/>
+    </a>
+  </h2>
+</xsl:template>
+   
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<!--               Create @name.html  (mode = "content")                       -->
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+   
+<xsl:template match="salesperson" mode="content">
+  <saxon:output href="{@name}.html">     
+    <html>
+     <head>
+        <title><xsl:value-of select="@name"/> Sales</title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+      <h1><xsl:value-of select="@name"/> Sales</h1>
+      <ol>
+          <xsl:apply-templates mode="content"/>
+      </ol>
+     </body>
+    </html>
+  </saxon:output>
+</xsl:template>
+   
+<xsl:template match="product" mode="content">
+    <li><xsl:value-of 
+select="@sku"/>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;$<xsl:value-
+of select="@totalSales"/></li>
+</xsl:template>
+   
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="html"/>
+<!—Used to specify which document to output—>
+<!—INDEX : creates the index document —>
+<!—Sales Person's name : creates the page for that salesperson —> 
+<xsl:param name="which" select="'INDEX'"/>
+   
+<xsl:template match="/">
+  <xsl:choose>
+    <xsl:when test="$which='INDEX'">
+      <xsl:apply-templates select="*" mode="index"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:apply-templates select="*/salesperson[@name = $which]" 
+                           mode="content"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+   
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<!--            Create index.html  (mode = "index")                 -->
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<xsl:template match="salesBySalesperson" mode="index">
+  <!— Removed saxon:output. The rest is the same. —>
+</xsl:template>
+   
+<!-- ... -->
+   
+<xsl:template match="salesperson" mode="content">
+  <!— Removed saxon:output. The rest is the same. —>
+</xsl:template>
+   
+<!-- ... -->
+   
+</xsl:stylesheet>
+Discussion
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="html"/>
+   
+<xsl:param name="URL" select="http://www.mycompany.com/"/>
+   
+<!-- elided ... -->
+   
+<xsl:template match="salesperson" mode="index">
+  <h2>
+    <a href="{$URL}{@name}.html'">
+      <xsl:value-of select="@name"/>
+    </a>
+  </h2>
+</xsl:template>
+4) Creating HTML Tables
+<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="html"/>
+   
+<xsl:param name="URL"/>
+   
+<xsl:template match="/">
+  <xsl:apply-templates select="*" mode="index"/>
+  <xsl:apply-templates select="*" mode="content"/>
+</xsl:template>
+   
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<!--             Create index.html  (mode = "index")                -->
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<xsl:template match="salesBySalesperson" mode="index">
+  <!-- Non-standard saxon xsl:document! -->
+  <xsl:document href="index.html">     
+    <html>
+     <head>
+      <title>Sales by Salesperson</title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+      <h1>Sales By Salesperson</h1>
+      <xsl:apply-templates mode="index"/>
+     </body>
+    </html>
+  </xsl:document>
+</xsl:template>
+   
+<xsl:template match="salesperson" mode="index">
+  <h2>
+    <a href="{concat($URL,@name,'.html')}">
+      <xsl:value-of select="@name"/>
+    </a>
+  </h2>
+</xsl:template>
+   
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<!--          Create @name.html  (mode = "content")                 -->
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+   
+<xsl:template match="salesperson" mode="content">
+  <xsl:document href="{concat(@name,'.html')}">     
+    <html>
+     <head>
+      <title><xsl:value select="@name"/></title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+      <h1><xsl:value-of select="@name"/> Sales</h1>
+      <table border="1" cellpadding="3">
+        <tbody >
+          <tr>
+            <th>SKU</th>
+            <th>Sales (in US $)</th>
+          </tr>
+          <xsl:apply-templates mode="content"/>
+        </tbody>
+      </table>
+      <h2><a href="{concat($URL,'index.html')}">Home</a></h2>
+     </body>
+    </html>
+  </xsl:document>
+</xsl:template>
+   
+<xsl:template match="product" mode="content">
+    <tr>
+      <td><xsl:value-of select="@sku"/></td>
+      <td><xsl:value-of select="@totalSales"/></td>
+    </tr>
+    
+</xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+XSLT 1.0
+<?xml version="1.0" encoding="UTF-8"?>
+<sales>
+  <product sku="10000" sales="90000.00" region="NE"/>
+  <product sku="10000" sales="10000.00" region="NW"/>
+  <product sku="10000" sales="55000.00" region="SE"/>
+  <product sku="10000" sales="32000.00" region="SW"/>
+  <product sku="10000" sales="95000.00" region="NC"/>
+  <product sku="10000" sales="88000.00" region="SC"/>
+  <product sku="20000" sales="77000.00" region="NE"/>
+  <product sku="20000" sales="11100.00" region="NW"/>
+  <product sku="20000" sales="33210.00" region="SE"/>
+  <product sku="20000" sales="78000.00" region="SW"/>
+  <product sku="20000" sales="105000.00" region="NC"/>
+  <product sku="20000" sales="12300.00" region="SC"/>
+  <product sku="30000" sales="1000.00" region="NE"/>
+  <product sku="30000" sales="5100.00" region="NW"/>
+  <product sku="30000" sales="3210.00" region="SE"/>
+  <product sku="30000" sales="8000.00" region="SW"/>
+  <product sku="30000" sales="5000.00" region="NC"/>
+  <product sku="30000" sales="11300.00" region="SC"/>
+</sales>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html"/>
+  
+<xsl:template match="sales">
+  <html>
+    <head>
+      <title>Sales by Region</title>
+    </head>
+    <body>
+      <h1>Sales by Region</h1>
+      <table border="1" cellpadding="3">
+        <tbody>
+          <tr>
+            <th>SKU</th>
+            <th>Sales</th>
+          </tr>
+          <xsl:call-template name="group-region">
+            <xsl:with-param name="region" select=" 'NE' "/>
+            <xsl:with-param name="title" select="'North East Sales'"/>
+          </xsl:call-template>
+          <xsl:call-template name="group-region">
+            <xsl:with-param name="region" select=" 'NW' "/>
+            <xsl:with-param name="title" select="'North West Sales'"/>
+          </xsl:call-template>
+          <xsl:call-template name="group-region">
+            <xsl:with-param name="region" select=" 'NC' "/>
+            <xsl:with-param name="title" select="'North Central Sales'"/>
+          </xsl:call-template>
+          <xsl:call-template name="group-region">
+            <xsl:with-param name="region" select=" 'SE' "/>
+            <xsl:with-param name="title" select="'South East Sales'"/>
+          </xsl:call-template>
+          <xsl:call-template name="group-region">
+            <xsl:with-param name="region" select=" 'SC' "/>
+            <xsl:with-param name="title" select="'South Central Sales'"/>
+          </xsl:call-template>
+          <xsl:call-template name="group-region">
+            <xsl:with-param name="region" select=" 'SW' "/>
+            <xsl:with-param name="title" select="'South West Sales'"/>
+          </xsl:call-template>
+        </tbody>
+      </table>
+    </body>
+  </html>
+</xsl:template>
+   
+<xsl:template name="group-region">
+    <xsl:param name="region"/>
+    <xsl:param name="title"/>
+    <xsl:variable name="products" select="product[@region = $region]" />
+    <tr>
+      <th colspan="2"><xsl:value-of select="$title" /></th>
+    </tr>
+    <xsl:apply-templates select="$products"/>
+    <tr style="font-weight:bold">
+      <td >Total</td>
+      <td align="right">
+        <xsl:value-of 
+             select="format-number(sum($products/@sales), '#.00')"/>
+      </td>
+     </tr>
+  </xsl:template>
+   
+  <xsl:template match="product">
+    <tr>
+      <td><xsl:value-of select="@sku"/></td>
+      <td align="right"><xsl:value-of select="@sales"/></td>
+    </tr>
+  </xsl:template>
+  
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" 
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:sales="sales">
+  
+  <sales:region code=__QUOT?QUOT__ name="North East"/>
+  <sales:region code="NC" name="North Central"/>
+  <sales:region code="NW" name="North West"/>
+  <sales:region code="SE" name="South East"/>
+  <sales:region code="SC" name="South Central"/>
+  <sales:region code="SW" name="South West"/>
+   
+ <xsl:variable name="products" select="/sales/product"/>
+  
+  <xsl:output method="html"/>
+    
+  <xsl:template match="sales">
+    <html>
+      <head>
+        <title>Sales by Region</title>
+      </head>
+      <body>
+        <h1>Sales by Region</h1>
+        <table border="1" cellpadding="3">
+          <tbody>
+            <tr>
+              <th>SKU</th>
+              <th>Sales</th>
+            </tr>
+            <xsl:for-each select="document('')/*/sales:region">
+              <tr >
+                <th colspan="2"><xsl:value-of select="@name"/> Sales</th>
+              </tr>
+              <xsl:call-template name="group-region">
+                <xsl:with-param name="region" select="@code"/>
+              </xsl:call-template>
+            </xsl:for-each>
+          </tbody>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+   
+  <xsl:template name="group-region">
+    <xsl:param name="region"/>
+        <xsl:apply-templates select="$products[@region=$region]"/>
+        <tr style="font-weight:bold">
+          <td >Total</td>
+          <td align="right"><xsl:value-of 
+          select="format-number(sum($products[@region=$region]/@sales),'#.00')"/>
+          </td>
+        </tr>
+  </xsl:template>
+   
+  
+  <xsl:template match="product">
+    <tr>
+      <td><xsl:value-of select="@sku"/></td>
+      <td align="right"><xsl:value-of select="@sales"/></td>
+    </tr>
+  </xsl:template>
+  
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:sales="sales">
+  
+  <xsl:output method="html"/>
+   
+ <xsl:key name="region-key" match="product" use="@region"/>
+  
+  <xsl:template match="sales">
+    <html>
+      <head>
+        <title>Sales by Region</title>
+      </head>
+      <body>
+        <h1>Sales by Region</h1>
+        <table border="1" cellpadding="3">
+          <tbody>
+            <tr>
+              <th>SKU</th>
+              <th>Sales</th>
+            </tr>
+            <xsl:variable name="unique-regions" 
+                 select="/sales
+                         /product[generate-id(.) = 
+                                  generate-id(key('region-key',@region))]
+                         /@region"/>
+            <xsl:for-each select="$unique-regions">
+              <tr >
+                <th colspan="2"><xsl:value-of select="."/> Sales</th>
+              </tr>
+              <xsl:call-template name="group-region">
+                <xsl:with-param name="region" select="."/>
+              </xsl:call-template>
+            </xsl:for-each>
+          </tbody>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+   
+  <xsl:template name="group-region">
+    <xsl:param name="region"/>
+        <xsl:apply-templates select="key('region-key', @region)"/>
+        <tr style="font-weight:bold">
+          <td >Total</td>
+          <td align="right"><xsl:value-of 
+          select="format-number(sum(key('region-key', @region)/@sales),'#.00')"/>
+          </td>
+        </tr>
+  </xsl:template>
+  
+  <xsl:template match="product">
+    <tr>
+      <td><xsl:value-of select="@sku"/></td>
+      <td align="right"><xsl:value-of select="@sales"/></td>
+    </tr>
+  </xsl:template>
+  
+</xsl:stylesheet>
+XSLT 2.0
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" 
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  
+  <xsl:output method="html"/>
+     
+  <xsl:template match="sales">
+    <html>
+      <head>
+        <title>Sales by Region</title>
+      </head>
+      <body>
+        <h1>Sales by Region</h1>
+        <table border="1" cellpadding="3">
+          <tbody>
+            <tr>
+              <th>SKU</th>
+              <th>Sales</th>
+            </tr>
+            <xsl:for-each-group select="product" group-by="@region">
+              <tr >
+                <th colspan="2"><xsl:value-of select="."/> Sales</th>
+              </tr>
+              <xsl:apply-templates select="current-group()"/>
+              <tr style="font-weight:bold">
+                <td >Total</td>
+                <td align="right"><xsl:value-of 
+                select="format-number(sum(current-group()/@sales),'#.00')"/>
+                </td>
+              </tr>
+            </xsl:for-each-group>
+          </tbody>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+     
+  <xsl:template match="product">
+    <tr>
+      <td><xsl:value-of select="@sku"/></td>
+      <td align="right"><xsl:value-of select="@sales"/></td>
+    </tr>
+  </xsl:template>
+  
+
+</xsl:stylesheet>
+5) Creating Frames
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+<xsl:output method="html"/>
+   
+<xsl:param name="URL"/>
+   
+<xsl:template match="/">
+  <xsl:apply-templates select="*" mode="frameset"/>
+  <xsl:apply-templates select="*" mode="salespeople_frame"/>
+  <xsl:apply-templates select="*" mode="sales_frames"/>
+</xsl:template>
+   
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<!--              Create frameset container (mode ="frameset")      -->
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<xsl:template match="salesBySalesperson" mode="frameset">
+  <!-- Non-standard saxon xsl:document! -->
+  <xsl:document href="index.html">     
+    <html>
+     <head>
+      <title>Salesperson Frameset</title>
+     </head>
+     <frameset rows="100%" cols="25%, 75%" border="0">
+       <frame name="salespeople" src="salespeople_frame.html" noresize=""/>
+       <frame name="mainFrame" src="default_sales.html" noresize=""/>
+     </frameset>
+     <body bgcolor="#FFFFFF" text="#000000">
+     </body>
+    </html>
+  </xsl:document>
+</xsl:template>
+   
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<!-- Create salespeople_frame.html  (mode = "salespeople_frame")    -->
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<xsl:template match="salesBySalesperson" mode="salespeople_frame">
+  <!-- Non-standard xsl: saxon:document! -->
+  <xsl:document href="salespeople_frame.html">
+    <html>
+     <head>
+       <title>Salespeople</title>
+     </head>
+     <body bgcolor="#FFFFFF" text="#000000">
+       <table>
+        <tbody>
+          <xsl:apply-templates mode="index"/>
+        </tbody>
+      </table>
+     </body>
+    </html>
+  </xsl:document>
+</xsl:template>
+   
+<xsl:template match="salesperson" mode="index">
+  <tr>
+    <td>
+      <a href="{concat(@name,'.html')}" 
+          target="mainFrame"><xsl:value-of select="@name"/></a>
+    </td>
+  </tr>
+</xsl:template>
+   
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+<!--                  Create @name.html  (mode = "content")         -->
+<!-- =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  =  = -->
+   
+<xsl:template match="salesperson" mode="sales_frames">
+   
+  <xsl:document href="default_sales.html">
+    <html>
+     <head>
+       <title>Default</title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+     <h1><center>Sales By Salesperson</center></h1>
+      <br/>
+     Click on a salesperson on the left to load his or her sales figures.
+     </body>
+    </html>
+  </xsl:document>
+   
+  <xsl:document href="{concat(@name,'.html')}">
+    <html>
+     <head>
+       <title><xsl:value-of select="@name"/></title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+     <h1><center>Sales By Salesperson</center></h1>
+      <h2><xsl:value-of select="@name"/></h2>
+      <table border="1" cellpadding="3">
+        <tbody >
+          <tr>
+            <th>SKU</th>
+            <th>Sales (in US $)</th>
+          </tr>
+          <xsl:apply-templates mode="content"/>
+        </tbody>
+      </table>
+     </body>
+    </html>
+  </xsl:document>
+</xsl:template>
+   
+<xsl:template match="product" mode="content">
+    <tr>
+      <td><xsl:value-of select="@sku"/></td>
+      <td align="right"><xsl:value-of select="@totalSales"/></td>
+    </tr>
+    
+</xsl:template>
+   
+</xsl:stylesheet>
+Discussion
+<html>
+   <head>
+      <title>Frameset</title> 
+   </head>
+   <frameset rows="100%" cols="25%, 75%" border="0">
+      <frame name="leftFrame" src="left.xml" noresize="">
+      <frame name="mainFrame" src="main.xml" noresize="">
+   </frameset>
+   <body bgcolor="#FFFFFF" text="#000000"></body>
+</html>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="application/xml" href="left.xsl"?>
+<xi:include href="salesBySalesperson.xml" 
+            xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="application/xml" href="main.xsl"?> 
+<xi:include href="salesBySalesperson.xml"
+            xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<!-- left.xsl -->
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  
+<xsl:output method="html"/>
+   
+<xsl:template match="xi:include" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xsl:for-each select="document(@href,.)"> 
+    <xsl:apply-templates/>
+  </xsl:for-each>
+</xsl:template> 
+   
+<xsl:template match="salesBySalesperson">
+  <html>
+   <head>
+    <title>Salespeople</title>
+   </head>
+   <body bgcolor="#FFFFFF" text="#000000">
+     <table>
+      <tbody>
+        <xsl:apply-templates/>
+      </tbody>
+    </table>
+   </body>
+  </html>
+</xsl:template>
+   
+<xsl:template match="salesperson">
+  <tr>
+    <td>
+      <a href="{concat('main.xml#',@name)}" target="mainFrame">
+      <xsl:value-of select="@name"/></a>
+    </td>
+  </tr>
+</xsl:template>
+   
+</xsl:stylesheet>
+   
+<!-- main.xsl -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html"/>
+   
+<xsl:template match="xi:include" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xsl:for-each select="document(@href)"> 
+    <xsl:apply-templates/>
+  </xsl:for-each>
+</xsl:template> 
+   
+<xsl:template match="salesBySalesperson">
+    <html>
+     <head>
+      <title>Sales By Salesperson</title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+     <xsl:apply-templates/>
+     </body>
+    </html>
+</xsl:template>
+   
+<xsl:template match="salesperson">
+     <h1><a name="{@name}"><center>Sales By Salesperson</center></a></h1>
+      <h2><xsl:value-of select="@name"/></h2>
+      <table border="1" cellpadding="3">
+        <tbody >
+          <tr>
+            <th>SKU</th>
+            <th>Sales (in US $)</th>
+          </tr>
+          <xsl:apply-templates />
+        </tbody>
+      </table>
+      <div style="padding-top:1000"/>
+</xsl:template>
+   
+<xsl:template match="product">
+    <tr>
+      <td><xsl:value-of select="@sku"/></td>
+      <td align="right"><xsl:value-of select="@totalSales"/></td>
+    </tr>
+    
+</xsl:template>
+       
+</xsl:stylesheet>
+6) Creating Data-Driven Stylesheets
+XSLT 1.0
+<portfolio>
+  <investment>
+    <symbol>IBM</symbol>
+    <current>72.70</current>
+    <paid>65.00</paid>
+    <qty>1000</qty>
+  </investment>
+  <investment>
+    <symbol>JMAR</symbol>
+    <current>1.90</current>
+    <paid>5.10</paid>
+    <qty>5000</qty>
+  </investment>
+  <investment>
+    <symbol>DELL</symbol>
+    <current>24.50</current>
+    <paid>18.00</paid>
+    <qty>100000</qty>
+  </investment>
+  <investment>
+    <symbol>P</symbol>
+    <current>57.33</current>
+    <paid>63</paid>
+    <qty>100</qty>
+  </investment>
+</portfolio>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:output method="html"/>
+   
+  <xsl:attribute-set name="gain-loss-font">
+    <xsl:attribute name="color">
+      <xsl:choose>
+        <xsl:when test="(current - paid) * qty >= 0">black</xsl:when>
+        <xsl:otherwise>red</xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+  </xsl:attribute-set>      
+   
+<xsl:template match="portfolio">
+    <html>
+     <head>
+      <title>My Portfolio</title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+      <h1>Portfolio</h1>
+      <table border="1" cellpadding="2">
+        <tbody>
+          <tr>
+            <th>Symbol</th>
+            <th>Current</th>
+            <th>Paid</th>
+            <th>Qty</th>
+            <th>Gain/Loss</th>
+          </tr>
+          <xsl:apply-templates/>
+        </tbody>
+      </table>
+     </body>
+    </html>
+</xsl:template>
+   
+<xsl:template match="investment">
+  <tr>
+    <td><xsl:value-of select="symbol"/></td>
+    <td><xsl:value-of select="current"/></td>
+    <td><xsl:value-of select="paid"/></td>
+    <td><xsl:value-of select="qty"/></td>
+    <td>
+     <font xsl:use-attribute-sets="gain-loss-font">
+      <xsl:value-of 
+        select="format-number((current - paid) * qty, '#,##0.00')"/>
+     </font>
+    </td>
+  </tr>
+</xsl:template>     
+   
+</xsl:stylesheet>
+  <xsl:attribute-set name="gain-loss-color">
+    <xsl:attribute name="style">color:<xsl:text/>
+      <xsl:choose>
+        <xsl:when test="(current - paid) * qty >= 0">black</xsl:when>
+        <xsl:otherwise>red</xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+  </xsl:attribute-set>      
+   
+...
+   
+<xsl:template match="investment">
+  <tr>
+    <td><xsl:value-of select="symbol"/></td>
+    <td><xsl:value-of select="current"/></td>
+    <td><xsl:value-of select="paid"/></td>
+    <td><xsl:value-of select="qty"/></td>
+    <td xsl:use-attribute-sets="gain-loss-color">
+      <xsl:value-of 
+              select="format-number((current - paid) * qty, '#,##0.00')"/>
+    </td>
+  </tr>
+</xsl:template>
+XSLT 2.0
+  <xsl:attribute-set name="gain-loss-font">
+    <xsl:attribute name="color" 
+                   select="if ((current - paid) * qty ge 0) 
+                           then 'black' else 'red'"/>
+  </xsl:attribute-set>      
+
+Discussion 
+<xsl:template match="investment">
+  <tr>
+    <td><xsl:value-of select="symbol"/></td>
+    <td><xsl:value-of select="current"/></td>
+    <td><xsl:value-of select="paid"/></td>
+    <td><xsl:value-of select="qty"/></td>
+    <td>
+      <font>
+        <xsl:attribute name="color">
+          <xsl:choose>
+            <xsl:when test="(current - paid) * qty >= 0">black</xsl:when>
+            <xsl:otherwise>red</xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+        <xsl:value-of 
+          select="format-number((current - paid) * qty, '#,##0.00')"/>
+      </font>
+    </td>
+  </tr>
+</xsl:template>
+<portfolio>
+   
+  <stock>
+    <symbol>IBM</symbol>
+    <current>72.70</current>
+    <paid>65.00</paid>
+    <qty>1000</qty>
+  </stock>
+   
+  <stock>
+    <symbol>JMAR</symbol>
+    <current>1.90</current>
+    <paid>5.10</paid>
+    <qty>5000</qty>
+  </stock>
+   
+  <stock>
+    <symbol>DELL</symbol>
+    <current>24.50</current>
+    <paid>18.00</paid>
+    <qty>100000</qty>
+  </stock>
+   
+  <stock>
+    <symbol>P</symbol>
+    <current>57.33</current>
+    <paid>63.00</paid>
+    <qty>100</qty>
+  </stock>
+  
+  <property>
+    <address>123 Main St. Anytown NY</address>
+    <paid>100000</paid>
+    <appriasal>250000</appriasal>
+  </property>
+   
+  <property>
+    <address>13 Skunks Misery Dr. Stinksville NJ</address>
+    <paid>200000</paid>
+    <appriasal>50000</appriasal>
+  </property>
+  
+</portfolio>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:output method="html"/>
+   
+  <xsl:attribute-set name="gain-loss-font">
+    <xsl:attribute name="color">
+      <xsl:apply-templates select="." mode="gain-loss-font-color"/>
+    </xsl:attribute>
+  </xsl:attribute-set>      
+   
+<xsl:template match="stock" mode="gain-loss-font-color">
+    <xsl:choose>
+      <xsl:when test="(current - paid) * qty >= 0">black</xsl:when>
+      <xsl:otherwise>red</xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+   
+<xsl:template match="property" mode="gain-loss-font-color">
+    <xsl:choose>
+      <xsl:when test="appriasal - paid  >= 0">black</xsl:when>
+      <xsl:otherwise>red</xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+   
+... 
+   
+</xsl:stylesheet>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+  <xsl:output method="html"/>
+   
+  <xsl:attribute-set name="gain-loss">
+    <xsl:attribute name="class">
+      <xsl:apply-templates select="." mode="gain-loss"/>
+    </xsl:attribute>
+  </xsl:attribute-set>      
+   
+<xsl:template match="stock" mode="gain-loss">
+    <xsl:choose>
+      <xsl:when test="(current - paid) * qty >= 0">gain</xsl:when>
+      <xsl:otherwise>loss</xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+   
+<xsl:template match="property" mode="gain-loss">
+    <xsl:choose>
+      <xsl:when test="appriasal - paid  >= 0">gain</xsl:when>
+      <xsl:otherwise>loss</xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+   
+<xsl:template match="portfolio">
+    <html>
+     <head>
+      <title>My Portfolio</title>
+      <link  rel="stylesheet"  type="text/css"  href="portfolio.css"/>
+     </head>
+   
+     ...
+    
+</xsl:template>
+   
+<xsl:template match="stock">
+  <tr>
+    <td><xsl:value-of select="symbol"/></td>
+    <td align="right"><xsl:value-of select="current"/></td>
+    <td align="right"><xsl:value-of select="paid"/></td>
+    <td align="right"><xsl:value-of select="qty"/></td>
+    <td align="right" xsl:use-attribute-sets="gain-loss">
+      <xsl:value-of 
+            select="format-number((current - paid) * qty, '#,##0.00')"/>
+    </td>
+  </tr>
+</xsl:template>     
+   
+<xsl:template match="property">
+  <tr>
+    <td><xsl:value-of select="address"/></td>
+    <td align="right"><xsl:value-of select="paid"/></td>
+    <td align="right"><xsl:value-of select="appriasal"/></td>
+    <td align="right" xsl:use-attribute-sets="gain-loss">
+      <xsl:value-of 
+             select="format-number(appriasal - paid, '#,##0.00')"/>
+    </td>
+  </tr>
+</xsl:template>     
+   
+</xsl:stylesheet>
+Example 10-1. portfolio.css 
+td.gain
+{
+     color:black;
+}
+   
+td.loss
+{
+     color:red;
+     font-weight:700;
+}     
+7) Creating a Self-Contained HTML 
+Transformation
+<?xml version="1.0" encoding="UTF-8"?>
+   
+<?xml-stylesheet type="application/xml" href="selfcontained.xsl"?>
+   
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:pf="http://www.ora.com/XSLTCookbook/namespaces/portfolio">
+   
+<portfolio xmlns="http://www.ora.com/XSLTCookbook/namespaces/portfolio">
+  <investment>
+    <symbol>IBM</symbol>
+    <current>72.70</current>
+    <paid>65.00</paid>
+    <qty>1000</qty>
+  </investment>
+  <investment>
+    <symbol>JMAR</symbol>
+    <current>1.90</current>
+    <paid>5.10</paid>
+    <qty>5000</qty>
+  </investment>
+  <investment>
+    <symbol>DELL</symbol>
+    <current>24.50</current>
+    <paid>18.00</paid>
+    <qty>100000</qty>
+  </investment>
+  <investment>
+    <symbol>P</symbol>
+    <current>57.33</current>
+    <paid>63</paid>
+    <qty>100</qty>
+  </investment>
+</portfolio>
+     
+<xsl:output method="html" />
+   
+  <xsl:attribute-set name="gain-loss-font">
+    <xsl:attribute name="color">
+      <xsl:choose>
+        <xsl:when test="(pf:current - pf:paid) * pf:qty >= 0">black</xsl:when>
+        <xsl:otherwise>red</xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+  </xsl:attribute-set>      
+   
+<xsl:template match="xsl:stylesheet">
+  <xsl:apply-templates select="pf:portfolio"/>
+</xsl:template>
+   
+<xsl:template match="pf:portfolio">
+    <html>
+     <head>
+      <title>My Portfolio</title>
+     </head>
+    
+     <body bgcolor="#FFFFFF" text="#000000">
+      <h1>Portfolio</h1>
+      <table border="1" cellpadding="2">
+        <tbody>
+          <tr>
+            <th>Symbol</th>
+            <th>Current</th>
+            <th>Paid</th>
+            <th>Qty</th>
+            <th>Gain/Loss</th>
+          </tr>
+          <xsl:apply-templates/>
+        </tbody>
+      </table>
+     </body>
+    </html>
+</xsl:template>
+   
+<xsl:template match="pf:investment">
+  <tr>
+    <td><xsl:value-of select="pf:symbol"/></td>
+    <td><xsl:value-of select="pf:current"/></td>
+    <td><xsl:value-of select="pf:paid"/></td>
+    <td><xsl:value-of select="pf:qty"/></td>
+    <td><font xsl:use-attribute-sets="gain-loss-font"><xsl:value-of select="format-
+number((pf:current - pf:paid) * pf:qty, '#,##0.00')"/></font></td>
+  </tr>
+</xsl:template>     
+   
+     
+</xsl:stylesheet>
+Discussion
+<!-- generate-selfcontained.xslt -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:xso="dummy">
+   
+<!-- Reuse the identity transform -->
+<xsl:import href="../util/copy.xslt"/>
+   
+<!-- This stylesheet will be generating styleshhet content 
+     so use xso as alias for xsl -->
+<xsl:namespace-alias stylesheet-prefix="xso" result-prefix="xsl"/>
+   
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+   
+<xsl:strip-space elements="*"/>
+<!--Not a good idea to strip space from text nodes -->
+<xsl:preserve-space elements="xsl:text"/>
+   
+<!--The name of the file containing xml data -->
+<xsl:param name="datafile"/>
+<!-- The name of the resulting output file -->
+<xsl:param name="outfile"/>
+   
+<xsl:template match="/">
+  <!-- Insert the processing instruction to tell the browser that
+       $outfile is the stylesheet -->
+  <xsl:processing-instruction name="xml-stylesheet">
+   <xsl:text>type="application/xml" href="</xsl:text>
+   <xsl:value-of select="$outfile"/>"<xsl:text/>  
+  </xsl:processing-instruction>
+   
+ <xsl:apply-templates/>  
+   
+</xsl:template>
+   
+<xsl:template match="xsl:stylesheet">
+   
+  <xsl:copy>
+    <xsl:copy-of select="@*"/>
+    
+    <xsl:apply-templates/>
+   
+     <!-- Generate the xslt that tells the  
+    <xso:template match="xsl:stylesheet">
+      <xso:apply-templates select="{name(document($datafile)/*)}"/>
+    </xso:template>
+   
+  <!-- Insert the data -->
+  <xsl:copy-of select="document($datafile)"/>
+  
+  </xsl:copy>
+   
+</xsl:template>
+   
+</xsl:stylesheet>
+saxon -o self-contained.xsl pf-portfolio.xslt generate-selfcontained.xslt 
+          datafile="pf-portfolio.xml" outfile="self-contained.xsl"
+8) Populating a Form
+<salesTax>
+  <state>
+    <name>AL</name>
+    <tax>4</tax>
+  </state>
+  <state>
+    <name>AK</name>
+    <tax>0</tax>
+  </state>
+  <state>
+    <name>AZ</name>
+    <tax>5.6</tax>
+  </state>
+   
+...
+   
+  <state>
+    <name>WY</name>
+    <tax>4</tax>
+  </state>
+</salesTax>
+<html>
+  <head>
+   <title>Check Out</title>
+   <script type="text/javascript" language="JavaScript">
+   <!--
+   /* Initialize tax for default state */
+   setTax(document.customerInfo.billState)
+           
+   /*Recompute tax when state changes */
+     function setTax(field) 
+       {
+      var value = new String(field.value) 
+      var commaPos = value.indexOf(",") 
+      var taxObj = document.customerInfo.tax
+      var tax = value.substr(commaPos + 1)
+      var subtotalObj = document.customerInfo.subtotal
+      taxObj.value = tax
+      document.customerInfo.total.value = 
+          parseFloat(subtotalObj.value) + 
+          (parseFloat(subtotalObj.value) * parseFloat(tax) / 100.00)
+     }
+   -->
+   </script>
+  </head>
+   
+<body bgcolor="#FFFFFF" text="#000000">
+<h1>Check Out</h1>
+<form name="customerInfo" method="post" action="">
+  <table width="70%" border="0" cellspacing="3" cellpadding="3">
+    <tr> 
+      <td width="7%">&#xa0;</td>
+      <td width="32%"> 
+        <div align="center"><b>Shipping Address</b></div>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">&#xa0;</td>
+      <td width="34%"> 
+        <div align="center"><b>Billing Address</b></div>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">Name</td>
+      <td width="32%"> 
+        <input type="text" name="shipName" maxlength="40" size="50" border="0"
+        align="absmiddle"/>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Name</td>
+      <td width="34%"> 
+        <input type="text" name="billName" maxlength="40" size="50" border="0" 
+        align="absmiddle"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">Address</td>
+      <td width="32%"> 
+        <input type="text" name="shipAddr" maxlength="40" size="50" border="0" 
+        align="absmiddle"/>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Address</td>
+      <td width="34%"> 
+        <input type="text" name="billAddr" maxlength="40" size="50" border="0"
+        align="absmiddle"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">City</td>
+      <td width="32%"> 
+        <input type="text" name="shipCity" maxlength="40" size="50" border="0" 
+        align="absmiddle"/>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">City</td>
+      <td width="34%"> 
+        <input type="text" name="billCity" maxlength="40" size="50" border="0"
+        align="absmiddle"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">State</td>
+      <td width="32%"> 
+        <select name="shipState" size="1" align="absmiddle">
+        </select>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">State</td>
+      <td width="34%"> 
+        <select name="billState" size="1" align="absmiddle" 
+onChange="setTax(this)">
+        </select>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">Zip</td>
+      <td width="32%"> 
+        <input type="text" name="shipZip" maxlength="10" size="15" border="0"
+        align="absmiddle"/>
+      </td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Zip</td>
+      <td width="34%"> 
+        <input type="text" name="billZip" maxlength="10" size="15" border="0" 
+        align="absmiddle"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">&#xa0;</td>
+      <td width="32%">&#xa0;</td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">&#xa0;</td>
+      <td width="34%">&#xa0;</td>
+    </tr>
+    <tr> 
+      <td width="7%">&#xa0;</td>
+      <td width="32%">&#xa0;</td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Subtotal</td>
+      <td width="34%">
+        <input type="text" name="subtotal" readonly="1" value="100.00"/>
+      </td>
+    </tr>
+    <tr> 
+      <td width="7%">&#xa0;</td>
+      <td width="32%">&#xa0;</td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Tax</td>
+      <td width="34%">
+        <input type="text" name="tax" readonly="1"/>
+      </td>
+    </tr>
+    <tr>
+      <td width="7%">&#xa0;</td>
+      <td width="32%">&#xa0;</td>
+      <td width="20%">&#xa0;</td>
+      <td width="7%">Total</td>
+      <td width="34%">
+        <input type="text" name="total" readonly="1"/>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   
+ <xsl:import href="../util/copy.xslt"/>
+  
+ <xsl:output method="html"/>
+   
+ <xsl:template match="html">
+    <xsl:copy>
+      <xsl:apply-templates/>
+    </xsl:copy>     
+ </xsl:template>
+  
+ <xsl:template match="select[@name='shipState' or @name='billState']">
+    <xsl:copy>
+      <xsl:copy-of select="@*"/>
+      <xsl:for-each select="document('salesTax.xml')/salesTax/state">
+        <option value="{name}',',{tax}">
+          <xsl:value-of select="name"/>
+        </option>
+      </xsl:for-each>
+    </xsl:copy>
+ </xsl:template> 
+   
+</xsl:stylesheet>
+ 
+ 
+ 
+ 
+28		XML to HTML
+8) Populating a Form				29 of  of 30
+28
+		29
+DRAFT	O'Reilly & Associates	1/16/2006

@@ -1,0 +1,12 @@
+Attribute 'algorithm.subjectIdentity' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'sort.subjectIdentity' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'quicksort.subjectIdentity' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'in-place sort.subjectIdentity' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'insertion sort.subjectIdentity' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'quick sort demo.resourceName' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'quick sort specification.resourceName' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'insertion sort definition.resourceData' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'quick sort definition.resourceData' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'qsort.language' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'C Programming Language.id' does not have a type.  The type "<undefined>" will be assigned.
+Attribute 'test.foo' does not have a type.  The type "<undefined>" will be assigned.

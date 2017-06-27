@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test foo="1">
+  <someElement n="1"/>
+  <someElement n="2">
+    <someChild>someValue</someChild>
+  </someElement>
+  <someElement n="3">
+    <someChild>someOtherValue</someChild>
+  </someElement>
+  <someElement n="4">
+    <someChild>someValue</someChild>
+  </someElement>
+</test>

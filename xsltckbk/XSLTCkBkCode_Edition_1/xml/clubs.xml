@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clubs>
+  <club name="The 500 Club">
+    <members>
+	  <member name="Joe Smith">
+	    <position name="president"/>
+      </member>
+	  <member name="Jill McFonald">
+	    <position name="treasurer"/>
+      </member>
+	  <!-- ... -->
+    </members>
+  </club>
+  <!-- ... -->
+</clubs>
+

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template name="math:log">
+	<xsl:param name="number" select="1"/>
+
+	<xsl:variable name="log10-e" select="0.4342944819032518"/>
+	<xsl:variable name="log10">
+		<xsl:call-template name="math:log10">
+			<xsl:with-param name="number" select="$number"/>
+		</xsl:call-template>
+	</xsl:variable>
+	<xsl:value-of select="$log10 div $log10-e"/>
+</xsl:template>
+
+<xsl:template name="math:log10">
+	<xsl:param name="number" select="1"/>
+
+	<xsl:param name="n" select="0"/>
+	
+	<xsl:choose>
+		<xsl:when test="$number &lt;= 0">
+			<xsl:value-of select="number('NaN')"/>
+		</xsl:when>
+		<xsl:when test="$number &lt; 1">
+			<xsl:call-template name="math:log10">
+				<xsl:with-param name="number" select="$number * 10"/>
+				<xsl:with-param name="n" select="$n - 1"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:when test="$number > 10">
+			<xsl:call-template name="math:log10">
+				<xsl:with-param name="number" select="$number div 10"/>
+				<xsl:with-param name="n" select="$n + 1"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:when test="$number = 10">
+			<xsl:value-of select="$n + 1"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:call-template name="math:log10-util">
+				<xsl:with-param name="number" select="$number"/>
+				<xsl:with-param name="n" select="$n"/>
+			</xsl:call-template>
+		</xsl:otherwise>
+	</xsl:choose>
+	
+</xsl:template>
+
+
+<xsl:template name="math:log10-util">
+	<xsl:param name="number"/>
+	<xsl:param name="n"/>
+	
+	<xsl:param name="frac" select="0"/>
+	<xsl:param name="k" select="0"/>
+	<xsl:param name="divisor" select="2"/>
+	<xsl:param name="maxiter" select="40"/>
+
+	<xsl:variable name="x" select="$number * $number"/>
+	
+	<xsl:choose>
+		<xsl:when test="$k >= $maxiter">
+			<xsl:value-of select="$n + $frac"/>
+		</xsl:when>
+		<xsl:when test="$x &lt; 10">
+			<xsl:call-template name="math:log10-util">
+				<xsl:with-param name="number" select="$x"/>
+				<xsl:with-param name="n" select="$n"/>
+				<xsl:with-param name="k" select="$k + 1"/>
+				<xsl:with-param name="divisor" select="$divisor * 2"/>
+				<xsl:with-param name="frac" select="$frac"/>
+				<xsl:with-param name="maxiter" select="$maxiter"/>
+			</xsl:call-template>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:call-template name="math:log10-util">
+				<xsl:with-param name="number" select="$x div 10"/>
+				<xsl:with-param name="n" select="$n"/>
+				<xsl:with-param name="k" select="$k + 1"/>
+				<xsl:with-param name="divisor" select="$divisor * 2"/>
+				<xsl:with-param name="frac" select="$frac + (1 div $divisor)"/>
+				<xsl:with-param name="maxiter" select="$maxiter"/>
+			</xsl:call-template>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+</xsl:stylesheet>

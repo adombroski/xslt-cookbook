@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employee name="Jil Michel" sex="female">
+	<employee name="Nancy Pratt" sex="female">
+		<employee name="Phill McKraken" sex="male"/>
+		<employee name="Ima Little" sex="female">
+			<employee name="Betsy Ross" sex="female"/> 
+		</employee>
+	</employee>
+	<employee name="Jane Doe" sex="female">
+		<employee name="Walter H. Potter" sex="male"/>
+		<employee name="Wendy B.K. McDonald" sex="female">
+			<employee name="Craig F. Frye" sex="male"/>
+			<employee name="Hardy Hamburg" sex="male"/>
+			<employee name="Rich Shaker" sex="male"/> 
+		</employee>
+	</employee>
+	<employee name="Mike Rosenbaum" sex="male">
+		<employee name="Cindy Post-Kellog" sex="female">
+			<employee name="Allen Bran" sex="male"/>
+			<employee name="Frank N. Berry" sex="male"/>
+			<employee name="Jack Apple" sex="male"/> 
+		</employee>
+		<employee name="Oscar A. Winner" sex="male">
+			<employee name="Jack Nickolas" sex="male">
+				<employee name="R.P. McMurphy" sex="male"/>
+			</employee>
+			<employee name="Tom Hanks" sex="male">
+				<employee name="Forest Gump" sex="male"/>
+				<employee name="Andrew Beckett" sex="male"/>
+			</employee>
+			<employee name="Susan Sarandon" sex="female">
+				<employee name="Helen Prejean" sex="female"/>
+			</employee>
+		</employee>
+	</employee>
+</employee>

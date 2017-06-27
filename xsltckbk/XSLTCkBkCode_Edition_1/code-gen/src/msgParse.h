@@ -1,0 +1,15 @@
+void parseMessage(MessageHandler& handler, const Message& msg);
+class TestData ;
+void parse(MessageHandler & handler, const TestData& data);
+class AddStockOrderData ;
+void parse(MessageHandler & handler, const AddStockOrderData& data);
+class AddStockOrderAckData ;
+void parse(MessageHandler & handler, const AddStockOrderAckData& data);
+class AddStockOrderNackData ;
+void parse(MessageHandler & handler, const AddStockOrderNackData& data);
+class CancelStockOrderData ;
+void parse(MessageHandler & handler, const CancelStockOrderData& data);
+class CancelStockOrderAckData ;
+void parse(MessageHandler & handler, const CancelStockOrderAckData& data);
+class CancelStockOrderNackData ;
+void parse(MessageHandler & handler, const CancelStockOrderNackData& data);
